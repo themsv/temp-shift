@@ -10,4 +10,9 @@ export default defineConfig({
     react(),
     // ...,
   ],
+  server: {
+    port: 8080, // ✅ Change dev server port here
+    host: '0.0.0.0', // optional: allows access from network IP,
+    allowedHosts: ['mqg-style-counsel.azurewebsites.net'],
+  },
 });
