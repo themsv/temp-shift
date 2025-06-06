@@ -25,9 +25,10 @@ function ApiProvider({ children }: Readonly<PropsWithChildren>) {
   useEffect(() => {
     // Set default headers
     // axios.defaults.headers["Content-Type"] = "application/json";
-    // axios.defaults.headers["Accept"] = "application/json";
-    // axios.defaults.headers["Cache-Control"] = "no-cache";
-    axios.defaults.headers['timezone'] = Intl.DateTimeFormat().resolvedOptions().timeZone;
+    axios.defaults.headers.common['Cache-Control'] = 'no-cache';
+    axios.defaults.headers.common.Accept = 'application/json';
+    // if the APIs need timezone
+    axios.defaults.headers.timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
     axios.defaults.baseURL = import.meta.env.VITE_APP_BASE_URL;
   }, []);
   return (

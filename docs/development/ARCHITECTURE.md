@@ -56,7 +56,7 @@ style-counsel/
 
 #### Routing
 
-- React Router for navigation
+- TanStack Router for navigation
 - Route-based code splitting
 - Protected routes for authenticated sections
 

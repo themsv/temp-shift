@@ -1,7 +1,9 @@
 import type { PropsWithChildren } from 'react';
 import { createRouter, RouterProvider } from '@tanstack/react-router';
+
 import ApiProvider from './ApiProvider';
-import { I18nProvider } from './I18nProvider';
+import I18nProvider from './I18nProvider';
+import ThemeProvider from './StyleProvider';
 import { routeTree } from '../routeTree.gen';
 
 const router = createRouter({ routeTree });
@@ -15,8 +17,10 @@ function RootProvider({ children }: PropsWithChildren) {
   return (
     <I18nProvider>
       <ApiProvider>
-        <RouterProvider router={router} />
-        {children}
+        <ThemeProvider>
+          <RouterProvider router={router} />
+          {children}
+        </ThemeProvider>
       </ApiProvider>
     </I18nProvider>
   );
