@@ -1,0 +1,103 @@
+{
+  "country": {
+    "value": "Australia",
+    "options": [
+      { "label": "Australia", "value": "Australia" },
+      { "label": "United States", "value": "United States" },
+      { "label": "United Kingdom", "value": "United Kingdom" },
+      { "label": "India", "value": "India" },
+      { "label": "Germany", "value": "Germany" },
+      { "label": "Japan", "value": "Japan" },
+      { "label": "Singapore", "value": "Singapore" }
+    ]
+  },
+  "dateTime": {
+    "shortDate": {
+      "value": "mm/dd/yy",
+      "options": [
+        { "label": "m/d/yy", "value": "m/d/yy" },
+        { "label": "mm/dd/yy", "value": "mm/dd/yy" },
+        { "label": "mm/dd/yyyy", "value": "mm/dd/yyyy" },
+        { "label": "yy/mm/dd", "value": "yy/mm/dd" },
+        { "label": "yyyy-mm-dd", "value": "yyyy-mm-dd" },
+        { "label": "dd-mm-yyyy", "value": "dd-mm-yyyy" }
+      ]
+    },
+    "longDate": {
+      "value": "dd MMMM yyyy",
+      "options": [
+        { "label": "dd MMMM yyyy", "value": "dd MMMM yyyy" },
+        { "label": "MMMM dd, yyyy", "value": "MMMM dd, yyyy" },
+        { "label": "yyyy MMMM dd", "value": "yyyy MMMM dd" },
+        { "label": "dd MMMM, yyyy", "value": "dd MMMM, yyyy" }
+      ]
+    },
+    "clockFormat": {
+      "value": "12hr",
+      "options": [
+        { "label": "12Hour (AM/PM)", "value": "12hr" },
+        { "label": "24Hour", "value": "24hr" }
+      ]
+    },
+    "shortTime": {
+      "value": "hh:mm",
+      "options": [
+        { "label": "hh:mm", "value": "hh:mm" },
+        { "label": "HH:mm", "value": "HH:mm" },
+        { "label": "h:mm a", "value": "h:mm a" },
+        { "label": "HH:mm:ss", "value": "HH:mm:ss" }
+      ]
+    },
+    "longTime": {
+      "value": "hh:mm:ss",
+      "options": [
+        { "label": "hh:mm:ss", "value": "hh:mm:ss" },
+        { "label": "HH:mm:ss", "value": "HH:mm:ss" },
+        { "label": "h:mm:ss a", "value": "h:mm:ss a" },
+        { "label": "HH:mm:ss.SSS", "value": "HH:mm:ss.SSS" }
+      ]
+    }
+  },
+  "alignment": {
+    "numeric": {
+      "value": "center",
+      "options": [
+        { "label": "Left", "value": "left" },
+        { "label": "Center", "value": "center" },
+        { "label": "Right", "value": "right" }
+      ]
+    },
+    "text": {
+      "value": "left",
+      "options": [
+        { "label": "Left", "value": "left" },
+        { "label": "Center", "value": "center" },
+        { "label": "Right", "value": "right" }
+      ]
+    }
+  },
+  "defaultCurrency": {
+    "value": "AUD",
+    "options": [
+      { "label": "Australian Dollar (AUD)", "value": "AUD" },
+      { "label": "US Dollar (USD)", "value": "USD" },
+      { "label": "Euro (EUR)", "value": "EUR" },
+      { "label": "British Pound (GBP)", "value": "GBP" },
+      { "label": "Indian Rupee (INR)", "value": "INR" },
+      { "label": "Japanese Yen (JPY)", "value": "JPY" },
+      { "label": "Singapore Dollar (SGD)", "value": "SGD" }
+    ]
+  },
+  "defaultUniverse": {
+    "value": "S&P/ASX300",
+    "options": [
+      { "label": "S&P/ASX300", "value": "S&P/ASX300" },
+      { "label": "S&P 500", "value": "S&P 500" },
+      { "label": "FTSE 100", "value": "FTSE 100" },
+      { "label": "NIFTY 50", "value": "NIFTY 50" },
+      { "label": "DAX", "value": "DAX" },
+      { "label": "Nikkei 225", "value": "Nikkei 225" },
+      { "label": "STI", "value": "STI" }
+    ]
+  }
+}

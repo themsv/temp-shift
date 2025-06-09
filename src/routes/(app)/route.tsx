@@ -19,7 +19,7 @@ function RouteComponent() {
       }}
       styles={{
         header: {
-          borderBottom: '2px solid #000',
+          borderBottom: '1px solid #000',
         },
         navbar: {
           background: '#000',
@@ -34,7 +34,15 @@ function RouteComponent() {
         <SideNavbar />
       </AppShell.Navbar>
 
-      <AppShell.Main>
+      <AppShell.Main
+        m="xl"
+        style={{
+          backgroundImage: 'url(/background-pattern.svg)',
+          backgroundRepeat: 'no-repeat',
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+        }}
+      >
         <Outlet />
       </AppShell.Main>
     </AppShell>

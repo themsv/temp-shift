@@ -1,0 +1,15 @@
+{
+  "SETTINGS_PAGE_TITLE": "Settings",
+  "SETTINGS_COUNTRY_REGION": "Country or Region",
+  "SETTINGS_HEADER_DATE_TIME": "Date & Time",
+  "SETTINGS_DATE_SHORT": "Short Date",
+  "SETTINGS_DATE_LONG": "Long Date",
+  "SETTINGS_TIME_CLOCK": "Clock Format",
+  "SETTINGS_TIME_SHORT": "Short Time",
+  "SETTINGS_TIME_LONG": "Long Time",
+  "SETTINGS_HEADER_ALIGNMENT": "Alignment",
+  "SETTINGS_ALIGNMENT_NUMERIC": "Numeric Alignment",
+  "SETTINGS_ALIGNMENT_TEXT": "Text Alignment",
+  "SETTINGS_DEFAULT_CCY": "Default Currency",
+  "SETTINGS_DEFAULT_UNIV": "Default Universe"
+}
