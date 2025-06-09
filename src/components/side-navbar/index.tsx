@@ -6,7 +6,7 @@ import { ActionIcon, Drawer, Group, Stack, Text, Tooltip, UnstyledButton } from 
 import { useDisclosure } from '@mantine/hooks';
 import { IconCircleChevronLeft, IconCircleChevronRight } from '@tabler/icons-react';
 
-import { IconDashboard, IconData, IconHelp, IconSettings } from '../../ui-core/icons';
+import { IconDashboard, IconData, IconHelp, IconSettings } from '../../ui-core';
 
 function SideNavbar() {
   const [opened, { open, close }] = useDisclosure();
