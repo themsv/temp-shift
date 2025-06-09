@@ -1,0 +1,12 @@
+{
+  "TITLE": "Reference Data",
+  "MODEL_TITLE": "Model Flavour Version 2.7",
+  "BASE_LABEL": "Base Universe",
+  "LATEST_LABEL": "Latest Available Date",
+  "STOCK_LABEL": "Stock Count of Latest Available Date",
+  "CURRENCY_LABEL": "Currency of Market Cap",
+  "REGIME_TITLE": "Regime Region Statistics",
+  "START_LABEL": "Start of History (Regime returns appear in Flavour, Factors and GICS exposure charts)",
+  "HISTORY_LABEL": "History Updated to (For historical style flavour returns and economic regimes)",
+  "HISTORY_MONTH_LABEL": "History # Months (For historical style flavour returns and economic regimes)"
+}

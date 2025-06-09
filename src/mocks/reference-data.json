@@ -1,0 +1,20 @@
+{
+  "baseUniverses": [
+    "S&P/ASX 300",
+    "MSCI World",
+    "Russell 2000",
+    "NIFTY 50",
+    "FTSE 100",
+    "S&P 500",
+    "STOXX Europe 600",
+    "Nikkei 225",
+    "Hang Seng Index",
+    "DAX 40"
+  ],
+  "latestAvailableDate": "31 - Jan - 2025",
+  "stockCount": "298",
+  "currency": "AUD",
+  "startOfHistory": "30 - Dec -1994",
+  "historyUpdatedTo": "31 - Jan -2025",
+  "historyMonths": "361"
+}

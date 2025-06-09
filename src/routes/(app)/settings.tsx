@@ -1,11 +1,20 @@
 import { createFileRoute } from '@tanstack/react-router';
-import { Card, Center, Divider, Grid, Select as MantineSelect, Stack, Text } from '@mantine/core';
+import {
+  Card,
+  Center,
+  Divider,
+  Grid,
+  Select as MantineSelect,
+  Stack,
+  Text,
+  Title,
+} from '@mantine/core';
 import { useIntl } from 'react-intl';
 
 import settingsConfig from '../../mocks/settings.json';
 
 const Select = MantineSelect.withProps({
-  disabled: true,
+  readOnly: true,
 });
 
 export const Route = createFileRoute('/(app)/settings')({
@@ -16,9 +25,7 @@ function RouteComponent() {
   const { formatMessage } = useIntl();
   return (
     <Stack>
-      <Text fw={700} size="xl">
-        {formatMessage({ id: 'SETTINGS_PAGE_TITLE' })}
-      </Text>
+      <Title order={3}>{formatMessage({ id: 'SETTINGS_PAGE_TITLE' })}</Title>
       <Center>
         <Stack w="70vw" component={Card}>
           <Grid>
