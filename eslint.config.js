@@ -5,6 +5,9 @@ import reactRefresh from 'eslint-plugin-react-refresh';
 import reactX from 'eslint-plugin-react-x';
 import reactDom from 'eslint-plugin-react-dom';
 import tseslint from 'typescript-eslint';
+import tanstackQuery from '@tanstack/eslint-plugin-query';
+import prettier from 'eslint-plugin-prettier';
+import formatjs from 'eslint-plugin-formatjs';
 
 export default tseslint.config(
   { ignores: ['dist'] },
@@ -30,12 +33,24 @@ export default tseslint.config(
       'react-refresh': reactRefresh,
       'react-x': reactX,
       'react-dom': reactDom,
+      '@tanstack/query': tanstackQuery,
+      prettier,
+      formatjs,
     },
     rules: {
       ...reactHooks.configs.recommended.rules,
       'react-refresh/only-export-components': ['warn', { allowConstantExport: true }],
       ...reactX.configs['recommended-typescript'].rules,
       ...reactDom.configs.recommended.rules,
+      'prettier/prettier': [
+        'error',
+        {
+          endOfLine: 'auto',
+        },
+      ],
+
+      'formatjs/no-camel-case': 'error',
+      'formatjs/no-offset': 'error',
     },
   },
 );

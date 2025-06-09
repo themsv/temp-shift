@@ -1,0 +1,143 @@
+import type { ComponentType } from 'react';
+import { useIntl } from 'react-intl';
+import { Link, useMatchRoute } from '@tanstack/react-router';
+import type { LinkProps } from '@tanstack/react-router';
+import { ActionIcon, Drawer, Group, Stack, Text, Tooltip, UnstyledButton } from '@mantine/core';
+import { useDisclosure } from '@mantine/hooks';
+import { IconCircleChevronLeft, IconCircleChevronRight } from '@tabler/icons-react';
+
+import { IconDashboard, IconData, IconHelp, IconSettings } from '../../ui-core/icons';
+
+function SideNavbar() {
+  const [opened, { open, close }] = useDisclosure();
+  const intl = useIntl();
+
+  return (
+    <>
+      {/* Expanded mode */}
+      <Drawer
+        p="0"
+        opened={opened}
+        onClose={close}
+        withCloseButton={false}
+        size={182}
+        styles={{
+          content: {
+            backgroundColor: '#000',
+          },
+          body: {
+            padding: 0,
+          },
+        }}
+      >
+        <Stack justify="space-between" align="center" h="80vh" my={72}>
+          <Stack gap="xl">
+            <ExpandedNavItem
+              to="/dashboard"
+              label={intl.formatMessage({ id: 'NAV_ITEM_DASHBOARD' })}
+              icon={IconDashboard}
+            />
+            <ExpandedNavItem
+              to="/reference-data"
+              label={intl.formatMessage({ id: 'NAV_ITEM_REFERENCE_DATA' })}
+              icon={IconData}
+            />
+          </Stack>
+          <ActionIcon
+            onClick={close}
+            style={{ alignSelf: 'flex-end' }}
+            variant="transparent"
+            size="xl"
+          >
+            <IconCircleChevronLeft color="white" size={32} />
+          </ActionIcon>
+
+          <Stack gap="xl">
+            <ExpandedNavItem
+              to="/settings"
+              label={intl.formatMessage({ id: 'NAV_ITEM_SETTINGS' })}
+              icon={IconSettings}
+            />
+            <ExpandedNavItem
+              to="/help"
+              label={intl.formatMessage({ id: 'NAV_ITEM_HELP' })}
+              icon={IconHelp}
+            />
+          </Stack>
+        </Stack>
+      </Drawer>
+
+      {/* Collapsed Mode */}
+      <Stack justify="space-between" align="center" h="80vh" my={72}>
+        <Stack gap="xl">
+          <CollapsedNavItem
+            to="/dashboard"
+            label={intl.formatMessage({ id: 'NAV_ITEM_DASHBOARD' })}
+            icon={IconDashboard}
+          />
+          <CollapsedNavItem
+            to="/reference-data"
+            label={intl.formatMessage({ id: 'NAV_ITEM_REFERENCE_DATA' })}
+            icon={IconData}
+          />
+        </Stack>
+
+        <ActionIcon
+          onClick={open}
+          style={{ alignSelf: 'flex-end' }}
+          variant="transparent"
+          size="xl"
+        >
+          <IconCircleChevronRight color="white" size={32} />
+        </ActionIcon>
+
+        <Stack gap="xl">
+          <CollapsedNavItem
+            to="/settings"
+            label={intl.formatMessage({ id: 'NAV_ITEM_SETTINGS' })}
+            icon={IconSettings}
+          />
+          <CollapsedNavItem
+            to="/help"
+            label={intl.formatMessage({ id: 'NAV_ITEM_HELP' })}
+            icon={IconHelp}
+          />
+        </Stack>
+      </Stack>
+    </>
+  );
+}
+
+export default SideNavbar;
+
+interface NavItemProps {
+  to: LinkProps['to'];
+  label: string;
+  icon: ComponentType<{ color: string }>;
+}
+function ExpandedNavItem({ to, label, icon: Icon }: NavItemProps) {
+  const matchRoute = useMatchRoute();
+  const color = matchRoute({ to }) ? 'blue' : 'white';
+
+  return (
+    <UnstyledButton component={Link} to={to}>
+      <Group>
+        <Icon color={color} />
+        <Text c={color}>{label}</Text>
+      </Group>
+    </UnstyledButton>
+  );
+}
+
+function CollapsedNavItem({ to, label, icon: Icon }: NavItemProps) {
+  const matchRoute = useMatchRoute();
+  const color = matchRoute({ to }) ? 'blue' : 'white';
+
+  return (
+    <Tooltip position="right" label={label}>
+      <ActionIcon component={Link} to={to} variant="transparent" size={36}>
+        <Icon color={color} />
+      </ActionIcon>
+    </Tooltip>
+  );
+}
