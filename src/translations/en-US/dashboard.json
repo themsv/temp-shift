@@ -1,0 +1,13 @@
+{
+  "READ_MORE": "Read more",
+  "DOWNLOAD": "Download",
+  "ADD_PORTFOLIO": "Add Portfolio",
+  "STOCKS_COUNT": "{count} stocks",
+  "TRACKING_ERROR": "Tracking Error: {value}",
+  "ACTIVE_SHARE": "Active Share: {value}",
+  "BETA": "Beta: {value}",
+  "MY_PORTFOLIOS": "My Portfolios",
+  "STYLE_RESEARCH": "Style 2.0 Research",
+  "IDEA_GENERATION": "Idea Generation",
+  "STOCK_PROFILE": "Stock Profile"
+}

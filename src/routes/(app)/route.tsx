@@ -15,7 +15,7 @@ function RouteComponent() {
       header={{ height: 64 }}
       navbar={{
         width: 64,
-        breakpoint: 'sm',
+        breakpoint: 'xs',
       }}
       styles={{
         header: {

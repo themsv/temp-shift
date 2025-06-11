@@ -1,0 +1,32 @@
+{
+  "DEFAULT_OPTIONS": ["Recent", "A-Z"],
+  "portfolios": [
+    {
+      "_id": "201",
+      "name": "ASX Quality Growth",
+      "description": "This is a portfolio for increasing wealth",
+      "stockCount": "70",
+      "trackingError": "0.04%",
+      "activeShare": "89%",
+      "beta": "1.33"
+    },
+    {
+      "_id": "202",
+      "name": "S&P Growth",
+      "description": "This is a portfolio for increasing wealth",
+      "stockCount": "70",
+      "trackingError": "0.04%",
+      "activeShare": "89%",
+      "beta": "1.33"
+    },
+    {
+      "_id": "203",
+      "name": "S&P Growth",
+      "description": "This is a portfolio for increasing wealth",
+      "stockCount": "70",
+      "trackingError": "0.04%",
+      "activeShare": "89%",
+      "beta": "1.33"
+    }
+  ]
+}
