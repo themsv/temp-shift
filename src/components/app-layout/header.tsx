@@ -2,7 +2,7 @@ import { Link } from '@tanstack/react-router';
 import { Group, Text, ActionIcon } from '@mantine/core';
 import { IconUserCircle } from '@tabler/icons-react';
 
-import { IconMCQLogo, IconLogout } from '../ui-core';
+import { IconLogout, IconMCQLogo } from '../../ui-core';
 
 function Header() {
   return (

@@ -1,8 +1,8 @@
 import { createFileRoute, Outlet } from '@tanstack/react-router';
 import { AppShell } from '@mantine/core';
 
-import SideNavbar from '../../components/side-navbar';
-import Header from '../../components/header';
+import SideNavbar from '../../components/app-layout/side-navbar';
+import Header from '../../components/app-layout/header';
 
 export const Route = createFileRoute('/(app)')({
   component: RouteComponent,

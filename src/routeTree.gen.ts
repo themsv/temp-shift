@@ -14,9 +14,8 @@ import { createFileRoute } from '@tanstack/react-router';
 
 import { Route as rootRoute } from './routes/__root';
 import { Route as appRouteImport } from './routes/(app)/route';
-import { Route as IndexImport } from './routes/index';
+import { Route as authIndexImport } from './routes/(auth)/index';
 import { Route as authRegisterImport } from './routes/(auth)/register';
-import { Route as authLoginImport } from './routes/(auth)/login';
 import { Route as appSettingsImport } from './routes/(app)/settings';
 import { Route as appReferenceDataImport } from './routes/(app)/reference-data';
 import { Route as appDashboardImport } from './routes/(app)/dashboard';
@@ -32,8 +31,8 @@ const appRouteRoute = appRouteImport.update({
   getParentRoute: () => rootRoute,
 } as any);
 
-const IndexRoute = IndexImport.update({
-  id: '/',
+const authIndexRoute = authIndexImport.update({
+  id: '/(auth)/',
   path: '/',
   getParentRoute: () => rootRoute,
 } as any);
@@ -49,12 +48,6 @@ const appHelpLazyRoute = appHelpLazyImport
 const authRegisterRoute = authRegisterImport.update({
   id: '/(auth)/register',
   path: '/register',
-  getParentRoute: () => rootRoute,
-} as any);
-
-const authLoginRoute = authLoginImport.update({
-  id: '/(auth)/login',
-  path: '/login',
   getParentRoute: () => rootRoute,
 } as any);
 
@@ -80,13 +73,6 @@ const appDashboardRoute = appDashboardImport.update({
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/': {
-      id: '/';
-      path: '/';
-      fullPath: '/';
-      preLoaderRoute: typeof IndexImport;
-      parentRoute: typeof rootRoute;
-    };
     '/(app)': {
       id: '/(app)';
       path: '/';
@@ -115,13 +101,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof appSettingsImport;
       parentRoute: typeof appRouteImport;
     };
-    '/(auth)/login': {
-      id: '/(auth)/login';
-      path: '/login';
-      fullPath: '/login';
-      preLoaderRoute: typeof authLoginImport;
-      parentRoute: typeof rootRoute;
-    };
     '/(auth)/register': {
       id: '/(auth)/register';
       path: '/register';
@@ -135,6 +114,13 @@ declare module '@tanstack/react-router' {
       fullPath: '/help';
       preLoaderRoute: typeof appHelpLazyImport;
       parentRoute: typeof appRouteImport;
+    };
+    '/(auth)/': {
+      id: '/(auth)/';
+      path: '/';
+      fullPath: '/';
+      preLoaderRoute: typeof authIndexImport;
+      parentRoute: typeof rootRoute;
     };
   }
 }
@@ -158,74 +144,61 @@ const appRouteRouteChildren: appRouteRouteChildren = {
 const appRouteRouteWithChildren = appRouteRoute._addFileChildren(appRouteRouteChildren);
 
 export interface FileRoutesByFullPath {
-  '/': typeof appRouteRouteWithChildren;
+  '/': typeof authIndexRoute;
   '/dashboard': typeof appDashboardRoute;
   '/reference-data': typeof appReferenceDataRoute;
   '/settings': typeof appSettingsRoute;
-  '/login': typeof authLoginRoute;
   '/register': typeof authRegisterRoute;
   '/help': typeof appHelpLazyRoute;
 }
 
 export interface FileRoutesByTo {
-  '/': typeof appRouteRouteWithChildren;
+  '/': typeof authIndexRoute;
   '/dashboard': typeof appDashboardRoute;
   '/reference-data': typeof appReferenceDataRoute;
   '/settings': typeof appSettingsRoute;
-  '/login': typeof authLoginRoute;
   '/register': typeof authRegisterRoute;
   '/help': typeof appHelpLazyRoute;
 }
 
 export interface FileRoutesById {
   __root__: typeof rootRoute;
-  '/': typeof IndexRoute;
   '/(app)': typeof appRouteRouteWithChildren;
   '/(app)/dashboard': typeof appDashboardRoute;
   '/(app)/reference-data': typeof appReferenceDataRoute;
   '/(app)/settings': typeof appSettingsRoute;
-  '/(auth)/login': typeof authLoginRoute;
   '/(auth)/register': typeof authRegisterRoute;
   '/(app)/help': typeof appHelpLazyRoute;
+  '/(auth)/': typeof authIndexRoute;
 }
 
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath;
-  fullPaths:
-    | '/'
-    | '/dashboard'
-    | '/reference-data'
-    | '/settings'
-    | '/login'
-    | '/register'
-    | '/help';
+  fullPaths: '/' | '/dashboard' | '/reference-data' | '/settings' | '/register' | '/help';
   fileRoutesByTo: FileRoutesByTo;
-  to: '/' | '/dashboard' | '/reference-data' | '/settings' | '/login' | '/register' | '/help';
+  to: '/' | '/dashboard' | '/reference-data' | '/settings' | '/register' | '/help';
   id:
     | '__root__'
-    | '/'
     | '/(app)'
     | '/(app)/dashboard'
     | '/(app)/reference-data'
     | '/(app)/settings'
-    | '/(auth)/login'
     | '/(auth)/register'
-    | '/(app)/help';
+    | '/(app)/help'
+    | '/(auth)/';
   fileRoutesById: FileRoutesById;
 }
 
 export interface RootRouteChildren {
-  IndexRoute: typeof IndexRoute;
   appRouteRoute: typeof appRouteRouteWithChildren;
-  authLoginRoute: typeof authLoginRoute;
   authRegisterRoute: typeof authRegisterRoute;
+  authIndexRoute: typeof authIndexRoute;
 }
 
 const rootRouteChildren: RootRouteChildren = {
-  IndexRoute: IndexRoute,
   appRouteRoute: appRouteRouteWithChildren,
-  authLoginRoute: authLoginRoute,
   authRegisterRoute: authRegisterRoute,
+  authIndexRoute: authIndexRoute,
 };
 
 export const routeTree = rootRoute
@@ -238,14 +211,10 @@ export const routeTree = rootRoute
     "__root__": {
       "filePath": "__root.tsx",
       "children": [
-        "/",
         "/(app)",
-        "/(auth)/login",
-        "/(auth)/register"
+        "/(auth)/register",
+        "/(auth)/"
       ]
-    },
-    "/": {
-      "filePath": "index.tsx"
     },
     "/(app)": {
       "filePath": "(app)/route.tsx",
@@ -268,15 +237,15 @@ export const routeTree = rootRoute
       "filePath": "(app)/settings.tsx",
       "parent": "/(app)"
     },
-    "/(auth)/login": {
-      "filePath": "(auth)/login.tsx"
-    },
     "/(auth)/register": {
       "filePath": "(auth)/register.tsx"
     },
     "/(app)/help": {
       "filePath": "(app)/help.lazy.tsx",
       "parent": "/(app)"
+    },
+    "/(auth)/": {
+      "filePath": "(auth)/index.tsx"
     }
   }
 }
