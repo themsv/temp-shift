@@ -27,6 +27,33 @@
       "trackingError": "0.04%",
       "activeShare": "89%",
       "beta": "1.33"
+    },
+    {
+      "_id": "204",
+      "name": "ASX Quality Growth",
+      "description": "This is a portfolio for increasing wealth",
+      "stockCount": "70",
+      "trackingError": "0.04%",
+      "activeShare": "89%",
+      "beta": "1.33"
+    },
+    {
+      "_id": "205",
+      "name": "S&P Growth",
+      "description": "This is a portfolio for increasing wealth",
+      "stockCount": "70",
+      "trackingError": "0.04%",
+      "activeShare": "89%",
+      "beta": "1.33"
+    },
+    {
+      "_id": "206",
+      "name": "S&P Growth",
+      "description": "This is a portfolio for increasing wealth",
+      "stockCount": "70",
+      "trackingError": "0.04%",
+      "activeShare": "89%",
+      "beta": "1.33"
     }
   ]
 }

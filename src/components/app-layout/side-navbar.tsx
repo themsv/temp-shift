@@ -2,7 +2,16 @@ import type { ComponentType } from 'react';
 import { useIntl } from 'react-intl';
 import { Link, useMatchRoute } from '@tanstack/react-router';
 import type { LinkProps } from '@tanstack/react-router';
-import { ActionIcon, Drawer, Group, Stack, Text, Tooltip, UnstyledButton } from '@mantine/core';
+import {
+  ActionIcon,
+  Drawer,
+  Group,
+  Stack,
+  Text,
+  Tooltip,
+  UnstyledButton,
+  useMantineTheme,
+} from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 import { IconCircleChevronLeft, IconCircleChevronRight } from '@tabler/icons-react';
 
@@ -117,7 +126,9 @@ interface NavItemProps {
 }
 function ExpandedNavItem({ to, label, icon: Icon }: NavItemProps) {
   const matchRoute = useMatchRoute();
-  const color = matchRoute({ to }) ? 'blue' : 'white';
+  const { primaryColor, colors } = useMantineTheme();
+
+  const color = matchRoute({ to }) ? colors[primaryColor][5] : '#fff';
 
   return (
     <UnstyledButton component={Link} to={to}>
@@ -131,7 +142,9 @@ function ExpandedNavItem({ to, label, icon: Icon }: NavItemProps) {
 
 function CollapsedNavItem({ to, label, icon: Icon }: NavItemProps) {
   const matchRoute = useMatchRoute();
-  const color = matchRoute({ to }) ? 'blue' : 'white';
+  const { primaryColor, colors } = useMantineTheme();
+
+  const color = matchRoute({ to }) ? colors[primaryColor][5] : '#fff';
 
   return (
     <Tooltip position="right" label={label}>

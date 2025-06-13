@@ -34,15 +34,7 @@ function RouteComponent() {
         <SideNavbar />
       </AppShell.Navbar>
 
-      <AppShell.Main
-        m="xl"
-        style={{
-          backgroundImage: 'url(/background-pattern.svg)',
-          backgroundRepeat: 'no-repeat',
-          backgroundSize: 'cover',
-          backgroundPosition: 'center',
-        }}
-      >
+      <AppShell.Main m="xl">
         <Outlet />
       </AppShell.Main>
     </AppShell>

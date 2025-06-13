@@ -12,12 +12,23 @@ import './style.css';
 
 const theme = createTheme({
   /** Theme override here */
-  defaultRadius: 'xs',
-
-  fontFamily: 'MCQGlobal, sans-serif',
-  headings: {
-    fontFamily: 'MCQGlobal, sans-serif',
+  colors: {
+    skyblue: [
+      '#e3f6ff',
+      '#cee7ff',
+      '#9fccfb',
+      '#6db0f6',
+      '#4398f2',
+      '#2d8cf0',
+      '#1281f0',
+      '#006fd6',
+      '#0063c1',
+      '#0055ab',
+    ],
   },
+  primaryColor: 'skyblue',
+  primaryShade: 5,
+  defaultRadius: 'xs',
 
   components: {
     Select: {

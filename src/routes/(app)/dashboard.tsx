@@ -1,11 +1,11 @@
 import { createFileRoute } from '@tanstack/react-router';
 import { useIntl } from 'react-intl';
-import { Box, Button, Flex, Group, Paper, SimpleGrid, Stack, Text } from '@mantine/core';
-import { IconBulb, IconChartLine } from '@tabler/icons-react';
+import { Button, Flex, Group, SimpleGrid, Stack, Text } from '@mantine/core';
+import { IconBulb, IconChartLine, IconHelp } from '@tabler/icons-react';
 
 import { SearchSortDropdown } from '../../components/dashboard/SearchSortDropdown';
 import { StockCard } from '../../components/dashboard/StockCard';
-import { ResearchCard } from '../../components/dashboard/ResearchCard';
+import { ArticleCard } from '../../components/dashboard/ArticleCard';
 import portfolioData from './../../mocks/portfolio-data.json';
 import researchData from './../../mocks/research-data.json';
 
@@ -17,9 +17,18 @@ function RouteComponent() {
   const { formatMessage } = useIntl();
 
   return (
-    <Flex gap="md" align="flex-start">
-      <Box w="75%">
-        <Flex justify="space-between" align="center" mb="md">
+    <Flex
+      gap="md"
+      align="flex-start"
+      style={{
+        backgroundImage: 'url(/background-pattern.svg)',
+        backgroundRepeat: 'no-repeat',
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+      }}
+    >
+      <Stack w="75%">
+        <Group justify="space-between" align="center">
           <Text fw={400} size="xl">
             {formatMessage({ id: 'MY_PORTFOLIOS', defaultMessage: 'My Portfolios' })}
           </Text>
@@ -29,7 +38,7 @@ function RouteComponent() {
               console.log('Selected value:', value);
             }}
           />
-        </Flex>
+        </Group>
 
         <SimpleGrid cols={4} spacing="md">
           <StockCard name="add" />
@@ -37,29 +46,30 @@ function RouteComponent() {
             <StockCard key={item._id} {...item} />
           ))}
         </SimpleGrid>
-      </Box>
+      </Stack>
 
-      <Box w="25%">
-        <Group gap="xs" wrap="nowrap" mb="sm">
-          <Button size="sm" color="#2D8CF0" fullWidth leftSection={<IconBulb size={16} />}>
+      <Stack w="25%">
+        <Group gap="xs" wrap="nowrap">
+          <Button size="sm" fullWidth leftSection={<IconBulb size={16} />}>
             {formatMessage({ id: 'IDEA_GENERATION' })}
           </Button>
-          <Button size="sm" variant="default" fullWidth leftSection={<IconChartLine size={16} />}>
+          <Button size="sm" variant="outline" fullWidth leftSection={<IconChartLine size={16} />}>
             {formatMessage({ id: 'STOCK_PROFILE' })}
           </Button>
         </Group>
 
-        <Paper bg="gray.0" radius="md" p="sm">
-          <Text fw={500} mb="sm">
-            {formatMessage({ id: 'STYLE_RESEARCH' })}
-          </Text>
+        <Stack bg="gray.0" p="md">
+          <Group align="center" gap="sm">
+            <Text fw={500}>{formatMessage({ id: 'STYLE_RESEARCH' })}</Text>
+            <IconHelp size={16} />
+          </Group>
           <Stack gap="sm">
             {researchData.map((item) => (
-              <ResearchCard key={item._id} {...item} />
+              <ArticleCard key={item._id} {...item} showLinks />
             ))}
           </Stack>
-        </Paper>
-      </Box>
+        </Stack>
+      </Stack>
     </Flex>
   );
 }

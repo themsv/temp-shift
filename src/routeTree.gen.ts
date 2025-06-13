@@ -8,245 +8,213 @@
 // You should NOT make any changes in this file as it will be overwritten.
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
-import { createFileRoute } from '@tanstack/react-router';
+import { createFileRoute } from '@tanstack/react-router'
 
-// Import Routes
+import { Route as rootRouteImport } from './routes/__root'
+import { Route as appRouteRouteImport } from './routes/(app)/route'
+import { Route as authIndexRouteImport } from './routes/(auth)/index'
+import { Route as authRegisterRouteImport } from './routes/(auth)/register'
+import { Route as appSettingsRouteImport } from './routes/(app)/settings'
+import { Route as appReferenceDataRouteImport } from './routes/(app)/reference-data'
+import { Route as appPortfolioRouteImport } from './routes/(app)/portfolio'
+import { Route as appDashboardRouteImport } from './routes/(app)/dashboard'
 
-import { Route as rootRoute } from './routes/__root';
-import { Route as appRouteImport } from './routes/(app)/route';
-import { Route as authIndexImport } from './routes/(auth)/index';
-import { Route as authRegisterImport } from './routes/(auth)/register';
-import { Route as appSettingsImport } from './routes/(app)/settings';
-import { Route as appReferenceDataImport } from './routes/(app)/reference-data';
-import { Route as appDashboardImport } from './routes/(app)/dashboard';
+const appHelpLazyRouteImport = createFileRoute('/(app)/help')()
 
-// Create Virtual Routes
-
-const appHelpLazyImport = createFileRoute('/(app)/help')();
-
-// Create/Update Routes
-
-const appRouteRoute = appRouteImport.update({
+const appRouteRoute = appRouteRouteImport.update({
   id: '/(app)',
-  getParentRoute: () => rootRoute,
-} as any);
-
-const authIndexRoute = authIndexImport.update({
+  getParentRoute: () => rootRouteImport,
+} as any)
+const authIndexRoute = authIndexRouteImport.update({
   id: '/(auth)/',
   path: '/',
-  getParentRoute: () => rootRoute,
-} as any);
-
-const appHelpLazyRoute = appHelpLazyImport
+  getParentRoute: () => rootRouteImport,
+} as any)
+const appHelpLazyRoute = appHelpLazyRouteImport
   .update({
     id: '/help',
     path: '/help',
     getParentRoute: () => appRouteRoute,
   } as any)
-  .lazy(() => import('./routes/(app)/help.lazy').then((d) => d.Route));
-
-const authRegisterRoute = authRegisterImport.update({
+  .lazy(() => import('./routes/(app)/help.lazy').then((d) => d.Route))
+const authRegisterRoute = authRegisterRouteImport.update({
   id: '/(auth)/register',
   path: '/register',
-  getParentRoute: () => rootRoute,
-} as any);
-
-const appSettingsRoute = appSettingsImport.update({
+  getParentRoute: () => rootRouteImport,
+} as any)
+const appSettingsRoute = appSettingsRouteImport.update({
   id: '/settings',
   path: '/settings',
   getParentRoute: () => appRouteRoute,
-} as any);
-
-const appReferenceDataRoute = appReferenceDataImport.update({
+} as any)
+const appReferenceDataRoute = appReferenceDataRouteImport.update({
   id: '/reference-data',
   path: '/reference-data',
   getParentRoute: () => appRouteRoute,
-} as any);
-
-const appDashboardRoute = appDashboardImport.update({
+} as any)
+const appPortfolioRoute = appPortfolioRouteImport.update({
+  id: '/portfolio',
+  path: '/portfolio',
+  getParentRoute: () => appRouteRoute,
+} as any)
+const appDashboardRoute = appDashboardRouteImport.update({
   id: '/dashboard',
   path: '/dashboard',
   getParentRoute: () => appRouteRoute,
-} as any);
-
-// Populate the FileRoutesByPath interface
-
-declare module '@tanstack/react-router' {
-  interface FileRoutesByPath {
-    '/(app)': {
-      id: '/(app)';
-      path: '/';
-      fullPath: '/';
-      preLoaderRoute: typeof appRouteImport;
-      parentRoute: typeof rootRoute;
-    };
-    '/(app)/dashboard': {
-      id: '/(app)/dashboard';
-      path: '/dashboard';
-      fullPath: '/dashboard';
-      preLoaderRoute: typeof appDashboardImport;
-      parentRoute: typeof appRouteImport;
-    };
-    '/(app)/reference-data': {
-      id: '/(app)/reference-data';
-      path: '/reference-data';
-      fullPath: '/reference-data';
-      preLoaderRoute: typeof appReferenceDataImport;
-      parentRoute: typeof appRouteImport;
-    };
-    '/(app)/settings': {
-      id: '/(app)/settings';
-      path: '/settings';
-      fullPath: '/settings';
-      preLoaderRoute: typeof appSettingsImport;
-      parentRoute: typeof appRouteImport;
-    };
-    '/(auth)/register': {
-      id: '/(auth)/register';
-      path: '/register';
-      fullPath: '/register';
-      preLoaderRoute: typeof authRegisterImport;
-      parentRoute: typeof rootRoute;
-    };
-    '/(app)/help': {
-      id: '/(app)/help';
-      path: '/help';
-      fullPath: '/help';
-      preLoaderRoute: typeof appHelpLazyImport;
-      parentRoute: typeof appRouteImport;
-    };
-    '/(auth)/': {
-      id: '/(auth)/';
-      path: '/';
-      fullPath: '/';
-      preLoaderRoute: typeof authIndexImport;
-      parentRoute: typeof rootRoute;
-    };
-  }
-}
-
-// Create and export the route tree
-
-interface appRouteRouteChildren {
-  appDashboardRoute: typeof appDashboardRoute;
-  appReferenceDataRoute: typeof appReferenceDataRoute;
-  appSettingsRoute: typeof appSettingsRoute;
-  appHelpLazyRoute: typeof appHelpLazyRoute;
-}
-
-const appRouteRouteChildren: appRouteRouteChildren = {
-  appDashboardRoute: appDashboardRoute,
-  appReferenceDataRoute: appReferenceDataRoute,
-  appSettingsRoute: appSettingsRoute,
-  appHelpLazyRoute: appHelpLazyRoute,
-};
-
-const appRouteRouteWithChildren = appRouteRoute._addFileChildren(appRouteRouteChildren);
+} as any)
 
 export interface FileRoutesByFullPath {
-  '/': typeof authIndexRoute;
-  '/dashboard': typeof appDashboardRoute;
-  '/reference-data': typeof appReferenceDataRoute;
-  '/settings': typeof appSettingsRoute;
-  '/register': typeof authRegisterRoute;
-  '/help': typeof appHelpLazyRoute;
+  '/': typeof authIndexRoute
+  '/dashboard': typeof appDashboardRoute
+  '/portfolio': typeof appPortfolioRoute
+  '/reference-data': typeof appReferenceDataRoute
+  '/settings': typeof appSettingsRoute
+  '/register': typeof authRegisterRoute
+  '/help': typeof appHelpLazyRoute
 }
-
 export interface FileRoutesByTo {
-  '/': typeof authIndexRoute;
-  '/dashboard': typeof appDashboardRoute;
-  '/reference-data': typeof appReferenceDataRoute;
-  '/settings': typeof appSettingsRoute;
-  '/register': typeof authRegisterRoute;
-  '/help': typeof appHelpLazyRoute;
+  '/': typeof authIndexRoute
+  '/dashboard': typeof appDashboardRoute
+  '/portfolio': typeof appPortfolioRoute
+  '/reference-data': typeof appReferenceDataRoute
+  '/settings': typeof appSettingsRoute
+  '/register': typeof authRegisterRoute
+  '/help': typeof appHelpLazyRoute
 }
-
 export interface FileRoutesById {
-  __root__: typeof rootRoute;
-  '/(app)': typeof appRouteRouteWithChildren;
-  '/(app)/dashboard': typeof appDashboardRoute;
-  '/(app)/reference-data': typeof appReferenceDataRoute;
-  '/(app)/settings': typeof appSettingsRoute;
-  '/(auth)/register': typeof authRegisterRoute;
-  '/(app)/help': typeof appHelpLazyRoute;
-  '/(auth)/': typeof authIndexRoute;
+  __root__: typeof rootRouteImport
+  '/(app)': typeof appRouteRouteWithChildren
+  '/(app)/dashboard': typeof appDashboardRoute
+  '/(app)/portfolio': typeof appPortfolioRoute
+  '/(app)/reference-data': typeof appReferenceDataRoute
+  '/(app)/settings': typeof appSettingsRoute
+  '/(auth)/register': typeof authRegisterRoute
+  '/(app)/help': typeof appHelpLazyRoute
+  '/(auth)/': typeof authIndexRoute
 }
-
 export interface FileRouteTypes {
-  fileRoutesByFullPath: FileRoutesByFullPath;
-  fullPaths: '/' | '/dashboard' | '/reference-data' | '/settings' | '/register' | '/help';
-  fileRoutesByTo: FileRoutesByTo;
-  to: '/' | '/dashboard' | '/reference-data' | '/settings' | '/register' | '/help';
+  fileRoutesByFullPath: FileRoutesByFullPath
+  fullPaths:
+    | '/'
+    | '/dashboard'
+    | '/portfolio'
+    | '/reference-data'
+    | '/settings'
+    | '/register'
+    | '/help'
+  fileRoutesByTo: FileRoutesByTo
+  to:
+    | '/'
+    | '/dashboard'
+    | '/portfolio'
+    | '/reference-data'
+    | '/settings'
+    | '/register'
+    | '/help'
   id:
     | '__root__'
     | '/(app)'
     | '/(app)/dashboard'
+    | '/(app)/portfolio'
     | '/(app)/reference-data'
     | '/(app)/settings'
     | '/(auth)/register'
     | '/(app)/help'
-    | '/(auth)/';
-  fileRoutesById: FileRoutesById;
+    | '/(auth)/'
+  fileRoutesById: FileRoutesById
+}
+export interface RootRouteChildren {
+  appRouteRoute: typeof appRouteRouteWithChildren
+  authRegisterRoute: typeof authRegisterRoute
+  authIndexRoute: typeof authIndexRoute
 }
 
-export interface RootRouteChildren {
-  appRouteRoute: typeof appRouteRouteWithChildren;
-  authRegisterRoute: typeof authRegisterRoute;
-  authIndexRoute: typeof authIndexRoute;
+declare module '@tanstack/react-router' {
+  interface FileRoutesByPath {
+    '/(app)': {
+      id: '/(app)'
+      path: '/'
+      fullPath: '/'
+      preLoaderRoute: typeof appRouteRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/(auth)/': {
+      id: '/(auth)/'
+      path: '/'
+      fullPath: '/'
+      preLoaderRoute: typeof authIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/(app)/help': {
+      id: '/(app)/help'
+      path: '/help'
+      fullPath: '/help'
+      preLoaderRoute: typeof appHelpLazyRouteImport
+      parentRoute: typeof appRouteRoute
+    }
+    '/(auth)/register': {
+      id: '/(auth)/register'
+      path: '/register'
+      fullPath: '/register'
+      preLoaderRoute: typeof authRegisterRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/(app)/settings': {
+      id: '/(app)/settings'
+      path: '/settings'
+      fullPath: '/settings'
+      preLoaderRoute: typeof appSettingsRouteImport
+      parentRoute: typeof appRouteRoute
+    }
+    '/(app)/reference-data': {
+      id: '/(app)/reference-data'
+      path: '/reference-data'
+      fullPath: '/reference-data'
+      preLoaderRoute: typeof appReferenceDataRouteImport
+      parentRoute: typeof appRouteRoute
+    }
+    '/(app)/portfolio': {
+      id: '/(app)/portfolio'
+      path: '/portfolio'
+      fullPath: '/portfolio'
+      preLoaderRoute: typeof appPortfolioRouteImport
+      parentRoute: typeof appRouteRoute
+    }
+    '/(app)/dashboard': {
+      id: '/(app)/dashboard'
+      path: '/dashboard'
+      fullPath: '/dashboard'
+      preLoaderRoute: typeof appDashboardRouteImport
+      parentRoute: typeof appRouteRoute
+    }
+  }
 }
+
+interface appRouteRouteChildren {
+  appDashboardRoute: typeof appDashboardRoute
+  appPortfolioRoute: typeof appPortfolioRoute
+  appReferenceDataRoute: typeof appReferenceDataRoute
+  appSettingsRoute: typeof appSettingsRoute
+  appHelpLazyRoute: typeof appHelpLazyRoute
+}
+
+const appRouteRouteChildren: appRouteRouteChildren = {
+  appDashboardRoute: appDashboardRoute,
+  appPortfolioRoute: appPortfolioRoute,
+  appReferenceDataRoute: appReferenceDataRoute,
+  appSettingsRoute: appSettingsRoute,
+  appHelpLazyRoute: appHelpLazyRoute,
+}
+
+const appRouteRouteWithChildren = appRouteRoute._addFileChildren(
+  appRouteRouteChildren,
+)
 
 const rootRouteChildren: RootRouteChildren = {
   appRouteRoute: appRouteRouteWithChildren,
   authRegisterRoute: authRegisterRoute,
   authIndexRoute: authIndexRoute,
-};
-
-export const routeTree = rootRoute
-  ._addFileChildren(rootRouteChildren)
-  ._addFileTypes<FileRouteTypes>();
-
-/* ROUTE_MANIFEST_START
-{
-  "routes": {
-    "__root__": {
-      "filePath": "__root.tsx",
-      "children": [
-        "/(app)",
-        "/(auth)/register",
-        "/(auth)/"
-      ]
-    },
-    "/(app)": {
-      "filePath": "(app)/route.tsx",
-      "children": [
-        "/(app)/dashboard",
-        "/(app)/reference-data",
-        "/(app)/settings",
-        "/(app)/help"
-      ]
-    },
-    "/(app)/dashboard": {
-      "filePath": "(app)/dashboard.tsx",
-      "parent": "/(app)"
-    },
-    "/(app)/reference-data": {
-      "filePath": "(app)/reference-data.tsx",
-      "parent": "/(app)"
-    },
-    "/(app)/settings": {
-      "filePath": "(app)/settings.tsx",
-      "parent": "/(app)"
-    },
-    "/(auth)/register": {
-      "filePath": "(auth)/register.tsx"
-    },
-    "/(app)/help": {
-      "filePath": "(app)/help.lazy.tsx",
-      "parent": "/(app)"
-    },
-    "/(auth)/": {
-      "filePath": "(auth)/index.tsx"
-    }
-  }
 }
-ROUTE_MANIFEST_END */
+export const routeTree = rootRouteImport
+  ._addFileChildren(rootRouteChildren)
+  ._addFileTypes<FileRouteTypes>()

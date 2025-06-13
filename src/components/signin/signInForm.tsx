@@ -1,7 +1,6 @@
 import {
   Anchor,
   Divider,
-  Group,
   Text,
   PasswordInput,
   TextInput,
@@ -9,6 +8,7 @@ import {
   Stack,
   Center,
   Title,
+  Flex,
 } from '@mantine/core';
 import { useForm } from '@mantine/form';
 import { useNavigate } from '@tanstack/react-router';
@@ -18,14 +18,14 @@ function Disclaimer() {
   const intl = useIntl();
 
   return (
-    <Group gap="sm" align="baseline">
-      <Text fw={400} size="lg" w="15%">
+    <Flex gap="lg" maw="45vw">
+      <Text fw={400} size="lg">
         {intl.formatMessage({ id: 'DISCLAIMER_TITLE' })}
       </Text>
-      <Text size="xs" c="dimmed" w="82%">
+      <Text size="xs" c="dimmed">
         {intl.formatMessage({ id: 'DISCLAIMER_CONTENT' })}
       </Text>
-    </Group>
+    </Flex>
   );
 }
 
@@ -67,9 +67,7 @@ function SignInForm() {
             minLength={5}
             {...form.getInputProps('password')}
           />
-          <Button type="submit" variant="filled" color="gray">
-            {intl.formatMessage({ id: 'SIGN_IN' })}
-          </Button>
+          <Button type="submit">{intl.formatMessage({ id: 'SIGN_IN' })}</Button>
           <Anchor href="#" underline="hover" c="black">
             {intl.formatMessage({ id: 'FORGOT_PWD' })}
           </Anchor>
@@ -84,7 +82,6 @@ function SignInForm() {
             </Text>
           </Center>
         </Stack>
-
         <Disclaimer />
       </Stack>
     </form>

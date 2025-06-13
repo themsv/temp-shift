@@ -1,16 +1,17 @@
-import { Card, Text, Box, Anchor, Group, Stack } from '@mantine/core';
+import { Card, Text, Anchor, Group, Stack } from '@mantine/core';
 import { useIntl } from 'react-intl';
 
-interface ResearchcardProps {
+interface ArticleCardProps {
   title: string;
   description: string;
+  showLinks?: boolean;
 }
 
-export const ResearchCard = ({ title, description }: ResearchcardProps) => {
+export const ArticleCard = ({ title, description, showLinks = false }: ArticleCardProps) => {
   const { formatMessage } = useIntl();
 
   return (
-    <Card withBorder p="sm" shadow="sm">
+    <Card withBorder p="sm" shadow="sm" component={Stack} gap="md">
       <Stack gap="xs" m={0}>
         <Text fw={500} size="sm">
           {title}
@@ -18,7 +19,7 @@ export const ResearchCard = ({ title, description }: ResearchcardProps) => {
         <Text size="xs">{description}</Text>
       </Stack>
 
-      <Box mt="sm">
+      {showLinks && (
         <Group gap={12} wrap="wrap">
           <Anchor
             href="#"
@@ -42,7 +43,7 @@ export const ResearchCard = ({ title, description }: ResearchcardProps) => {
             {formatMessage({ id: 'DOWNLOAD' })}
           </Anchor>
         </Group>
-      </Box>
+      )}
     </Card>
   );
 };
