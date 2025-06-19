@@ -8,7 +8,7 @@ import '@mantine/core/styles.css';
 import '@mantine/notifications/styles.css';
 import '@mantine/dropzone/styles.css';
 import '@mantine/dates/styles.css';
-import './style.css';
+import 'ag-charts-enterprise';
 
 const theme = createTheme({
   /** Theme override here */

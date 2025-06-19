@@ -1,0 +1,136 @@
+.rankForest,
+.rankCoral,
+.rankEmrald,
+.rankLightgreen,
+.rankMintgreen,
+.rankGreen,
+.rankPink,
+.rankRed {
+  color: black;
+}
+
+.rankForest {
+  background-color: #5edfbe;
+}
+.rankCoral {
+  background-color: #f67a87;
+}
+.rankEmrald {
+  background-color: #97ebd4;
+}
+.rankLightgreen {
+  background-color: #dcedc8;
+}
+.rankMintgreen {
+  background-color: #b2dfdb;
+}
+.rankGreen {
+  background-color: #e1faf7;
+}
+.rankPink {
+  background-color: #ffe5eb;
+}
+
+.rankRed {
+  background-color: #d1293c;
+}
+
+:global(.ag-header-group-cell) {
+  background-color: black;
+  font-weight: 400;
+  color: white;
+}
+
+:global(.ag-header-group-cell:hover) {
+  background-color: black;
+}
+
+:global(.ag-header-group-cell-with-group) {
+  border-right: 1px solid #aacef9;
+  text-overflow: inherit;
+  font-size: 12px;
+}
+
+:global(.ag-header-group-cell-with-group:hover) {
+  background-color: black !important;
+  cursor: default;
+}
+
+:global(.ag-header-cell) {
+  background-color: #e3f2f9;
+  font-weight: 400;
+}
+
+:global(.ag-header-cell:hover) {
+  background-color: #e3f2f9 !important;
+}
+
+.leftAlignCell {
+  text-align: left !important;
+}
+
+:global(.ag-theme-alpine .ag-header-expand-icon use),
+:global(.ag-header-group-cell .ag-icon) {
+  fill: #1e88e5;
+  color: #1e88e5;
+  font-weight: bold;
+  font-size: 14px;
+}
+
+:global(.ag-theme-alpine .ag-row:nth-child(even)) {
+  background-color: #f2f2f2;
+}
+
+:global(.ag-theme-alpine .ag-row:nth-child(odd)) {
+  background-color: white;
+}
+
+:global(.ag-header-cell.group-boundary),
+:global(.ag-cell.group-boundary),
+:global(.ag-theme-alpine .ag-cell:last-child),
+:global(.last-visible-header),
+:global(.last-visible-cell),
+:global(.ag-header-group-cell-with-group) {
+  border-right: 1px solid #aacef9;
+}
+
+:global(.ag-root-wrapper),
+:global(.ag-root-wrapper-body),
+:global(.ag-body-viewport),
+:global(.ag-body-horizontal-scroll),
+:global(.ag-header) {
+  border: none;
+  box-shadow: none;
+}
+
+:global(.ag-row) {
+  border: none;
+}
+
+:global(.ag-header-cell-label),
+:global(.ag-header-group-cell-label),
+:global(.ag-cell) {
+  justify-content: center;
+  text-align: center;
+  padding: 2px 4px;
+}
+
+:global(.ag-theme-alpine .ag-cell),
+:global(.ag-theme-alpine .ag-header-cell) {
+  font-size: 12px;
+  text-overflow: inherit;
+}
+
+:global(.ag-header-cell-text) {
+  overflow: visible;
+}
+
+:global([class^='ag-']:before) {
+  font-size: 20px;
+}
+
+.leftAlignHeader :global(.ag-header-cell-label),
+.leftAlignHeaderExpanded :global(.ag-header-cell-label) {
+  justify-content: flex-start;
+  padding: 0px;
+}

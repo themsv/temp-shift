@@ -6,6 +6,7 @@ import {
   ActionIcon,
   Drawer,
   Group,
+  Image,
   Stack,
   Text,
   Tooltip,
@@ -15,7 +16,7 @@ import {
 import { useDisclosure } from '@mantine/hooks';
 import { IconCircleChevronLeft, IconCircleChevronRight } from '@tabler/icons-react';
 
-import { IconDashboard, IconData, IconHelp, IconSettings } from '../../ui-core';
+import { IconDashboard, IconData, IconHelp, IconMCQLogo, IconSettings } from '../../ui-core';
 
 function SideNavbar() {
   const [opened, { open, close }] = useDisclosure();
@@ -25,22 +26,19 @@ function SideNavbar() {
     <>
       {/* Expanded mode */}
       <Drawer
-        p="0"
         opened={opened}
         onClose={close}
         withCloseButton={false}
-        size={182}
+        size={198}
         styles={{
           content: {
             backgroundColor: '#000',
           },
-          body: {
-            padding: 0,
-          },
         }}
       >
-        <Stack justify="space-between" align="center" h="80vh" my={72}>
+        <Stack justify="space-between" align="flex-start" h="88vh">
           <Stack gap="xl">
+            <IconMCQLogo size="26" />
             <ExpandedNavItem
               to="/dashboard"
               label={intl.formatMessage({ id: 'NAV_ITEM_DASHBOARD' })}
@@ -77,8 +75,9 @@ function SideNavbar() {
       </Drawer>
 
       {/* Collapsed Mode */}
-      <Stack justify="space-between" align="center" h="80vh" my={72}>
-        <Stack gap="xl">
+      <Stack justify="space-between" align="center" h="88vh" my={8}>
+        <Stack gap="xl" align="center">
+          <Image src="./logo_mini.png" alt="Shorter version of Macquarie logo" w="48" />
           <CollapsedNavItem
             to="/dashboard"
             label={intl.formatMessage({ id: 'NAV_ITEM_DASHBOARD' })}

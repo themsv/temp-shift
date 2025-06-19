@@ -1,4 +1,4 @@
-export function IconMCQLogo({ size = '36' }) {
+export function IconMCQLogo({ size = '36', color = 'white' }) {
   return (
     <svg
       id="Layer_1"
@@ -6,6 +6,7 @@ export function IconMCQLogo({ size = '36' }) {
       xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 245.19 43.48"
       height={size}
+      fill={color}
     >
       <path
         className="cls-1"

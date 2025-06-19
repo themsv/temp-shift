@@ -1,0 +1,241 @@
+[
+  {
+    "econCycle": "Recovery",
+    "flavour": "High\nRisk Value",
+    "regimeReturn": -0.3
+  },
+  { "econCycle": "Recovery", "flavour": "Value Traps", "regimeReturn": -0.8 },
+  {
+    "econCycle": "Recovery",
+    "flavour": "Sentiment\nValue",
+    "regimeReturn": -0.4
+  },
+  { "econCycle": "Recovery", "flavour": "Low Risk Value", "regimeReturn": -1.4 },
+  { "econCycle": "Recovery", "flavour": "High Yield", "regimeReturn": -0.8 },
+  { "econCycle": "Recovery", "flavour": "Low Risk Yield", "regimeReturn": -0.5 },
+  {
+    "econCycle": "Recovery",
+    "flavour": "Short Term\nGrowth",
+    "regimeReturn": -0.2
+  },
+  {
+    "econCycle": "Recovery",
+    "flavour": "Expensive\nGrowth",
+    "regimeReturn": -1.1
+  },
+  {
+    "econCycle": "Recovery",
+    "flavour": "Sentiment\nGrowth",
+    "regimeReturn": -1.2
+  },
+  {
+    "econCycle": "Recovery",
+    "flavour": "High Risk\nGrowth",
+    "regimeReturn": 0.1
+  },
+  { "econCycle": "Recovery", "flavour": "Growth Traps", "regimeReturn": 0.4 },
+  { "econCycle": "Recovery", "flavour": "Secular Growth", "regimeReturn": -1.8 },
+  { "econCycle": "Recovery", "flavour": "Cheap\nCompounds", "regimeReturn": 0.4 },
+  {
+    "econCycle": "Recovery",
+    "flavour": "Growth\nCompounds",
+    "regimeReturn": -1.3
+  },
+  { "econCycle": "Recovery", "flavour": "Quad\nCompounds", "regimeReturn": -1.7 },
+  {
+    "econCycle": "Recovery",
+    "flavour": "Mkt & CFO\nLossmakers",
+    "regimeReturn": 1.8
+  },
+  {
+    "econCycle": "Recovery",
+    "flavour": "Winner\nLossmakers",
+    "regimeReturn": 1.9
+  },
+  {
+    "econCycle": "Recovery",
+    "flavour": "Loser\nLossmakers",
+    "regimeReturn": 1.2
+  },
+
+  {
+    "econCycle": "Expansion",
+    "flavour": "High\nRisk Value",
+    "regimeReturn": -0.8
+  },
+  { "econCycle": "Expansion", "flavour": "Value Traps", "regimeReturn": -1.6 },
+  {
+    "econCycle": "Expansion",
+    "flavour": "Sentiment\nValue",
+    "regimeReturn": 0.7
+  },
+  { "econCycle": "Expansion", "flavour": "Low Risk Value", "regimeReturn": 0.2 },
+  { "econCycle": "Expansion", "flavour": "High Yield", "regimeReturn": -1.5 },
+  { "econCycle": "Expansion", "flavour": "Low Risk Yield", "regimeReturn": 0.0 },
+  {
+    "econCycle": "Expansion",
+    "flavour": "Short Term\nGrowth",
+    "regimeReturn": -1.9
+  },
+  {
+    "econCycle": "Expansion",
+    "flavour": "Expensive\nGrowth",
+    "regimeReturn": 1.6
+  },
+  {
+    "econCycle": "Expansion",
+    "flavour": "Sentiment\nGrowth",
+    "regimeReturn": -1.0
+  },
+  {
+    "econCycle": "Expansion",
+    "flavour": "High Risk\nGrowth",
+    "regimeReturn": 0.7
+  },
+  { "econCycle": "Expansion", "flavour": "Growth Traps", "regimeReturn": -0.8 },
+  { "econCycle": "Expansion", "flavour": "Secular Growth", "regimeReturn": 0.1 },
+  {
+    "econCycle": "Expansion",
+    "flavour": "Cheap\nCompounds",
+    "regimeReturn": 0.2
+  },
+  {
+    "econCycle": "Expansion",
+    "flavour": "Growth\nCompounds",
+    "regimeReturn": -1.3
+  },
+  { "econCycle": "Expansion", "flavour": "Quad\nCompounds", "regimeReturn": 1.9 },
+  {
+    "econCycle": "Expansion",
+    "flavour": "Mkt & CFO\nLossmakers",
+    "regimeReturn": 1.1
+  },
+  {
+    "econCycle": "Expansion",
+    "flavour": "Winner\nLossmakers",
+    "regimeReturn": 1.8
+  },
+  {
+    "econCycle": "Expansion",
+    "flavour": "Loser\nLossmakers",
+    "regimeReturn": 1.6
+  },
+
+  { "econCycle": "Slowdown", "flavour": "High\nRisk Value", "regimeReturn": 0.4 },
+  { "econCycle": "Slowdown", "flavour": "Value Traps", "regimeReturn": 1.7 },
+  {
+    "econCycle": "Slowdown",
+    "flavour": "Sentiment\nValue",
+    "regimeReturn": -1.6
+  },
+  { "econCycle": "Slowdown", "flavour": "Low Risk Value", "regimeReturn": -1.2 },
+  { "econCycle": "Slowdown", "flavour": "High Yield", "regimeReturn": -1.8 },
+  { "econCycle": "Slowdown", "flavour": "Low Risk Yield", "regimeReturn": -0.7 },
+  {
+    "econCycle": "Slowdown",
+    "flavour": "Short Term\nGrowth",
+    "regimeReturn": -0.4
+  },
+  {
+    "econCycle": "Slowdown",
+    "flavour": "Expensive\nGrowth",
+    "regimeReturn": -1.0
+  },
+  {
+    "econCycle": "Slowdown",
+    "flavour": "Sentiment\nGrowth",
+    "regimeReturn": 1.3
+  },
+  {
+    "econCycle": "Slowdown",
+    "flavour": "High Risk\nGrowth",
+    "regimeReturn": -0.6
+  },
+  { "econCycle": "Slowdown", "flavour": "Growth Traps", "regimeReturn": 0.9 },
+  { "econCycle": "Slowdown", "flavour": "Secular Growth", "regimeReturn": -0.2 },
+  {
+    "econCycle": "Slowdown",
+    "flavour": "Cheap\nCompounds",
+    "regimeReturn": -1.4
+  },
+  {
+    "econCycle": "Slowdown",
+    "flavour": "Growth\nCompounds",
+    "regimeReturn": 1.2
+  },
+  { "econCycle": "Slowdown", "flavour": "Quad\nCompounds", "regimeReturn": -1.7 },
+  {
+    "econCycle": "Slowdown",
+    "flavour": "Mkt & CFO\nLossmakers",
+    "regimeReturn": 1.9
+  },
+  {
+    "econCycle": "Slowdown",
+    "flavour": "Winner\nLossmakers",
+    "regimeReturn": 1.1
+  },
+  {
+    "econCycle": "Slowdown",
+    "flavour": "Loser\nLossmakers",
+    "regimeReturn": -1.2
+  },
+
+  {
+    "econCycle": "Downturn",
+    "flavour": "High\nRisk Value",
+    "regimeReturn": -2.0
+  },
+  { "econCycle": "Downturn", "flavour": "Value Traps", "regimeReturn": 1.3 },
+  { "econCycle": "Downturn", "flavour": "Sentiment\nValue", "regimeReturn": 0.8 },
+  { "econCycle": "Downturn", "flavour": "Low Risk Value", "regimeReturn": 0.9 },
+  { "econCycle": "Downturn", "flavour": "High Yield", "regimeReturn": 1.1 },
+  { "econCycle": "Downturn", "flavour": "Low Risk Yield", "regimeReturn": -1.7 },
+  {
+    "econCycle": "Downturn",
+    "flavour": "Short Term\nGrowth",
+    "regimeReturn": -0.6
+  },
+  {
+    "econCycle": "Downturn",
+    "flavour": "Expensive\nGrowth",
+    "regimeReturn": -1.5
+  },
+  {
+    "econCycle": "Downturn",
+    "flavour": "Sentiment\nGrowth",
+    "regimeReturn": 1.5
+  },
+  {
+    "econCycle": "Downturn",
+    "flavour": "High Risk\nGrowth",
+    "regimeReturn": 0.5
+  },
+  { "econCycle": "Downturn", "flavour": "Growth Traps", "regimeReturn": -0.7 },
+  { "econCycle": "Downturn", "flavour": "Secular Growth", "regimeReturn": -1.7 },
+  {
+    "econCycle": "Downturn",
+    "flavour": "Cheap\nCompounds",
+    "regimeReturn": -0.8
+  },
+  {
+    "econCycle": "Downturn",
+    "flavour": "Growth\nCompounds",
+    "regimeReturn": 0.7
+  },
+  { "econCycle": "Downturn", "flavour": "Quad\nCompounds", "regimeReturn": 0.9 },
+  {
+    "econCycle": "Downturn",
+    "flavour": "Mkt & CFO\nLossmakers",
+    "regimeReturn": 0.6
+  },
+  {
+    "econCycle": "Downturn",
+    "flavour": "Winner\nLossmakers",
+    "regimeReturn": 1.5
+  },
+  {
+    "econCycle": "Downturn",
+    "flavour": "Loser\nLossmakers",
+    "regimeReturn": -0.1
+  }
+]

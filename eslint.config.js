@@ -15,9 +15,9 @@ export default tseslint.config(
     extends: [
       js.configs.recommended,
       // use this for stricter rules
-      ...tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      ...tseslint.configs.stylisticTypeChecked,
+      tseslint.configs.strictTypeChecked,
+      reactHooks.configs['recommended-latest'],
+      reactRefresh.configs.vite,
     ],
     files: ['**/*.{ts,tsx}'],
     languageOptions: {
@@ -29,8 +29,6 @@ export default tseslint.config(
       },
     },
     plugins: {
-      'react-hooks': reactHooks,
-      'react-refresh': reactRefresh,
       'react-x': reactX,
       'react-dom': reactDom,
       '@tanstack/query': tanstackQuery,

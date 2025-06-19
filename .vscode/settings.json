@@ -10,5 +10,8 @@
   "appService.defaultWebAppToDeploy": "/subscriptions/5f49b8db-29eb-46da-9fcc-b0c0ca7d7aa9/resourceGroups/Wissen_Engage/providers/Microsoft.Web/sites/mqg-style-counsel",
   "appService.deploySubpath": ".",
   "cSpell.words": ["formatjs", "tabler", "tseslint"],
-  "typescript.tsdk": "node_modules/typescript/lib"
+  "typescript.tsdk": "node_modules/typescript/lib",
+  "[typescriptreact]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  }
 }

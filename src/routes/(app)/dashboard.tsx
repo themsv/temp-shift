@@ -1,13 +1,14 @@
+import { Button, Flex, Group, SimpleGrid, Stack, Text } from '@mantine/core';
 import { createFileRoute } from '@tanstack/react-router';
 import { useIntl } from 'react-intl';
-import { Button, Flex, Group, SimpleGrid, Stack, Text } from '@mantine/core';
-import { IconBulb, IconChartLine, IconHelp } from '@tabler/icons-react';
+import { IconHelp } from '@tabler/icons-react';
 
 import { SearchSortDropdown } from '../../components/dashboard/SearchSortDropdown';
 import { StockCard } from '../../components/dashboard/StockCard';
 import { ArticleCard } from '../../components/dashboard/ArticleCard';
-import portfolioData from './../../mocks/portfolio-data.json';
-import researchData from './../../mocks/research-data.json';
+import { IconBulb, IconQueryStats } from '../../ui-core';
+import researchData from '../../mocks/Research-data.json';
+import portfolioData from '../../mocks/portfolio-data.json';
 
 export const Route = createFileRoute('/(app)/dashboard')({
   component: RouteComponent,
@@ -27,7 +28,7 @@ function RouteComponent() {
         backgroundPosition: 'center',
       }}
     >
-      <Stack w="75%">
+      <Stack>
         <Group justify="space-between" align="center">
           <Text fw={400} size="xl">
             {formatMessage({ id: 'MY_PORTFOLIOS', defaultMessage: 'My Portfolios' })}
@@ -40,7 +41,7 @@ function RouteComponent() {
           />
         </Group>
 
-        <SimpleGrid cols={4} spacing="md">
+        <SimpleGrid cols={{ sm: 1, md: 2, lg: 3, xl: 4 }}>
           <StockCard name="add" />
           {portfolioData.portfolios.map((item) => (
             <StockCard key={item._id} {...item} />
@@ -48,12 +49,18 @@ function RouteComponent() {
         </SimpleGrid>
       </Stack>
 
-      <Stack w="25%">
-        <Group gap="xs" wrap="nowrap">
-          <Button size="sm" fullWidth leftSection={<IconBulb size={16} />}>
+      <Stack>
+        <Group gap="xs" grow>
+          <Button leftSection={<IconBulb size="24" color="white" />} p="0">
             {formatMessage({ id: 'IDEA_GENERATION' })}
           </Button>
-          <Button size="sm" variant="outline" fullWidth leftSection={<IconChartLine size={16} />}>
+          <Button
+            variant="outline"
+            leftSection={<IconQueryStats size="24" />}
+            c="black"
+            style={{ borderColor: 'black' }}
+            p="0"
+          >
             {formatMessage({ id: 'STOCK_PROFILE' })}
           </Button>
         </Group>
@@ -61,7 +68,7 @@ function RouteComponent() {
         <Stack bg="gray.0" p="md">
           <Group align="center" gap="sm">
             <Text fw={500}>{formatMessage({ id: 'STYLE_RESEARCH' })}</Text>
-            <IconHelp size={16} />
+            <IconHelp size={20} />
           </Group>
           <Stack gap="sm">
             {researchData.map((item) => (

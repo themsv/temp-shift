@@ -1,0 +1,53 @@
+[
+  {
+    "rank": 1,
+    "bbgTicker": "ATL AU",
+    "mktCap": "82,238",
+    "sedol": "627102",
+    "name": "Austal Ltd.",
+    "sector": "Financials",
+    "industry": "Insurance",
+    "activeWeight": "5.06%",
+    "flavourExp": "45.7%",
+    "expContrib": "45.7%",
+    "percentExpContrib": "45.7%",
+    "compValueModel1": "1.73%",
+    "rank1": "15%",
+    "compValueModel2": "0.1",
+    "rank2": "61%"
+  },
+  {
+    "rank": 2,
+    "bbgTicker": "IAG AU",
+    "mktCap": "17,928",
+    "sedol": "627102",
+    "name": "Insurance Australia Group",
+    "sector": "Financials",
+    "industry": "Insurance",
+    "activeWeight": "5.06%",
+    "flavourExp": "45.7%",
+    "expContrib": "45.7%",
+    "percentExpContrib": "45.7%",
+    "compValueModel1": "1.73%",
+    "rank1": "50%",
+    "compValueModel2": "0.1",
+    "rank2": "75%"
+  },
+  {
+    "rank": 3,
+    "bbgTicker": "IAG AU",
+    "mktCap": "12,782",
+    "sedol": "627102",
+    "name": "Insurance Australia Group",
+    "sector": "Financials",
+    "industry": "Insurance",
+    "activeWeight": "5.06%",
+    "flavourExp": "45.7%",
+    "expContrib": "45.7%",
+    "percentExpContrib": "45.7%",
+    "compValueModel1": "1.73%",
+    "rank1": "45%",
+    "compValueModel2": "0.1",
+    "rank2": "36%"
+  }
+]

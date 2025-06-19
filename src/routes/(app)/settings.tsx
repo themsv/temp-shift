@@ -1,21 +1,8 @@
 import { createFileRoute } from '@tanstack/react-router';
-import {
-  Card,
-  Center,
-  Divider,
-  Grid,
-  Select as MantineSelect,
-  Stack,
-  Text,
-  Title,
-} from '@mantine/core';
+import { Card, Center, Divider, Grid, Select, Stack, Text, Title } from '@mantine/core';
 import { useIntl } from 'react-intl';
 
 import settingsConfig from '../../mocks/settings.json';
-
-const Select = MantineSelect.withProps({
-  readOnly: true,
-});
 
 export const Route = createFileRoute('/(app)/settings')({
   component: RouteComponent,

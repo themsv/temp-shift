@@ -12,7 +12,7 @@ function RouteComponent() {
   return (
     <AppShell
       layout="alt"
-      header={{ height: 64 }}
+      header={{ height: 52 }}
       navbar={{
         width: 64,
         breakpoint: 'xs',
@@ -25,6 +25,7 @@ function RouteComponent() {
           background: '#000',
         },
       }}
+      p="lg"
     >
       <AppShell.Header>
         <Header />
@@ -34,7 +35,7 @@ function RouteComponent() {
         <SideNavbar />
       </AppShell.Navbar>
 
-      <AppShell.Main m="xl">
+      <AppShell.Main>
         <Outlet />
       </AppShell.Main>
     </AppShell>

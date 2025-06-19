@@ -3,57 +3,57 @@
   "portfolios": [
     {
       "_id": "201",
-      "name": "ASX Quality Growth",
-      "description": "This is a portfolio for increasing wealth",
-      "stockCount": "70",
-      "trackingError": "0.04%",
-      "activeShare": "89%",
-      "beta": "1.33"
+      "name": "Vanguard Australian Shares Index Fund",
+      "description": "Tracks the S&P/ASX 300 Index, providing broad Australian equity exposure.",
+      "stockCount": "300",
+      "trackingError": "0.10%",
+      "activeShare": "5%",
+      "beta": "1.00"
     },
     {
       "_id": "202",
-      "name": "S&P Growth",
-      "description": "This is a portfolio for increasing wealth",
-      "stockCount": "70",
-      "trackingError": "0.04%",
-      "activeShare": "89%",
-      "beta": "1.33"
+      "name": "Plato Australian Shares Income Fund",
+      "description": "Focuses on high-yielding Australian equities with franking credits.",
+      "stockCount": "50",
+      "trackingError": "1.30%",
+      "activeShare": "85%",
+      "beta": "0.95"
     },
     {
       "_id": "203",
-      "name": "S&P Growth",
-      "description": "This is a portfolio for increasing wealth",
-      "stockCount": "70",
-      "trackingError": "0.04%",
-      "activeShare": "89%",
-      "beta": "1.33"
+      "name": "Perpetual Wholesale Industrial Fund",
+      "description": "Invests in quality industrial stocks with a value-driven approach.",
+      "stockCount": "45",
+      "trackingError": "2.10%",
+      "activeShare": "88%",
+      "beta": "0.85"
     },
     {
       "_id": "204",
-      "name": "ASX Quality Growth",
-      "description": "This is a portfolio for increasing wealth",
-      "stockCount": "70",
-      "trackingError": "0.04%",
-      "activeShare": "89%",
-      "beta": "1.33"
+      "name": "Fidelity Australian Equities Fund",
+      "description": "Actively managed fund aiming for long-term capital growth.",
+      "stockCount": "60",
+      "trackingError": "1.80%",
+      "activeShare": "92%",
+      "beta": "1.10"
     },
     {
       "_id": "205",
-      "name": "S&P Growth",
-      "description": "This is a portfolio for increasing wealth",
-      "stockCount": "70",
-      "trackingError": "0.04%",
-      "activeShare": "89%",
-      "beta": "1.33"
+      "name": "Ausbil Active Sustainable Equity Fund",
+      "description": "Targets strong performance through sustainable Australian companies.",
+      "stockCount": "55",
+      "trackingError": "1.50%",
+      "activeShare": "90%",
+      "beta": "1.05"
     },
     {
       "_id": "206",
-      "name": "S&P Growth",
-      "description": "This is a portfolio for increasing wealth",
-      "stockCount": "70",
-      "trackingError": "0.04%",
-      "activeShare": "89%",
-      "beta": "1.33"
+      "name": "Magellan High Conviction Trust",
+      "description": "Concentrated portfolio of high-quality Australian companies.",
+      "stockCount": "20",
+      "trackingError": "3.50%",
+      "activeShare": "98%",
+      "beta": "0.87"
     }
   ]
 }

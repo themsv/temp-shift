@@ -1,4 +1,5 @@
-import { Card, Text, Box, Stack, Flex } from '@mantine/core';
+import { Card, Text, Stack } from '@mantine/core';
+import { useNavigate } from '@tanstack/react-router';
 import { useIntl } from 'react-intl';
 
 interface StockCardProps {
@@ -19,26 +20,26 @@ export const StockCard = ({
   beta,
 }: StockCardProps) => {
   const { formatMessage } = useIntl();
+  const navigate = useNavigate();
+
   const isAddCard = name === 'add';
 
   if (isAddCard) {
     return (
       <Card
-        withBorder
         p="lg"
-        h={240}
         bg="#e3f2f9"
         style={{
           border: '1px solid #F2F2F2',
           boxShadow: '4px 4px 12px rgba(0, 0, 0, 0.1)',
+          cursor: 'pointer',
         }}
       >
-        <Flex
-          direction="column"
+        <Stack
           align="center"
           justify="center"
-          h={240}
-          style={{ border: '1px dashed #0954a0', borderRadius: 1, cursor: 'pointer' }}
+          h="100%"
+          style={{ border: '1px dashed #0954a0', borderRadius: 1 }}
         >
           <Text size="60" fw={700} lh={1} mb={8}>
             +
@@ -46,40 +47,39 @@ export const StockCard = ({
           <Text size="lg" fw={500}>
             {formatMessage({ id: 'ADD_PORTFOLIO' })}
           </Text>
-        </Flex>
+        </Stack>
       </Card>
     );
   }
 
   return (
     <Card
-      withBorder
-      p="md"
-      h={240}
+      component={Stack}
+      gap="xs"
+      justify="space-between"
       style={{
         border: '1px solid #F2F2F2',
         boxShadow: '4px 4px 12px rgba(0, 0, 0, 0.1)',
+        cursor: 'pointer',
       }}
+      // eslint-disable-next-line @typescript-eslint/no-misused-promises
+      onClick={() => navigate({ to: '/portfolio' })}
     >
-      <Stack gap={0}>
-        <Text fw={400} size="lg">
-          {name}
-        </Text>
-        <Text fw={400} size="sm" mt={2}>
-          {description}
-        </Text>
-        <Text size="lg" c="blue" fw={600} mt="xs" style={{ cursor: 'pointer' }}>
-          {formatMessage({ id: 'STOCKS_COUNT' }, { count: stockCount })}
-        </Text>
-      </Stack>
+      <Text fw={400} size="lg">
+        {name}
+      </Text>
+      <Text size="sm">{description}</Text>
+      <Text size="lg" c="blue" fw={600}>
+        {formatMessage({ id: 'STOCKS_COUNT' }, { count: stockCount })}
+      </Text>
 
-      <Box bg="#e1faf7" pos="absolute" bottom={0} left={0} right={0} px="sm" py={8} m={1}>
-        <Stack gap={4}>
+      <Card.Section bg="#e1faf7">
+        <Stack p="md" gap="xs">
           <Text size="xs">{formatMessage({ id: 'TRACKING_ERROR' }, { value: trackingError })}</Text>
           <Text size="xs">{formatMessage({ id: 'ACTIVE_SHARE' }, { value: activeShare })}</Text>
           <Text size="xs">{formatMessage({ id: 'BETA' }, { value: beta })}</Text>
         </Stack>
-      </Box>
+      </Card.Section>
     </Card>
   );
 };
