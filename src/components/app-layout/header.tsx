@@ -1,7 +1,6 @@
 import { Link } from '@tanstack/react-router';
 import { Group, Text, Image, Menu, Button } from '@mantine/core';
-
-import { IconLogout } from '../../ui-core';
+import { IconLogout } from '@app/ui-core/icons';
 
 function Header() {
   return (

@@ -1,7 +1,7 @@
 import { createFileRoute } from '@tanstack/react-router';
 import { Center, SimpleGrid } from '@mantine/core';
-import BrandPage from '../../components/signin/brandPage';
-import SignInForm from '../../components/signin/signInForm';
+import BrandPage from '@app/components/signin/brandPage';
+import SignInForm from '@app/components/signin/signInForm';
 
 export const Route = createFileRoute('/(auth)/')({
   component: RouteComponent,

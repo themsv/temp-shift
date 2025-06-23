@@ -1,14 +1,14 @@
-import { Button, Flex, Group, SimpleGrid, Stack, Text } from '@mantine/core';
+import { Button, Flex, Group, LoadingOverlay, SimpleGrid, Stack, Text } from '@mantine/core';
 import { createFileRoute } from '@tanstack/react-router';
 import { useIntl } from 'react-intl';
 import { IconHelp } from '@tabler/icons-react';
 
-import { SearchSortDropdown } from '../../components/dashboard/SearchSortDropdown';
-import { StockCard } from '../../components/dashboard/StockCard';
-import { ArticleCard } from '../../components/dashboard/ArticleCard';
-import { IconBulb, IconQueryStats } from '../../ui-core';
+import { SearchSortDropdown } from '@app/components/dashboard/SearchSortDropdown';
+import { CreatePortfolioCard, PortfolioCard } from '@app/components/dashboard/PortfolioCard';
+import { IconBulb, IconQueryStats } from '@app/ui-core/icons';
 import researchData from '../../mocks/Research-data.json';
-import portfolioData from '../../mocks/portfolio-data.json';
+import useGetPortfolios from '@app/data/api/useGetPortfolios';
+import { ArticleCard } from '@app/components/dashboard/ArticleCard';
 
 export const Route = createFileRoute('/(app)/dashboard')({
   component: RouteComponent,
@@ -16,11 +16,15 @@ export const Route = createFileRoute('/(app)/dashboard')({
 
 function RouteComponent() {
   const { formatMessage } = useIntl();
+  const { data: portfolios, isPending } = useGetPortfolios();
+
+  if (isPending) return <LoadingOverlay />;
 
   return (
     <Flex
       gap="md"
       align="flex-start"
+      justify="space-around"
       style={{
         backgroundImage: 'url(/background-pattern.svg)',
         backgroundRepeat: 'no-repeat',
@@ -42,14 +46,14 @@ function RouteComponent() {
         </Group>
 
         <SimpleGrid cols={{ sm: 1, md: 2, lg: 3, xl: 4 }}>
-          <StockCard name="add" />
-          {portfolioData.portfolios.map((item) => (
-            <StockCard key={item._id} {...item} />
+          <CreatePortfolioCard />
+          {portfolios?.map((portfolio) => (
+            <PortfolioCard key={portfolio.portfolioId} {...portfolio} />
           ))}
         </SimpleGrid>
       </Stack>
 
-      <Stack>
+      <Stack maw={420}>
         <Group gap="xs" grow>
           <Button leftSection={<IconBulb size="24" color="white" />} p="0">
             {formatMessage({ id: 'IDEA_GENERATION' })}

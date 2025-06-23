@@ -2,6 +2,7 @@ import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import { tanstackRouter } from '@tanstack/router-plugin/vite';
 import { visualizer } from 'rollup-plugin-visualizer';
+import tsconfigPaths from 'vite-tsconfig-paths';
 
 // https://vite.dev/config/
 export default defineConfig({
@@ -9,6 +10,7 @@ export default defineConfig({
     // Please make sure that '@tanstack/router-plugin' is passed before '@vitejs/plugin-react'
     tanstackRouter({ target: 'react', autoCodeSplitting: true }),
     react(),
+    tsconfigPaths(),
     visualizer({
       open: true,
       filename: 'build-stats.html',
@@ -17,6 +19,6 @@ export default defineConfig({
   server: {
     port: 8080, // ✅ Change dev server port here
     host: '0.0.0.0', // optional: allows access from network IP,
-    allowedHosts: ['mqg-style-counsel.azurewebsites.net'],
+    allowedHosts: ['style-counsel.azurewebsites.net'],
   },
 });

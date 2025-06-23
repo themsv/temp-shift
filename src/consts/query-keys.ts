@@ -1,8 +1,8 @@
 const queryKeys = {
   portfolio: {
-    all: ['portfolio'],
-    list: () => [...queryKeys.portfolio.all, 'list'],
-    details: (id: string) => [...queryKeys.portfolio.all, id],
+    all: ['portfolio'] as const,
+    list: () => [...queryKeys.portfolio.all, 'list'] as const,
+    details: (id: string) => [...queryKeys.portfolio.all, id] as const,
   },
 };
 

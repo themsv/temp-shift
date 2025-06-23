@@ -15,8 +15,7 @@ import {
 } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 import { IconCircleChevronLeft, IconCircleChevronRight } from '@tabler/icons-react';
-
-import { IconDashboard, IconData, IconHelp, IconMCQLogo, IconSettings } from '../../ui-core';
+import { IconDashboard, IconData, IconHelp, IconMCQLogo, IconSettings } from '@app/ui-core/icons';
 
 function SideNavbar() {
   const [opened, { open, close }] = useDisclosure();

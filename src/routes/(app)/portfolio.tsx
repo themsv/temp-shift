@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { createFileRoute } from '@tanstack/react-router';
 import { useIntl } from 'react-intl';
 import {
@@ -14,15 +15,14 @@ import {
 } from '@mantine/core';
 import { IconChartBar, IconLayoutBoard } from '@tabler/icons-react';
 
-import { ArticleCard } from '../../components/dashboard/ArticleCard';
+import { ArticleCard } from '@app/components/dashboard/ArticleCard';
+import GroupedScatterBarChart from '@app/components/charts/Combination';
+import ContributorsTable from '@app/components/ContributorsTable/ContributorsTable';
+import { IconBulb, IconQueryStats } from '@app/ui-core/icons';
+import { ContributorsControls } from '@app/components/ContributorsTable/ContributorsControls';
+import HeatMapChart from '@app/components/charts/HeatMapChart';
 import insights from '../../mocks/insights.json';
 import portfolios from '../../mocks/portfolio-data.json';
-import GroupedScatterBarChart from '../../components/charts/Combination';
-import ContributorsTable from '../../components/ContributorsTable/ContributorsTable';
-import { useState } from 'react';
-import { IconBulb, IconQueryStats } from '../../ui-core';
-import { ContributorsControls } from '../../components/ContributorsTable/ContributorsControls';
-import HeatMapChart from '../../components/charts/HeatMapChart';
 
 const tabs = [
   {

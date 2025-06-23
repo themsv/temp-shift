@@ -2,6 +2,7 @@ import { type PropsWithChildren, useEffect } from 'react';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import axios from 'axios';
+import URLS from '@app/consts/urls';
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -24,12 +25,12 @@ const queryClient = new QueryClient({
 function ApiProvider({ children }: Readonly<PropsWithChildren>) {
   useEffect(() => {
     // Set default headers
-    // axios.defaults.headers["Content-Type"] = "application/json";
+    axios.defaults.headers.common['Accept'] = 'application/json';
     axios.defaults.headers.common['Cache-Control'] = 'no-cache';
-    axios.defaults.headers.common.Accept = 'application/json';
+    axios.defaults.headers['Content-Type'] = 'application/json';
     // if the APIs need timezone
-    axios.defaults.headers.timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
-    axios.defaults.baseURL = import.meta.env.VITE_APP_BASE_URL;
+    // axios.defaults.headers.timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+    axios.defaults.baseURL = URLS.base;
   }, []);
   return (
     <QueryClientProvider client={queryClient}>
