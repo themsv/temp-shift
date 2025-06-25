@@ -17,6 +17,7 @@ import { IconChartBar, IconLayoutBoard } from '@tabler/icons-react';
 
 import { ArticleCard } from '@app/components/dashboard/ArticleCard';
 import GroupedScatterBarChart from '@app/components/charts/Combination';
+import BubbleChart from '@app/components/charts/BubbleCharts';
 import ContributorsTable from '@app/components/ContributorsTable/ContributorsTable';
 import { IconBulb, IconQueryStats } from '@app/ui-core/icons';
 import { ContributorsControls } from '@app/components/ContributorsTable/ContributorsControls';
@@ -25,22 +26,10 @@ import insights from '../../mocks/insights.json';
 import portfolios from '../../mocks/portfolio-data.json';
 
 const tabs = [
-  {
-    label: 'Style Flavours',
-    value: 'flavours',
-  },
-  {
-    label: 'Factors',
-    value: 'factors',
-  },
-  {
-    label: 'Industrial Groups',
-    value: 'groups',
-  },
-  {
-    label: 'Macro Betas',
-    value: 'macros',
-  },
+  { label: 'Style Flavours', value: 'flavours' },
+  { label: 'Factors', value: 'factors' },
+  { label: 'Industrial Groups', value: 'groups' },
+  { label: 'Macro Betas', value: 'macros' },
 ];
 
 export const Route = createFileRoute('/(app)/portfolio')({
@@ -50,18 +39,32 @@ export const Route = createFileRoute('/(app)/portfolio')({
 function RouteComponent() {
   const { formatMessage } = useIntl();
   const [checked, setChecked] = useState(true);
+  const [showBubble, setShowBubble] = useState(false);
 
-  const portfolioOptions = portfolios.portfolios.map((p) => ({ label: p.name, value: p._id }));
+  const portfolioOptions = portfolios.portfolios.map((p) => ({
+    label: p.name,
+    value: p._id,
+  }));
+
+  const handleTooltipClick = () => {
+    setShowBubble(true);
+    console.log('BUBBLE');
+  };
+
+  const handleBackClick = () => {
+    setShowBubble(false);
+  };
+
   return (
     <Flex gap="md" align="flex-start">
       <Stack w="100%">
         <Group>
           <Text>{formatMessage({ id: 'NAV_ITEM_DASHBOARD' })}</Text>
-          <Select data={portfolioOptions} defaultValue={'202'} />
+          <Select data={portfolioOptions} defaultValue="202" />
           <Paper withBorder p={6}>
             <Group>
               <Group>
-                <Text>Total Stocks </Text>
+                <Text>Total Stocks</Text>
                 <Title order={5}>140</Title>
               </Group>
               <Divider orientation="vertical" />
@@ -71,7 +74,7 @@ function RouteComponent() {
               </Group>
               <Divider orientation="vertical" />
               <Group>
-                <Text>Active Share </Text>
+                <Text>Active Share</Text>
                 <Title order={5}>89%</Title>
               </Group>
               <Divider orientation="vertical" />
@@ -82,7 +85,8 @@ function RouteComponent() {
             </Group>
           </Paper>
         </Group>
-        <Tabs defaultValue="flavours">
+
+        <Tabs defaultValue="groups">
           <Tabs.List>
             {tabs.map((t) => (
               <Tabs.Tab value={t.value} key={t.value}>
@@ -102,11 +106,19 @@ function RouteComponent() {
                     <IconLayoutBoard size={24} />
                   </Tabs.Tab>
                 </Tabs.List>
+
                 <Tabs.Panel value="bar-chart">
-                  <GroupedScatterBarChart />
+                  {showBubble ? (
+                    <>
+                      <BubbleChart handleBackClick={handleBackClick} />
+                    </>
+                  ) : (
+                    <GroupedScatterBarChart onTooltipClick={handleTooltipClick} />
+                  )}
                   <ContributorsControls checked={checked} setChecked={setChecked} />
                   <ContributorsTable />
                 </Tabs.Panel>
+
                 <Tabs.Panel value="heatmap">
                   <HeatMapChart />
                   <ContributorsControls checked={checked} setChecked={setChecked} />

@@ -1,5 +1,4 @@
 /* eslint-disable @typescript-eslint/restrict-plus-operands */
-
 /* eslint-disable @typescript-eslint/restrict-template-expressions */
 
 import { useRef, useEffect } from 'react';
@@ -43,6 +42,9 @@ const shapeTypes: Record<RegimeKey, string> = {
   Slowdown: 'triangle',
   Downturn: 'square',
 };
+interface GroupedScatterBarChartProps {
+  onTooltipClick?: () => void;
+}
 
 const tooltipData: TooltipDatum[] = [
   {
@@ -83,7 +85,9 @@ const tooltipData: TooltipDatum[] = [
   },
 ];
 
-const GroupedScatterBarChart = () => {
+const GroupedScatterBarChart = (props: GroupedScatterBarChartProps) => {
+  const { onTooltipClick } = props;
+
   const svgRef = useRef<SVGSVGElement | null>(null);
   const containerRef = useRef<HTMLDivElement | null>(null);
 
@@ -92,9 +96,7 @@ const GroupedScatterBarChart = () => {
     svg.selectAll('*').remove();
 
     const width = containerRef.current?.clientWidth ?? 1000;
-
     const height = 520;
-
     svg.attr('viewBox', `0 0 ${width} ${height}`);
     const margin = { top: 30, right: 60, bottom: 120, left: 60 };
 
@@ -144,12 +146,17 @@ const GroupedScatterBarChart = () => {
     const tooltip = d3
       .select('body')
       .append('div')
+      .attr('class', 'custom-tooltip')
       .style('position', 'absolute')
       .style('background', 'white')
       .style('border', '1px solid #ccc')
       .style('padding', '10px')
       .style('display', 'none')
-      .style('font-size', '12px');
+      .style('font-size', '12px')
+      .style('pointer-events', 'auto')
+      .on('click', () => {
+        onTooltipClick?.();
+      });
 
     g.selectAll('.bar')
       .data(mockData)
@@ -184,10 +191,8 @@ const GroupedScatterBarChart = () => {
           .style('left', event.pageX + 10 + 'px')
           .style('top', event.pageY - 28 + 'px')
           .style('display', 'block');
-      })
-      .on('mouseout', () => {
-        tooltip.style('display', 'none');
       });
+
     g.selectAll('.bar-line')
       .data(mockData)
       .enter()
@@ -201,12 +206,10 @@ const GroupedScatterBarChart = () => {
 
     mockData.forEach((d) => {
       const cx = (x(d.category) ?? 0) + x.bandwidth() / 2;
-
       regimeKeys.forEach((key) => {
         const regimeKey = key as RegimeKey;
         const value = d.regimes[regimeKey];
         const cy = yRight(value);
-
         const shape = shapeTypes[regimeKey];
         const color = shapeColors[regimeKey];
 
@@ -246,13 +249,11 @@ const GroupedScatterBarChart = () => {
         .append('text')
         .attr('x', xOffset + 20)
         .attr('y', 10)
-        .text(key)
-        .style('alignment-baseline', 'middle');
+        .text(key);
 
       const shape = shapeTypes[regimeKey];
       const color = shapeColors[regimeKey];
-
-      let path: string | undefined | null;
+      let path: string | null | undefined;
 
       if (shape === 'circle') {
         legend
@@ -283,6 +284,19 @@ const GroupedScatterBarChart = () => {
           .attr('fill', color);
       }
     });
+
+    const handleClickOutside = (e: MouseEvent) => {
+      const isTooltipClick = (e.target as HTMLElement).closest('.custom-tooltip');
+      if (!isTooltipClick) {
+        tooltip.style('display', 'none');
+      }
+    };
+
+    document.addEventListener('click', handleClickOutside);
+    return () => {
+      document.removeEventListener('click', handleClickOutside);
+      tooltip.remove();
+    };
   }, [containerRef]);
 
   const handleDownload = () => {
@@ -291,7 +305,6 @@ const GroupedScatterBarChart = () => {
     const svg = svgRef.current;
     const serializer = new XMLSerializer();
     const svgString = serializer.serializeToString(svg);
-
     const canvas = document.createElement('canvas');
     canvas.width = svg.clientWidth;
     canvas.height = svg.clientHeight;
@@ -307,8 +320,8 @@ const GroupedScatterBarChart = () => {
     img.onload = () => {
       if (ctx) {
         ctx.fillStyle = 'white';
-        ctx.fillRect(0, 0, canvas.width, canvas.height); // Draw white background
-        ctx.drawImage(img, 0, 0); // Draw the SVG over it
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+        ctx.drawImage(img, 0, 0);
         URL.revokeObjectURL(url);
 
         const pngFile = canvas.toDataURL('image/png');
@@ -317,10 +330,6 @@ const GroupedScatterBarChart = () => {
         link.href = pngFile;
         link.click();
       }
-    };
-
-    img.onerror = (err) => {
-      console.error('Image load error', err);
     };
 
     img.src = url;

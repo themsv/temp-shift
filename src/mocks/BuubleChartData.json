@@ -1,0 +1,10 @@
+[
+  { "name": "AMC AU", "exposure": 10, "weight": -8, "contribution": -61, "styleExp": 99 },
+  { "name": "BHP AU", "exposure": 20, "weight": 3, "contribution": 12, "styleExp": 75 },
+  { "name": "CBA AU", "exposure": 40, "weight": -5, "contribution": -25, "styleExp": 60 },
+  { "name": "NAB AU", "exposure": 50, "weight": 4, "contribution": 20, "styleExp": 80 },
+  { "name": "WBC AU", "exposure": 60, "weight": 2, "contribution": 10, "styleExp": 55 },
+  { "name": "ANZ AU", "exposure": 70, "weight": -5, "contribution": -30, "styleExp": 65 },
+  { "name": "TLS AU", "exposure": 90, "weight": 6, "contribution": 35, "styleExp": 95 },
+  { "name": "WOW AU", "exposure": 80, "weight": -8, "contribution": -50, "styleExp": 70 }
+]
