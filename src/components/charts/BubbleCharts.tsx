@@ -1,11 +1,11 @@
 /* eslint-disable @typescript-eslint/restrict-plus-operands */
 /* eslint-disable @typescript-eslint/restrict-template-expressions */
+import { useEffect, useRef } from 'react';
 import { ActionIcon, Group, Select, Stack, Text } from '@mantine/core';
 import { IconDownload, IconEye } from '@tabler/icons-react';
 import { axisBottom, axisLeft } from 'd3-axis';
 import { scaleLinear } from 'd3-scale';
 import { select } from 'd3-selection';
-import { useEffect, useRef } from 'react';
 import BubbleData from '../../mocks/BuubleChartData.json';
 
 interface BubbleDataTypes {

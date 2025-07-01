@@ -1,3 +1,4 @@
+import { useNavigate } from '@tanstack/react-router';
 import {
   Anchor,
   Divider,
@@ -11,7 +12,6 @@ import {
   Flex,
 } from '@mantine/core';
 import { useForm } from '@mantine/form';
-import { useNavigate } from '@tanstack/react-router';
 import { useIntl } from 'react-intl';
 
 function Disclaimer() {

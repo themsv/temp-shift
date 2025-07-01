@@ -1,14 +1,14 @@
-import { Button, Flex, Group, LoadingOverlay, SimpleGrid, Stack, Text } from '@mantine/core';
 import { createFileRoute } from '@tanstack/react-router';
+import { Button, Flex, Group, LoadingOverlay, SimpleGrid, Stack, Text } from '@mantine/core';
 import { useIntl } from 'react-intl';
 import { IconHelp } from '@tabler/icons-react';
 
 import { SearchSortDropdown } from '@app/components/dashboard/SearchSortDropdown';
 import { CreatePortfolioCard, PortfolioCard } from '@app/components/dashboard/PortfolioCard';
 import { IconBulb, IconQueryStats } from '@app/ui-core/icons';
-import researchData from '../../mocks/Research-data.json';
 import useGetPortfolios from '@app/data/api/useGetPortfolios';
 import { ArticleCard } from '@app/components/dashboard/ArticleCard';
+import researchData from '../../mocks/Research-data.json';
 
 export const Route = createFileRoute('/(app)/dashboard')({
   component: RouteComponent,

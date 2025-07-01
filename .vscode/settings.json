@@ -1,4 +1,14 @@
 {
+  "todohighlight.isEnable": true,
+  "todohighlight.isCaseSensitive": true,
+  "todohighlight.keywords": [
+    { "text": "BUG:", "backgroundColor": "#FF0000", "color": "#FFF" },
+    { "text": "REVIEW:", "backgroundColor": "#228BE6", "color": "#FFF" },
+    { "text": "REMOVE:", "backgroundColor": "#E1306C", "color": "#FFF" },
+    { "text": "CHECK:", "backgroundColor": "#FFA500", "color": "#FFF" },
+    { "text": "HACK:", "backgroundColor": "#5F3DC4", "color": "#FFF" },
+    { "text": "NOTE:", "backgroundColor": "#008000", "color": "#FFF" }
+  ],
   "editor.codeActionsOnSave": {
     "source.fixAll.eslint": "explicit"
   },

@@ -5,9 +5,11 @@ import reactRefresh from 'eslint-plugin-react-refresh';
 import reactX from 'eslint-plugin-react-x';
 import reactDom from 'eslint-plugin-react-dom';
 import tseslint from 'typescript-eslint';
-import tanstackQuery from '@tanstack/eslint-plugin-query';
+import pluginQuery from '@tanstack/eslint-plugin-query';
+import pluginRouter from '@tanstack/eslint-plugin-router';
 import prettier from 'eslint-plugin-prettier';
 import formatjs from 'eslint-plugin-formatjs';
+import importPlugin from 'eslint-plugin-import';
 
 export default tseslint.config(
   { ignores: ['dist'] },
@@ -15,9 +17,14 @@ export default tseslint.config(
     extends: [
       js.configs.recommended,
       // use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      reactHooks.configs['recommended-latest'],
+      ...tseslint.configs.strictTypeChecked,
+      ...pluginQuery.configs['flat/recommended'],
+      ...pluginRouter.configs['flat/recommended'],
+      reactX.configs['recommended-typescript'],
       reactRefresh.configs.vite,
+      // Enable lint rules for React DOM
+      reactDom.configs.recommended,
+      reactHooks.configs['recommended-latest'],
     ],
     files: ['**/*.{ts,tsx}'],
     languageOptions: {
@@ -29,17 +36,12 @@ export default tseslint.config(
       },
     },
     plugins: {
-      'react-x': reactX,
-      'react-dom': reactDom,
-      '@tanstack/query': tanstackQuery,
       prettier,
       formatjs,
+      import: importPlugin,
     },
     rules: {
-      ...reactHooks.configs.recommended.rules,
       'react-refresh/only-export-components': ['warn', { allowConstantExport: true }],
-      ...reactX.configs['recommended-typescript'].rules,
-      ...reactDom.configs.recommended.rules,
       'prettier/prettier': [
         'error',
         {
@@ -49,6 +51,26 @@ export default tseslint.config(
 
       'formatjs/no-camel-case': 'error',
       'formatjs/no-offset': 'error',
+      'import/order': [
+        'error',
+        {
+          groups: ['builtin', 'external', 'internal', ['parent', 'sibling', 'index']],
+          pathGroups: [
+            {
+              pattern: 'react',
+              group: 'builtin',
+              position: 'before',
+            },
+            {
+              pattern: '{@tanstack/**, @mantine/**}',
+              group: 'external',
+              position: 'before',
+            },
+            { pattern: '@app/**', group: 'internal', position: 'before' },
+          ],
+          pathGroupsExcludedImportTypes: ['builtin'],
+        },
+      ],
     },
   },
 );

@@ -1,5 +1,5 @@
-import axios from 'axios';
 import { useQuery } from '@tanstack/react-query';
+import axios from 'axios';
 import URLS from '@app/consts/urls';
 import queryKeys from '@app/consts/query-keys';
 

@@ -1,6 +1,6 @@
+import { createLazyFileRoute } from '@tanstack/react-router';
 import { Card, Stack, Text } from '@mantine/core';
 import { IconHelp } from '@tabler/icons-react';
-import { createLazyFileRoute } from '@tanstack/react-router';
 
 export const Route = createLazyFileRoute('/(app)/help')({
   component: RouteComponent,

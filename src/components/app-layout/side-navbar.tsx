@@ -1,7 +1,7 @@
 import type { ComponentType } from 'react';
-import { useIntl } from 'react-intl';
 import { Link, useMatchRoute } from '@tanstack/react-router';
 import type { LinkProps } from '@tanstack/react-router';
+import { useIntl } from 'react-intl';
 import {
   ActionIcon,
   Drawer,

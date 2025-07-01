@@ -1,5 +1,5 @@
-import { Card, Text, Stack } from '@mantine/core';
 import { useNavigate } from '@tanstack/react-router';
+import { Card, Text, Stack } from '@mantine/core';
 import { useIntl } from 'react-intl';
 
 import { type PortfolioLite } from '@app/data/types/portfolio';

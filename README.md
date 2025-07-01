@@ -9,32 +9,27 @@ The Style Counsel Tool is a sophisticated web application that helps fund manage
 ### Core Features
 
 1. **Portfolio Data Entry**
-
    - Client data management with time-dimensionality
    - Support for batch uploads and file imports
    - Portfolio, Benchmark, and investable universe data management
 
 2. **Style 2.0 Report**
-
    - Measure and manage portfolio exposures to Style Flavours
    - Interactive bar charts showing aggregate portfolio exposures
    - Juxtaposition against regime performance in various market conditions
    - Stock-level weight management capabilities
 
 3. **Stock Profile Analysis**
-
    - Detailed analysis of individual stocks by style flavour exposure
    - Interactive bubble scatter charts for quick stock identification
    - Tooltips and detailed information on hover
 
 4. **Idea Generation**
-
    - Target Style Flavours aligned with investment philosophy
    - Independent analysis from existing holdings
    - Advanced filtering and search capabilities
 
 5. **Regime Analysis**
-
    - Market, Risk, and Economic Regime exposure analysis
    - Interactive regime charts dashboard
    - Performance prediction across different economic scenarios

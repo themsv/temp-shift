@@ -2,8 +2,8 @@ import { type ReactNode, useMemo } from 'react';
 import { IntlProvider } from 'react-intl';
 import { useLocalStorage } from '@mantine/hooks';
 
-import { messages, type SupportedLocale } from '../translations';
 import { I18nContext } from '@app/hooks/useI18n';
+import { messages, type SupportedLocale } from '../translations';
 
 type I18nProviderProps = Readonly<{
   children: ReactNode;
