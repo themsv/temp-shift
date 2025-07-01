@@ -67,7 +67,7 @@ git config user.email
 
 Types:
 
-- feat: New feature
+- feat/feature: New feature
 - fix: Bug fix
 - docs: Documentation changes
 - style: Code style changes

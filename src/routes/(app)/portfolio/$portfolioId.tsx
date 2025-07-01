@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { createFileRoute } from '@tanstack/react-router';
+import { createFileRoute, useParams } from '@tanstack/react-router';
 import { useIntl } from 'react-intl';
 import {
   Button,
@@ -22,8 +22,8 @@ import ContributorsTable from '@app/components/ContributorsTable/ContributorsTab
 import { IconBulb, IconQueryStats } from '@app/ui-core/icons';
 import { ContributorsControls } from '@app/components/ContributorsTable/ContributorsControls';
 import HeatMapChart from '@app/components/charts/HeatMapChart';
-import insights from '../../mocks/insights.json';
-import portfolios from '../../mocks/portfolio-data.json';
+import insights from '../../../mocks/insights.json';
+import portfolios from '../../../mocks/portfolio-data.json';
 
 const tabs = [
   { label: 'Style Flavours', value: 'flavours' },
@@ -32,11 +32,14 @@ const tabs = [
   { label: 'Macro Betas', value: 'macros' },
 ];
 
-export const Route = createFileRoute('/(app)/portfolio')({
+export const Route = createFileRoute('/(app)/portfolio/$portfolioId')({
   component: RouteComponent,
 });
 
 function RouteComponent() {
+  const { portfolioId } = useParams({ strict: false });
+
+  //TODO: prefetch or API call to get portfolio passing portfolioId
   const { formatMessage } = useIntl();
   const [checked, setChecked] = useState(true);
   const [showBubble, setShowBubble] = useState(false);
@@ -48,7 +51,7 @@ function RouteComponent() {
 
   const handleTooltipClick = () => {
     setShowBubble(true);
-    console.log('BUBBLE');
+    console.log('BUBBLE', portfolioId);
   };
 
   const handleBackClick = () => {
@@ -109,9 +112,7 @@ function RouteComponent() {
 
                 <Tabs.Panel value="bar-chart">
                   {showBubble ? (
-                    <>
-                      <BubbleChart handleBackClick={handleBackClick} />
-                    </>
+                    <BubbleChart handleBackClick={handleBackClick} />
                   ) : (
                     <GroupedScatterBarChart onTooltipClick={handleTooltipClick} />
                   )}

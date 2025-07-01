@@ -11,6 +11,7 @@ export const PortfolioCard = ({
   beta,
   trackingError,
   activeShare,
+  portfolioId,
 }: PortfolioLite) => {
   const { formatMessage } = useIntl();
   const navigate = useNavigate();
@@ -25,8 +26,12 @@ export const PortfolioCard = ({
         boxShadow: '4px 4px 12px rgba(0, 0, 0, 0.1)',
         cursor: 'pointer',
       }}
-      // eslint-disable-next-line @typescript-eslint/no-misused-promises
-      onClick={() => navigate({ to: '/portfolio' })}
+      onClick={() =>
+        void navigate({
+          to: '/portfolio/$portfolioId',
+          params: { portfolioId: portfolioId.toString() },
+        })
+      }
     >
       <Text fw={400} size="lg">
         {portfolioName}
@@ -49,6 +54,8 @@ export const PortfolioCard = ({
 
 export const CreatePortfolioCard = () => {
   const { formatMessage } = useIntl();
+  const navigate = useNavigate();
+
   return (
     <Card
       p="lg"
@@ -58,6 +65,7 @@ export const CreatePortfolioCard = () => {
         boxShadow: '4px 4px 12px rgba(0, 0, 0, 0.1)',
         cursor: 'pointer',
       }}
+      onClick={() => void navigate({ to: '/portfolio/create' })}
     >
       <Stack
         align="center"

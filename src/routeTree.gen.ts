@@ -16,8 +16,9 @@ import { Route as authIndexRouteImport } from './routes/(auth)/index'
 import { Route as authRegisterRouteImport } from './routes/(auth)/register'
 import { Route as appSettingsRouteImport } from './routes/(app)/settings'
 import { Route as appReferenceDataRouteImport } from './routes/(app)/reference-data'
-import { Route as appPortfolioRouteImport } from './routes/(app)/portfolio'
 import { Route as appDashboardRouteImport } from './routes/(app)/dashboard'
+import { Route as appPortfolioCreateRouteImport } from './routes/(app)/portfolio/create'
+import { Route as appPortfolioPortfolioIdRouteImport } from './routes/(app)/portfolio/$portfolioId'
 
 const appHelpLazyRouteImport = createFileRoute('/(app)/help')()
 
@@ -52,75 +53,86 @@ const appReferenceDataRoute = appReferenceDataRouteImport.update({
   path: '/reference-data',
   getParentRoute: () => appRouteRoute,
 } as any)
-const appPortfolioRoute = appPortfolioRouteImport.update({
-  id: '/portfolio',
-  path: '/portfolio',
-  getParentRoute: () => appRouteRoute,
-} as any)
 const appDashboardRoute = appDashboardRouteImport.update({
   id: '/dashboard',
   path: '/dashboard',
+  getParentRoute: () => appRouteRoute,
+} as any)
+const appPortfolioCreateRoute = appPortfolioCreateRouteImport.update({
+  id: '/portfolio/create',
+  path: '/portfolio/create',
+  getParentRoute: () => appRouteRoute,
+} as any)
+const appPortfolioPortfolioIdRoute = appPortfolioPortfolioIdRouteImport.update({
+  id: '/portfolio/$portfolioId',
+  path: '/portfolio/$portfolioId',
   getParentRoute: () => appRouteRoute,
 } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof authIndexRoute
   '/dashboard': typeof appDashboardRoute
-  '/portfolio': typeof appPortfolioRoute
   '/reference-data': typeof appReferenceDataRoute
   '/settings': typeof appSettingsRoute
   '/register': typeof authRegisterRoute
   '/help': typeof appHelpLazyRoute
+  '/portfolio/$portfolioId': typeof appPortfolioPortfolioIdRoute
+  '/portfolio/create': typeof appPortfolioCreateRoute
 }
 export interface FileRoutesByTo {
   '/': typeof authIndexRoute
   '/dashboard': typeof appDashboardRoute
-  '/portfolio': typeof appPortfolioRoute
   '/reference-data': typeof appReferenceDataRoute
   '/settings': typeof appSettingsRoute
   '/register': typeof authRegisterRoute
   '/help': typeof appHelpLazyRoute
+  '/portfolio/$portfolioId': typeof appPortfolioPortfolioIdRoute
+  '/portfolio/create': typeof appPortfolioCreateRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/(app)': typeof appRouteRouteWithChildren
   '/(app)/dashboard': typeof appDashboardRoute
-  '/(app)/portfolio': typeof appPortfolioRoute
   '/(app)/reference-data': typeof appReferenceDataRoute
   '/(app)/settings': typeof appSettingsRoute
   '/(auth)/register': typeof authRegisterRoute
   '/(app)/help': typeof appHelpLazyRoute
   '/(auth)/': typeof authIndexRoute
+  '/(app)/portfolio/$portfolioId': typeof appPortfolioPortfolioIdRoute
+  '/(app)/portfolio/create': typeof appPortfolioCreateRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
     | '/dashboard'
-    | '/portfolio'
     | '/reference-data'
     | '/settings'
     | '/register'
     | '/help'
+    | '/portfolio/$portfolioId'
+    | '/portfolio/create'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/dashboard'
-    | '/portfolio'
     | '/reference-data'
     | '/settings'
     | '/register'
     | '/help'
+    | '/portfolio/$portfolioId'
+    | '/portfolio/create'
   id:
     | '__root__'
     | '/(app)'
     | '/(app)/dashboard'
-    | '/(app)/portfolio'
     | '/(app)/reference-data'
     | '/(app)/settings'
     | '/(auth)/register'
     | '/(app)/help'
     | '/(auth)/'
+    | '/(app)/portfolio/$portfolioId'
+    | '/(app)/portfolio/create'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -173,13 +185,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof appReferenceDataRouteImport
       parentRoute: typeof appRouteRoute
     }
-    '/(app)/portfolio': {
-      id: '/(app)/portfolio'
-      path: '/portfolio'
-      fullPath: '/portfolio'
-      preLoaderRoute: typeof appPortfolioRouteImport
-      parentRoute: typeof appRouteRoute
-    }
     '/(app)/dashboard': {
       id: '/(app)/dashboard'
       path: '/dashboard'
@@ -187,23 +192,39 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof appDashboardRouteImport
       parentRoute: typeof appRouteRoute
     }
+    '/(app)/portfolio/create': {
+      id: '/(app)/portfolio/create'
+      path: '/portfolio/create'
+      fullPath: '/portfolio/create'
+      preLoaderRoute: typeof appPortfolioCreateRouteImport
+      parentRoute: typeof appRouteRoute
+    }
+    '/(app)/portfolio/$portfolioId': {
+      id: '/(app)/portfolio/$portfolioId'
+      path: '/portfolio/$portfolioId'
+      fullPath: '/portfolio/$portfolioId'
+      preLoaderRoute: typeof appPortfolioPortfolioIdRouteImport
+      parentRoute: typeof appRouteRoute
+    }
   }
 }
 
 interface appRouteRouteChildren {
   appDashboardRoute: typeof appDashboardRoute
-  appPortfolioRoute: typeof appPortfolioRoute
   appReferenceDataRoute: typeof appReferenceDataRoute
   appSettingsRoute: typeof appSettingsRoute
   appHelpLazyRoute: typeof appHelpLazyRoute
+  appPortfolioPortfolioIdRoute: typeof appPortfolioPortfolioIdRoute
+  appPortfolioCreateRoute: typeof appPortfolioCreateRoute
 }
 
 const appRouteRouteChildren: appRouteRouteChildren = {
   appDashboardRoute: appDashboardRoute,
-  appPortfolioRoute: appPortfolioRoute,
   appReferenceDataRoute: appReferenceDataRoute,
   appSettingsRoute: appSettingsRoute,
   appHelpLazyRoute: appHelpLazyRoute,
+  appPortfolioPortfolioIdRoute: appPortfolioPortfolioIdRoute,
+  appPortfolioCreateRoute: appPortfolioCreateRoute,
 }
 
 const appRouteRouteWithChildren = appRouteRoute._addFileChildren(

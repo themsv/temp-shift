@@ -122,7 +122,7 @@ interface NavItemProps {
   label: string;
   icon: ComponentType<{ color: string }>;
 }
-function ExpandedNavItem({ to, label, icon: Icon }: NavItemProps) {
+function ExpandedNavItem({ to, label, icon: Icon }: Readonly<NavItemProps>) {
   const matchRoute = useMatchRoute();
   const { primaryColor, colors } = useMantineTheme();
 
@@ -138,7 +138,7 @@ function ExpandedNavItem({ to, label, icon: Icon }: NavItemProps) {
   );
 }
 
-function CollapsedNavItem({ to, label, icon: Icon }: NavItemProps) {
+function CollapsedNavItem({ to, label, icon: Icon }: Readonly<NavItemProps>) {
   const matchRoute = useMatchRoute();
   const { primaryColor, colors } = useMantineTheme();
 
