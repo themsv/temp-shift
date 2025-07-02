@@ -11,10 +11,10 @@ import { ArticleCard } from '@app/components/dashboard/ArticleCard';
 import researchData from '../../mocks/Research-data.json';
 
 export const Route = createFileRoute('/(app)/dashboard')({
-  component: RouteComponent,
+  component: Dashboard,
 });
 
-function RouteComponent() {
+function Dashboard() {
   const { formatMessage } = useIntl();
   const { data: portfolios, isPending } = useGetPortfolios();
 

@@ -5,10 +5,10 @@ import { useIntl } from 'react-intl';
 import settingsConfig from '../../mocks/settings.json';
 
 export const Route = createFileRoute('/(app)/settings')({
-  component: RouteComponent,
+  component: Settings,
 });
 
-function RouteComponent() {
+function Settings() {
   const { formatMessage } = useIntl();
   return (
     <Stack>

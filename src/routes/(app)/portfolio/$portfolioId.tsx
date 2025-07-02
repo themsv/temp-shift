@@ -33,10 +33,10 @@ const tabs = [
 ];
 
 export const Route = createFileRoute('/(app)/portfolio/$portfolioId')({
-  component: RouteComponent,
+  component: PortfolioDetails,
 });
 
-function RouteComponent() {
+function PortfolioDetails() {
   const { portfolioId } = useParams({ strict: false });
 
   //TODO: prefetch or API call to get portfolio passing portfolioId

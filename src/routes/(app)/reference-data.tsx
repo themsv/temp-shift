@@ -5,10 +5,10 @@ import { useIntl } from 'react-intl';
 import referenceData from '../../mocks/reference-data.json';
 
 export const Route = createFileRoute('/(app)/reference-data')({
-  component: RouteComponent,
+  component: ReferenceData,
 });
 
-function RouteComponent() {
+function ReferenceData() {
   const intl = useIntl();
 
   const renderRow = (label: string, value: string) => (

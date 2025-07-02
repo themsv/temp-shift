@@ -3,10 +3,10 @@ import { Card, Stack, Text } from '@mantine/core';
 import { IconHelp } from '@tabler/icons-react';
 
 export const Route = createLazyFileRoute('/(app)/help')({
-  component: RouteComponent,
+  component: Help,
 });
 
-function RouteComponent() {
+function Help() {
   return (
     <Stack align="center" component={Card}>
       <Text>Under Construction</Text>
