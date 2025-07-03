@@ -76,7 +76,7 @@ function SideNavbar() {
       {/* Collapsed Mode */}
       <Stack justify="space-between" align="center" h="88vh" my={8}>
         <Stack gap="xl" align="center">
-          <Image src="./logo_mini.png" alt="Shorter version of Macquarie logo" w="48" />
+          <Image src="/logo_mini.png" alt="Shorter version of Macquarie logo" w="48" />
           <CollapsedNavItem
             to="/dashboard"
             label={intl.formatMessage({ id: 'NAV_ITEM_DASHBOARD' })}

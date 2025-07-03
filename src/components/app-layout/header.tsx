@@ -11,7 +11,7 @@ function Header() {
       <Menu>
         <Menu.Target>
           <Button
-            leftSection={<Image src="./jane_doe.jpg" alt="Jane Doe" h="25" w="25" radius="50%" />}
+            leftSection={<Image src="/jane_doe.jpg" alt="Jane Doe" h="25" w="25" radius="50%" />}
             variant="transparent"
           >
             Jane Doe
