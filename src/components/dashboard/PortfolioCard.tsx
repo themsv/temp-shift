@@ -65,7 +65,7 @@ export const CreatePortfolioCard = () => {
         boxShadow: '4px 4px 12px rgba(0, 0, 0, 0.1)',
         cursor: 'pointer',
       }}
-      onClick={() => void navigate({ to: '/portfolio/create' })}
+      onClick={() => void navigate({ to: '/portfolio/create/basic-info' })}
     >
       <Stack
         align="center"

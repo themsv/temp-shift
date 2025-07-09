@@ -17,8 +17,11 @@ import { Route as authRegisterRouteImport } from './routes/(auth)/register'
 import { Route as appSettingsRouteImport } from './routes/(app)/settings'
 import { Route as appReferenceDataRouteImport } from './routes/(app)/reference-data'
 import { Route as appDashboardRouteImport } from './routes/(app)/dashboard'
-import { Route as appPortfolioCreateRouteImport } from './routes/(app)/portfolio/create'
 import { Route as appPortfolioPortfolioIdRouteImport } from './routes/(app)/portfolio/$portfolioId'
+import { Route as appPortfolioCreateRouteRouteImport } from './routes/(app)/portfolio/create/route'
+import { Route as appPortfolioCreateBasicInfoRouteImport } from './routes/(app)/portfolio/create/basic-info'
+import { Route as appPortfolioCreatePortfolioIdSubmitRouteImport } from './routes/(app)/portfolio/create/$portfolioId/submit'
+import { Route as appPortfolioCreatePortfolioIdCorrectionsRouteImport } from './routes/(app)/portfolio/create/$portfolioId/corrections'
 
 const appHelpLazyRouteImport = createFileRoute('/(app)/help')()
 
@@ -58,16 +61,34 @@ const appDashboardRoute = appDashboardRouteImport.update({
   path: '/dashboard',
   getParentRoute: () => appRouteRoute,
 } as any)
-const appPortfolioCreateRoute = appPortfolioCreateRouteImport.update({
-  id: '/portfolio/create',
-  path: '/portfolio/create',
-  getParentRoute: () => appRouteRoute,
-} as any)
 const appPortfolioPortfolioIdRoute = appPortfolioPortfolioIdRouteImport.update({
   id: '/portfolio/$portfolioId',
   path: '/portfolio/$portfolioId',
   getParentRoute: () => appRouteRoute,
 } as any)
+const appPortfolioCreateRouteRoute = appPortfolioCreateRouteRouteImport.update({
+  id: '/portfolio/create',
+  path: '/portfolio/create',
+  getParentRoute: () => appRouteRoute,
+} as any)
+const appPortfolioCreateBasicInfoRoute =
+  appPortfolioCreateBasicInfoRouteImport.update({
+    id: '/basic-info',
+    path: '/basic-info',
+    getParentRoute: () => appPortfolioCreateRouteRoute,
+  } as any)
+const appPortfolioCreatePortfolioIdSubmitRoute =
+  appPortfolioCreatePortfolioIdSubmitRouteImport.update({
+    id: '/$portfolioId/submit',
+    path: '/$portfolioId/submit',
+    getParentRoute: () => appPortfolioCreateRouteRoute,
+  } as any)
+const appPortfolioCreatePortfolioIdCorrectionsRoute =
+  appPortfolioCreatePortfolioIdCorrectionsRouteImport.update({
+    id: '/$portfolioId/corrections',
+    path: '/$portfolioId/corrections',
+    getParentRoute: () => appPortfolioCreateRouteRoute,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof authIndexRoute
@@ -76,8 +97,11 @@ export interface FileRoutesByFullPath {
   '/settings': typeof appSettingsRoute
   '/register': typeof authRegisterRoute
   '/help': typeof appHelpLazyRoute
+  '/portfolio/create': typeof appPortfolioCreateRouteRouteWithChildren
   '/portfolio/$portfolioId': typeof appPortfolioPortfolioIdRoute
-  '/portfolio/create': typeof appPortfolioCreateRoute
+  '/portfolio/create/basic-info': typeof appPortfolioCreateBasicInfoRoute
+  '/portfolio/create/$portfolioId/corrections': typeof appPortfolioCreatePortfolioIdCorrectionsRoute
+  '/portfolio/create/$portfolioId/submit': typeof appPortfolioCreatePortfolioIdSubmitRoute
 }
 export interface FileRoutesByTo {
   '/': typeof authIndexRoute
@@ -86,8 +110,11 @@ export interface FileRoutesByTo {
   '/settings': typeof appSettingsRoute
   '/register': typeof authRegisterRoute
   '/help': typeof appHelpLazyRoute
+  '/portfolio/create': typeof appPortfolioCreateRouteRouteWithChildren
   '/portfolio/$portfolioId': typeof appPortfolioPortfolioIdRoute
-  '/portfolio/create': typeof appPortfolioCreateRoute
+  '/portfolio/create/basic-info': typeof appPortfolioCreateBasicInfoRoute
+  '/portfolio/create/$portfolioId/corrections': typeof appPortfolioCreatePortfolioIdCorrectionsRoute
+  '/portfolio/create/$portfolioId/submit': typeof appPortfolioCreatePortfolioIdSubmitRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -98,8 +125,11 @@ export interface FileRoutesById {
   '/(auth)/register': typeof authRegisterRoute
   '/(app)/help': typeof appHelpLazyRoute
   '/(auth)/': typeof authIndexRoute
+  '/(app)/portfolio/create': typeof appPortfolioCreateRouteRouteWithChildren
   '/(app)/portfolio/$portfolioId': typeof appPortfolioPortfolioIdRoute
-  '/(app)/portfolio/create': typeof appPortfolioCreateRoute
+  '/(app)/portfolio/create/basic-info': typeof appPortfolioCreateBasicInfoRoute
+  '/(app)/portfolio/create/$portfolioId/corrections': typeof appPortfolioCreatePortfolioIdCorrectionsRoute
+  '/(app)/portfolio/create/$portfolioId/submit': typeof appPortfolioCreatePortfolioIdSubmitRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -110,8 +140,11 @@ export interface FileRouteTypes {
     | '/settings'
     | '/register'
     | '/help'
-    | '/portfolio/$portfolioId'
     | '/portfolio/create'
+    | '/portfolio/$portfolioId'
+    | '/portfolio/create/basic-info'
+    | '/portfolio/create/$portfolioId/corrections'
+    | '/portfolio/create/$portfolioId/submit'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -120,8 +153,11 @@ export interface FileRouteTypes {
     | '/settings'
     | '/register'
     | '/help'
-    | '/portfolio/$portfolioId'
     | '/portfolio/create'
+    | '/portfolio/$portfolioId'
+    | '/portfolio/create/basic-info'
+    | '/portfolio/create/$portfolioId/corrections'
+    | '/portfolio/create/$portfolioId/submit'
   id:
     | '__root__'
     | '/(app)'
@@ -131,8 +167,11 @@ export interface FileRouteTypes {
     | '/(auth)/register'
     | '/(app)/help'
     | '/(auth)/'
-    | '/(app)/portfolio/$portfolioId'
     | '/(app)/portfolio/create'
+    | '/(app)/portfolio/$portfolioId'
+    | '/(app)/portfolio/create/basic-info'
+    | '/(app)/portfolio/create/$portfolioId/corrections'
+    | '/(app)/portfolio/create/$portfolioId/submit'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -192,13 +231,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof appDashboardRouteImport
       parentRoute: typeof appRouteRoute
     }
-    '/(app)/portfolio/create': {
-      id: '/(app)/portfolio/create'
-      path: '/portfolio/create'
-      fullPath: '/portfolio/create'
-      preLoaderRoute: typeof appPortfolioCreateRouteImport
-      parentRoute: typeof appRouteRoute
-    }
     '/(app)/portfolio/$portfolioId': {
       id: '/(app)/portfolio/$portfolioId'
       path: '/portfolio/$portfolioId'
@@ -206,16 +238,64 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof appPortfolioPortfolioIdRouteImport
       parentRoute: typeof appRouteRoute
     }
+    '/(app)/portfolio/create': {
+      id: '/(app)/portfolio/create'
+      path: '/portfolio/create'
+      fullPath: '/portfolio/create'
+      preLoaderRoute: typeof appPortfolioCreateRouteRouteImport
+      parentRoute: typeof appRouteRoute
+    }
+    '/(app)/portfolio/create/basic-info': {
+      id: '/(app)/portfolio/create/basic-info'
+      path: '/basic-info'
+      fullPath: '/portfolio/create/basic-info'
+      preLoaderRoute: typeof appPortfolioCreateBasicInfoRouteImport
+      parentRoute: typeof appPortfolioCreateRouteRoute
+    }
+    '/(app)/portfolio/create/$portfolioId/submit': {
+      id: '/(app)/portfolio/create/$portfolioId/submit'
+      path: '/$portfolioId/submit'
+      fullPath: '/portfolio/create/$portfolioId/submit'
+      preLoaderRoute: typeof appPortfolioCreatePortfolioIdSubmitRouteImport
+      parentRoute: typeof appPortfolioCreateRouteRoute
+    }
+    '/(app)/portfolio/create/$portfolioId/corrections': {
+      id: '/(app)/portfolio/create/$portfolioId/corrections'
+      path: '/$portfolioId/corrections'
+      fullPath: '/portfolio/create/$portfolioId/corrections'
+      preLoaderRoute: typeof appPortfolioCreatePortfolioIdCorrectionsRouteImport
+      parentRoute: typeof appPortfolioCreateRouteRoute
+    }
   }
 }
+
+interface appPortfolioCreateRouteRouteChildren {
+  appPortfolioCreateBasicInfoRoute: typeof appPortfolioCreateBasicInfoRoute
+  appPortfolioCreatePortfolioIdCorrectionsRoute: typeof appPortfolioCreatePortfolioIdCorrectionsRoute
+  appPortfolioCreatePortfolioIdSubmitRoute: typeof appPortfolioCreatePortfolioIdSubmitRoute
+}
+
+const appPortfolioCreateRouteRouteChildren: appPortfolioCreateRouteRouteChildren =
+  {
+    appPortfolioCreateBasicInfoRoute: appPortfolioCreateBasicInfoRoute,
+    appPortfolioCreatePortfolioIdCorrectionsRoute:
+      appPortfolioCreatePortfolioIdCorrectionsRoute,
+    appPortfolioCreatePortfolioIdSubmitRoute:
+      appPortfolioCreatePortfolioIdSubmitRoute,
+  }
+
+const appPortfolioCreateRouteRouteWithChildren =
+  appPortfolioCreateRouteRoute._addFileChildren(
+    appPortfolioCreateRouteRouteChildren,
+  )
 
 interface appRouteRouteChildren {
   appDashboardRoute: typeof appDashboardRoute
   appReferenceDataRoute: typeof appReferenceDataRoute
   appSettingsRoute: typeof appSettingsRoute
   appHelpLazyRoute: typeof appHelpLazyRoute
+  appPortfolioCreateRouteRoute: typeof appPortfolioCreateRouteRouteWithChildren
   appPortfolioPortfolioIdRoute: typeof appPortfolioPortfolioIdRoute
-  appPortfolioCreateRoute: typeof appPortfolioCreateRoute
 }
 
 const appRouteRouteChildren: appRouteRouteChildren = {
@@ -223,8 +303,8 @@ const appRouteRouteChildren: appRouteRouteChildren = {
   appReferenceDataRoute: appReferenceDataRoute,
   appSettingsRoute: appSettingsRoute,
   appHelpLazyRoute: appHelpLazyRoute,
+  appPortfolioCreateRouteRoute: appPortfolioCreateRouteRouteWithChildren,
   appPortfolioPortfolioIdRoute: appPortfolioPortfolioIdRoute,
-  appPortfolioCreateRoute: appPortfolioCreateRoute,
 }
 
 const appRouteRouteWithChildren = appRouteRoute._addFileChildren(

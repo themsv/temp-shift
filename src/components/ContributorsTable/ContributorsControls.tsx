@@ -13,7 +13,6 @@ export function ContributorsControls({ checked, setChecked }: ContributorsContro
           Largest Contributors to portfolio's Style Flavor Exposure
         </Text>
         <Box w="auto">
-          {' '}
           <SegmentedControl
             fullWidth
             data={[
