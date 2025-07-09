@@ -7,6 +7,7 @@ import {
   Flex,
   Group,
   Paper,
+  ScrollArea,
   Select,
   Stack,
   Tabs,
@@ -99,7 +100,9 @@ function PortfolioDetails() {
           </Tabs.List>
 
           {tabs.map((t) => (
-            <Tabs.Panel value={t.value} key={t.value} p="md">
+            // NOTE: The hardcoded height is a ugly workaround for now which needs to be calculated
+            // dynamically from 100vh - headerHeight - elementsHeight etc  -Saivenkat
+            <Tabs.Panel value={t.value} key={t.value} p="md" component={ScrollArea} h="76vh">
               <Tabs variant="pills" defaultValue="bar-chart">
                 <Tabs.List>
                   <Tabs.Tab value="bar-chart">
@@ -130,7 +133,6 @@ function PortfolioDetails() {
           ))}
         </Tabs>
       </Stack>
-
       <Stack>
         <Group gap="xs" grow>
           <Button leftSection={<IconBulb size="24" color="white" />} p="0">
@@ -148,11 +150,15 @@ function PortfolioDetails() {
 
         <Stack bg="gray.0" p="md">
           <Text fw={500}>Insights</Text>
-          <Stack gap="sm">
-            {insights.map((item) => (
-              <ArticleCard key={item.id} {...item} />
-            ))}
-          </Stack>
+          {/* NOTE: The hardcoded height is a ugly workaround for now which needs to be calculated
+          dynamically from 100vh - headerHeight - elementsHeight etc  -Saivenkat */}
+          <ScrollArea h="74vh" offsetScrollbars type="hover">
+            <Stack gap="sm">
+              {insights.map((item) => (
+                <ArticleCard key={item.id} {...item} />
+              ))}
+            </Stack>
+          </ScrollArea>
         </Stack>
       </Stack>
     </Flex>

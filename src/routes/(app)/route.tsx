@@ -3,19 +3,21 @@ import { AppShell } from '@mantine/core';
 
 import SideNavbar from '@app/components/app-layout/side-navbar';
 import Header from '@app/components/app-layout/header';
+import appLayoutConfig from '@app/consts/app-layout';
 
 export const Route = createFileRoute('/(app)')({
-  component: RouteComponent,
+  component: MainLayout,
 });
 
-function RouteComponent() {
+function MainLayout() {
   return (
     <AppShell
       layout="alt"
-      header={{ height: 52 }}
+      padding={appLayoutConfig.padding}
+      header={{ height: appLayoutConfig.header.height }}
       navbar={{
-        width: 64,
-        breakpoint: 'xs',
+        width: appLayoutConfig.navbar.width,
+        breakpoint: appLayoutConfig.navbar.breakpoint,
       }}
       styles={{
         header: {
@@ -25,7 +27,6 @@ function RouteComponent() {
           background: '#000',
         },
       }}
-      p="lg"
     >
       <AppShell.Header>
         <Header />

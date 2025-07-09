@@ -35,7 +35,7 @@ function SideNavbar() {
           },
         }}
       >
-        <Stack justify="space-between" align="flex-start" h="88vh">
+        <Stack justify="space-between" align="flex-start" h="92vh">
           <Stack gap="xl">
             <IconMCQLogo size="26" />
             <ExpandedNavItem
@@ -74,7 +74,7 @@ function SideNavbar() {
       </Drawer>
 
       {/* Collapsed Mode */}
-      <Stack justify="space-between" align="center" h="88vh" my={8}>
+      <Stack justify="space-between" align="center" h="92vh" my={8}>
         <Stack gap="xl" align="center">
           <Image src="/logo_mini.png" alt="Shorter version of Macquarie logo" w="48" />
           <CollapsedNavItem

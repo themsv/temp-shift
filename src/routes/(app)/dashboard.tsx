@@ -1,5 +1,14 @@
 import { createFileRoute } from '@tanstack/react-router';
-import { Button, Flex, Group, LoadingOverlay, SimpleGrid, Stack, Text } from '@mantine/core';
+import {
+  Button,
+  Flex,
+  Group,
+  LoadingOverlay,
+  ScrollArea,
+  SimpleGrid,
+  Stack,
+  Text,
+} from '@mantine/core';
 import { useIntl } from 'react-intl';
 import { IconHelp } from '@tabler/icons-react';
 
@@ -24,7 +33,7 @@ function Dashboard() {
     <Flex
       gap="md"
       align="flex-start"
-      justify="space-around"
+      justify="center"
       style={{
         backgroundImage: 'url(/background-pattern.svg)',
         backgroundRepeat: 'no-repeat',
@@ -44,13 +53,16 @@ function Dashboard() {
             }}
           />
         </Group>
-
-        <SimpleGrid cols={{ sm: 1, md: 2, lg: 3, xl: 4 }}>
-          <CreatePortfolioCard />
-          {portfolios?.map((portfolio) => (
-            <PortfolioCard key={portfolio.portfolioId} {...portfolio} />
-          ))}
-        </SimpleGrid>
+        {/* NOTE: The hardcoded height is a ugly workaround for now which needs to be calculated
+        dynamically from 100vh - headerHeight - elementsHeight etc  -Saivenkat */}
+        <ScrollArea h="82vh" offsetScrollbars type="hover">
+          <SimpleGrid cols={{ sm: 1, md: 2, lg: 3 }}>
+            <CreatePortfolioCard />
+            {portfolios?.map((portfolio) => (
+              <PortfolioCard key={portfolio.portfolioId} {...portfolio} />
+            ))}
+          </SimpleGrid>
+        </ScrollArea>
       </Stack>
 
       <Stack maw={420}>
@@ -74,11 +86,15 @@ function Dashboard() {
             <Text fw={500}>{formatMessage({ id: 'STYLE_RESEARCH' })}</Text>
             <IconHelp size={20} />
           </Group>
-          <Stack gap="sm">
-            {researchData.map((item) => (
-              <ArticleCard key={item._id} {...item} showLinks />
-            ))}
-          </Stack>
+          {/* NOTE: The hardcoded height is a ugly workaround for now which needs to be calculated
+          dynamically from 100vh - headerHeight - elementsHeight etc  -Saivenkat */}
+          <ScrollArea h="74vh" offsetScrollbars type="hover">
+            <Stack gap="sm">
+              {researchData.map((item) => (
+                <ArticleCard key={item._id} {...item} showLinks />
+              ))}
+            </Stack>
+          </ScrollArea>
         </Stack>
       </Stack>
     </Flex>
