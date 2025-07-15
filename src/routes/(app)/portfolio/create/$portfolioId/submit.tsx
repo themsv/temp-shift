@@ -17,8 +17,8 @@ import { Dropzone, MS_EXCEL_MIME_TYPE } from '@mantine/dropzone';
 import { useForm } from '@mantine/form';
 import { IconChevronRight, IconX, IconCloudUpload } from '@tabler/icons-react';
 import { currencyOptions, investmentOptions, strategyOptions } from '@app/consts/portfolio-create';
-import { CustomHeading } from '../basic-info';
 import { CustomButtonLink } from '@app/ui-core/link-button';
+import { CustomHeading } from '../basic-info';
 
 export const Route = createFileRoute('/(app)/portfolio/create/$portfolioId/submit')({
   component: SubmitPortfolio,
@@ -115,8 +115,12 @@ function SubmitPortfolio() {
       >
         <Stack gap="sm">
           <Dropzone
-            onDrop={(files) => console.log('accepted files', files)}
-            onReject={(files) => console.log('rejected files', files)}
+            onDrop={(files) => {
+              console.log('accepted files', files);
+            }}
+            onReject={(files) => {
+              console.log('rejected files', files);
+            }}
             maxSize={5 * 1024 ** 2} //5MB
             accept={MS_EXCEL_MIME_TYPE}
           >
@@ -151,7 +155,7 @@ function SubmitPortfolio() {
             <CustomButtonLink
               to="/portfolio/create/$portfolioId/corrections"
               //TODO: Validate portfolioId + prefetch portfolio data using portfolioId
-              params={{ portfolioId: portfolioId!?.toString() }}
+              params={{ portfolioId: portfolioId?.toString() }}
             >
               Next
             </CustomButtonLink>

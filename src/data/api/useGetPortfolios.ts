@@ -2,18 +2,29 @@ import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
 import URLS from '@app/consts/urls';
 import queryKeys from '@app/consts/query-keys';
+import { type PortfoliosLite } from '../types/portfolio';
 
-import { type PortfolioLite } from '../types/portfolio';
+type PortfolioParams = {
+  page: number;
+  size: number;
+  sort: string;
+};
+async function getPortfolios({ page, size, sort }: PortfolioParams) {
+  const params = new URLSearchParams({
+    page: String(page),
+    size: String(size),
+    sort,
+  });
 
-async function getPortfolios() {
-  const response = await axios.get<PortfolioLite[]>(URLS.portfolios);
+  const response = await axios.get<PortfoliosLite>(`${URLS.portfolios}?${params.toString()}`);
   return response.data;
 }
 
-function useGetPortfolios() {
+function useGetPortfolios(params: PortfolioParams) {
   return useQuery({
-    queryKey: queryKeys.portfolio.list(),
-    queryFn: getPortfolios,
+    queryKey: [queryKeys.portfolio.list(), params],
+    queryFn: () => getPortfolios(params),
   });
 }
+
 export default useGetPortfolios;

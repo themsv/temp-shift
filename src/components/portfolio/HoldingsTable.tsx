@@ -12,7 +12,7 @@ interface ValidRow {
   weight: string;
 }
 function ValidHoldings() {
-  const [colDefs, setColDefs] = useState<ColDef<ValidRow>[]>([
+  const [colDefs] = useState<ColDef<ValidRow>[]>([
     { field: 'effectiveDate' },
     { field: 'sedol' },
     { field: 'bbTicker' },
@@ -39,10 +39,8 @@ interface InvalidRow extends ValidRow {
 }
 
 function InvalidHoldings() {
-  const [rowData, setRowData] = useState<InvalidRow[]>(
-    holdings.map((_) => ({ ..._, isDelete: false })),
-  );
-  const [colDefs, setColDefs] = useState<ColDef<InvalidRow>[]>([
+  const [rowData] = useState<InvalidRow[]>(holdings.map((_) => ({ ..._, isDelete: false })));
+  const [colDefs] = useState<ColDef<InvalidRow>[]>([
     { field: 'effectiveDate', headerName: 'Effective Date', editable: true, width: 175 },
     { field: 'sedol', headerName: 'Sedol', editable: true },
     { field: 'bbTicker', headerName: 'Bloomberg Ticker', editable: true },

@@ -1,17 +1,18 @@
 import { useNavigate } from '@tanstack/react-router';
-import { Card, Text, Stack } from '@mantine/core';
+import { Card, Text, Stack, Group } from '@mantine/core';
+import { IconCircleDottedLetterM } from '@tabler/icons-react';
 import { useIntl } from 'react-intl';
-
 import { type PortfolioLite } from '@app/data/types/portfolio';
 
 export const PortfolioCard = ({
-  holdingsCount,
-  portfolioName,
+  totalHoldingsCount,
+  name,
   description,
   beta,
   trackingError,
   activeShare,
-  portfolioId,
+  id,
+  isMultifund,
 }: PortfolioLite) => {
   const { formatMessage } = useIntl();
   const navigate = useNavigate();
@@ -29,16 +30,20 @@ export const PortfolioCard = ({
       onClick={() =>
         void navigate({
           to: '/portfolio/$portfolioId',
-          params: { portfolioId: portfolioId.toString() },
+          params: { portfolioId: id.toString() },
         })
       }
     >
-      <Text fw={400} size="lg">
-        {portfolioName}
-      </Text>
+      <Group>
+        <Text fw={400} size="lg">
+          {name}
+        </Text>
+        {/* TODO: Add a badge for card & sync with figma */}
+        {isMultifund && <IconCircleDottedLetterM color="blue" />}
+      </Group>
       <Text size="sm">{description}</Text>
       <Text size="lg" c="blue" fw={600}>
-        {formatMessage({ id: 'STOCKS_COUNT' }, { count: holdingsCount })}
+        {formatMessage({ id: 'STOCKS_COUNT' }, { count: totalHoldingsCount })}
       </Text>
 
       <Card.Section bg="#e1faf7">

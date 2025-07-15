@@ -34,6 +34,8 @@ const theme = createTheme({
     Select: {
       defaultProps: {
         rightSection: <IconTriangleInvertedFilled size={10} />,
+        allowDeselect: false,
+        checkIconPosition: 'right',
       },
     },
   },

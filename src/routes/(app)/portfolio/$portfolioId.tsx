@@ -24,7 +24,6 @@ import { IconBulb, IconQueryStats } from '@app/ui-core/icons';
 import { ContributorsControls } from '@app/components/ContributorsTable/ContributorsControls';
 import HeatMapChart from '@app/components/charts/HeatMapChart';
 import insights from '../../../mocks/insights.json';
-import portfolios from '../../../mocks/portfolio-data.json';
 
 const tabs = [
   { label: 'Style Flavours', value: 'flavours' },
@@ -45,11 +44,6 @@ function PortfolioDetails() {
   const [checked, setChecked] = useState(true);
   const [showBubble, setShowBubble] = useState(false);
 
-  const portfolioOptions = portfolios.portfolios.map((p) => ({
-    label: p.name,
-    value: p._id,
-  }));
-
   const handleTooltipClick = () => {
     setShowBubble(true);
     console.log('BUBBLE', portfolioId);
@@ -64,7 +58,8 @@ function PortfolioDetails() {
       <Stack w="100%">
         <Group>
           <Text>{formatMessage({ id: 'NAV_ITEM_DASHBOARD' })}</Text>
-          <Select data={portfolioOptions} defaultValue="202" />
+          {/* TODO: Wire API that gives lite details of portfolios like name, id with debounce search */}
+          <Select searchable data={[]} defaultValue="202" />
           <Paper withBorder p={6}>
             <Group>
               <Group>
