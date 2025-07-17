@@ -38,6 +38,11 @@ const theme = createTheme({
         checkIconPosition: 'right',
       },
     },
+    Breadcrumbs: {
+      defaultProps: {
+        separator: '>',
+      },
+    },
   },
 });
 

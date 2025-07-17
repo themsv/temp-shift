@@ -1,4 +1,4 @@
-import { createFileRoute } from '@tanstack/react-router';
+import { createFileRoute, useNavigate } from '@tanstack/react-router';
 import {
   Text,
   Stack,
@@ -9,82 +9,111 @@ import {
   TextInput,
   Select,
   Textarea,
+  SegmentedControl,
+  Button,
 } from '@mantine/core';
 import { useForm } from '@mantine/form';
 import { z } from 'zod/v4';
 import { zod4Resolver } from 'mantine-form-zod-resolver';
 import { CustomButtonLink } from '@app/ui-core/link-button';
 import { currencyOptions, investmentOptions, strategyOptions } from '@app/consts/portfolio-create';
+import { useCreateDraftPortfolio } from '@app/data/api';
+import type { BasicPortfolioPayload } from '@app/data/types/portfolio';
 
 export const Route = createFileRoute('/(app)/portfolio/create/basic-info')({
   component: PortfolioInfo,
 });
 
 const schema = z.object({
+  isMultifund: z.boolean(),
   name: z.string().min(5, { message: 'Portfolio Name should have at least 5 letters' }),
   currency: z.enum(currencyOptions.map((_) => _.value)),
   strategy: z.enum(strategyOptions.map((_) => _.value)),
-  style: z.enum(investmentOptions.map((_) => _.value)),
+  investmentStyle: z.enum(investmentOptions.map((_) => _.value)),
   description: z.string().optional(),
 });
 
+const initialValues = {
+  isMultifund: false,
+  name: '',
+  currency: '',
+  strategy: '',
+  investmentStyle: '',
+  description: '',
+};
+
 function PortfolioInfo() {
+  const { mutate } = useCreateDraftPortfolio();
+  const navigate = useNavigate();
   const form = useForm({
     mode: 'uncontrolled',
-    initialValues: {
-      name: 'Parag Parikh Flexi Cap Fund Direct Growth',
-      currency: 'USD',
-      strategy: 'Long',
-      style: 'Growth',
-      description:
-        'Parag Parikh Flexi Cap Fund Direct-Growth is a Flexi Cap mutual fund scheme from Ppfas Mutual Fund. This fund has been in existence for 12 yrs 1 m, having been launched on 13/05/2013. Parag Parikh Flexi Cap Fund Direct-Growth has ₹1,03,868 Crores worth of assets under management (AUM) as on 31/03/2025 and is medium-sized fund of its category.',
-    },
+    initialValues: initialValues,
     validateInputOnBlur: true,
     validate: zod4Resolver(schema),
   });
 
+  const handleSubmit = (values: BasicPortfolioPayload) => {
+    mutate(values, {
+      onSuccess: (portfolio) => {
+        void navigate({
+          to: '/portfolio/create/$portfolioId/submit',
+          params: { portfolioId: portfolio.id.toString() },
+        });
+      },
+    });
+  };
   return (
-    <Stack>
-      <CustomHeading title="Portfolio Details" description="Set up your portfolio" />
-      <SimpleGrid cols={2}>
-        {/* TODO: Ideally this should undergo validation on blur */}
-        <TextInput {...form.getInputProps('name')} label="Portfolio Name" required />
-        <Select
-          {...form.getInputProps('currency')}
-          label="Currency"
-          required
-          data={currencyOptions}
-        />
-      </SimpleGrid>
-      <SimpleGrid cols={2}>
-        <Select
-          {...form.getInputProps('strategy')}
-          label="Strategy"
-          required
-          data={strategyOptions}
-        />
-        <Select
-          {...form.getInputProps('style')}
-          label="Investment Style"
-          required
-          data={investmentOptions}
-        />
-      </SimpleGrid>
-      <Textarea {...form.getInputProps('description')} label="Description" minRows={3} autosize />
-      <Group justify="flex-end">
-        <CustomButtonLink to="/dashboard" variant="outline">
-          Cancel
-        </CustomButtonLink>
-        {/* TODO: useMutation hook with above info and get the interm/draft portfolioId, 
-        use it as dynamic route till last step */}
-        <CustomButtonLink
-          to="/portfolio/create/$portfolioId/submit"
-          params={{ portfolioId: '1234' }}
-        >
-          Next
-        </CustomButtonLink>
-      </Group>
-    </Stack>
+    <form onSubmit={form.onSubmit(handleSubmit)}>
+      <Stack>
+        <Group justify="space-between">
+          <CustomHeading title="Portfolio Details" description="Set up your portfolio" />
+          <SegmentedControl
+            size="md"
+            color="dark"
+            data={[
+              { value: 'single', label: 'Single Portfolio' },
+              { value: 'multi', label: 'Multi-fund Portfolio' },
+            ]}
+            value={form.getValues().isMultifund ? 'multi' : 'single'}
+            onChange={(value) => {
+              form.setFieldValue('isMultifund', value === 'multi');
+            }}
+          />
+        </Group>
+        <SimpleGrid cols={{ sm: 1, md: 2 }}>
+          {/* TODO: Ideally this should undergo validation on blur */}
+          <TextInput {...form.getInputProps('name')} label="Portfolio Name" required />
+          <Select
+            {...form.getInputProps('currency')}
+            label="Currency"
+            required
+            data={currencyOptions}
+            searchable
+          />
+        </SimpleGrid>
+        <SimpleGrid cols={{ sm: 1, md: 2 }}>
+          <Select
+            {...form.getInputProps('strategy')}
+            label="Strategy"
+            required
+            data={strategyOptions}
+          />
+          <Select
+            {...form.getInputProps('investmentStyle')}
+            label="Investment Style"
+            required
+            data={investmentOptions}
+          />
+        </SimpleGrid>
+        <Textarea {...form.getInputProps('description')} label="Description" minRows={3} autosize />
+        <Group justify="flex-end">
+          <CustomButtonLink to="/dashboard" variant="outline">
+            Cancel
+          </CustomButtonLink>
+          <Button type="submit">Next</Button>
+        </Group>
+      </Stack>
+    </form>
   );
 }
 

@@ -11,19 +11,20 @@ export const currencyOptions = [
   { label: 'Singapore Dollar (SGD)', value: 'SGD' },
 ];
 
+//TODO: Check how Macquarie is storing these currently
 export const strategyOptions = [
-  { label: 'Long', value: 'Long' },
-  { label: 'Long/Short', value: 'Long/Short' },
-  { label: 'Market Neutral', value: 'Market Neutral' },
+  { label: 'Long', value: 'long' },
+  { label: 'Long/Short', value: 'long-short' },
+  { label: 'Market Neutral', value: 'neutral' },
 ];
 
 export const investmentOptions = [
-  { label: 'Core/ Style Neutral', value: 'Core/ Style Neutral' },
-  { label: 'Value', value: 'Value' },
-  { label: 'Yield', value: 'Yield' },
-  { label: 'Growth', value: 'Growth' },
-  { label: 'Growth at a Reasonable Price', value: 'Growth at a Reasonable Price' },
-  { label: 'Secular Growth', value: 'Secular Growth' },
-  { label: 'Quality/Quality-Growth', value: 'Quality/Quality-Growth' },
-  { label: 'Quality at a Reasonable Price', value: 'Quality at a Reasonable Price' },
+  { label: 'Core/ Style Neutral', value: 'core' },
+  { label: 'Value', value: 'value' },
+  { label: 'Yield', value: 'yield' },
+  { label: 'Growth', value: 'growth' },
+  { label: 'Growth at a Reasonable Price', value: 'grp' },
+  { label: 'Secular Growth', value: 'secular-growth' },
+  { label: 'Quality/Quality-Growth', value: 'quality-growth' },
+  { label: 'Quality at a Reasonable Price', value: 'qrp' },
 ];

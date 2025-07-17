@@ -1,4 +1,5 @@
-import { createFileRoute, useParams } from '@tanstack/react-router';
+import { createFileRoute } from '@tanstack/react-router';
+import { useSuspenseQuery } from '@tanstack/react-query';
 import {
   ActionIcon,
   Button,
@@ -18,27 +19,26 @@ import { useForm } from '@mantine/form';
 import { IconChevronRight, IconX, IconCloudUpload } from '@tabler/icons-react';
 import { currencyOptions, investmentOptions, strategyOptions } from '@app/consts/portfolio-create';
 import { CustomButtonLink } from '@app/ui-core/link-button';
+import { portfolioByIdQueryOptions } from '@app/data/api';
 import { CustomHeading } from '../basic-info';
 
 export const Route = createFileRoute('/(app)/portfolio/create/$portfolioId/submit')({
   component: SubmitPortfolio,
+  loader: ({ context, params: { portfolioId } }) => {
+    return context.queryClient.ensureQueryData(portfolioByIdQueryOptions(portfolioId));
+  },
 });
 
 function SubmitPortfolio() {
   const [opened, { open, close }] = useDisclosure(false);
-  const { portfolioId } = useParams({ strict: false });
-  //TODO: prefetch or API call to get portfolio passing portfolioId
+  const { portfolioId } = Route.useParams();
+  const { data: portfolioById } = useSuspenseQuery(portfolioByIdQueryOptions(portfolioId));
+
   const form = useForm({
     mode: 'uncontrolled',
-    initialValues: {
-      name: 'Parag Parikh Flexi Cap Fund Direct Growth',
-      currency: 'USD',
-      strategy: 'Long',
-      style: 'Growth',
-      description:
-        'Parag Parikh Flexi Cap Fund Direct-Growth is a Flexi Cap mutual fund scheme from Ppfas Mutual Fund. This fund has been in existence for 12 yrs 1 m, having been launched on 13/05/2013. Parag Parikh Flexi Cap Fund Direct-Growth has ₹1,03,868 Crores worth of assets under management (AUM) as on 31/03/2025 and is medium-sized fund of its category.',
-    },
+    initialValues: portfolioById,
   });
+
   return (
     <>
       <Stack>
@@ -46,7 +46,7 @@ function SubmitPortfolio() {
           title="Welcome to Style Counsel Tool"
           description="Please complete the sections highlighted in yellow to start the analysis"
         />
-        <SimpleGrid cols={2}>
+        <SimpleGrid cols={{ md: 1, lg: 2 }}>
           <TextInput {...form.getInputProps('name')} label="Portfolio Name" required readOnly />
           <Select
             {...form.getInputProps('currency')}
@@ -65,7 +65,7 @@ function SubmitPortfolio() {
             readOnly
           />
           <Select
-            {...form.getInputProps('style')}
+            {...form.getInputProps('investmentStyle')}
             label="Investment Style"
             required
             data={investmentOptions}
@@ -154,8 +154,7 @@ function SubmitPortfolio() {
             </Button>
             <CustomButtonLink
               to="/portfolio/create/$portfolioId/corrections"
-              //TODO: Validate portfolioId + prefetch portfolio data using portfolioId
-              params={{ portfolioId: portfolioId?.toString() }}
+              params={{ portfolioId: portfolioId.toString() }}
             >
               Next
             </CustomButtonLink>

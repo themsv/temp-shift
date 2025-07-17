@@ -19,7 +19,7 @@ import { useDisclosure } from '@mantine/hooks';
 
 import { CreatePortfolioCard, PortfolioCard } from '@app/components/dashboard/PortfolioCard';
 import { IconBulb, IconQueryStats } from '@app/ui-core/icons';
-import useGetPortfolios from '@app/data/api/useGetPortfolios';
+import { useGetPortfolios } from '@app/data/api';
 import { ArticleCard } from '@app/components/dashboard/ArticleCard';
 import researchData from '../../mocks/Research-data.json';
 

@@ -1,18 +1,25 @@
-import { useQuery } from '@tanstack/react-query';
+import { queryOptions, useQuery } from '@tanstack/react-query';
 import axios from 'axios';
 import URLS from '@app/consts/urls';
 import queryKeys from '@app/consts/query-keys';
-import type { DefaultSettings } from '../types/setting';
+import type { StaticSettings } from '../types/setting';
 
-async function getDefaultSettings() {
-  const response = await axios.get<DefaultSettings>(URLS.defaultSettings);
+async function getStaticSettings() {
+  const response = await axios.get<StaticSettings>(URLS.defaultSettings);
   return response.data;
 }
 
-function useGetDefaultSettings() {
+function useGetStaticSettings() {
   return useQuery({
-    queryKey: queryKeys.setting.default(),
-    queryFn: getDefaultSettings,
+    queryKey: queryKeys.setting.static(),
+    queryFn: getStaticSettings,
+  });
+}
+
+export const staticSettingsQueryOptions = () =>
+  queryOptions({
+    queryKey: queryKeys.setting.static(),
+    queryFn: getStaticSettings,
     select: (data) => ({
       numericAlignment: data.numericAlignment.map((_) => ({ value: _.code, label: _.description })),
       country: data.country.map((_) => ({ value: _.code, label: _.description })),
@@ -26,5 +33,5 @@ function useGetDefaultSettings() {
       shortDate: data.shortDate.map((_) => ({ value: _.code, label: _.description })),
     }),
   });
-}
-export default useGetDefaultSettings;
+
+export default useGetStaticSettings;

@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import { createFileRoute } from '@tanstack/react-router';
+import { useSuspenseQuery } from '@tanstack/react-query';
 import { useIntl } from 'react-intl';
 import {
   Card,
@@ -14,11 +15,16 @@ import {
 } from '@mantine/core';
 import { useForm } from '@mantine/form';
 import { notifications } from '@mantine/notifications';
-import { useGetDefaultSettings, useGetUserSettings, useUpdateUserSettings } from '@app/data/api';
+import {
+  staticSettingsQueryOptions,
+  useGetUserSettings,
+  useUpdateUserSettings,
+} from '@app/data/api';
 import type { SettingType } from '@app/data/types/setting';
 
 export const Route = createFileRoute('/(app)/settings')({
   component: Settings,
+  loader: ({ context }) => context.queryClient.ensureQueryData(staticSettingsQueryOptions()),
 });
 
 const initialValues = {
@@ -35,7 +41,7 @@ const initialValues = {
 };
 function Settings() {
   const { formatMessage } = useIntl();
-  const { data: defaultSettings, isPending: pendingDefaultSettings } = useGetDefaultSettings();
+  const { data: staticSettings } = useSuspenseQuery(staticSettingsQueryOptions());
   const { data: userSettings, isPending: pendingUserSetting } = useGetUserSettings();
 
   const { mutate, isPending: pendingUpdate } = useUpdateUserSettings();
@@ -77,7 +83,7 @@ function Settings() {
     }
   }, [userSettings]);
 
-  if (pendingDefaultSettings || pendingUserSetting) return <LoadingOverlay visible />;
+  if (pendingUserSetting) return <LoadingOverlay visible />;
   return (
     <Stack>
       <Title order={3}>{formatMessage({ id: 'SETTINGS_PAGE_TITLE' })}</Title>
@@ -91,7 +97,7 @@ function Settings() {
             <Grid.Col span={{ lg: 2, md: 3 }}>
               <Select
                 {...form.getInputProps('country')}
-                data={defaultSettings?.country ?? []}
+                data={staticSettings.country}
                 // avoid user changing the field immediately when the mutation in progress instead of debounce
                 readOnly={pendingUpdate}
               />
@@ -111,7 +117,7 @@ function Settings() {
             <Grid.Col span={{ lg: 2, md: 3 }}>
               <Select
                 {...form.getInputProps('shortDate')}
-                data={defaultSettings?.shortDate ?? []}
+                data={staticSettings.shortDate}
                 readOnly={pendingUpdate}
               />
             </Grid.Col>
@@ -123,7 +129,7 @@ function Settings() {
             <Grid.Col span={{ lg: 2, md: 3 }}>
               <Select
                 {...form.getInputProps('longDate')}
-                data={defaultSettings?.longDate ?? []}
+                data={staticSettings.longDate}
                 readOnly={pendingUpdate}
               />
             </Grid.Col>
@@ -135,7 +141,7 @@ function Settings() {
             <Grid.Col span={{ lg: 2, md: 3 }}>
               <Select
                 {...form.getInputProps('clockFormat')}
-                data={defaultSettings?.clockFormat ?? []}
+                data={staticSettings.clockFormat}
                 readOnly={pendingUpdate}
               />
             </Grid.Col>
@@ -147,7 +153,7 @@ function Settings() {
             <Grid.Col span={{ lg: 2, md: 3 }}>
               <Select
                 {...form.getInputProps('shortTime')}
-                data={defaultSettings?.shortTime ?? []}
+                data={staticSettings.shortTime}
                 readOnly={pendingUpdate}
               />
             </Grid.Col>
@@ -159,7 +165,7 @@ function Settings() {
             <Grid.Col span={{ lg: 2, md: 3 }}>
               <Select
                 {...form.getInputProps('longTime')}
-                data={defaultSettings?.longTime ?? []}
+                data={staticSettings.longTime}
                 readOnly={pendingUpdate}
               />
             </Grid.Col>
@@ -177,7 +183,7 @@ function Settings() {
             <Grid.Col span={{ lg: 2, md: 3 }}>
               <Select
                 {...form.getInputProps('numericAlignment')}
-                data={defaultSettings?.numericAlignment ?? []}
+                data={staticSettings.numericAlignment}
                 readOnly={pendingUpdate}
               />
             </Grid.Col>
@@ -189,7 +195,7 @@ function Settings() {
             <Grid.Col span={{ lg: 2, md: 3 }}>
               <Select
                 {...form.getInputProps('textAlignment')}
-                data={defaultSettings?.textAlignment ?? []}
+                data={staticSettings.textAlignment}
                 readOnly={pendingUpdate}
               />
             </Grid.Col>
@@ -205,7 +211,7 @@ function Settings() {
             <Grid.Col span={{ lg: 2, md: 3 }}>
               <Select
                 {...form.getInputProps('defaultCurrency')}
-                data={defaultSettings?.defaultCurrency ?? []}
+                data={staticSettings.defaultCurrency}
                 readOnly={pendingUpdate}
               />
             </Grid.Col>
@@ -220,7 +226,7 @@ function Settings() {
             <Grid.Col span={{ lg: 2, md: 3 }}>
               <Select
                 {...form.getInputProps('defaultUniverse')}
-                data={defaultSettings?.defaultUniverse ?? []}
+                data={staticSettings.defaultUniverse}
                 readOnly={pendingUpdate}
               />
             </Grid.Col>

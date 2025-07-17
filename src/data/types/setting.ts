@@ -25,7 +25,7 @@ interface SettingItem {
   isDefault: boolean;
 }
 
-export interface DefaultSettings {
+export interface StaticSettings {
   country: SettingItem[];
   defaultCurrency: SettingItem[];
   defaultUniverse: SettingItem[];

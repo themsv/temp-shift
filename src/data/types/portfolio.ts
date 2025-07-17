@@ -21,3 +21,19 @@ export interface PortfoliosLite {
   numberOfElements: number;
   empty: boolean;
 }
+
+export interface BasicPortfolioPayload {
+  isMultifund: boolean;
+  name: string;
+  currency: string;
+  strategy: string;
+  investmentStyle: string;
+  description: string;
+}
+
+export interface BasicPortfolio extends BasicPortfolioPayload {
+  id: number;
+  benchmarkType: string;
+  universeType: string;
+  mappedPortfolios: string[];
+}

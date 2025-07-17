@@ -13,15 +13,6 @@
     "start": "npm run build && npm run preview",
     "prepare": "husky"
   },
-  "lint-staged": {
-    "src/**/*.{js,jsx,ts,tsx}": [
-      "eslint --fix",
-      "prettier --write"
-    ],
-    "*.{js,jsx,ts,tsx,css,md,json}": [
-      "prettier --write"
-    ]
-  },
   "dependencies": {
     "@mantine/core": "8.1.2",
     "@mantine/dates": "8.1.2",

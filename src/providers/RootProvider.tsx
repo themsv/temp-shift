@@ -1,5 +1,6 @@
 import type { PropsWithChildren } from 'react';
 import { createRouter, RouterProvider } from '@tanstack/react-router';
+import { QueryClient } from '@tanstack/react-query';
 import { AllEnterpriseModule } from 'ag-grid-enterprise';
 import { ModuleRegistry } from 'ag-grid-community';
 
@@ -8,7 +9,14 @@ import I18nProvider from './I18nProvider';
 import ThemeProvider from './StyleProvider';
 import { routeTree } from '../routeTree.gen';
 
-const router = createRouter({ routeTree });
+const queryClient = new QueryClient();
+const router = createRouter({
+  routeTree,
+  context: {
+    queryClient,
+  },
+  defaultPreload: 'intent',
+});
 
 declare module '@tanstack/react-router' {
   interface Register {

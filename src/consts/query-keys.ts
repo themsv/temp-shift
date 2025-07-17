@@ -6,8 +6,18 @@ const queryKeys = {
   },
   setting: {
     all: ['setting'] as const,
-    default: () => [...queryKeys.setting.all, 'default'] as const,
+    static: () => [...queryKeys.setting.all, 'static'] as const,
     byUser: (userId: string) => [...queryKeys.setting.all, userId] as const,
+  },
+};
+
+export const mutationKeys = {
+  portfolio: {
+    create: () => [...queryKeys.portfolio.all, 'create'],
+    update: (id: string) => [...queryKeys.portfolio.all, 'update', id],
+  },
+  settings: {
+    update: (id: string) => [...queryKeys.setting.all, 'update', id],
   },
 };
 
