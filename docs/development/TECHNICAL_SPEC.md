@@ -20,21 +20,21 @@
 
 #### UI Components and Styling
 
-- [To be added based on chosen UI library]
-  - Purpose: Provide consistent, accessible UI components
-  - Benefits: Reduced development time, consistent design
+- `Mantine UI`: Build fully functional accessible web applications faster than ever – Mantine includes more than 120 customizable components and 70 hooks to cover you in any situation
+- Purpose: Provide consistent, accessible UI components
+- Benefits: Reduced development time, consistent design
 
 #### Data Visualization
 
-- [To be added based on chosen charting library]
-  - Purpose: Interactive charts and data visualization
-  - Benefits: Rich visualization capabilities, performance
+- `ApexChart`: ApexCharts is a modern charting library that helps developers to create beautiful and interactive visualizations for web pages.It is an open-source project licensed under MIT and is free to use in commercial applications.
+- Purpose: Interactive charts and data visualization
+- Benefits: Rich visualization capabilities, performance
 
 #### Data Grid
 
-- [To be added based on chosen grid library]
-  - Purpose: Advanced data grid functionality
-  - Benefits: Sorting, filtering, grouping capabilities
+- `AgGrid`: AG Grid is a high-performance React Data Grid library for building React Tables with unbeatable performance and hundreds of features. Available in Community and Enterprise editions.
+- Purpose: Advanced data grid functionality
+- Benefits: Sorting, filtering, grouping capabilities
 
 ### Development Dependencies
 
@@ -52,10 +52,8 @@
 
 #### Testing
 
-- `vitest`: Unit testing framework
-- `@testing-library/react`: React testing utilities
-- `@testing-library/jest-dom`: DOM testing utilities
-- `@testing-library/user-event`: User event simulation
+- Unit tests (TBD)
+- BDD/E2E tests (TBD)
 
 #### Type Checking
 
@@ -66,10 +64,9 @@
 
 ### Required Tools
 
-- Node.js (version [specify])
-- npm or yarn
+- Node.js v22.17.1[LTS]
+- npm
 - Git
-- [Any other required tools]
 
 ### IDE Setup
 
@@ -78,7 +75,8 @@
   - ESLint
   - Prettier
   - TypeScript and JavaScript Language Features
-  - [Other recommended extensions]
+  - Sonarlint
+  - Please go through .vscode/extensions file for further list
 
 ## Build and Deployment
 
@@ -86,7 +84,7 @@
 
 1. Type checking
 2. Linting
-3. Testing
+3. Testing\*
 4. Bundle creation
 5. Asset optimization
 
@@ -98,25 +96,11 @@
 4. Testing in staging
 5. Deployment to production
 
-## Performance Requirements
-
-### Frontend Performance
-
-- First contentful paint: < 1.5s
-- Time to interactive: < 3s
-- Bundle size: < 200KB (initial load)
-- Lighthouse score: > 90
-
-### API Performance
-
-- Response time: < 200ms
-- Availability: 99.9%
-- Error rate: < 0.1%
-
 ## Security Requirements
 
 ### Authentication
 
+- OpenID/OAuth provider (TDB)
 - JWT-based authentication
 - Secure session management
 - Proper token refresh mechanism
@@ -135,17 +119,8 @@
 - CSRF protection
 - Rate limiting
 
-## Monitoring and Logging
+## Frontend Monitoring
 
-### Frontend Monitoring
-
-- Error tracking
-- Performance monitoring
-- User behavior analytics
-
-### Backend Monitoring
-
-- API performance monitoring
-- Error tracking
-- Resource usage monitoring
-- Security monitoring
+- Error tracking(TBD)
+- Performance monitoring(TBD)
+- User behavior analytics (TBD)
