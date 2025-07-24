@@ -1,29 +1,29 @@
 import { useNavigate } from '@tanstack/react-router';
-import { Card, Text, Stack, Group } from '@mantine/core';
-import { IconCircleDottedLetterM } from '@tabler/icons-react';
+import { Card, Text, Stack } from '@mantine/core';
 import { useIntl } from 'react-intl';
 import { type PortfolioLite } from '@app/data/types/portfolio';
+import { CustomRibbon } from '@app/ui-core/custom';
 
 export const PortfolioCard = ({
+  id,
   totalHoldingsCount,
   name,
   description,
   beta,
   trackingError,
   activeShare,
-  id,
   isMultifund,
 }: PortfolioLite) => {
   const { formatMessage } = useIntl();
   const navigate = useNavigate();
-
+  console.log(isMultifund);
   return (
     <Card
       component={Stack}
       gap="xs"
       justify="space-between"
       style={{
-        border: '1px solid #F2F2F2',
+        // border: '1px solid #F2F2F2',
         boxShadow: '4px 4px 12px rgba(0, 0, 0, 0.1)',
         cursor: 'pointer',
       }}
@@ -34,13 +34,11 @@ export const PortfolioCard = ({
         })
       }
     >
-      <Group>
-        <Text fw={400} size="lg">
-          {name}
-        </Text>
-        {/* TODO: Add a badge for card & sync with figma */}
-        {isMultifund && <IconCircleDottedLetterM color="blue" />}
-      </Group>
+      {isMultifund && <CustomRibbon letter="M" />}
+
+      <Text fw={400} size="lg">
+        {name}
+      </Text>
       <Text size="sm">{description}</Text>
       <Text size="lg" c="blue" fw={600}>
         {formatMessage({ id: 'STOCKS_COUNT' }, { count: totalHoldingsCount })}

@@ -22,6 +22,7 @@ import { Route as appPortfolioCreateRouteRouteImport } from './routes/(app)/port
 import { Route as appPortfolioCreateBasicInfoRouteImport } from './routes/(app)/portfolio/create/basic-info'
 import { Route as appPortfolioCreatePortfolioIdSubmitRouteImport } from './routes/(app)/portfolio/create/$portfolioId/submit'
 import { Route as appPortfolioCreatePortfolioIdCorrectionsRouteImport } from './routes/(app)/portfolio/create/$portfolioId/corrections'
+import { Route as appPortfolioCreatePortfolioIdBenchmarkRouteImport } from './routes/(app)/portfolio/create/$portfolioId/benchmark'
 
 const appHelpLazyRouteImport = createFileRoute('/(app)/help')()
 
@@ -89,6 +90,12 @@ const appPortfolioCreatePortfolioIdCorrectionsRoute =
     path: '/$portfolioId/corrections',
     getParentRoute: () => appPortfolioCreateRouteRoute,
   } as any)
+const appPortfolioCreatePortfolioIdBenchmarkRoute =
+  appPortfolioCreatePortfolioIdBenchmarkRouteImport.update({
+    id: '/$portfolioId/benchmark',
+    path: '/$portfolioId/benchmark',
+    getParentRoute: () => appPortfolioCreateRouteRoute,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof authIndexRoute
@@ -100,6 +107,7 @@ export interface FileRoutesByFullPath {
   '/portfolio/create': typeof appPortfolioCreateRouteRouteWithChildren
   '/portfolio/$portfolioId': typeof appPortfolioPortfolioIdRoute
   '/portfolio/create/basic-info': typeof appPortfolioCreateBasicInfoRoute
+  '/portfolio/create/$portfolioId/benchmark': typeof appPortfolioCreatePortfolioIdBenchmarkRoute
   '/portfolio/create/$portfolioId/corrections': typeof appPortfolioCreatePortfolioIdCorrectionsRoute
   '/portfolio/create/$portfolioId/submit': typeof appPortfolioCreatePortfolioIdSubmitRoute
 }
@@ -113,6 +121,7 @@ export interface FileRoutesByTo {
   '/portfolio/create': typeof appPortfolioCreateRouteRouteWithChildren
   '/portfolio/$portfolioId': typeof appPortfolioPortfolioIdRoute
   '/portfolio/create/basic-info': typeof appPortfolioCreateBasicInfoRoute
+  '/portfolio/create/$portfolioId/benchmark': typeof appPortfolioCreatePortfolioIdBenchmarkRoute
   '/portfolio/create/$portfolioId/corrections': typeof appPortfolioCreatePortfolioIdCorrectionsRoute
   '/portfolio/create/$portfolioId/submit': typeof appPortfolioCreatePortfolioIdSubmitRoute
 }
@@ -128,6 +137,7 @@ export interface FileRoutesById {
   '/(app)/portfolio/create': typeof appPortfolioCreateRouteRouteWithChildren
   '/(app)/portfolio/$portfolioId': typeof appPortfolioPortfolioIdRoute
   '/(app)/portfolio/create/basic-info': typeof appPortfolioCreateBasicInfoRoute
+  '/(app)/portfolio/create/$portfolioId/benchmark': typeof appPortfolioCreatePortfolioIdBenchmarkRoute
   '/(app)/portfolio/create/$portfolioId/corrections': typeof appPortfolioCreatePortfolioIdCorrectionsRoute
   '/(app)/portfolio/create/$portfolioId/submit': typeof appPortfolioCreatePortfolioIdSubmitRoute
 }
@@ -143,6 +153,7 @@ export interface FileRouteTypes {
     | '/portfolio/create'
     | '/portfolio/$portfolioId'
     | '/portfolio/create/basic-info'
+    | '/portfolio/create/$portfolioId/benchmark'
     | '/portfolio/create/$portfolioId/corrections'
     | '/portfolio/create/$portfolioId/submit'
   fileRoutesByTo: FileRoutesByTo
@@ -156,6 +167,7 @@ export interface FileRouteTypes {
     | '/portfolio/create'
     | '/portfolio/$portfolioId'
     | '/portfolio/create/basic-info'
+    | '/portfolio/create/$portfolioId/benchmark'
     | '/portfolio/create/$portfolioId/corrections'
     | '/portfolio/create/$portfolioId/submit'
   id:
@@ -170,6 +182,7 @@ export interface FileRouteTypes {
     | '/(app)/portfolio/create'
     | '/(app)/portfolio/$portfolioId'
     | '/(app)/portfolio/create/basic-info'
+    | '/(app)/portfolio/create/$portfolioId/benchmark'
     | '/(app)/portfolio/create/$portfolioId/corrections'
     | '/(app)/portfolio/create/$portfolioId/submit'
   fileRoutesById: FileRoutesById
@@ -266,11 +279,19 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof appPortfolioCreatePortfolioIdCorrectionsRouteImport
       parentRoute: typeof appPortfolioCreateRouteRoute
     }
+    '/(app)/portfolio/create/$portfolioId/benchmark': {
+      id: '/(app)/portfolio/create/$portfolioId/benchmark'
+      path: '/$portfolioId/benchmark'
+      fullPath: '/portfolio/create/$portfolioId/benchmark'
+      preLoaderRoute: typeof appPortfolioCreatePortfolioIdBenchmarkRouteImport
+      parentRoute: typeof appPortfolioCreateRouteRoute
+    }
   }
 }
 
 interface appPortfolioCreateRouteRouteChildren {
   appPortfolioCreateBasicInfoRoute: typeof appPortfolioCreateBasicInfoRoute
+  appPortfolioCreatePortfolioIdBenchmarkRoute: typeof appPortfolioCreatePortfolioIdBenchmarkRoute
   appPortfolioCreatePortfolioIdCorrectionsRoute: typeof appPortfolioCreatePortfolioIdCorrectionsRoute
   appPortfolioCreatePortfolioIdSubmitRoute: typeof appPortfolioCreatePortfolioIdSubmitRoute
 }
@@ -278,6 +299,8 @@ interface appPortfolioCreateRouteRouteChildren {
 const appPortfolioCreateRouteRouteChildren: appPortfolioCreateRouteRouteChildren =
   {
     appPortfolioCreateBasicInfoRoute: appPortfolioCreateBasicInfoRoute,
+    appPortfolioCreatePortfolioIdBenchmarkRoute:
+      appPortfolioCreatePortfolioIdBenchmarkRoute,
     appPortfolioCreatePortfolioIdCorrectionsRoute:
       appPortfolioCreatePortfolioIdCorrectionsRoute,
     appPortfolioCreatePortfolioIdSubmitRoute:

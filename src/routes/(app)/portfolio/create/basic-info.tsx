@@ -15,10 +15,10 @@ import {
 import { useForm } from '@mantine/form';
 import { z } from 'zod/v4';
 import { zod4Resolver } from 'mantine-form-zod-resolver';
-import { CustomButtonLink } from '@app/ui-core/link-button';
 import { currencyOptions, investmentOptions, strategyOptions } from '@app/consts/portfolio-create';
 import { useCreateDraftPortfolio } from '@app/data/api';
 import type { BasicPortfolioPayload } from '@app/data/types/portfolio';
+import { CustomButtonLink } from '@app/ui-core/custom';
 
 export const Route = createFileRoute('/(app)/portfolio/create/basic-info')({
   component: PortfolioInfo,

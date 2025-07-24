@@ -1,0 +1,31 @@
+[
+  {
+    "label": "MSCI",
+    "options": [
+      { "label": "MSCI Worlds", "value": "msci-world" },
+      { "label": "MSCI Emerging Markets (EM)", "value": "msci-em" },
+      { "label": "MSCI 100", "value": "msci-100" },
+      { "label": "MSCI Lorem Ipsum", "value": "msci-lorem" }
+    ],
+    "showSubscribe": false,
+    "isSubscribed": false
+  },
+  {
+    "label": "ASX",
+    "options": [
+      { "label": "S&P/ASX 300", "value": "asx-300" },
+      { "label": "Subscribe Now", "value": "subscribe" }
+    ],
+    "showSubscribe": true,
+    "isSubscribed": false
+  },
+  {
+    "label": "Custom",
+    "options": [
+      { "label": "ASX Growth", "value": "asx-growth" },
+      { "label": "S&P Growth", "value": "sp-growth" }
+    ],
+    "showSubscribe": false,
+    "isSubscribed": false
+  }
+]

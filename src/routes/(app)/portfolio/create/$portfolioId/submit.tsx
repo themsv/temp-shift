@@ -1,5 +1,6 @@
 import { createFileRoute } from '@tanstack/react-router';
 import { useSuspenseQuery } from '@tanstack/react-query';
+import { useNavigate } from '@tanstack/react-router';
 import {
   ActionIcon,
   Button,
@@ -18,8 +19,8 @@ import { Dropzone, MS_EXCEL_MIME_TYPE } from '@mantine/dropzone';
 import { useForm } from '@mantine/form';
 import { IconChevronRight, IconX, IconCloudUpload } from '@tabler/icons-react';
 import { currencyOptions, investmentOptions, strategyOptions } from '@app/consts/portfolio-create';
-import { CustomButtonLink } from '@app/ui-core/link-button';
 import { portfolioByIdQueryOptions } from '@app/data/api';
+import { CustomButtonLink } from '@app/ui-core/custom';
 import { CustomHeading } from '../basic-info';
 
 export const Route = createFileRoute('/(app)/portfolio/create/$portfolioId/submit')({
@@ -32,6 +33,8 @@ export const Route = createFileRoute('/(app)/portfolio/create/$portfolioId/submi
 function SubmitPortfolio() {
   const [opened, { open, close }] = useDisclosure(false);
   const { portfolioId } = Route.useParams();
+  const navigate = useNavigate();
+
   const { data: portfolioById } = useSuspenseQuery(portfolioByIdQueryOptions(portfolioId));
 
   const form = useForm({
@@ -90,7 +93,12 @@ function SubmitPortfolio() {
           title="Select Base Benchmarks"
           description="Select a benchmark for analysis."
           isRequired
-          onClick={() => {}}
+          onClick={() =>
+            void navigate({
+              to: '/portfolio/create/$portfolioId/benchmark',
+              params: { portfolioId },
+            })
+          }
         />
         <ActionCard
           title="Investable Universe"
