@@ -15,7 +15,7 @@ import {
 } from '@mantine/core';
 import { useIntl } from 'react-intl';
 import { IconHelp, IconSearch } from '@tabler/icons-react';
-import { useDisclosure } from '@mantine/hooks';
+import { useDisclosure, useClickOutside } from '@mantine/hooks';
 
 import { CreatePortfolioCard, PortfolioCard } from '@app/components/dashboard/PortfolioCard';
 import { IconBulb, IconQueryStats } from '@app/ui-core/icons';
@@ -29,6 +29,7 @@ export const Route = createFileRoute('/(app)/dashboard')({
 
 function Dashboard() {
   const { formatMessage } = useIntl();
+  const navigate = useNavigate();
 
   return (
     <Flex
@@ -54,6 +55,7 @@ function Dashboard() {
             c="black"
             style={{ borderColor: 'black' }}
             p="0"
+            onClick={() => void navigate({ to: '/selectPortfolio' })}
           >
             {formatMessage({ id: 'STOCK_PROFILE' })}
           </Button>
@@ -72,7 +74,10 @@ const OPTIONS = [
 function Portfolios() {
   const { formatMessage } = useIntl();
   const navigate = useNavigate();
-  const [opened, { open }] = useDisclosure(false);
+  const [opened, handler] = useDisclosure(false);
+  const ref = useClickOutside(() => {
+    handler.close();
+  });
   const [sortBy, setSortBy] = useState('id,desc');
   const [pagination] = useState({ size: 10, page: 0 });
   const { data: portfolios, isPending } = useGetPortfolios({ sort: sortBy, ...pagination });
@@ -98,6 +103,7 @@ function Portfolios() {
           {opened ? (
             // TODO: Wire API that gives lite details of portfolios like name, id with debounce search
             <Select
+              ref={ref}
               searchable
               data={
                 portfolios?.content.map((portfolio) => ({
@@ -109,9 +115,17 @@ function Portfolios() {
               renderOption={renderOption}
               placeholder="Search"
               size="xs"
+              style={{
+                width: 'clamp(180px, 40vw, 400px)',
+              }}
             />
           ) : (
-            <ActionIcon onClick={open} variant="transparent">
+            <ActionIcon
+              onClick={() => {
+                handler.open();
+              }}
+              variant="transparent"
+            >
               <IconSearch />
             </ActionIcon>
           )}

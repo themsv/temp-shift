@@ -1,0 +1,84 @@
+export const data = [
+  {
+    value: 'Factor',
+    description:
+      'At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinction',
+  },
+  {
+    value: 'Models',
+    description:
+      'At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinction',
+  },
+  {
+    value: 'Observations',
+    description:
+      'At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinction',
+  },
+];
+
+export const tableGroups = [
+  {
+    group: 'Value',
+    rows: [
+      { factor: 'Deep Value', value: '9.5%' },
+      { factor: 'High Risk Value', value: '15%' },
+      { factor: 'Low Risk Value', value: '-7%' },
+      { factor: 'High Yield', value: '74%' },
+      { factor: 'Sentiment Value', value: '19.5%' },
+    ],
+  },
+  {
+    group: 'Growth',
+    rows: [
+      { factor: 'Deep Value', value: '9.5%' },
+      { factor: 'High Risk Value', value: '15%' },
+      { factor: 'Low Risk Value', value: '-7%' },
+      { factor: 'High Yield', value: '74%' },
+    ],
+  },
+  {
+    group: 'quality',
+    rows: [
+      { factor: 'Deep Value', value: '9.5%' },
+      { factor: 'High Risk Value', value: '15%' },
+      { factor: 'Low Risk Value', value: '-7%' },
+      { factor: 'High Yield', value: '74%' },
+    ],
+  },
+  {
+    group: 'Loss-Makers',
+    rows: [
+      { factor: 'Deep Value', value: '9.5%' },
+      { factor: 'High Risk Value', value: '15%' },
+      { factor: 'Low Risk Value', value: '-7%' },
+      { factor: 'High Yield', value: '74%' },
+    ],
+  },
+];
+
+export const flavourExposures = [
+  {
+    label: 'Value',
+    exposures: ['#4cc9b0', '#bce6e5', '#4cc9b0', '#ffeaea', '#4cc9b0', '#4cc9b0'],
+  },
+  {
+    label: 'Quality Comp.',
+    exposures: ['#ff6f69', '#ff6f69', '#ff495c'],
+  },
+  {
+    label: 'Lossmakers',
+    exposures: [null, null, '#ffeaea', '#ff495c'],
+  },
+  {
+    label: 'Short Term Growth',
+    exposures: ['#ffeaea', '#ff495c', '#ff6f69', '#ff6f69', '#ff495c', '#ff6f69'],
+  },
+];
+
+export const elements = [
+  { position: 'Low Risk Yield', mass: '12%', name: '-' },
+  { position: 'High Yield', mass: '49%', name: '-' },
+  { position: 'Deep value', mass: '62%', name: '-' },
+  { position: 'Sentiment Value', mass: '37%', name: '-' },
+  { position: 'Low risk yield', mass: '6%', name: '-' },
+];

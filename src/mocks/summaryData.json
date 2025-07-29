@@ -1,0 +1,86 @@
+[
+  {
+    "date": "04-03-2025",
+    "count": 4,
+    "weight": "24.9%",
+    "tickerList": [
+      {
+        "sedol": "098278",
+        "bbTicker": "CSL AU",
+        "isin": "CSL AU",
+        "ticker": "ABCD",
+        "weight": "9.2%"
+      },
+      {
+        "sedol": "987651",
+        "bbTicker": "RMD AU",
+        "isin": "RMD-AU",
+        "ticker": "ABCD",
+        "weight": "4.5%"
+      },
+      {
+        "sedol": "789273",
+        "bbTicker": "WOW AU",
+        "isin": "COL-AU",
+        "ticker": "ABCD",
+        "weight": "5.6%"
+      },
+      {
+        "sedol": "789273",
+        "bbTicker": "WOW AU",
+        "isin": "COL-AU",
+        "ticker": "ABCD",
+        "weight": "5.6%"
+      }
+    ]
+  },
+  {
+    "date": "05-03-2025",
+    "count": 6,
+    "weight": "29.2%",
+    "tickerList": [
+      {
+        "sedol": "987651",
+        "bbTicker": "RMD AU",
+        "isin": "RMD-AU",
+        "ticker": "ABCD",
+        "weight": "4.5%"
+      },
+      {
+        "sedol": "789273",
+        "bbTicker": "WOW AU",
+        "isin": "COL-AU",
+        "ticker": "ABCD",
+        "weight": "5.6%"
+      },
+      {
+        "sedol": "987651",
+        "bbTicker": "RMD AU",
+        "isin": "RMD-AU",
+        "ticker": "ABCD",
+        "weight": "4.5%"
+      },
+      {
+        "sedol": "789273",
+        "bbTicker": "WOW AU",
+        "isin": "COL-AU",
+        "ticker": "ABCD",
+        "weight": "5.6%"
+      },
+      {
+        "sedol": "987651",
+        "bbTicker": "RMD AU",
+        "isin": "RMD-AU",
+        "ticker": "ABCD",
+        "weight": "4.5%"
+      },
+      {
+        "sedol": "987651",
+        "bbTicker": "RMD AU",
+        "isin": "RMD-AU",
+        "ticker": "ABCD",
+        "weight": "4.5%"
+      }
+    ]
+  }
+]
