@@ -1,9 +1,11 @@
-import { useState } from 'react';
-import { AgGridReact } from 'ag-grid-react';
-import { type ColDef } from 'ag-grid-community';
-import holdings from '../../mocks/holdings-upload.json';
+import { useMemo, useState } from 'react';
+import { type ColumnDef } from '@tanstack/react-table';
+import { ActionIcon, Group, NumberInput, Select, Text } from '@mantine/core';
+import { IconCircleX, IconTrash } from '@tabler/icons-react';
+import { CustomTable } from '@app/ui-core/custom';
+import { valid, invalid } from '../../mocks/holdings-upload.json';
 
-interface ValidRow {
+interface Holding {
   effectiveDate: string;
   sedol: string;
   bbTicker: string;
@@ -12,54 +14,99 @@ interface ValidRow {
   weight: string;
 }
 function ValidHoldings() {
-  const [colDefs] = useState<ColDef<ValidRow>[]>([
-    { field: 'effectiveDate' },
-    { field: 'sedol' },
-    { field: 'bbTicker' },
-    { field: 'isin' },
-    { field: 'ticker' },
-    { field: 'weight' },
-  ]);
+  const columns = useMemo<ColumnDef<Holding>[]>(
+    () => [
+      { accessorKey: 'effectiveDate', header: 'Effective Date' },
+      { accessorKey: 'sedol', header: 'Sedol' },
+      { accessorKey: 'bbTicker', header: 'Bloomberg Ticker' },
+      { accessorKey: 'isin', header: 'ISIN' },
+      { accessorKey: 'ticker', header: 'Ticker' },
+      { accessorKey: 'weight', header: 'Weight' },
+    ],
+    [],
+  );
 
   return (
-    //TODO: Create a re-usable Table and render
-    <AgGridReact
-      rowData={holdings}
-      columnDefs={colDefs}
-      pagination={true}
-      paginationPageSize={5}
-      paginationPageSizeSelector={[5, 10, 25, 50]}
-      domLayout="autoHeight"
+    <CustomTable
+      columns={columns}
+      tableData={valid}
+      isLoading={false}
+      count={valid.length}
+      withPagination={false}
     />
   );
 }
 
-interface InvalidRow extends ValidRow {
-  isDelete: boolean;
+interface InvalidHolding extends Holding {
+  reason: string;
 }
-
 function InvalidHoldings() {
-  const [rowData] = useState<InvalidRow[]>(holdings.map((_) => ({ ..._, isDelete: false })));
-  const [colDefs] = useState<ColDef<InvalidRow>[]>([
-    { field: 'effectiveDate', headerName: 'Effective Date', editable: true, width: 175 },
-    { field: 'sedol', headerName: 'Sedol', editable: true },
-    { field: 'bbTicker', headerName: 'Bloomberg Ticker', editable: true },
-    { field: 'isin', headerName: 'ISIN', editable: true },
-    { field: 'ticker', headerName: 'Ticker', editable: true },
-    { field: 'weight', width: 125, headerName: 'Weight', editable: true },
-    { field: 'isDelete', headerName: 'Delete All', width: 100 },
-  ]);
+  const [data] = useState<InvalidHolding[]>(invalid);
+
+  const columns = useMemo<ColumnDef<InvalidHolding>[]>(
+    () => [
+      {
+        accessorKey: 'reason',
+        header: 'Reasons',
+        cell: ({ row }) => <Text c="red.9">{row.original.reason}</Text>,
+      },
+      {
+        accessorKey: 'effectiveDate',
+        header: 'Effective Date',
+      },
+      {
+        accessorKey: 'sedol',
+        header: 'Sedol',
+        cell: () => (
+          <Select
+            rightSection={null}
+            data={[
+              { value: '0263494', label: 'HSBC Holdings plc' },
+              { value: 'B1YW440', label: 'AstraZeneca plc' },
+            ]}
+            w={120}
+          />
+        ),
+      },
+      { accessorKey: 'bbTicker', header: 'Bloomberg Ticker' },
+      { accessorKey: 'isin', header: 'ISIN' },
+      { accessorKey: 'ticker', header: 'Ticker' },
+      {
+        accessorKey: 'weight',
+        header: 'Weight',
+        cell: ({ row }) => (
+          <NumberInput
+            value={parseFloat(row.original.weight)}
+            onChange={() => () => {}}
+            hideControls
+            w={64}
+          />
+        ),
+      },
+      {
+        accessorKey: 'isDelete',
+        header: () => (
+          <Group align="center" gap={0} c="red.9">
+            <IconTrash />
+            <Text>Delete All</Text>
+          </Group>
+        ),
+        cell: () => (
+          <ActionIcon variant="transparent">
+            <IconCircleX />
+          </ActionIcon>
+        ),
+      },
+    ],
+    [data],
+  );
   return (
-    //TODO: Create a re-usable Table and render
-    <AgGridReact
-      rowData={rowData}
-      columnDefs={colDefs}
-      pagination={true}
-      paginationPageSize={5}
-      paginationPageSizeSelector={[5, 10, 25, 50]}
-      domLayout="autoHeight"
-      defaultColDef={{ flex: 1, resizable: true }}
-      singleClickEdit={true}
+    <CustomTable
+      columns={columns}
+      tableData={invalid}
+      isLoading={false}
+      count={invalid.length}
+      withPagination={false}
     />
   );
 }

@@ -43,7 +43,7 @@ function Dashboard() {
       }}
     >
       <Portfolios />
-      <Stack maw={420}>
+      <Stack maw={360}>
         <Group gap="xs" grow>
           <Button leftSection={<IconBulb size="24" color="white" />} p="0">
             {formatMessage({ id: 'IDEA_GENERATION' })}
@@ -81,7 +81,7 @@ function Portfolios() {
 
   const renderOption: SelectProps['renderOption'] = ({ option }) => {
     const onClick = () =>
-      void navigate({ to: '/portfolio/$portfolioId', params: { portfolioId: option.value } });
+      void navigate({ to: '/analyze/$portfolioId', params: { portfolioId: option.value } });
     return (
       <Text onClick={onClick} size="sm">
         {option.label}
@@ -128,8 +128,8 @@ function Portfolios() {
       </Group>
       {/* NOTE: The hardcoded height is a ugly workaround for now which needs to be calculated
       dynamically from 100vh - headerHeight - elementsHeight etc  -Saivenkat */}
-      <ScrollArea h="82vh" offsetScrollbars type="hover">
-        <SimpleGrid cols={{ sm: 1, md: 2, lg: 3 }}>
+      <ScrollArea h="82vh" type="never">
+        <SimpleGrid cols={{ sm: 1, md: 2, lg: 3, xl: 4 }}>
           <CreatePortfolioCard />
           {portfolios?.content.map((portfolio) => (
             <PortfolioCard key={portfolio.id} {...portfolio} />
@@ -150,7 +150,7 @@ function ResearchItems() {
       </Group>
       {/* NOTE: The hardcoded height is a ugly workaround for now which needs to be calculated 
       dynamically from 100vh - headerHeight - elementsHeight etc  -Saivenkat */}
-      <ScrollArea h="74vh" offsetScrollbars type="hover">
+      <ScrollArea h="74vh" type="never">
         <Stack gap="sm">
           {researchData.map((item) => (
             <ArticleCard key={item._id} {...item} showLinks />

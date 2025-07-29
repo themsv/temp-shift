@@ -1,8 +1,8 @@
-import { createFileRoute } from '@tanstack/react-router';
+import { createFileRoute, useNavigate } from '@tanstack/react-router';
 import { useSuspenseQuery } from '@tanstack/react-query';
-import { useNavigate } from '@tanstack/react-router';
 import {
   ActionIcon,
+  Badge,
   Button,
   Card,
   Group,
@@ -13,6 +13,7 @@ import {
   Text,
   Textarea,
   TextInput,
+  Title,
 } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 import { Dropzone, MS_EXCEL_MIME_TYPE } from '@mantine/dropzone';
@@ -20,21 +21,33 @@ import { useForm } from '@mantine/form';
 import { IconChevronRight, IconX, IconCloudUpload } from '@tabler/icons-react';
 import { currencyOptions, investmentOptions, strategyOptions } from '@app/consts/portfolio-create';
 import { portfolioByIdQueryOptions } from '@app/data/api';
-import { CustomButtonLink } from '@app/ui-core/custom';
-import { CustomHeading } from '../basic-info';
+import { CustomButtonLink, CustomHeading } from '@app/ui-core/custom';
 
-export const Route = createFileRoute('/(app)/portfolio/create/$portfolioId/submit')({
+export const Route = createFileRoute('/(app)/create-portfolio/$portfolioId/submit')({
   component: SubmitPortfolio,
   loader: ({ context, params: { portfolioId } }) => {
     return context.queryClient.ensureQueryData(portfolioByIdQueryOptions(portfolioId));
   },
 });
 
+// const portfolioById: BasicPortfolio = {
+//   isMultifund: true,
+//   name: 'Parag Parikh',
+//   currency: 'USD',
+//   strategy: 'long',
+//   investmentStyle: 'growth',
+//   description: 'Lorem',
+//   mappedPortfolios: [],
+//   benchmarkType: '',
+//   universeType: '',
+//   id: 11111,
+// };
+
 function SubmitPortfolio() {
   const [opened, { open, close }] = useDisclosure(false);
+
   const { portfolioId } = Route.useParams();
   const navigate = useNavigate();
-
   const { data: portfolioById } = useSuspenseQuery(portfolioByIdQueryOptions(portfolioId));
 
   const form = useForm({
@@ -49,6 +62,13 @@ function SubmitPortfolio() {
           title="Welcome to Style Counsel Tool"
           description="Please complete the sections highlighted in yellow to start the analysis"
         />
+        <Group justify="space-between">
+          <Group>
+            <Title order={3}>{portfolioById.name}</Title>
+            {portfolioById.isMultifund && <Badge>Multi-Fund</Badge>}
+          </Group>
+          <Button size="xs">Analyze Portfolio</Button>
+        </Group>
         <SimpleGrid cols={{ md: 1, lg: 2 }}>
           <TextInput {...form.getInputProps('name')} label="Portfolio Name" required readOnly />
           <Select
@@ -83,35 +103,61 @@ function SubmitPortfolio() {
           readOnly
         />
 
-        <ActionCard
-          title="Upload Portfolio Holdings"
-          description="Upload your portfolio by adding holdings and weights."
-          isRequired
-          onClick={open}
-        />
-        <ActionCard
-          title="Select Base Benchmarks"
-          description="Select a benchmark for analysis."
-          isRequired
-          onClick={() =>
-            void navigate({
-              to: '/portfolio/create/$portfolioId/benchmark',
-              params: { portfolioId },
-            })
-          }
-        />
-        <ActionCard
-          title="Investable Universe"
-          description="Define your Investable universe."
-          isRequired={false}
-          onClick={() => {}}
-        />
-        <ActionCard
-          title="Regime Region & Calculation Settings"
-          description="Define your Calculation settings."
-          isRequired={false}
-          onClick={() => {}}
-        />
+        {portfolioById.isMultifund ? (
+          <ActionCard
+            title="Configure Portfolio"
+            description="Select the Portfolios to create a Multi-fund Portfolio"
+            isRequired
+            onClick={() =>
+              void navigate({
+                to: '/create-portfolio/$portfolioId/multifund',
+                params: { portfolioId },
+              })
+            }
+          />
+        ) : (
+          <>
+            <ActionCard
+              title="Upload Portfolio Holdings"
+              description="Upload your portfolio by adding holdings and weights."
+              isRequired
+              onClick={open}
+            />
+            <ActionCard
+              title="Select Base Benchmarks"
+              description="Select a benchmark for analysis."
+              isRequired
+              onClick={() =>
+                void navigate({
+                  to: '/create-portfolio/$portfolioId/benchmark',
+                  params: { portfolioId },
+                })
+              }
+            />
+            <ActionCard
+              title="Investable Universe"
+              description="Define your Investable universe."
+              isRequired={false}
+              onClick={() =>
+                void navigate({
+                  to: '/create-portfolio/$portfolioId/universe',
+                  params: { portfolioId },
+                })
+              }
+            />
+            <ActionCard
+              title="Regime Region & Calculation Settings"
+              description="Define your Calculation settings."
+              isRequired={false}
+              onClick={() =>
+                void navigate({
+                  to: '/create-portfolio/$portfolioId/calculations',
+                  params: { portfolioId },
+                })
+              }
+            />
+          </>
+        )}
       </Stack>
 
       <Modal
@@ -161,7 +207,7 @@ function SubmitPortfolio() {
               Cancel
             </Button>
             <CustomButtonLink
-              to="/portfolio/create/$portfolioId/corrections"
+              to="/create-portfolio/$portfolioId/corrections"
               params={{ portfolioId: portfolioId.toString() }}
             >
               Next

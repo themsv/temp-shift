@@ -17,12 +17,19 @@ import { Route as authRegisterRouteImport } from './routes/(auth)/register'
 import { Route as appSettingsRouteImport } from './routes/(app)/settings'
 import { Route as appReferenceDataRouteImport } from './routes/(app)/reference-data'
 import { Route as appDashboardRouteImport } from './routes/(app)/dashboard'
-import { Route as appPortfolioPortfolioIdRouteImport } from './routes/(app)/portfolio/$portfolioId'
-import { Route as appPortfolioCreateRouteRouteImport } from './routes/(app)/portfolio/create/route'
-import { Route as appPortfolioCreateBasicInfoRouteImport } from './routes/(app)/portfolio/create/basic-info'
-import { Route as appPortfolioCreatePortfolioIdSubmitRouteImport } from './routes/(app)/portfolio/create/$portfolioId/submit'
-import { Route as appPortfolioCreatePortfolioIdCorrectionsRouteImport } from './routes/(app)/portfolio/create/$portfolioId/corrections'
-import { Route as appPortfolioCreatePortfolioIdBenchmarkRouteImport } from './routes/(app)/portfolio/create/$portfolioId/benchmark'
+import { Route as appCreatePortfolioRouteRouteImport } from './routes/(app)/create-portfolio/route'
+import { Route as appCreatePortfolioMetadataRouteImport } from './routes/(app)/create-portfolio/metadata'
+import { Route as appAnalyzePortfolioIdRouteImport } from './routes/(app)/analyze/$portfolioId'
+import { Route as appCreatePortfolioPortfolioIdUniverseRouteImport } from './routes/(app)/create-portfolio/$portfolioId/universe'
+import { Route as appCreatePortfolioPortfolioIdSubmitRouteImport } from './routes/(app)/create-portfolio/$portfolioId/submit'
+import { Route as appCreatePortfolioPortfolioIdPreviewRouteImport } from './routes/(app)/create-portfolio/$portfolioId/preview'
+import { Route as appCreatePortfolioPortfolioIdMultifundRouteImport } from './routes/(app)/create-portfolio/$portfolioId/multifund'
+import { Route as appCreatePortfolioPortfolioIdCorrectionsRouteImport } from './routes/(app)/create-portfolio/$portfolioId/corrections'
+import { Route as appCreatePortfolioPortfolioIdCalculationsRouteImport } from './routes/(app)/create-portfolio/$portfolioId/calculations'
+import { Route as appCreatePortfolioPortfolioIdBenchmarkRouteImport } from './routes/(app)/create-portfolio/$portfolioId/benchmark'
+import { Route as appCreatePortfolioPortfolioIdCreateBenchmarkPreviewRouteImport } from './routes/(app)/create-portfolio/$portfolioId/create-benchmark/preview'
+import { Route as appCreatePortfolioPortfolioIdCreateBenchmarkMetadataRouteImport } from './routes/(app)/create-portfolio/$portfolioId/create-benchmark/metadata'
+import { Route as appCreatePortfolioPortfolioIdCreateBenchmarkCorrectionsRouteImport } from './routes/(app)/create-portfolio/$portfolioId/create-benchmark/corrections'
 
 const appHelpLazyRouteImport = createFileRoute('/(app)/help')()
 
@@ -62,129 +69,213 @@ const appDashboardRoute = appDashboardRouteImport.update({
   path: '/dashboard',
   getParentRoute: () => appRouteRoute,
 } as any)
-const appPortfolioPortfolioIdRoute = appPortfolioPortfolioIdRouteImport.update({
-  id: '/portfolio/$portfolioId',
-  path: '/portfolio/$portfolioId',
+const appCreatePortfolioRouteRoute = appCreatePortfolioRouteRouteImport.update({
+  id: '/create-portfolio',
+  path: '/create-portfolio',
   getParentRoute: () => appRouteRoute,
 } as any)
-const appPortfolioCreateRouteRoute = appPortfolioCreateRouteRouteImport.update({
-  id: '/portfolio/create',
-  path: '/portfolio/create',
-  getParentRoute: () => appRouteRoute,
-} as any)
-const appPortfolioCreateBasicInfoRoute =
-  appPortfolioCreateBasicInfoRouteImport.update({
-    id: '/basic-info',
-    path: '/basic-info',
-    getParentRoute: () => appPortfolioCreateRouteRoute,
+const appCreatePortfolioMetadataRoute =
+  appCreatePortfolioMetadataRouteImport.update({
+    id: '/metadata',
+    path: '/metadata',
+    getParentRoute: () => appCreatePortfolioRouteRoute,
   } as any)
-const appPortfolioCreatePortfolioIdSubmitRoute =
-  appPortfolioCreatePortfolioIdSubmitRouteImport.update({
+const appAnalyzePortfolioIdRoute = appAnalyzePortfolioIdRouteImport.update({
+  id: '/analyze/$portfolioId',
+  path: '/analyze/$portfolioId',
+  getParentRoute: () => appRouteRoute,
+} as any)
+const appCreatePortfolioPortfolioIdUniverseRoute =
+  appCreatePortfolioPortfolioIdUniverseRouteImport.update({
+    id: '/$portfolioId/universe',
+    path: '/$portfolioId/universe',
+    getParentRoute: () => appCreatePortfolioRouteRoute,
+  } as any)
+const appCreatePortfolioPortfolioIdSubmitRoute =
+  appCreatePortfolioPortfolioIdSubmitRouteImport.update({
     id: '/$portfolioId/submit',
     path: '/$portfolioId/submit',
-    getParentRoute: () => appPortfolioCreateRouteRoute,
+    getParentRoute: () => appCreatePortfolioRouteRoute,
   } as any)
-const appPortfolioCreatePortfolioIdCorrectionsRoute =
-  appPortfolioCreatePortfolioIdCorrectionsRouteImport.update({
+const appCreatePortfolioPortfolioIdPreviewRoute =
+  appCreatePortfolioPortfolioIdPreviewRouteImport.update({
+    id: '/$portfolioId/preview',
+    path: '/$portfolioId/preview',
+    getParentRoute: () => appCreatePortfolioRouteRoute,
+  } as any)
+const appCreatePortfolioPortfolioIdMultifundRoute =
+  appCreatePortfolioPortfolioIdMultifundRouteImport.update({
+    id: '/$portfolioId/multifund',
+    path: '/$portfolioId/multifund',
+    getParentRoute: () => appCreatePortfolioRouteRoute,
+  } as any)
+const appCreatePortfolioPortfolioIdCorrectionsRoute =
+  appCreatePortfolioPortfolioIdCorrectionsRouteImport.update({
     id: '/$portfolioId/corrections',
     path: '/$portfolioId/corrections',
-    getParentRoute: () => appPortfolioCreateRouteRoute,
+    getParentRoute: () => appCreatePortfolioRouteRoute,
   } as any)
-const appPortfolioCreatePortfolioIdBenchmarkRoute =
-  appPortfolioCreatePortfolioIdBenchmarkRouteImport.update({
+const appCreatePortfolioPortfolioIdCalculationsRoute =
+  appCreatePortfolioPortfolioIdCalculationsRouteImport.update({
+    id: '/$portfolioId/calculations',
+    path: '/$portfolioId/calculations',
+    getParentRoute: () => appCreatePortfolioRouteRoute,
+  } as any)
+const appCreatePortfolioPortfolioIdBenchmarkRoute =
+  appCreatePortfolioPortfolioIdBenchmarkRouteImport.update({
     id: '/$portfolioId/benchmark',
     path: '/$portfolioId/benchmark',
-    getParentRoute: () => appPortfolioCreateRouteRoute,
+    getParentRoute: () => appCreatePortfolioRouteRoute,
+  } as any)
+const appCreatePortfolioPortfolioIdCreateBenchmarkPreviewRoute =
+  appCreatePortfolioPortfolioIdCreateBenchmarkPreviewRouteImport.update({
+    id: '/$portfolioId/create-benchmark/preview',
+    path: '/$portfolioId/create-benchmark/preview',
+    getParentRoute: () => appCreatePortfolioRouteRoute,
+  } as any)
+const appCreatePortfolioPortfolioIdCreateBenchmarkMetadataRoute =
+  appCreatePortfolioPortfolioIdCreateBenchmarkMetadataRouteImport.update({
+    id: '/$portfolioId/create-benchmark/metadata',
+    path: '/$portfolioId/create-benchmark/metadata',
+    getParentRoute: () => appCreatePortfolioRouteRoute,
+  } as any)
+const appCreatePortfolioPortfolioIdCreateBenchmarkCorrectionsRoute =
+  appCreatePortfolioPortfolioIdCreateBenchmarkCorrectionsRouteImport.update({
+    id: '/$portfolioId/create-benchmark/corrections',
+    path: '/$portfolioId/create-benchmark/corrections',
+    getParentRoute: () => appCreatePortfolioRouteRoute,
   } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof authIndexRoute
+  '/create-portfolio': typeof appCreatePortfolioRouteRouteWithChildren
   '/dashboard': typeof appDashboardRoute
   '/reference-data': typeof appReferenceDataRoute
   '/settings': typeof appSettingsRoute
   '/register': typeof authRegisterRoute
   '/help': typeof appHelpLazyRoute
-  '/portfolio/create': typeof appPortfolioCreateRouteRouteWithChildren
-  '/portfolio/$portfolioId': typeof appPortfolioPortfolioIdRoute
-  '/portfolio/create/basic-info': typeof appPortfolioCreateBasicInfoRoute
-  '/portfolio/create/$portfolioId/benchmark': typeof appPortfolioCreatePortfolioIdBenchmarkRoute
-  '/portfolio/create/$portfolioId/corrections': typeof appPortfolioCreatePortfolioIdCorrectionsRoute
-  '/portfolio/create/$portfolioId/submit': typeof appPortfolioCreatePortfolioIdSubmitRoute
+  '/analyze/$portfolioId': typeof appAnalyzePortfolioIdRoute
+  '/create-portfolio/metadata': typeof appCreatePortfolioMetadataRoute
+  '/create-portfolio/$portfolioId/benchmark': typeof appCreatePortfolioPortfolioIdBenchmarkRoute
+  '/create-portfolio/$portfolioId/calculations': typeof appCreatePortfolioPortfolioIdCalculationsRoute
+  '/create-portfolio/$portfolioId/corrections': typeof appCreatePortfolioPortfolioIdCorrectionsRoute
+  '/create-portfolio/$portfolioId/multifund': typeof appCreatePortfolioPortfolioIdMultifundRoute
+  '/create-portfolio/$portfolioId/preview': typeof appCreatePortfolioPortfolioIdPreviewRoute
+  '/create-portfolio/$portfolioId/submit': typeof appCreatePortfolioPortfolioIdSubmitRoute
+  '/create-portfolio/$portfolioId/universe': typeof appCreatePortfolioPortfolioIdUniverseRoute
+  '/create-portfolio/$portfolioId/create-benchmark/corrections': typeof appCreatePortfolioPortfolioIdCreateBenchmarkCorrectionsRoute
+  '/create-portfolio/$portfolioId/create-benchmark/metadata': typeof appCreatePortfolioPortfolioIdCreateBenchmarkMetadataRoute
+  '/create-portfolio/$portfolioId/create-benchmark/preview': typeof appCreatePortfolioPortfolioIdCreateBenchmarkPreviewRoute
 }
 export interface FileRoutesByTo {
   '/': typeof authIndexRoute
+  '/create-portfolio': typeof appCreatePortfolioRouteRouteWithChildren
   '/dashboard': typeof appDashboardRoute
   '/reference-data': typeof appReferenceDataRoute
   '/settings': typeof appSettingsRoute
   '/register': typeof authRegisterRoute
   '/help': typeof appHelpLazyRoute
-  '/portfolio/create': typeof appPortfolioCreateRouteRouteWithChildren
-  '/portfolio/$portfolioId': typeof appPortfolioPortfolioIdRoute
-  '/portfolio/create/basic-info': typeof appPortfolioCreateBasicInfoRoute
-  '/portfolio/create/$portfolioId/benchmark': typeof appPortfolioCreatePortfolioIdBenchmarkRoute
-  '/portfolio/create/$portfolioId/corrections': typeof appPortfolioCreatePortfolioIdCorrectionsRoute
-  '/portfolio/create/$portfolioId/submit': typeof appPortfolioCreatePortfolioIdSubmitRoute
+  '/analyze/$portfolioId': typeof appAnalyzePortfolioIdRoute
+  '/create-portfolio/metadata': typeof appCreatePortfolioMetadataRoute
+  '/create-portfolio/$portfolioId/benchmark': typeof appCreatePortfolioPortfolioIdBenchmarkRoute
+  '/create-portfolio/$portfolioId/calculations': typeof appCreatePortfolioPortfolioIdCalculationsRoute
+  '/create-portfolio/$portfolioId/corrections': typeof appCreatePortfolioPortfolioIdCorrectionsRoute
+  '/create-portfolio/$portfolioId/multifund': typeof appCreatePortfolioPortfolioIdMultifundRoute
+  '/create-portfolio/$portfolioId/preview': typeof appCreatePortfolioPortfolioIdPreviewRoute
+  '/create-portfolio/$portfolioId/submit': typeof appCreatePortfolioPortfolioIdSubmitRoute
+  '/create-portfolio/$portfolioId/universe': typeof appCreatePortfolioPortfolioIdUniverseRoute
+  '/create-portfolio/$portfolioId/create-benchmark/corrections': typeof appCreatePortfolioPortfolioIdCreateBenchmarkCorrectionsRoute
+  '/create-portfolio/$portfolioId/create-benchmark/metadata': typeof appCreatePortfolioPortfolioIdCreateBenchmarkMetadataRoute
+  '/create-portfolio/$portfolioId/create-benchmark/preview': typeof appCreatePortfolioPortfolioIdCreateBenchmarkPreviewRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/(app)': typeof appRouteRouteWithChildren
+  '/(app)/create-portfolio': typeof appCreatePortfolioRouteRouteWithChildren
   '/(app)/dashboard': typeof appDashboardRoute
   '/(app)/reference-data': typeof appReferenceDataRoute
   '/(app)/settings': typeof appSettingsRoute
   '/(auth)/register': typeof authRegisterRoute
   '/(app)/help': typeof appHelpLazyRoute
   '/(auth)/': typeof authIndexRoute
-  '/(app)/portfolio/create': typeof appPortfolioCreateRouteRouteWithChildren
-  '/(app)/portfolio/$portfolioId': typeof appPortfolioPortfolioIdRoute
-  '/(app)/portfolio/create/basic-info': typeof appPortfolioCreateBasicInfoRoute
-  '/(app)/portfolio/create/$portfolioId/benchmark': typeof appPortfolioCreatePortfolioIdBenchmarkRoute
-  '/(app)/portfolio/create/$portfolioId/corrections': typeof appPortfolioCreatePortfolioIdCorrectionsRoute
-  '/(app)/portfolio/create/$portfolioId/submit': typeof appPortfolioCreatePortfolioIdSubmitRoute
+  '/(app)/analyze/$portfolioId': typeof appAnalyzePortfolioIdRoute
+  '/(app)/create-portfolio/metadata': typeof appCreatePortfolioMetadataRoute
+  '/(app)/create-portfolio/$portfolioId/benchmark': typeof appCreatePortfolioPortfolioIdBenchmarkRoute
+  '/(app)/create-portfolio/$portfolioId/calculations': typeof appCreatePortfolioPortfolioIdCalculationsRoute
+  '/(app)/create-portfolio/$portfolioId/corrections': typeof appCreatePortfolioPortfolioIdCorrectionsRoute
+  '/(app)/create-portfolio/$portfolioId/multifund': typeof appCreatePortfolioPortfolioIdMultifundRoute
+  '/(app)/create-portfolio/$portfolioId/preview': typeof appCreatePortfolioPortfolioIdPreviewRoute
+  '/(app)/create-portfolio/$portfolioId/submit': typeof appCreatePortfolioPortfolioIdSubmitRoute
+  '/(app)/create-portfolio/$portfolioId/universe': typeof appCreatePortfolioPortfolioIdUniverseRoute
+  '/(app)/create-portfolio/$portfolioId/create-benchmark/corrections': typeof appCreatePortfolioPortfolioIdCreateBenchmarkCorrectionsRoute
+  '/(app)/create-portfolio/$portfolioId/create-benchmark/metadata': typeof appCreatePortfolioPortfolioIdCreateBenchmarkMetadataRoute
+  '/(app)/create-portfolio/$portfolioId/create-benchmark/preview': typeof appCreatePortfolioPortfolioIdCreateBenchmarkPreviewRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/create-portfolio'
     | '/dashboard'
     | '/reference-data'
     | '/settings'
     | '/register'
     | '/help'
-    | '/portfolio/create'
-    | '/portfolio/$portfolioId'
-    | '/portfolio/create/basic-info'
-    | '/portfolio/create/$portfolioId/benchmark'
-    | '/portfolio/create/$portfolioId/corrections'
-    | '/portfolio/create/$portfolioId/submit'
+    | '/analyze/$portfolioId'
+    | '/create-portfolio/metadata'
+    | '/create-portfolio/$portfolioId/benchmark'
+    | '/create-portfolio/$portfolioId/calculations'
+    | '/create-portfolio/$portfolioId/corrections'
+    | '/create-portfolio/$portfolioId/multifund'
+    | '/create-portfolio/$portfolioId/preview'
+    | '/create-portfolio/$portfolioId/submit'
+    | '/create-portfolio/$portfolioId/universe'
+    | '/create-portfolio/$portfolioId/create-benchmark/corrections'
+    | '/create-portfolio/$portfolioId/create-benchmark/metadata'
+    | '/create-portfolio/$portfolioId/create-benchmark/preview'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/create-portfolio'
     | '/dashboard'
     | '/reference-data'
     | '/settings'
     | '/register'
     | '/help'
-    | '/portfolio/create'
-    | '/portfolio/$portfolioId'
-    | '/portfolio/create/basic-info'
-    | '/portfolio/create/$portfolioId/benchmark'
-    | '/portfolio/create/$portfolioId/corrections'
-    | '/portfolio/create/$portfolioId/submit'
+    | '/analyze/$portfolioId'
+    | '/create-portfolio/metadata'
+    | '/create-portfolio/$portfolioId/benchmark'
+    | '/create-portfolio/$portfolioId/calculations'
+    | '/create-portfolio/$portfolioId/corrections'
+    | '/create-portfolio/$portfolioId/multifund'
+    | '/create-portfolio/$portfolioId/preview'
+    | '/create-portfolio/$portfolioId/submit'
+    | '/create-portfolio/$portfolioId/universe'
+    | '/create-portfolio/$portfolioId/create-benchmark/corrections'
+    | '/create-portfolio/$portfolioId/create-benchmark/metadata'
+    | '/create-portfolio/$portfolioId/create-benchmark/preview'
   id:
     | '__root__'
     | '/(app)'
+    | '/(app)/create-portfolio'
     | '/(app)/dashboard'
     | '/(app)/reference-data'
     | '/(app)/settings'
     | '/(auth)/register'
     | '/(app)/help'
     | '/(auth)/'
-    | '/(app)/portfolio/create'
-    | '/(app)/portfolio/$portfolioId'
-    | '/(app)/portfolio/create/basic-info'
-    | '/(app)/portfolio/create/$portfolioId/benchmark'
-    | '/(app)/portfolio/create/$portfolioId/corrections'
-    | '/(app)/portfolio/create/$portfolioId/submit'
+    | '/(app)/analyze/$portfolioId'
+    | '/(app)/create-portfolio/metadata'
+    | '/(app)/create-portfolio/$portfolioId/benchmark'
+    | '/(app)/create-portfolio/$portfolioId/calculations'
+    | '/(app)/create-portfolio/$portfolioId/corrections'
+    | '/(app)/create-portfolio/$portfolioId/multifund'
+    | '/(app)/create-portfolio/$portfolioId/preview'
+    | '/(app)/create-portfolio/$portfolioId/submit'
+    | '/(app)/create-portfolio/$portfolioId/universe'
+    | '/(app)/create-portfolio/$portfolioId/create-benchmark/corrections'
+    | '/(app)/create-portfolio/$portfolioId/create-benchmark/metadata'
+    | '/(app)/create-portfolio/$portfolioId/create-benchmark/preview'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -244,90 +335,160 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof appDashboardRouteImport
       parentRoute: typeof appRouteRoute
     }
-    '/(app)/portfolio/$portfolioId': {
-      id: '/(app)/portfolio/$portfolioId'
-      path: '/portfolio/$portfolioId'
-      fullPath: '/portfolio/$portfolioId'
-      preLoaderRoute: typeof appPortfolioPortfolioIdRouteImport
+    '/(app)/create-portfolio': {
+      id: '/(app)/create-portfolio'
+      path: '/create-portfolio'
+      fullPath: '/create-portfolio'
+      preLoaderRoute: typeof appCreatePortfolioRouteRouteImport
       parentRoute: typeof appRouteRoute
     }
-    '/(app)/portfolio/create': {
-      id: '/(app)/portfolio/create'
-      path: '/portfolio/create'
-      fullPath: '/portfolio/create'
-      preLoaderRoute: typeof appPortfolioCreateRouteRouteImport
+    '/(app)/create-portfolio/metadata': {
+      id: '/(app)/create-portfolio/metadata'
+      path: '/metadata'
+      fullPath: '/create-portfolio/metadata'
+      preLoaderRoute: typeof appCreatePortfolioMetadataRouteImport
+      parentRoute: typeof appCreatePortfolioRouteRoute
+    }
+    '/(app)/analyze/$portfolioId': {
+      id: '/(app)/analyze/$portfolioId'
+      path: '/analyze/$portfolioId'
+      fullPath: '/analyze/$portfolioId'
+      preLoaderRoute: typeof appAnalyzePortfolioIdRouteImport
       parentRoute: typeof appRouteRoute
     }
-    '/(app)/portfolio/create/basic-info': {
-      id: '/(app)/portfolio/create/basic-info'
-      path: '/basic-info'
-      fullPath: '/portfolio/create/basic-info'
-      preLoaderRoute: typeof appPortfolioCreateBasicInfoRouteImport
-      parentRoute: typeof appPortfolioCreateRouteRoute
+    '/(app)/create-portfolio/$portfolioId/universe': {
+      id: '/(app)/create-portfolio/$portfolioId/universe'
+      path: '/$portfolioId/universe'
+      fullPath: '/create-portfolio/$portfolioId/universe'
+      preLoaderRoute: typeof appCreatePortfolioPortfolioIdUniverseRouteImport
+      parentRoute: typeof appCreatePortfolioRouteRoute
     }
-    '/(app)/portfolio/create/$portfolioId/submit': {
-      id: '/(app)/portfolio/create/$portfolioId/submit'
+    '/(app)/create-portfolio/$portfolioId/submit': {
+      id: '/(app)/create-portfolio/$portfolioId/submit'
       path: '/$portfolioId/submit'
-      fullPath: '/portfolio/create/$portfolioId/submit'
-      preLoaderRoute: typeof appPortfolioCreatePortfolioIdSubmitRouteImport
-      parentRoute: typeof appPortfolioCreateRouteRoute
+      fullPath: '/create-portfolio/$portfolioId/submit'
+      preLoaderRoute: typeof appCreatePortfolioPortfolioIdSubmitRouteImport
+      parentRoute: typeof appCreatePortfolioRouteRoute
     }
-    '/(app)/portfolio/create/$portfolioId/corrections': {
-      id: '/(app)/portfolio/create/$portfolioId/corrections'
+    '/(app)/create-portfolio/$portfolioId/preview': {
+      id: '/(app)/create-portfolio/$portfolioId/preview'
+      path: '/$portfolioId/preview'
+      fullPath: '/create-portfolio/$portfolioId/preview'
+      preLoaderRoute: typeof appCreatePortfolioPortfolioIdPreviewRouteImport
+      parentRoute: typeof appCreatePortfolioRouteRoute
+    }
+    '/(app)/create-portfolio/$portfolioId/multifund': {
+      id: '/(app)/create-portfolio/$portfolioId/multifund'
+      path: '/$portfolioId/multifund'
+      fullPath: '/create-portfolio/$portfolioId/multifund'
+      preLoaderRoute: typeof appCreatePortfolioPortfolioIdMultifundRouteImport
+      parentRoute: typeof appCreatePortfolioRouteRoute
+    }
+    '/(app)/create-portfolio/$portfolioId/corrections': {
+      id: '/(app)/create-portfolio/$portfolioId/corrections'
       path: '/$portfolioId/corrections'
-      fullPath: '/portfolio/create/$portfolioId/corrections'
-      preLoaderRoute: typeof appPortfolioCreatePortfolioIdCorrectionsRouteImport
-      parentRoute: typeof appPortfolioCreateRouteRoute
+      fullPath: '/create-portfolio/$portfolioId/corrections'
+      preLoaderRoute: typeof appCreatePortfolioPortfolioIdCorrectionsRouteImport
+      parentRoute: typeof appCreatePortfolioRouteRoute
     }
-    '/(app)/portfolio/create/$portfolioId/benchmark': {
-      id: '/(app)/portfolio/create/$portfolioId/benchmark'
+    '/(app)/create-portfolio/$portfolioId/calculations': {
+      id: '/(app)/create-portfolio/$portfolioId/calculations'
+      path: '/$portfolioId/calculations'
+      fullPath: '/create-portfolio/$portfolioId/calculations'
+      preLoaderRoute: typeof appCreatePortfolioPortfolioIdCalculationsRouteImport
+      parentRoute: typeof appCreatePortfolioRouteRoute
+    }
+    '/(app)/create-portfolio/$portfolioId/benchmark': {
+      id: '/(app)/create-portfolio/$portfolioId/benchmark'
       path: '/$portfolioId/benchmark'
-      fullPath: '/portfolio/create/$portfolioId/benchmark'
-      preLoaderRoute: typeof appPortfolioCreatePortfolioIdBenchmarkRouteImport
-      parentRoute: typeof appPortfolioCreateRouteRoute
+      fullPath: '/create-portfolio/$portfolioId/benchmark'
+      preLoaderRoute: typeof appCreatePortfolioPortfolioIdBenchmarkRouteImport
+      parentRoute: typeof appCreatePortfolioRouteRoute
+    }
+    '/(app)/create-portfolio/$portfolioId/create-benchmark/preview': {
+      id: '/(app)/create-portfolio/$portfolioId/create-benchmark/preview'
+      path: '/$portfolioId/create-benchmark/preview'
+      fullPath: '/create-portfolio/$portfolioId/create-benchmark/preview'
+      preLoaderRoute: typeof appCreatePortfolioPortfolioIdCreateBenchmarkPreviewRouteImport
+      parentRoute: typeof appCreatePortfolioRouteRoute
+    }
+    '/(app)/create-portfolio/$portfolioId/create-benchmark/metadata': {
+      id: '/(app)/create-portfolio/$portfolioId/create-benchmark/metadata'
+      path: '/$portfolioId/create-benchmark/metadata'
+      fullPath: '/create-portfolio/$portfolioId/create-benchmark/metadata'
+      preLoaderRoute: typeof appCreatePortfolioPortfolioIdCreateBenchmarkMetadataRouteImport
+      parentRoute: typeof appCreatePortfolioRouteRoute
+    }
+    '/(app)/create-portfolio/$portfolioId/create-benchmark/corrections': {
+      id: '/(app)/create-portfolio/$portfolioId/create-benchmark/corrections'
+      path: '/$portfolioId/create-benchmark/corrections'
+      fullPath: '/create-portfolio/$portfolioId/create-benchmark/corrections'
+      preLoaderRoute: typeof appCreatePortfolioPortfolioIdCreateBenchmarkCorrectionsRouteImport
+      parentRoute: typeof appCreatePortfolioRouteRoute
     }
   }
 }
 
-interface appPortfolioCreateRouteRouteChildren {
-  appPortfolioCreateBasicInfoRoute: typeof appPortfolioCreateBasicInfoRoute
-  appPortfolioCreatePortfolioIdBenchmarkRoute: typeof appPortfolioCreatePortfolioIdBenchmarkRoute
-  appPortfolioCreatePortfolioIdCorrectionsRoute: typeof appPortfolioCreatePortfolioIdCorrectionsRoute
-  appPortfolioCreatePortfolioIdSubmitRoute: typeof appPortfolioCreatePortfolioIdSubmitRoute
+interface appCreatePortfolioRouteRouteChildren {
+  appCreatePortfolioMetadataRoute: typeof appCreatePortfolioMetadataRoute
+  appCreatePortfolioPortfolioIdBenchmarkRoute: typeof appCreatePortfolioPortfolioIdBenchmarkRoute
+  appCreatePortfolioPortfolioIdCalculationsRoute: typeof appCreatePortfolioPortfolioIdCalculationsRoute
+  appCreatePortfolioPortfolioIdCorrectionsRoute: typeof appCreatePortfolioPortfolioIdCorrectionsRoute
+  appCreatePortfolioPortfolioIdMultifundRoute: typeof appCreatePortfolioPortfolioIdMultifundRoute
+  appCreatePortfolioPortfolioIdPreviewRoute: typeof appCreatePortfolioPortfolioIdPreviewRoute
+  appCreatePortfolioPortfolioIdSubmitRoute: typeof appCreatePortfolioPortfolioIdSubmitRoute
+  appCreatePortfolioPortfolioIdUniverseRoute: typeof appCreatePortfolioPortfolioIdUniverseRoute
+  appCreatePortfolioPortfolioIdCreateBenchmarkCorrectionsRoute: typeof appCreatePortfolioPortfolioIdCreateBenchmarkCorrectionsRoute
+  appCreatePortfolioPortfolioIdCreateBenchmarkMetadataRoute: typeof appCreatePortfolioPortfolioIdCreateBenchmarkMetadataRoute
+  appCreatePortfolioPortfolioIdCreateBenchmarkPreviewRoute: typeof appCreatePortfolioPortfolioIdCreateBenchmarkPreviewRoute
 }
 
-const appPortfolioCreateRouteRouteChildren: appPortfolioCreateRouteRouteChildren =
+const appCreatePortfolioRouteRouteChildren: appCreatePortfolioRouteRouteChildren =
   {
-    appPortfolioCreateBasicInfoRoute: appPortfolioCreateBasicInfoRoute,
-    appPortfolioCreatePortfolioIdBenchmarkRoute:
-      appPortfolioCreatePortfolioIdBenchmarkRoute,
-    appPortfolioCreatePortfolioIdCorrectionsRoute:
-      appPortfolioCreatePortfolioIdCorrectionsRoute,
-    appPortfolioCreatePortfolioIdSubmitRoute:
-      appPortfolioCreatePortfolioIdSubmitRoute,
+    appCreatePortfolioMetadataRoute: appCreatePortfolioMetadataRoute,
+    appCreatePortfolioPortfolioIdBenchmarkRoute:
+      appCreatePortfolioPortfolioIdBenchmarkRoute,
+    appCreatePortfolioPortfolioIdCalculationsRoute:
+      appCreatePortfolioPortfolioIdCalculationsRoute,
+    appCreatePortfolioPortfolioIdCorrectionsRoute:
+      appCreatePortfolioPortfolioIdCorrectionsRoute,
+    appCreatePortfolioPortfolioIdMultifundRoute:
+      appCreatePortfolioPortfolioIdMultifundRoute,
+    appCreatePortfolioPortfolioIdPreviewRoute:
+      appCreatePortfolioPortfolioIdPreviewRoute,
+    appCreatePortfolioPortfolioIdSubmitRoute:
+      appCreatePortfolioPortfolioIdSubmitRoute,
+    appCreatePortfolioPortfolioIdUniverseRoute:
+      appCreatePortfolioPortfolioIdUniverseRoute,
+    appCreatePortfolioPortfolioIdCreateBenchmarkCorrectionsRoute:
+      appCreatePortfolioPortfolioIdCreateBenchmarkCorrectionsRoute,
+    appCreatePortfolioPortfolioIdCreateBenchmarkMetadataRoute:
+      appCreatePortfolioPortfolioIdCreateBenchmarkMetadataRoute,
+    appCreatePortfolioPortfolioIdCreateBenchmarkPreviewRoute:
+      appCreatePortfolioPortfolioIdCreateBenchmarkPreviewRoute,
   }
 
-const appPortfolioCreateRouteRouteWithChildren =
-  appPortfolioCreateRouteRoute._addFileChildren(
-    appPortfolioCreateRouteRouteChildren,
+const appCreatePortfolioRouteRouteWithChildren =
+  appCreatePortfolioRouteRoute._addFileChildren(
+    appCreatePortfolioRouteRouteChildren,
   )
 
 interface appRouteRouteChildren {
+  appCreatePortfolioRouteRoute: typeof appCreatePortfolioRouteRouteWithChildren
   appDashboardRoute: typeof appDashboardRoute
   appReferenceDataRoute: typeof appReferenceDataRoute
   appSettingsRoute: typeof appSettingsRoute
   appHelpLazyRoute: typeof appHelpLazyRoute
-  appPortfolioCreateRouteRoute: typeof appPortfolioCreateRouteRouteWithChildren
-  appPortfolioPortfolioIdRoute: typeof appPortfolioPortfolioIdRoute
+  appAnalyzePortfolioIdRoute: typeof appAnalyzePortfolioIdRoute
 }
 
 const appRouteRouteChildren: appRouteRouteChildren = {
+  appCreatePortfolioRouteRoute: appCreatePortfolioRouteRouteWithChildren,
   appDashboardRoute: appDashboardRoute,
   appReferenceDataRoute: appReferenceDataRoute,
   appSettingsRoute: appSettingsRoute,
   appHelpLazyRoute: appHelpLazyRoute,
-  appPortfolioCreateRouteRoute: appPortfolioCreateRouteRouteWithChildren,
-  appPortfolioPortfolioIdRoute: appPortfolioPortfolioIdRoute,
+  appAnalyzePortfolioIdRoute: appAnalyzePortfolioIdRoute,
 }
 
 const appRouteRouteWithChildren = appRouteRoute._addFileChildren(

@@ -24,3 +24,5 @@ dist-ssr
 
 # Ignore build visualizer
 build-stats.html
+
+.tanstack/

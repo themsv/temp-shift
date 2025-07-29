@@ -25,7 +25,7 @@ export function CustomRibbon({ letter }: CustomRibbonProps) {
       h={30}
       pos="absolute"
       top={0}
-      right={16}
+      right={0}
       bg="blue"
       style={{
         clipPath: 'polygon(0 0, 100% 0, 100% 100%, 50% 75%, 0 100%)',

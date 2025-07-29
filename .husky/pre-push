@@ -2,5 +2,5 @@
 
 echo "🧼 Running ESLint and Prettier before pushing..."
 
-npx eslint . --ext .js,.ts,.jsx,.tsx
-npx prettier --check .
+npm run format:check
+npm run check

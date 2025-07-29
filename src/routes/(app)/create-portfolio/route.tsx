@@ -2,7 +2,7 @@ import { createFileRoute, Outlet } from '@tanstack/react-router';
 import { Breadcrumbs, Center, Stack } from '@mantine/core';
 import { CustomButtonLink } from '@app/ui-core/custom';
 
-export const Route = createFileRoute('/(app)/portfolio/create')({
+export const Route = createFileRoute('/(app)/create-portfolio')({
   component: RouteComponent,
 });
 

@@ -1,8 +1,7 @@
 import { useState } from 'react';
-import { createFileRoute, useParams } from '@tanstack/react-router';
+import { createFileRoute } from '@tanstack/react-router';
 import { useIntl } from 'react-intl';
 import {
-  Button,
   Divider,
   Flex,
   Group,
@@ -23,6 +22,7 @@ import ContributorsTable from '@app/components/ContributorsTable/ContributorsTab
 import { IconBulb, IconQueryStats } from '@app/ui-core/icons';
 import { ContributorsControls } from '@app/components/ContributorsTable/ContributorsControls';
 import HeatMapChart from '@app/components/charts/HeatMapChart';
+import { CustomButtonLink } from '@app/ui-core/custom';
 import insights from '../../../mocks/insights.json';
 
 const tabs = [
@@ -32,12 +32,12 @@ const tabs = [
   { label: 'Macro Betas', value: 'macros' },
 ];
 
-export const Route = createFileRoute('/(app)/portfolio/$portfolioId')({
+export const Route = createFileRoute('/(app)/analyze/$portfolioId')({
   component: PortfolioDetails,
 });
 
 function PortfolioDetails() {
-  const { portfolioId } = useParams({ strict: false });
+  const { portfolioId } = Route.useParams();
 
   //TODO: prefetch or API call to get portfolio passing portfolioId
   const { formatMessage } = useIntl();
@@ -128,19 +128,26 @@ function PortfolioDetails() {
           ))}
         </Tabs>
       </Stack>
-      <Stack>
+      <Stack maw={360}>
         <Group gap="xs" grow>
-          <Button leftSection={<IconBulb size="24" color="white" />} p="0">
+          {/* FIXME: Update the appropriate URLs */}
+          <CustomButtonLink
+            to="/dashboard"
+            leftSection={<IconBulb size="24" color="white" />}
+            p="0"
+          >
             {formatMessage({ id: 'IDEA_GENERATION' })}
-          </Button>
-          <Button
+          </CustomButtonLink>
+          {/* FIXME: Update the appropriate URLs */}
+          <CustomButtonLink
             variant="outline"
+            to="/dashboard"
             leftSection={<IconQueryStats size="24" />}
             c="black"
             style={{ borderColor: 'black' }}
           >
             {formatMessage({ id: 'STOCK_PROFILE' })}
-          </Button>
+          </CustomButtonLink>
         </Group>
 
         <Stack bg="gray.0" p="md">

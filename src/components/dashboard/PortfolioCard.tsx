@@ -16,7 +16,6 @@ export const PortfolioCard = ({
 }: PortfolioLite) => {
   const { formatMessage } = useIntl();
   const navigate = useNavigate();
-  console.log(isMultifund);
   return (
     <Card
       component={Stack}
@@ -29,7 +28,7 @@ export const PortfolioCard = ({
       }}
       onClick={() =>
         void navigate({
-          to: '/portfolio/$portfolioId',
+          to: '/create-portfolio/$portfolioId/submit',
           params: { portfolioId: id.toString() },
         })
       }
@@ -68,7 +67,7 @@ export const CreatePortfolioCard = () => {
         boxShadow: '4px 4px 12px rgba(0, 0, 0, 0.1)',
         cursor: 'pointer',
       }}
-      onClick={() => void navigate({ to: '/portfolio/create/basic-info' })}
+      onClick={() => void navigate({ to: '/create-portfolio/metadata' })}
     >
       <Stack
         align="center"
