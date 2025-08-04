@@ -19,7 +19,7 @@
   "appService.zipIgnorePattern": ["node_modules{,/**}", ".vscode{,/**}"],
   "appService.defaultWebAppToDeploy": "/subscriptions/5f49b8db-29eb-46da-9fcc-b0c0ca7d7aa9/resourceGroups/Wissen_Engage/providers/Microsoft.Web/sites/mqg-style-counsel",
   "appService.deploySubpath": ".",
-  "cSpell.words": ["formatjs", "sedol", "tabler", "tseslint"],
+  "cSpell.words": ["apexcharts", "formatjs", "sedol", "tabler", "tseslint"],
   "typescript.tsdk": "node_modules/typescript/lib",
   "[typescriptreact]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"

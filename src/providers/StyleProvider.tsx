@@ -43,6 +43,11 @@ const theme = createTheme({
         separator: '>',
       },
     },
+    ScrollArea: {
+      defaultProps: {
+        scrollbarSize: 6,
+      },
+    },
   },
 });
 

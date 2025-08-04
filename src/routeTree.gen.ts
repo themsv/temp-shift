@@ -19,7 +19,10 @@ import { Route as appSelectPortfolioRouteImport } from './routes/(app)/selectPor
 import { Route as appReferenceDataRouteImport } from './routes/(app)/reference-data'
 import { Route as appDashboardRouteImport } from './routes/(app)/dashboard'
 import { Route as appCreatePortfolioRouteRouteImport } from './routes/(app)/create-portfolio/route'
+import { Route as appAnalyzeRouteRouteImport } from './routes/(app)/analyze/route'
 import { Route as appCreatePortfolioMetadataRouteImport } from './routes/(app)/create-portfolio/metadata'
+import { Route as appAnalyzeStockProfileRouteImport } from './routes/(app)/analyze/stock-profile'
+import { Route as appAnalyzeIdeaGenerationRouteImport } from './routes/(app)/analyze/idea-generation'
 import { Route as appAnalyzePortfolioIdRouteImport } from './routes/(app)/analyze/$portfolioId'
 import { Route as appCreatePortfolioPortfolioIdUniverseRouteImport } from './routes/(app)/create-portfolio/$portfolioId/universe'
 import { Route as appCreatePortfolioPortfolioIdSummaryRouteImport } from './routes/(app)/create-portfolio/$portfolioId/summary'
@@ -81,16 +84,32 @@ const appCreatePortfolioRouteRoute = appCreatePortfolioRouteRouteImport.update({
   path: '/create-portfolio',
   getParentRoute: () => appRouteRoute,
 } as any)
+const appAnalyzeRouteRoute = appAnalyzeRouteRouteImport.update({
+  id: '/analyze',
+  path: '/analyze',
+  getParentRoute: () => appRouteRoute,
+} as any)
 const appCreatePortfolioMetadataRoute =
   appCreatePortfolioMetadataRouteImport.update({
     id: '/metadata',
     path: '/metadata',
     getParentRoute: () => appCreatePortfolioRouteRoute,
   } as any)
+const appAnalyzeStockProfileRoute = appAnalyzeStockProfileRouteImport.update({
+  id: '/stock-profile',
+  path: '/stock-profile',
+  getParentRoute: () => appAnalyzeRouteRoute,
+} as any)
+const appAnalyzeIdeaGenerationRoute =
+  appAnalyzeIdeaGenerationRouteImport.update({
+    id: '/idea-generation',
+    path: '/idea-generation',
+    getParentRoute: () => appAnalyzeRouteRoute,
+  } as any)
 const appAnalyzePortfolioIdRoute = appAnalyzePortfolioIdRouteImport.update({
-  id: '/analyze/$portfolioId',
-  path: '/analyze/$portfolioId',
-  getParentRoute: () => appRouteRoute,
+  id: '/$portfolioId',
+  path: '/$portfolioId',
+  getParentRoute: () => appAnalyzeRouteRoute,
 } as any)
 const appCreatePortfolioPortfolioIdUniverseRoute =
   appCreatePortfolioPortfolioIdUniverseRouteImport.update({
@@ -161,6 +180,7 @@ const appCreatePortfolioPortfolioIdCreateBenchmarkCorrectionsRoute =
 
 export interface FileRoutesByFullPath {
   '/': typeof authIndexRoute
+  '/analyze': typeof appAnalyzeRouteRouteWithChildren
   '/create-portfolio': typeof appCreatePortfolioRouteRouteWithChildren
   '/dashboard': typeof appDashboardRoute
   '/reference-data': typeof appReferenceDataRoute
@@ -169,6 +189,8 @@ export interface FileRoutesByFullPath {
   '/register': typeof authRegisterRoute
   '/help': typeof appHelpLazyRoute
   '/analyze/$portfolioId': typeof appAnalyzePortfolioIdRoute
+  '/analyze/idea-generation': typeof appAnalyzeIdeaGenerationRoute
+  '/analyze/stock-profile': typeof appAnalyzeStockProfileRoute
   '/create-portfolio/metadata': typeof appCreatePortfolioMetadataRoute
   '/create-portfolio/$portfolioId/benchmark': typeof appCreatePortfolioPortfolioIdBenchmarkRoute
   '/create-portfolio/$portfolioId/calculations': typeof appCreatePortfolioPortfolioIdCalculationsRoute
@@ -184,6 +206,7 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof authIndexRoute
+  '/analyze': typeof appAnalyzeRouteRouteWithChildren
   '/create-portfolio': typeof appCreatePortfolioRouteRouteWithChildren
   '/dashboard': typeof appDashboardRoute
   '/reference-data': typeof appReferenceDataRoute
@@ -192,6 +215,8 @@ export interface FileRoutesByTo {
   '/register': typeof authRegisterRoute
   '/help': typeof appHelpLazyRoute
   '/analyze/$portfolioId': typeof appAnalyzePortfolioIdRoute
+  '/analyze/idea-generation': typeof appAnalyzeIdeaGenerationRoute
+  '/analyze/stock-profile': typeof appAnalyzeStockProfileRoute
   '/create-portfolio/metadata': typeof appCreatePortfolioMetadataRoute
   '/create-portfolio/$portfolioId/benchmark': typeof appCreatePortfolioPortfolioIdBenchmarkRoute
   '/create-portfolio/$portfolioId/calculations': typeof appCreatePortfolioPortfolioIdCalculationsRoute
@@ -208,6 +233,7 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/(app)': typeof appRouteRouteWithChildren
+  '/(app)/analyze': typeof appAnalyzeRouteRouteWithChildren
   '/(app)/create-portfolio': typeof appCreatePortfolioRouteRouteWithChildren
   '/(app)/dashboard': typeof appDashboardRoute
   '/(app)/reference-data': typeof appReferenceDataRoute
@@ -217,6 +243,8 @@ export interface FileRoutesById {
   '/(app)/help': typeof appHelpLazyRoute
   '/(auth)/': typeof authIndexRoute
   '/(app)/analyze/$portfolioId': typeof appAnalyzePortfolioIdRoute
+  '/(app)/analyze/idea-generation': typeof appAnalyzeIdeaGenerationRoute
+  '/(app)/analyze/stock-profile': typeof appAnalyzeStockProfileRoute
   '/(app)/create-portfolio/metadata': typeof appCreatePortfolioMetadataRoute
   '/(app)/create-portfolio/$portfolioId/benchmark': typeof appCreatePortfolioPortfolioIdBenchmarkRoute
   '/(app)/create-portfolio/$portfolioId/calculations': typeof appCreatePortfolioPortfolioIdCalculationsRoute
@@ -234,6 +262,7 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/analyze'
     | '/create-portfolio'
     | '/dashboard'
     | '/reference-data'
@@ -242,6 +271,8 @@ export interface FileRouteTypes {
     | '/register'
     | '/help'
     | '/analyze/$portfolioId'
+    | '/analyze/idea-generation'
+    | '/analyze/stock-profile'
     | '/create-portfolio/metadata'
     | '/create-portfolio/$portfolioId/benchmark'
     | '/create-portfolio/$portfolioId/calculations'
@@ -257,6 +288,7 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/analyze'
     | '/create-portfolio'
     | '/dashboard'
     | '/reference-data'
@@ -265,6 +297,8 @@ export interface FileRouteTypes {
     | '/register'
     | '/help'
     | '/analyze/$portfolioId'
+    | '/analyze/idea-generation'
+    | '/analyze/stock-profile'
     | '/create-portfolio/metadata'
     | '/create-portfolio/$portfolioId/benchmark'
     | '/create-portfolio/$portfolioId/calculations'
@@ -280,6 +314,7 @@ export interface FileRouteTypes {
   id:
     | '__root__'
     | '/(app)'
+    | '/(app)/analyze'
     | '/(app)/create-portfolio'
     | '/(app)/dashboard'
     | '/(app)/reference-data'
@@ -289,6 +324,8 @@ export interface FileRouteTypes {
     | '/(app)/help'
     | '/(auth)/'
     | '/(app)/analyze/$portfolioId'
+    | '/(app)/analyze/idea-generation'
+    | '/(app)/analyze/stock-profile'
     | '/(app)/create-portfolio/metadata'
     | '/(app)/create-portfolio/$portfolioId/benchmark'
     | '/(app)/create-portfolio/$portfolioId/calculations'
@@ -374,6 +411,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof appCreatePortfolioRouteRouteImport
       parentRoute: typeof appRouteRoute
     }
+    '/(app)/analyze': {
+      id: '/(app)/analyze'
+      path: '/analyze'
+      fullPath: '/analyze'
+      preLoaderRoute: typeof appAnalyzeRouteRouteImport
+      parentRoute: typeof appRouteRoute
+    }
     '/(app)/create-portfolio/metadata': {
       id: '/(app)/create-portfolio/metadata'
       path: '/metadata'
@@ -381,12 +425,26 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof appCreatePortfolioMetadataRouteImport
       parentRoute: typeof appCreatePortfolioRouteRoute
     }
+    '/(app)/analyze/stock-profile': {
+      id: '/(app)/analyze/stock-profile'
+      path: '/stock-profile'
+      fullPath: '/analyze/stock-profile'
+      preLoaderRoute: typeof appAnalyzeStockProfileRouteImport
+      parentRoute: typeof appAnalyzeRouteRoute
+    }
+    '/(app)/analyze/idea-generation': {
+      id: '/(app)/analyze/idea-generation'
+      path: '/idea-generation'
+      fullPath: '/analyze/idea-generation'
+      preLoaderRoute: typeof appAnalyzeIdeaGenerationRouteImport
+      parentRoute: typeof appAnalyzeRouteRoute
+    }
     '/(app)/analyze/$portfolioId': {
       id: '/(app)/analyze/$portfolioId'
-      path: '/analyze/$portfolioId'
+      path: '/$portfolioId'
       fullPath: '/analyze/$portfolioId'
       preLoaderRoute: typeof appAnalyzePortfolioIdRouteImport
-      parentRoute: typeof appRouteRoute
+      parentRoute: typeof appAnalyzeRouteRoute
     }
     '/(app)/create-portfolio/$portfolioId/universe': {
       id: '/(app)/create-portfolio/$portfolioId/universe'
@@ -468,6 +526,22 @@ declare module '@tanstack/react-router' {
   }
 }
 
+interface appAnalyzeRouteRouteChildren {
+  appAnalyzePortfolioIdRoute: typeof appAnalyzePortfolioIdRoute
+  appAnalyzeIdeaGenerationRoute: typeof appAnalyzeIdeaGenerationRoute
+  appAnalyzeStockProfileRoute: typeof appAnalyzeStockProfileRoute
+}
+
+const appAnalyzeRouteRouteChildren: appAnalyzeRouteRouteChildren = {
+  appAnalyzePortfolioIdRoute: appAnalyzePortfolioIdRoute,
+  appAnalyzeIdeaGenerationRoute: appAnalyzeIdeaGenerationRoute,
+  appAnalyzeStockProfileRoute: appAnalyzeStockProfileRoute,
+}
+
+const appAnalyzeRouteRouteWithChildren = appAnalyzeRouteRoute._addFileChildren(
+  appAnalyzeRouteRouteChildren,
+)
+
 interface appCreatePortfolioRouteRouteChildren {
   appCreatePortfolioMetadataRoute: typeof appCreatePortfolioMetadataRoute
   appCreatePortfolioPortfolioIdBenchmarkRoute: typeof appCreatePortfolioPortfolioIdBenchmarkRoute
@@ -516,23 +590,23 @@ const appCreatePortfolioRouteRouteWithChildren =
   )
 
 interface appRouteRouteChildren {
+  appAnalyzeRouteRoute: typeof appAnalyzeRouteRouteWithChildren
   appCreatePortfolioRouteRoute: typeof appCreatePortfolioRouteRouteWithChildren
   appDashboardRoute: typeof appDashboardRoute
   appReferenceDataRoute: typeof appReferenceDataRoute
   appSelectPortfolioRoute: typeof appSelectPortfolioRoute
   appSettingsRoute: typeof appSettingsRoute
   appHelpLazyRoute: typeof appHelpLazyRoute
-  appAnalyzePortfolioIdRoute: typeof appAnalyzePortfolioIdRoute
 }
 
 const appRouteRouteChildren: appRouteRouteChildren = {
+  appAnalyzeRouteRoute: appAnalyzeRouteRouteWithChildren,
   appCreatePortfolioRouteRoute: appCreatePortfolioRouteRouteWithChildren,
   appDashboardRoute: appDashboardRoute,
   appReferenceDataRoute: appReferenceDataRoute,
   appSelectPortfolioRoute: appSelectPortfolioRoute,
   appSettingsRoute: appSettingsRoute,
   appHelpLazyRoute: appHelpLazyRoute,
-  appAnalyzePortfolioIdRoute: appAnalyzePortfolioIdRoute,
 }
 
 const appRouteRouteWithChildren = appRouteRoute._addFileChildren(

@@ -28,7 +28,7 @@ export const PortfolioCard = ({
       }}
       onClick={() =>
         void navigate({
-          to: '/create-portfolio/$portfolioId/submit',
+          to: '/analyze/$portfolioId',
           params: { portfolioId: id.toString() },
         })
       }

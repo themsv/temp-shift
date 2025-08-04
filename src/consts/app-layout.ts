@@ -10,13 +10,18 @@
  */
 const appLayoutConfig = {
   navbar: {
-    width: 64,
+    width: '64px',
     breakpoint: 'xs',
   },
   header: {
-    height: 52,
+    height: '48px',
   },
-  padding: 'lg',
+  padding: 'md',
+};
+
+export const innerLayout = {
+  buttonSetWidth: '340px',
+  buttonSetHeight: '34px',
 };
 
 export default appLayoutConfig;
