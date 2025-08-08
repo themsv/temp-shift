@@ -62,7 +62,7 @@ export default function SearchSecurity({
             clearable
             size="xs"
             style={{
-              width: 'clamp(180px, 40vw, 400px)',
+              width: 'clamp(180px, 30vw, 400px)',
             }}
             data={[
               { value: 'IAG AU', label: 'Insurance Australian Group Limited' },

@@ -129,7 +129,7 @@ export default function StockOverview({
             <Grid align="center">
               <Grid.Col span={4}>
                 <Stack gap={2} align="center">
-                  <Text size="10px" c="dimmed" ta="center" style={{ whiteSpace: 'nowrap' }}>
+                  <Text size="8px" c="dimmed" ta="center">
                     Portfolio Weight
                   </Text>
                   <Text size="xs" c="blue" fw={500} ta="center">
@@ -139,7 +139,7 @@ export default function StockOverview({
               </Grid.Col>
               <Grid.Col span={4}>
                 <Stack gap={2} align="center">
-                  <Text size="10px" c="dimmed" ta="center" style={{ whiteSpace: 'nowrap' }}>
+                  <Text size="8px" c="dimmed" ta="center">
                     Benchmark Weight
                   </Text>
                   <Text size="xs" c="blue" fw={500} ta="center">
@@ -149,7 +149,7 @@ export default function StockOverview({
               </Grid.Col>
               <Grid.Col span={4}>
                 <Stack gap={2} align="center">
-                  <Text size="10px" c="dimmed" ta="center">
+                  <Text size="8px" c="dimmed" ta="center">
                     Active Weight
                   </Text>
                   <Text size="xs" c="red" fw={500} ta="center">

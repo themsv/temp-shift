@@ -1,7 +1,8 @@
 import { createFileRoute, Outlet } from '@tanstack/react-router';
-import { Divider, Grid, Group, Select, Text, Title } from '@mantine/core';
+import { Divider, Group, Select, Text, Title } from '@mantine/core';
 import { useIntl } from 'react-intl';
 import { IdeaGenAndStockProfile } from '@app/components/IdeaGenAndStockProfile';
+import { innerLayout } from '@app/consts/app-layout';
 
 export const Route = createFileRoute('/(app)/analyze')({
   component: RouteComponent,
@@ -11,16 +12,20 @@ function RouteComponent() {
   const { formatMessage } = useIntl();
   return (
     <>
-      <Grid gutter="xs" align="center">
-        <Grid.Col span={3}>
+      <Group justify="space-between" wrap="nowrap" align="center" preventGrowOverflow={false}>
+        <Group w="calc(100% - 340px)">
           <Group>
             <Text size="xs">{formatMessage({ id: 'NAV_ITEM_DASHBOARD' })}</Text>
             {/* TODO: Wire API that gives lite details of portfolios like name, id with debounce search */}
             <Select searchable data={[]} defaultValue="202" style={{ width: '55%' }} />
           </Group>
-        </Grid.Col>
-        <Grid.Col span={6}>
-          <Group style={{ border: '1px solid lightGrey', padding: '1%', width: '90%' }}>
+          <Group
+            style={{
+              border: '1px solid lightGrey',
+              padding: '1%',
+              width: 'auto',
+            }}
+          >
             <Group>
               <Text size="xs" style={{ lineHeight: 1 }}>
                 Total Stocks
@@ -63,12 +68,11 @@ function RouteComponent() {
               </Title>
             </Group>
           </Group>
-        </Grid.Col>
-        <Grid.Col span={3}>
-          {' '}
+        </Group>
+        <Group style={{ width: innerLayout.buttonSetWidth }} justify="flex-end">
           <IdeaGenAndStockProfile />
-        </Grid.Col>
-      </Grid>
+        </Group>
+      </Group>
       <Outlet />
     </>
   );

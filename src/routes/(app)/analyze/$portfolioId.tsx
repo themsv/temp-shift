@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { createFileRoute } from '@tanstack/react-router';
-import { Group, ScrollArea, Stack, Tabs, Text } from '@mantine/core';
-import { IconChartBar, IconLayoutBoard } from '@tabler/icons-react';
+import { ActionIcon, Group, ScrollArea, Stack, Tabs, Text } from '@mantine/core';
+import { IconChartBar, IconLayoutBoard, IconX } from '@tabler/icons-react';
 
 import { ArticleCard } from '@app/components/dashboard/ArticleCard';
 import ContributorsTable from '@app/components/ContributorsTable/ContributorsTable';
@@ -27,8 +27,8 @@ function PortfolioDetails() {
   const [showBubble] = useState(false);
 
   return (
-    <Group gap="0" h="calc(100vh - 48px - 32px)">
-      <Stack w="calc(100% - 340px - 20px)" h="100%">
+    <Group gap="0" h="calc(100vh - 48px - 32px)" style={{ paddingTop: '1%' }}>
+      <Stack w="calc(100% - 295px )" h="100%">
         <Tabs defaultValue="groups">
           <Tabs.List>
             {tabs.map((t) => (
@@ -68,9 +68,21 @@ function PortfolioDetails() {
           ))}
         </Tabs>
       </Stack>
-      <Stack w={340} p="0" gap="xs" h="100%">
+      <Stack w={295} p="0" gap="xs" h="100%">
         <Stack bg="gray.0" p="md">
-          <Text fw={500}>Insights</Text>
+          <Group justify="space-between">
+            <Text fw={500}>Insights</Text>
+            <ActionIcon
+              onClick={() => {
+                console.log('clicked');
+              }}
+              aria-label="Go back"
+              variant="transparent"
+              size="lg"
+            >
+              <IconX color="black" size={20} />
+            </ActionIcon>
+          </Group>
           <ScrollArea h="74vh" offsetScrollbars type="hover">
             <Stack gap="sm">
               {insights.map((item) => (
