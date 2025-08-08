@@ -18,7 +18,7 @@ export default function SelectPortfolio() {
   const [value, setValue] = useState<SelectValue | null>(null);
 
   return (
-    <Flex>
+    <Flex style={{ marginTop: '0.5%', height: '50%' }}>
       {changeFlex && (
         <StockOverview
           openDetailView={openDetailView}

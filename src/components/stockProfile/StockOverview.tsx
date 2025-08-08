@@ -1,4 +1,5 @@
-import { Flex, Stack, Text, ActionIcon, Group, Box, Tabs, Table } from '@mantine/core';
+import { useState } from 'react';
+import { Flex, Stack, Text, ActionIcon, Group, Box, Tabs, Table, Grid } from '@mantine/core';
 import { IconX, IconTriangleFilled } from '@tabler/icons-react';
 import { flavourExposures, elements } from '../stockProfile/StockProfileData';
 
@@ -7,14 +8,57 @@ const rows = elements.map((element) => (
     <Table.Td>
       <Text size="xs">{element.position}</Text>
     </Table.Td>
-    <Table.Td>
+    <Table.Td style={{ textAlign: 'center' }}>
       <Text size="xs">{element.mass}</Text>
     </Table.Td>
-    <Table.Td>
+    <Table.Td style={{ textAlign: 'center' }}>
       <Text size="xs">{element.name}</Text>
     </Table.Td>
   </Table.Tr>
 ));
+
+const renderTable = () => {
+  return (
+    <Table
+      withColumnBorders
+      withTableBorder
+      verticalSpacing={1}
+      horizontalSpacing={1}
+      styles={{
+        th: {
+          textAlign: 'center',
+          padding: 0,
+        },
+      }}
+    >
+      <colgroup>
+        <col style={{ width: '50%' }} />
+        <col style={{ width: '25%' }} />
+        <col style={{ width: '25%' }} />
+      </colgroup>
+      <Table.Thead>
+        <Table.Tr>
+          <Table.Th>
+            <Text size="xs" fw={500}>
+              Style Flavour
+            </Text>
+          </Table.Th>
+          <Table.Th>
+            <Text size="xs" fw={500} style={{ whiteSpace: 'nowrap' }}>
+              Flavour Exp.
+            </Text>
+          </Table.Th>
+          <Table.Th>
+            <Text size="xs" fw={500} style={{ whiteSpace: 'nowrap' }}>
+              Exp contrib.
+            </Text>
+          </Table.Th>
+        </Table.Tr>
+      </Table.Thead>
+      <Table.Tbody>{rows}</Table.Tbody>
+    </Table>
+  );
+};
 interface SelectValue {
   value: string;
   label: string;
@@ -34,52 +78,105 @@ export default function StockOverview({
   value,
   setValue,
 }: StockOverview) {
+  const [activeTab, setActiveTab] = useState<string | null>('first');
+
+  console.log('activetab : ', activeTab);
   return (
-    <Flex align="center" style={{ width: '25%' /* 25 + 3% */ }}>
+    <Flex align="center" style={{ width: '25%', backgroundColor: '#f7f7f7' }}>
       <Box
         style={{
           width: '100%',
-          height: '100%',
+          height: '80vh',
           marginRight: openDetailView ? '5%' : '0',
-          padding: '5%',
-          border: '1px solid #dcdcdc',
+          padding: '1% 1% 1% 2%',
+          // border: '1px solid #dcdcdc',
+          overflowY: 'auto',
+          boxSizing: 'border-box',
+          scrollbarWidth: 'none',
+          backgroundColor: '#f7f7f7',
         }}
       >
         <Stack>
-          <Group justify="space-between">
-            <Text fw={500}>{value ? value.value : null}</Text>
-            <ActionIcon
-              onClick={() => {
-                setChangeFlex(false);
-                setOpenDetailView(false);
-                setValue(null);
-              }}
-              aria-label="Go back"
-              variant="transparent"
-              size="lg"
-            >
-              <IconX color="black" size={20} />
-            </ActionIcon>
-          </Group>
-          <Text size="sm">{value ? value.label : null}</Text>
-          <Text size="xs" c="dimmed">
-            Insurance - Property and Casualty <br />
-            Close price - 652.1 | Market Price - 650
-          </Text>
-          <Box>
-            <Text size="sm" fw={500} mb={16}>
-              Flavour Exposures
+          <Stack gap={0}>
+            <Group justify="space-between">
+              <Text fw={500}>{value ? value.value : null}</Text>
+              <ActionIcon
+                onClick={() => {
+                  setChangeFlex(false);
+                  setOpenDetailView(false);
+                  setValue(null);
+                }}
+                aria-label="Go back"
+                variant="transparent"
+                size="lg"
+              >
+                <IconX color="black" size={20} />
+              </ActionIcon>
+            </Group>
+            <Text size="xs" c="dimmed" fw={500}>
+              {value ? value.label : null}
             </Text>
             <Stack>
-              {flavourExposures.map((row) => (
-                <Box key={row.label} style={{ display: 'flex', alignItems: 'center' }}>
+              <Text size="10px" c="dimmed">
+                Insurance - Property and Casualty
+              </Text>
+              <Text size="10px" c="dimmed">
+                Close price - 652.1 AUD | Market Price - 650 AUD
+              </Text>
+            </Stack>
+          </Stack>
+          <Stack gap={5}>
+            <Grid align="center">
+              <Grid.Col span={4}>
+                <Stack gap={2} align="center">
+                  <Text size="10px" c="dimmed" ta="center" style={{ whiteSpace: 'nowrap' }}>
+                    Portfolio Weight
+                  </Text>
+                  <Text size="xs" c="blue" fw={500} ta="center">
+                    3.30%
+                  </Text>
+                </Stack>
+              </Grid.Col>
+              <Grid.Col span={4}>
+                <Stack gap={2} align="center">
+                  <Text size="10px" c="dimmed" ta="center" style={{ whiteSpace: 'nowrap' }}>
+                    Benchmark Weight
+                  </Text>
+                  <Text size="xs" c="blue" fw={500} ta="center">
+                    2.3%
+                  </Text>
+                </Stack>
+              </Grid.Col>
+              <Grid.Col span={4}>
+                <Stack gap={2} align="center">
+                  <Text size="10px" c="dimmed" ta="center">
+                    Active Weight
+                  </Text>
+                  <Text size="xs" c="red" fw={500} ta="center">
+                    1.1%
+                  </Text>
+                </Stack>
+              </Grid.Col>
+            </Grid>
+          </Stack>
+
+          <Box style={{ backgroundColor: '	#FFFFFF', padding: '2%' }}>
+            <Text size="xs" fw={500} mb={10}>
+              Flavour Exposures
+            </Text>
+            <Stack gap="xs">
+              {flavourExposures.map((row, index) => (
+                <Box
+                  key={row.label + index.toString()}
+                  style={{ display: 'flex', alignItems: 'center' }}
+                >
                   <Text size="xs" style={{ minWidth: '45%' }}>
                     {row.label}
                   </Text>
                   <Box style={{ display: 'flex' }}>
-                    {row.exposures.map((val) => (
+                    {row.exposures.map((val, index) => (
                       <Box
-                        key={val}
+                        key={(val ?? '') + index.toString()}
                         style={{
                           width: 14,
                           height: 14,
@@ -96,103 +193,50 @@ export default function StockOverview({
               ))}
             </Stack>
           </Box>
-          <Text size="xs" fw={500} style={{ marginBottom: '-4%' }}>
-            Top 5 Factors
-          </Text>
-          <Box style={{ overflowX: 'auto', maxWidth: '100%', marginTop: '0' }}>
-            <Table withColumnBorders withTableBorder verticalSpacing={1} horizontalSpacing={1}>
-              <Table.Thead>
-                <Table.Tr>
-                  <Table.Th>
-                    <Text size="xs" fw={500}>
-                      Style Flavour
-                    </Text>
-                  </Table.Th>
-                  <Table.Th>
-                    <Text size="xs" fw={500}>
-                      Flavour Exp.
-                    </Text>
-                  </Table.Th>
-                  <Table.Th>
-                    <Text size="xs" fw={500}>
-                      Exp Contribution
-                    </Text>
-                  </Table.Th>
-                </Table.Tr>
-              </Table.Thead>
-              <Table.Tbody>{rows}</Table.Tbody>
-            </Table>
+          <Box style={{ backgroundColor: '	#FFFFFF', padding: '2%' }}>
+            <Text size="xs" fw={500}>
+              Top 5 Stock Flavour Exposures
+            </Text>
+            <Box style={{ overflowX: 'auto', maxWidth: '100%', marginTop: '2%' }}>
+              {renderTable()}
+            </Box>
           </Box>
-          <Tabs
-            defaultValue="first"
-            color="black"
-            styles={{
-              tab: {
-                padding: '1%',
-              },
-            }}
-          >
-            <Tabs.List grow justify="flex-start">
-              <Tabs.Tab value="first">
-                <Text size="xs">Top 5 contributors</Text>
-              </Tabs.Tab>
-              <Tabs.Tab value="second">
-                <Text size="xs">Bottom 5 contributors</Text>
-              </Tabs.Tab>
-            </Tabs.List>
-            <Tabs.Panel value="first" pt="xs">
-              <Box style={{ overflowX: 'auto', maxWidth: '100%', marginTop: '0' }}>
-                <Table withColumnBorders withTableBorder verticalSpacing={1} horizontalSpacing={1}>
-                  <Table.Thead>
-                    <Table.Tr>
-                      <Table.Th>
-                        <Text size="xs" fw={500}>
-                          Style Flavour
-                        </Text>
-                      </Table.Th>
-                      <Table.Th>
-                        <Text size="xs" fw={500}>
-                          Flavour Exp.
-                        </Text>
-                      </Table.Th>
-                      <Table.Th>
-                        <Text size="xs" fw={500}>
-                          Exp Contribution
-                        </Text>
-                      </Table.Th>
-                    </Table.Tr>
-                  </Table.Thead>
-                  <Table.Tbody>{rows}</Table.Tbody>
-                </Table>
-              </Box>
-            </Tabs.Panel>
-            <Tabs.Panel value="second" pt="xs">
-              <Box style={{ overflowX: 'auto', maxWidth: '100%', marginTop: '0' }}>
-                <Table withColumnBorders withTableBorder verticalSpacing={1} horizontalSpacing={1}>
-                  <Table.Thead>
-                    <Table.Tr>
-                      <Table.Th>
-                        <Text size="xs" fw={500}>
-                          Style Flavour
-                        </Text>
-                      </Table.Th>
-                      <Table.Th>
-                        <Text size="xs" fw={500}>
-                          Flavour Exp.
-                        </Text>
-                      </Table.Th>
-                      <Table.Th>
-                        <Text size="xs" fw={500}>
-                          Exp Contribution
-                        </Text>
-                      </Table.Th>
-                    </Table.Tr>
-                  </Table.Thead>
-                  <Table.Tbody>{rows}</Table.Tbody>
-                </Table>
-              </Box>
-            </Tabs.Panel>
-          </Tabs>
+          <Box style={{ backgroundColor: '	#FFFFFF', padding: '2%' }}>
+            <Tabs
+              defaultValue="first"
+              value={activeTab}
+              onChange={setActiveTab}
+              color="blue"
+              styles={{
+                tab: {
+                  padding: '1%',
+                },
+              }}
+            >
+              <Tabs.List grow justify="flex-start">
+                <Tabs.Tab value="first">
+                  <Text size="xs" c={activeTab === 'second' ? 'dimmed' : ''}>
+                    Top 5 contributors
+                  </Text>
+                </Tabs.Tab>
+                <Tabs.Tab value="second">
+                  <Text size="xs" c={activeTab === 'first' ? 'dimmed' : ''}>
+                    Bottom 5 contributors
+                  </Text>
+                </Tabs.Tab>
+              </Tabs.List>
+              <Tabs.Panel value="first" pt="xs">
+                <Box style={{ overflowX: 'auto', maxWidth: '100%', marginTop: '0' }}>
+                  {renderTable()}
+                </Box>
+              </Tabs.Panel>
+              <Tabs.Panel value="second" pt="xs">
+                <Box style={{ overflowX: 'auto', maxWidth: '100%', marginTop: '0' }}>
+                  {renderTable()}
+                </Box>
+              </Tabs.Panel>
+            </Tabs>
+          </Box>
         </Stack>
       </Box>
       {!openDetailView && (

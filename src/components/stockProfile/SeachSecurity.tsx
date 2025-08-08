@@ -36,6 +36,7 @@ export default function SearchSecurity({
         transition: 'width 0.3s ease',
         padding: '0.5%',
         border: '1px solid #dcdcdc',
+        backgroundColor: '#FFFFF',
       }}
     >
       <Group justify="space-between">

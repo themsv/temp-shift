@@ -16,42 +16,131 @@ export const data = [
   },
 ];
 
+function getRandomValue() {
+  return (Math.random() * 118 - 20).toFixed(1) + '%'; // -20 to 98
+}
+
 export const tableGroups = [
   {
     group: 'Value',
     rows: [
-      { factor: 'Deep Value', value: '9.5%' },
-      { factor: 'High Risk Value', value: '15%' },
-      { factor: 'Low Risk Value', value: '-7%' },
-      { factor: 'High Yield', value: '74%' },
-      { factor: 'Sentiment Value', value: '19.5%' },
+      {
+        factor: 'Deep Value',
+        value1: getRandomValue(),
+        value2: getRandomValue(),
+        value3: getRandomValue(),
+      },
+      {
+        factor: 'High Risk Value',
+        value1: getRandomValue(),
+        value2: getRandomValue(),
+        value3: getRandomValue(),
+      },
+      {
+        factor: 'Low Risk Value',
+        value1: getRandomValue(),
+        value2: getRandomValue(),
+        value3: getRandomValue(),
+      },
+      {
+        factor: 'High Yield',
+        value1: getRandomValue(),
+        value2: getRandomValue(),
+        value3: getRandomValue(),
+      },
+      {
+        factor: 'Sentiment Value',
+        value1: getRandomValue(),
+        value2: getRandomValue(),
+        value3: getRandomValue(),
+      },
     ],
   },
   {
     group: 'Growth',
     rows: [
-      { factor: 'Deep Value', value: '9.5%' },
-      { factor: 'High Risk Value', value: '15%' },
-      { factor: 'Low Risk Value', value: '-7%' },
-      { factor: 'High Yield', value: '74%' },
+      {
+        factor: 'Deep Value',
+        value1: getRandomValue(),
+        value2: getRandomValue(),
+        value3: getRandomValue(),
+      },
+      {
+        factor: 'High Risk Value',
+        value1: getRandomValue(),
+        value2: getRandomValue(),
+        value3: getRandomValue(),
+      },
+      {
+        factor: 'Low Risk Value',
+        value1: getRandomValue(),
+        value2: getRandomValue(),
+        value3: getRandomValue(),
+      },
+      {
+        factor: 'High Yield',
+        value1: getRandomValue(),
+        value2: getRandomValue(),
+        value3: getRandomValue(),
+      },
     ],
   },
   {
-    group: 'quality',
+    group: 'Quality',
     rows: [
-      { factor: 'Deep Value', value: '9.5%' },
-      { factor: 'High Risk Value', value: '15%' },
-      { factor: 'Low Risk Value', value: '-7%' },
-      { factor: 'High Yield', value: '74%' },
+      {
+        factor: 'Deep Value',
+        value1: getRandomValue(),
+        value2: getRandomValue(),
+        value3: getRandomValue(),
+      },
+      {
+        factor: 'High Risk Value',
+        value1: getRandomValue(),
+        value2: getRandomValue(),
+        value3: getRandomValue(),
+      },
+      {
+        factor: 'Low Risk Value',
+        value1: getRandomValue(),
+        value2: getRandomValue(),
+        value3: getRandomValue(),
+      },
+      {
+        factor: 'High Yield',
+        value1: getRandomValue(),
+        value2: getRandomValue(),
+        value3: getRandomValue(),
+      },
     ],
   },
   {
     group: 'Loss-Makers',
     rows: [
-      { factor: 'Deep Value', value: '9.5%' },
-      { factor: 'High Risk Value', value: '15%' },
-      { factor: 'Low Risk Value', value: '-7%' },
-      { factor: 'High Yield', value: '74%' },
+      {
+        factor: 'Deep Value',
+        value1: getRandomValue(),
+        value2: getRandomValue(),
+        value3: getRandomValue(),
+      },
+      {
+        factor: 'High Risk Value',
+        value1: getRandomValue(),
+        value2: getRandomValue(),
+        value3: getRandomValue(),
+      },
+      {
+        factor: 'Low Risk Value',
+        value1: getRandomValue(),
+        value2: getRandomValue(),
+        value3: getRandomValue(),
+      },
+      {
+        factor: 'High Yield',
+        value1: getRandomValue(),
+        value2: getRandomValue(),
+        value3: getRandomValue(),
+      },
     ],
   },
 ];
@@ -76,9 +165,9 @@ export const flavourExposures = [
 ];
 
 export const elements = [
-  { position: 'Low Risk Yield', mass: '12%', name: '-' },
-  { position: 'High Yield', mass: '49%', name: '-' },
-  { position: 'Deep value', mass: '62%', name: '-' },
-  { position: 'Sentiment Value', mass: '37%', name: '-' },
-  { position: 'Low risk yield', mass: '6%', name: '-' },
+  { position: 'Low Risk Yield', mass: '12%', name: '1%' },
+  { position: 'High Yield', mass: '49%', name: '5%' },
+  { position: 'Deep value', mass: '62%', name: '77%' },
+  { position: 'Sentiment Value', mass: '37%', name: '56%' },
+  { position: 'Low risk yield', mass: '6%', name: '23%' },
 ];
