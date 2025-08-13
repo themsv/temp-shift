@@ -20,8 +20,8 @@ const appLayoutConfig = {
 };
 
 export const innerLayout = {
-  buttonSetWidth: '340px',
-  buttonSetHeight: '34px',
+  buttonSetWidth: '330px',
+  buttonSetHeight: '36px',
 };
 
 export default appLayoutConfig;

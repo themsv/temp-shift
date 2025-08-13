@@ -80,16 +80,13 @@ export default function StockOverview({
 }: StockOverview) {
   const [activeTab, setActiveTab] = useState<string | null>('first');
 
-  console.log('activetab : ', activeTab);
   return (
-    <Flex align="center" style={{ width: '25%', backgroundColor: '#f7f7f7' }}>
+    <Flex style={{ width: openDetailView ? '28%' : '25%', backgroundColor: '#f7f7f7' }}>
       <Box
         style={{
           width: '100%',
-          height: '80vh',
           marginRight: openDetailView ? '5%' : '0',
           padding: '1% 1% 1% 2%',
-          // border: '1px solid #dcdcdc',
           overflowY: 'auto',
           boxSizing: 'border-box',
           scrollbarWidth: 'none',
@@ -240,32 +237,34 @@ export default function StockOverview({
         </Stack>
       </Box>
       {!openDetailView && (
-        <Box
-          style={{
-            backgroundColor: 'black',
-            height: '66px',
-            width: '16px',
-            marginRight: '3%',
-            cursor: 'pointer',
-            padding: '0',
-            clipPath: 'polygon(0 0, 100% 15%, 100% 85%, 0 100%)',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-          }}
-          onClick={() => {
-            setOpenDetailView(true);
-          }}
-        >
-          <IconTriangleFilled
-            size={10}
+        <Flex align="center" style={{ marginRight: '3%' }}>
+          <Box
             style={{
-              transform: 'rotate(90deg)',
-              fill: 'white',
-              stroke: 'none',
+              backgroundColor: 'black',
+              height: '66px',
+              width: '16px',
+
+              cursor: 'pointer',
+              padding: '0',
+              clipPath: 'polygon(0 0, 100% 15%, 100% 85%, 0 100%)',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
             }}
-          />
-        </Box>
+            onClick={() => {
+              setOpenDetailView(true);
+            }}
+          >
+            <IconTriangleFilled
+              size={10}
+              style={{
+                transform: 'rotate(90deg)',
+                fill: 'white',
+                stroke: 'none',
+              }}
+            />
+          </Box>
+        </Flex>
       )}
     </Flex>
   );

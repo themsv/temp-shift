@@ -51,7 +51,7 @@ function Dashboard() {
       gap="0"
       h={`calc(100vh - ${appLayoutConfig.header.height} - ${spacing.md} - ${spacing.md})`}
     >
-      <Stack w={`calc(100% - ${innerLayout.buttonSetWidth} - ${spacing.md})`} h="100%">
+      <Stack w={`calc(100% - ${innerLayout.buttonSetWidth} - ${spacing.md})`} h="100%" px="md">
         <Group align="center" justify="space-between">
           <Text fw={600} size="xl">
             {formatMessage({ id: 'MY_PORTFOLIOS', defaultMessage: 'My Portfolios' })}
@@ -102,7 +102,7 @@ function Dashboard() {
           </SimpleGrid>
         </ScrollArea>
       </Stack>
-      <Stack w={innerLayout.buttonSetWidth} p="0" gap="xs" h="100%">
+      <Stack w={innerLayout.buttonSetWidth} p="0" h="100%">
         <IdeaGenAndStockProfile />
         <ScrollArea h="calc(100% - 36px)">
           <ResearchItems />

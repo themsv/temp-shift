@@ -1,12 +1,22 @@
 import { useState } from 'react';
 import { createFileRoute } from '@tanstack/react-router';
-import { ActionIcon, Group, ScrollArea, Stack, Tabs, Text } from '@mantine/core';
+import {
+  ActionIcon,
+  Box,
+  Group,
+  ScrollArea,
+  Stack,
+  Tabs,
+  Text,
+  useMantineTheme,
+} from '@mantine/core';
 import { IconChartBar, IconLayoutBoard, IconX } from '@tabler/icons-react';
 
 import { ArticleCard } from '@app/components/dashboard/ArticleCard';
 import ContributorsTable from '@app/components/ContributorsTable/ContributorsTable';
 import { ContributorsControls } from '@app/components/ContributorsTable/ContributorsControls';
 import { BubbleChart, HeatmapChart, SkyLine } from '@app/components/charts/SkyLine';
+import { innerLayout } from '@app/consts/app-layout';
 import insights from '../../../mocks/insights.json';
 
 const tabs = [
@@ -23,12 +33,13 @@ export const Route = createFileRoute('/(app)/analyze/$portfolioId')({
 function PortfolioDetails() {
   //TODO: prefetch or API call to get portfolio passing portfolioId
 
+  const { spacing } = useMantineTheme();
   const [checked, setChecked] = useState(true);
   const [showBubble] = useState(false);
 
   return (
-    <Group gap="0" h="calc(100vh - 48px - 32px)" style={{ paddingTop: '1%' }}>
-      <Stack w="calc(100% - 295px )" h="100%">
+    <Group gap={0}>
+      <Stack w={`calc(100% - ${innerLayout.buttonSetWidth} - ${spacing.md})`} px="md">
         <Tabs defaultValue="groups">
           <Tabs.List>
             {tabs.map((t) => (
@@ -68,7 +79,7 @@ function PortfolioDetails() {
           ))}
         </Tabs>
       </Stack>
-      <Stack w={295} p="0" gap="xs" h="100%">
+      <Stack w={innerLayout.buttonSetWidth}>
         <Stack bg="gray.0" p="md">
           <Group justify="space-between">
             <Text fw={500}>Insights</Text>
@@ -92,6 +103,8 @@ function PortfolioDetails() {
           </ScrollArea>
         </Stack>
       </Stack>
+      {/* To sync the layout with Bookmarks */}
+      <Box w={spacing.md} />
     </Group>
   );
 }

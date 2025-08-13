@@ -1,79 +1,83 @@
 import { createFileRoute, Outlet } from '@tanstack/react-router';
-import { Divider, Group, Select, Text, Title } from '@mantine/core';
-import { useIntl } from 'react-intl';
+import {
+  Divider,
+  Group,
+  Paper,
+  Select,
+  Text as MantineText,
+  Title as MantineTitle,
+  Box,
+  useMantineTheme,
+  Stack,
+} from '@mantine/core';
+import { DateInput } from '@mantine/dates';
+import dayjs from 'dayjs';
+import { IconCalendarEvent } from '@tabler/icons-react';
 import { IdeaGenAndStockProfile } from '@app/components/IdeaGenAndStockProfile';
 import { innerLayout } from '@app/consts/app-layout';
+
+const Text = MantineText.withProps({
+  size: 'sm',
+});
+
+const Title = MantineTitle.withProps({ order: 6 });
 
 export const Route = createFileRoute('/(app)/analyze')({
   component: RouteComponent,
 });
 
 function RouteComponent() {
-  const { formatMessage } = useIntl();
+  const { spacing } = useMantineTheme();
   return (
-    <>
-      <Group justify="space-between" wrap="nowrap" align="center" preventGrowOverflow={false}>
-        <Group w="calc(100% - 340px)">
-          <Group>
-            <Text size="xs">{formatMessage({ id: 'NAV_ITEM_DASHBOARD' })}</Text>
-            {/* TODO: Wire API that gives lite details of portfolios like name, id with debounce search */}
-            <Select searchable data={[]} defaultValue="202" style={{ width: '55%' }} />
-          </Group>
-          <Group
-            style={{
-              border: '1px solid lightGrey',
-              padding: '1%',
-              width: 'auto',
-            }}
-          >
+    <Stack w="100%">
+      <Group gap={0} h={innerLayout.buttonSetHeight}>
+        <Group w={`calc(100% - ${innerLayout.buttonSetWidth} - ${spacing.md} )`}>
+          {/* TODO: Wire API that gives lite details of portfolios like name, id with debounce search */}
+          <Select
+            searchable
+            data={[{ value: '202', label: 'Small Cap Growth Fund' }]}
+            defaultValue="202"
+            styles={{ input: { border: 0 } }}
+          />
+          <DateInput
+            placeholder="mm-dd-yyyy"
+            maxDate={dayjs().subtract(1, 'day').format('YYYY-MM-DD')}
+            w={130}
+            valueFormat="DD/MM/YYYY"
+            styles={{ input: { border: 0 } }}
+            rightSection={<IconCalendarEvent size={20} />}
+          />
+
+          <Paper withBorder p={6}>
             <Group>
-              <Text size="xs" style={{ lineHeight: 1 }}>
-                Total Stocks
-              </Text>
-              <Title order={6} style={{ lineHeight: 1, fontWeight: 600 }}>
-                140
-              </Title>
+              <Group>
+                <Text>Total Stocks</Text>
+                <Title>140</Title>
+              </Group>
+              <Divider orientation="vertical" />
+              <Group>
+                <Text>Tracking Error</Text>
+                <Title>0.04%</Title>
+              </Group>
+              <Divider orientation="vertical" />
+              <Group>
+                <Text>Active Share</Text>
+                <Title>89%</Title>
+              </Group>
+              <Divider orientation="vertical" />
+              <Group>
+                <Text>Beta</Text>
+                <Title>1.33</Title>
+              </Group>
             </Group>
-
-            <Divider orientation="vertical" />
-
-            <Group>
-              <Text size="xs" ta="center" style={{ lineHeight: 1 }}>
-                Tracking Error
-              </Text>
-              <Title order={6} style={{ lineHeight: 1, fontWeight: 600 }}>
-                0.04%
-              </Title>
-            </Group>
-
-            <Divider orientation="vertical" />
-
-            <Group>
-              <Text size="xs" ta="center" style={{ lineHeight: 1 }}>
-                Active Share
-              </Text>
-              <Title order={6} style={{ lineHeight: 1, fontWeight: 600 }}>
-                89%
-              </Title>
-            </Group>
-
-            <Divider orientation="vertical" />
-
-            <Group>
-              <Text size="xs" ta="center" style={{ lineHeight: 1 }}>
-                Beta
-              </Text>
-              <Title order={6} style={{ lineHeight: 1, fontWeight: 600 }}>
-                1.33
-              </Title>
-            </Group>
-          </Group>
+          </Paper>
         </Group>
-        <Group style={{ width: innerLayout.buttonSetWidth }} justify="flex-end">
-          <IdeaGenAndStockProfile />
-        </Group>
+        <IdeaGenAndStockProfile />
+        {/* To sync the layout with Bookmarks */}
+        <Box w={spacing.md} />
       </Group>
+
       <Outlet />
-    </>
+    </Stack>
   );
 }

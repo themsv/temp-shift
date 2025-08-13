@@ -121,7 +121,6 @@ export default function StockDetail({ setOpenDetailView }: StockDetailProps) {
 
   return (
     <Flex
-      align="center"
       style={{
         width: '45%',
         backgroundColor: '#F7F7F7',
@@ -132,7 +131,6 @@ export default function StockDetail({ setOpenDetailView }: StockDetailProps) {
       <Box
         style={{
           width: '100%',
-          height: '80vh',
           padding: '1%',
           overflowY: 'auto',
           scrollbarWidth: 'none',
@@ -177,32 +175,34 @@ export default function StockDetail({ setOpenDetailView }: StockDetailProps) {
           </Tabs.Panel>
         </Tabs>
       </Box>
-      <Box
-        style={{
-          backgroundColor: 'black',
-          height: '66px',
-          width: '16px',
-          marginLeft: '1%',
-          cursor: 'pointer',
-          padding: '0',
-          clipPath: 'polygon(100% 0, 0 15%, 0 85%, 100% 100%)',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-        }}
-        onClick={() => {
-          setOpenDetailView(false);
-        }}
-      >
-        <IconTriangleFilled
-          size={10}
+      <Flex align="center">
+        <Box
           style={{
-            transform: 'rotate(270deg)',
-            fill: 'white',
-            stroke: 'none',
+            backgroundColor: 'black',
+            height: '66px',
+            width: '16px',
+            marginLeft: '1%',
+            cursor: 'pointer',
+            padding: '0',
+            clipPath: 'polygon(100% 0, 0 15%, 0 85%, 100% 100%)',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
           }}
-        />
-      </Box>
+          onClick={() => {
+            setOpenDetailView(false);
+          }}
+        >
+          <IconTriangleFilled
+            size={10}
+            style={{
+              transform: 'rotate(270deg)',
+              fill: 'white',
+              stroke: 'none',
+            }}
+          />
+        </Box>
+      </Flex>
     </Flex>
   );
 }

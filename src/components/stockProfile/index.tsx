@@ -4,6 +4,7 @@ import { Flex } from '@mantine/core';
 import StockOverview from '@app/components/stockProfile/StockOverview.tsx';
 import StockDetail from '@app/components/stockProfile/StockDetail.tsx';
 import SearchSecurity from '@app/components/stockProfile/SeachSecurity';
+import { innerLayout } from '@app/consts/app-layout';
 
 interface SelectValue {
   value: string;
@@ -18,7 +19,7 @@ export default function SelectPortfolio() {
   const [value, setValue] = useState<SelectValue | null>(null);
 
   return (
-    <Flex style={{ marginTop: '0.5%', height: '50%' }}>
+    <Flex h={`calc(100vh - 4 * ${innerLayout.buttonSetHeight} )`} style={{ marginTop: '0.5%' }}>
       {changeFlex && (
         <StockOverview
           openDetailView={openDetailView}
