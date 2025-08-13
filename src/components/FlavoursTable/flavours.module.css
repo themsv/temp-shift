@@ -1,0 +1,27 @@
+:global(.ag-cell.centered-content) {
+  display: flex;
+  align-items: center;
+}
+
+:global(.customSorticon .ag-icon) {
+  display: none !important;
+}
+
+:global(.customSorticon.ag-header-cell[aria-sort='ascending'] .ag-header-cell-label::after) {
+  content: '⌃';
+  font-size: 12px;
+  color: #1e88e5;
+  position: relative;
+  top: 1px;
+}
+
+:global(.customSorticon.ag-header-cell[aria-sort='descending'] .ag-header-cell-label::after) {
+  content: '⌵';
+  font-size: 14px;
+  color: #1e88e5;
+  position: relative;
+}
+
+:global(.ag-header-cell-label .ag-sort-order) {
+  display: none !important;
+}

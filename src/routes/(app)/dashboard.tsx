@@ -15,10 +15,10 @@ import { useIntl } from 'react-intl';
 import { IconHelp, IconSearch } from '@tabler/icons-react';
 import { useClickOutside, useDisclosure } from '@mantine/hooks';
 
+import { IdeaGenAndStockProfile } from '@app/components/IdeaGenAndStockProfile';
 import { ArticleCard } from '@app/components/dashboard/ArticleCard';
 import { CreatePortfolioCard, PortfolioCard } from '@app/components/dashboard/PortfolioCard';
 import { useGetPortfolios } from '@app/data/api';
-import { IdeaGenAndStockProfile } from '@app/components/IdeaGenAndStockProfile';
 import appLayoutConfig, { innerLayout } from '@app/consts/app-layout';
 
 import researchData from '../../mocks/Research-data.json';

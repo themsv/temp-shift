@@ -8,7 +8,10 @@ export function IdeaGenAndStockProfile() {
   const { formatMessage } = useIntl();
   return (
     <Group gap={0} w={innerLayout.buttonSetWidth} justify="space-between">
-      <CustomButtonLink to="/analyze/idea-generation" leftSection={<IconBulb size="20" />}>
+      <CustomButtonLink
+        to="/analyze/$portfolioId/idea-generation"
+        leftSection={<IconBulb size="20" />}
+      >
         {formatMessage({ id: 'IDEA_GENERATION' })}
       </CustomButtonLink>
       <CustomButtonLink

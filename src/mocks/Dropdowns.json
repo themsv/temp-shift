@@ -1,0 +1,31 @@
+{
+  "valueOptions": [
+    "Value",
+    "Deep value",
+    "High Risk Value",
+    "Value Traps",
+    "Sentiment Value",
+    "Low Risk Value",
+    "High Yield",
+    "Low Risk Yield"
+  ],
+  "growthOptions": [
+    "Short Term Growth",
+    "Sentiment Growth",
+    "High Risk Growth",
+    "Growth Traps",
+    "Secular Growth"
+  ],
+  "riskOptions": [
+    "High Beta",
+    "Low Beta",
+    "High Volatility",
+    "Low Volatility",
+    "Large Caps",
+    "Small Caps",
+    "High Liquidity",
+    "Low Liquidity"
+  ],
+  "debtOptions": ["High Composite Leverage", "Low Composite Leverage"],
+  "sensitivityOptions": ["High FX Sensitivity", "Low FX Sensitivity"]
+}

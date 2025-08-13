@@ -1,0 +1,128 @@
+.rankForest,
+.rankCoral,
+.rankEmrald,
+.rankLightgreen,
+.rankMintgreen,
+.rankGreen,
+.rankPink,
+.rankRed {
+  color: black;
+  display: flex;
+}
+
+.rankForest {
+  background-color: #5edfbe;
+}
+.rankCoral {
+  background-color: #f67a87;
+}
+.rankEmrald {
+  background-color: #97ebd4;
+}
+.rankLightgreen {
+  background-color: #dcedc8;
+}
+.rankMintgreen {
+  background-color: #b2dfdb;
+}
+.rankGreen {
+  background-color: #e1faf7;
+}
+.rankPink {
+  background-color: #ffe5eb;
+}
+
+.rankRed {
+  background-color: #d1293c;
+}
+.flavourWrapper :global(.ag-header-group-cell) {
+  background-color: black;
+  font-weight: 400;
+  color: white;
+}
+
+.gridWrapper :global(.ag-header-group-cell) {
+  background-color: black;
+  font-weight: 400;
+  color: white;
+}
+
+.gridWrapper :global(.ag-header-group-cell-with-group) {
+  font-size: 12px;
+}
+
+.gridWrapper :global(.ag-header-cell) {
+  background-color: #e3f2f9;
+  white-space: normal !important;
+  word-break: break-word;
+  overflow-wrap: break-word;
+  font-weight: bold;
+}
+
+.gridWrapper :global(.ag-theme-alpine .ag-header-expand-icon use),
+.gridWrapper :global(.ag-header-group-cell .ag-icon) {
+  fill: #1e88e5;
+  color: #1e88e5;
+  font-weight: bold;
+}
+
+.gridWrapper :global(.ag-theme-alpine .ag-row:nth-child(even)) {
+  background-color: #f2f2f2;
+}
+
+.gridWrapper :global(.ag-theme-alpine .ag-row:nth-child(odd)) {
+  background-color: white;
+}
+
+.gridWrapper :global(.ag-header-cell.group-boundary),
+.gridWrapper :global(.ag-cell.group-boundary),
+.gridWrapper :global(.last-visible-header),
+.gridWrapper :global(.last-visible-cell),
+.gridWrapper :global(.ag-header-group-cell-with-group) {
+  border-right: 1px solid #aacef9;
+  display: flex;
+}
+
+.gridWrapper :global(.ag-root-wrapper),
+.gridWrapper :global(.ag-root-wrapper-body),
+.gridWrapper :global(.ag-body-viewport),
+.gridWrapper :global(.ag-body-horizontal-scroll),
+.gridWrapper :global(.ag-header) {
+  border: none;
+  box-shadow: none;
+  background-color: white;
+}
+
+.gridWrapper :global(.ag-row) {
+  border: none;
+}
+
+.gridWrapper :global(.ag-header-cell-label),
+.gridWrapper :global(.ag-header-group-cell-label),
+.gridWrapper :global(.ag-cell) {
+  justify-content: center;
+  align-items: center;
+  font-size: 9px;
+  text-overflow: inherit;
+}
+
+.gridWrapper :global(.ag-header-cell-text) {
+  overflow: visible;
+}
+
+.verticalHeader :global(.ag-header-cell-label) {
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+  justify-content: space-between;
+  padding: 9px;
+  font-weight: bold;
+}
+
+.leftAlignHeader :global(.ag-header-cell-label),
+.leftAlignHeaderExpanded :global(.ag-header-cell-label) {
+  display: flex;
+  justify-content: flex-start !important;
+  padding: 0px !important;
+  text-align: left !important;
+  border: none;
+}

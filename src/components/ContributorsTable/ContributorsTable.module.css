@@ -1,4 +1,4 @@
-/* .rankForest,
+.rankForest,
 .rankCoral,
 .rankEmrald,
 .rankLightgreen,
@@ -133,4 +133,4 @@
 .leftAlignHeaderExpanded :global(.ag-header-cell-label) {
   justify-content: flex-start;
   padding: 0px;
-} */
+}

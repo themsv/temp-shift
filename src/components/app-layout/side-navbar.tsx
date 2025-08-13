@@ -14,7 +14,7 @@ import {
   useMantineTheme,
 } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
-import { IconCircleChevronLeft, IconCircleChevronRight } from '@tabler/icons-react';
+import { IconChevronRight, IconChevronLeft } from '@tabler/icons-react';
 import { IconDashboard, IconData, IconHelp, IconMCQLogo, IconSettings } from '@app/ui-core/icons';
 
 function SideNavbar() {
@@ -32,6 +32,7 @@ function SideNavbar() {
         styles={{
           content: {
             backgroundColor: '#000',
+            overflow: 'visible',
           },
         }}
       >
@@ -51,11 +52,15 @@ function SideNavbar() {
           </Stack>
           <ActionIcon
             onClick={close}
-            style={{ alignSelf: 'flex-end' }}
-            variant="transparent"
-            size="xl"
+            color="#5A5A58"
+            radius="lg"
+            size="md"
+            style={{
+              alignSelf: 'flex-end',
+              right: -30,
+            }}
           >
-            <IconCircleChevronLeft color="white" size={32} />
+            <IconChevronLeft color="white" size={20} />
           </ActionIcon>
 
           <Stack gap="xl">
@@ -91,11 +96,15 @@ function SideNavbar() {
 
         <ActionIcon
           onClick={open}
-          style={{ alignSelf: 'flex-end' }}
-          variant="transparent"
-          size="xl"
+          color="#5A5A58"
+          radius="lg"
+          size="md"
+          style={{
+            alignSelf: 'flex-end',
+            right: -13,
+          }}
         >
-          <IconCircleChevronRight color="white" size={32} />
+          <IconChevronRight color="white" size={20} />
         </ActionIcon>
 
         <Stack gap="xl">
