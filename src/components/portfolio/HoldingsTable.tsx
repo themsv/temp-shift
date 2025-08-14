@@ -6,6 +6,7 @@ import { CustomTable } from '@app/ui-core/custom';
 import { valid, invalid } from '../../mocks/holdings-upload.json';
 
 interface Holding {
+  uuid: string;
   effectiveDate: string;
   sedol: string;
   bbTicker: string;
@@ -41,7 +42,15 @@ interface InvalidHolding extends Holding {
   reason: string;
 }
 function InvalidHoldings() {
-  const [data] = useState<InvalidHolding[]>(invalid);
+  const [holdings, setHoldings] = useState<InvalidHolding[]>(invalid);
+
+  const handleDeleteAll = () => {
+    setHoldings([]);
+  };
+  const handleDeleteHolding = (uuid: string) => {
+    const updated = holdings.filter((h) => h.uuid !== uuid);
+    setHoldings(updated);
+  };
 
   const columns = useMemo<ColumnDef<InvalidHolding>[]>(
     () => [
@@ -86,26 +95,31 @@ function InvalidHoldings() {
       {
         accessorKey: 'isDelete',
         header: () => (
-          <Group align="center" gap={0} c="red.9">
+          <Group align="center" gap={0} c="red.9" onClick={handleDeleteAll}>
             <IconTrash />
             <Text>Delete All</Text>
           </Group>
         ),
-        cell: () => (
-          <ActionIcon variant="transparent">
-            <IconCircleX />
+        cell: ({ row }) => (
+          <ActionIcon
+            variant="transparent"
+            onClick={() => {
+              handleDeleteHolding(row.original.uuid);
+            }}
+          >
+            <IconCircleX color="black" />
           </ActionIcon>
         ),
       },
     ],
-    [data],
+    [holdings],
   );
   return (
     <CustomTable
       columns={columns}
-      tableData={invalid}
+      tableData={holdings}
       isLoading={false}
-      count={invalid.length}
+      count={holdings.length}
       withPagination={false}
     />
   );

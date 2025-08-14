@@ -8,6 +8,7 @@ export function IdeaGenAndStockProfile() {
   const { formatMessage } = useIntl();
   return (
     <Group gap={0} w={innerLayout.buttonSetWidth} justify="space-between">
+      {/* FIXME: Navigation to Idea Gen can happen with/without portfolioId So, fix the Link accordingly */}
       <CustomButtonLink
         to="/analyze/$portfolioId/idea-generation"
         leftSection={<IconBulb size="20" />}

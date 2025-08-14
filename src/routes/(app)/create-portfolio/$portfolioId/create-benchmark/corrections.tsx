@@ -7,7 +7,7 @@ import { InvalidHoldings, ValidHoldings } from '@app/components/portfolio/Holdin
 export const Route = createFileRoute(
   '/(app)/create-portfolio/$portfolioId/create-benchmark/corrections',
 )({
-  component: RouteComponent,
+  component: Corrections,
 });
 
 const CORRECTION_TABS = [
@@ -22,14 +22,14 @@ const CORRECTION_TABS = [
     icon: <IconCircleCheck color="green" />,
   },
 ];
-function RouteComponent() {
+function Corrections() {
   const { portfolioId } = Route.useParams();
 
   return (
     <Stack h="80vh" justify="space-between">
       <Stack>
         <CustomHeading title="Create Custom Benchmark" description="Set up a Custom Benchmark" />
-        <TextInput label="Benchmark Name" />
+        <TextInput label="Benchmark Name" value="ASX 300" />
         <Tabs defaultValue="invalid">
           <Tabs.List>
             {CORRECTION_TABS.map((tab) => (

@@ -24,7 +24,7 @@ import Selectable from '@app/components/SingleSelectCombobox/Select';
 import appLayoutConfig, { innerLayout } from '@app/consts/app-layout';
 import data from '../../../../mocks/Dropdowns.json';
 
-export const Route = createFileRoute('/(app)/analyze/$prortfolioId/idea-generation')({
+export const Route = createFileRoute('/(app)/analyze/$portfolioId/idea-generation')({
   component: IdeaGeneration,
 });
 

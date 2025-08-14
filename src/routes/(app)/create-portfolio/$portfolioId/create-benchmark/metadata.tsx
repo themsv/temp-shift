@@ -46,7 +46,7 @@ function RouteComponent() {
                 Select a file or drag & drop here
               </Text>
               <Text size="sm" c="dimmed">
-                .CSV or .XLS file size not more than 5mb
+                .CSV or .XLS file size not more than 5MB
               </Text>
             </Stack>
           </Stack>

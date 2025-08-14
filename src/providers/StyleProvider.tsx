@@ -2,13 +2,12 @@ import type { PropsWithChildren } from 'react';
 import { createTheme, MantineProvider } from '@mantine/core';
 import { Notifications } from '@mantine/notifications';
 import { ModalsProvider } from '@mantine/modals';
-import { IconTriangleInvertedFilled } from '@tabler/icons-react';
+import { IconChevronDown } from '@tabler/icons-react';
 
 import '@mantine/core/styles.css';
 import '@mantine/notifications/styles.css';
 import '@mantine/dropzone/styles.css';
 import '@mantine/dates/styles.css';
-import 'ag-charts-enterprise';
 
 const theme = createTheme({
   /** Theme override here */
@@ -33,7 +32,7 @@ const theme = createTheme({
   components: {
     Select: {
       defaultProps: {
-        rightSection: <IconTriangleInvertedFilled size={10} />,
+        rightSection: <IconChevronDown />,
         allowDeselect: false,
         checkIconPosition: 'right',
       },

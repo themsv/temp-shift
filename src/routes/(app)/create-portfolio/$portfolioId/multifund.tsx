@@ -131,7 +131,7 @@ function WeightsTable({ portfolios, setPortfolios }: WeightsTableProps) {
               handleDelete(row.original.id);
             }}
           >
-            <IconCircleX />
+            <IconCircleX color="black" />
           </ActionIcon>
         ),
       },

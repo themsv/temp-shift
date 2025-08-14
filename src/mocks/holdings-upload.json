@@ -1,6 +1,7 @@
 {
   "valid": [
     {
+      "uuid": "b1a7e2c0-1f2a-4e3b-8c9d-1a2b3c4d5e6f",
       "effectiveDate": "04-03-2025",
       "sedol": "098278",
       "bbTicker": "CSL AU",
@@ -9,6 +10,7 @@
       "weight": "9.2"
     },
     {
+      "uuid": "c2b8f3d1-2e3b-4c5d-9e0f-2b3c4d5e6f7a",
       "effectiveDate": "04-03-2025",
       "sedol": "987651",
       "bbTicker": "RMD AU",
@@ -17,6 +19,7 @@
       "weight": "4.5"
     },
     {
+      "uuid": "d3c9g4e2-3f4c-5d6e-0f1a-3c4d5e6f7a8b",
       "effectiveDate": "04-03-2025",
       "sedol": "789273",
       "bbTicker": "WOW AU",
@@ -25,6 +28,7 @@
       "weight": "5.6"
     },
     {
+      "uuid": "e4d0h5f3-4g5d-6e7f-1a2b-4d5e6f7a8b9c",
       "effectiveDate": "04-03-2025",
       "sedol": "987651",
       "bbTicker": "RMD AU",
@@ -33,6 +37,7 @@
       "weight": "4.5"
     },
     {
+      "uuid": "f5e1i6g4-5h6e-7f8g-2b3c-5e6f7a8b9c0d",
       "effectiveDate": "04-03-2025",
       "sedol": "789273",
       "bbTicker": "WOW AU",
@@ -41,6 +46,7 @@
       "weight": "5.6"
     },
     {
+      "uuid": "a6f2j7h5-6i7f-8g9h-3c4d-6f7a8b9c0d1e",
       "effectiveDate": "04-03-2025",
       "sedol": "987651",
       "bbTicker": "RMD AU",
@@ -49,6 +55,7 @@
       "weight": "4.5"
     },
     {
+      "uuid": "b7g3k8i6-7j8g-9h0i-4d5e-7a8b9c0d1e2f",
       "effectiveDate": "04-03-2025",
       "sedol": "789273",
       "bbTicker": "WOW AU",
@@ -57,6 +64,7 @@
       "weight": "5.6"
     },
     {
+      "uuid": "c8h4l9j7-8k9h-0i1j-5e6f-8b9c0d1e2f3g",
       "effectiveDate": "04-03-2025",
       "sedol": "987651",
       "bbTicker": "RMD AU",
@@ -65,6 +73,7 @@
       "weight": "4.5"
     },
     {
+      "uuid": "d9i5m0k8-9l0i-1j2k-6f7a-9c0d1e2f3g4h",
       "effectiveDate": "04-03-2025",
       "sedol": "789273",
       "bbTicker": "WOW AU",
@@ -73,6 +82,7 @@
       "weight": "5.6"
     },
     {
+      "uuid": "e0j6n1l9-0m1j-2k3l-7a8b-0d1e2f3g4h5i",
       "effectiveDate": "04-03-2025",
       "sedol": "987651",
       "bbTicker": "RMD AU",
@@ -83,6 +93,7 @@
   ],
   "invalid": [
     {
+      "uuid": "f1k7o2m0-1n2k-3l4m-8b9c-1e2f3g4h5i6j",
       "effectiveDate": "04-03-2025",
       "sedol": "098278",
       "bbTicker": "CSL AU",
@@ -92,6 +103,7 @@
       "reason": "Missing Id"
     },
     {
+      "uuid": "a2l8p3n1-2o3l-4m5n-9c0d-2f3g4h5i6j7k",
       "effectiveDate": "04-03-2025",
       "sedol": "789273",
       "bbTicker": "WOW AU",
@@ -101,6 +113,7 @@
       "reason": "Security Not found"
     },
     {
+      "uuid": "b3m9q4o2-3p4m-5n6o-0d1e-3g4h5i6j7k8l",
       "effectiveDate": "04-03-2025",
       "sedol": "987651",
       "bbTicker": "RMD AU",

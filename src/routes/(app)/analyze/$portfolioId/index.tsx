@@ -17,7 +17,7 @@ import ContributorsTable from '@app/components/ContributorsTable/ContributorsTab
 import { ContributorsControls } from '@app/components/ContributorsTable/ContributorsControls';
 import { BubbleChart, HeatmapChart, SkyLine } from '@app/components/charts/SkyLine';
 import { innerLayout } from '@app/consts/app-layout';
-import insights from '../../../mocks/insights.json';
+import insights from '../../../../mocks/insights.json';
 
 const tabs = [
   { label: 'Style Flavours', value: 'flavours' },
@@ -26,7 +26,7 @@ const tabs = [
   { label: 'Macro Betas', value: 'macros' },
 ];
 
-export const Route = createFileRoute('/(app)/analyze/$portfolioId')({
+export const Route = createFileRoute('/(app)/analyze/$portfolioId/')({
   component: PortfolioDetails,
 });
 

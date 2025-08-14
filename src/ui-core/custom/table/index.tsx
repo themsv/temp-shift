@@ -33,7 +33,7 @@ interface CustomTableProps extends TableProps {
 }
 
 function CustomTable(props: Readonly<CustomTableProps>) {
-  const { tableData, columns, isLoading, count, withPagination } = props;
+  const { tableData, columns, isLoading, count, withPagination, ...rest } = props;
 
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
 
@@ -60,7 +60,7 @@ function CustomTable(props: Readonly<CustomTableProps>) {
   return (
     <ScrollArea>
       <Stack>
-        <MTable striped stickyHeader>
+        <MTable striped stickyHeader {...rest}>
           <MTable.Thead>
             {tableInstance.getHeaderGroups().map((headerGroup) => (
               <MTable.Tr key={headerGroup.id}>
@@ -68,9 +68,9 @@ function CustomTable(props: Readonly<CustomTableProps>) {
                   <MTable.Th
                     key={header.id}
                     onClick={header.column.getToggleSortingHandler()}
-                    style={{ cursor: 'pointer' }}
+                    style={{ cursor: 'pointer', backgroundColor: '#E0F1FF' }}
                   >
-                    <Text fw="600">
+                    <Text fw="500" size="sm">
                       {flexRender(header.column.columnDef.header, header.getContext())}
                     </Text>
                   </MTable.Th>
@@ -86,7 +86,7 @@ function CustomTable(props: Readonly<CustomTableProps>) {
               tableInstance.getRowModel().rows.map((row) => (
                 <MTable.Tr key={row.id}>
                   {row.getVisibleCells().map((cell) => (
-                    <MTable.Td key={cell.id}>
+                    <MTable.Td key={cell.id} py="2">
                       {flexRender(cell.column.columnDef.cell, cell.getContext())}
                     </MTable.Td>
                   ))}
