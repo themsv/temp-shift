@@ -5,7 +5,7 @@ import { IconChartBar, IconLayoutBoard } from '@tabler/icons-react';
 
 import ContributorsTable from '@app/components/ContributorsTable/ContributorsTable';
 import { ContributorsControls } from '@app/components/ContributorsTable/ContributorsControls';
-import TabMenu from '@app/components/economic-exposure/TabMenu';
+import PortfolioAnalyzePanel from '@app/components/PortfolioAnalyzeSidePanel/PortfolioAnalyzePanel';
 import { SkyLine } from '@app/components/charts/SkyLine';
 import { HeatmapChart } from '@app/components/charts/HeatMapChart';
 import { innerLayout } from '@app/consts/app-layout';
@@ -29,7 +29,6 @@ function PortfolioDetails() {
 
   const { spacing } = useMantineTheme();
   const [checked, setChecked] = useState(true);
-  const [showBubble] = useState(false);
   const [panelWidth, setPanelWidth] = useState(innerLayout.buttonSetWidth);
 
   function panelWidthHandler(closed: boolean) {
@@ -94,7 +93,7 @@ function PortfolioDetails() {
           height: '80vh',
         }}
       >
-        <TabMenu panelWidthHandler={panelWidthHandler} />
+        <PortfolioAnalyzePanel panelWidthHandler={panelWidthHandler} />
       </div>
     </Group>
   );

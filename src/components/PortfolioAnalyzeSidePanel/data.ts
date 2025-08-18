@@ -1,0 +1,200 @@
+const marketData = [
+  {
+    id: 1,
+    regimeState: 'Value/Growth',
+    portfolioPosition: {
+      for: ['Growth', '#96ebd4'],
+      against: ['Growth', '#f5a7af'],
+    },
+    regimeInLast12Months: ['G', 'G', 'G', 'G', 'V', 'G', 'G', 'G', 'G', 'V', 'G', 'G'],
+  },
+  {
+    id: 2,
+    regimeState: 'Up/Down',
+    portfolioPosition: {
+      for: [null, ''],
+      against: [null, ''],
+    },
+    regimeInLast12Months: ['U', 'D', 'U', 'D', 'U', 'U', 'U', 'U', 'U', 'U', 'U', 'U'],
+  },
+  {
+    id: 3,
+    regimeState: 'Momentum/Not',
+    portfolioPosition: {
+      for: ['Momentum Market', '#e1faf7'],
+      against: ['Non Momentum Market', '#f5a7af'],
+    },
+    regimeInLast12Months: ['M', 'm', 'M', 'V', 'V', 'V', 'V', 'V', 'V', 'V', 'V', 'V'],
+  },
+  {
+    id: 4,
+    regimeState: 'Quality/Not',
+    portfolioPosition: {
+      for: ['Quality', '#e1faf7'],
+      against: ['Non Quality Market', '#f5a7af'],
+    },
+    regimeInLast12Months: ['Q', 'Q', 'Q', 'V', 'Q', 'Q', 'Q', 'Q', 'Q', 'Q', 'Q', 'V'],
+  },
+];
+
+const riskData = [
+  {
+    id: 1,
+    regimeState: 'VIX Level',
+    portfolioPosition: {
+      for: ['High VIX', '#e1faf7'],
+      against: ['Medium VIX', '#fde6ea'],
+    },
+    regimeInLast12Months: [
+      'Low',
+      'Low',
+      'Low',
+      'Med',
+      'Low',
+      'Low',
+      'Low',
+      'Low',
+      'Low',
+      'Low',
+      'Low',
+      'Low',
+    ],
+  },
+  {
+    id: 2,
+    regimeState: 'VIX Change',
+    portfolioPosition: {
+      for: ['Rising VIX', '#e1faf7'],
+      against: ['Falling VIX', '#fde6ea'],
+    },
+    regimeInLast12Months: [
+      'Stab',
+      'Stab',
+      'Fall',
+      'Rise',
+      'Stab',
+      'Stab',
+      'Stab',
+      'Stab',
+      'Stab',
+      'Rise',
+      'Stab',
+      'Stab',
+    ],
+  },
+];
+
+const economicData = [
+  {
+    id: 1,
+    regimeState: '10Yr Change',
+    portfolioPosition: {
+      for: [null, ''],
+      against: ['Rising', '#fde6ea'],
+    },
+    regimeInLast12Months: [
+      'Stab',
+      'Rise',
+      'Fall',
+      'Rise',
+      'Fall',
+      'Fall',
+      'Stab',
+      'Rise',
+      'Rise',
+      'Rise',
+      'Stab',
+      'Stab',
+    ],
+  },
+  {
+    id: 2,
+    regimeState: 'Inflation Level',
+    portfolioPosition: {
+      for: [null, ''],
+      against: ['Low', '#fde6ea'],
+    },
+    regimeInLast12Months: [
+      'High',
+      'Med',
+      'Med',
+      'Med',
+      'Med',
+      'Med',
+      'High',
+      'High',
+      'High',
+      'High',
+      'High',
+      'High',
+    ],
+  },
+  {
+    id: 3,
+    regimeState: 'US Infl Exp Change',
+    portfolioPosition: {
+      for: ['Falling', '#e1faf7'],
+      against: ['Rising', '#fde6ea'],
+    },
+    regimeInLast12Months: [
+      'Stab',
+      'Stab',
+      'Stab',
+      'Stab',
+      'Stab',
+      'Stab',
+      'Stab',
+      'Stab',
+      'Stab',
+      'Stab',
+      'Stab',
+      'Stab',
+    ],
+  },
+  {
+    id: 4,
+    regimeState: 'US Eco Cycle',
+    portfolioPosition: {
+      for: [null, ''],
+      against: ['Recovery', '#fde6ea'],
+    },
+    regimeInLast12Months: [
+      '2.Exp',
+      '2.Exp',
+      '2.Exp',
+      '2.Exp',
+      '2.Exp',
+      '2.Exp',
+      '2.Exp',
+      '2.Exp',
+      '2.Exp',
+      '2.Exp',
+      '2.Exp',
+      '2.Exp',
+    ],
+  },
+  {
+    id: 5,
+    regimeState: 'Eco Surprise',
+    portfolioPosition: {
+      for: ['Neutral', '#e1faf7'],
+      against: [null, ''],
+    },
+    regimeInLast12Months: [
+      'Neutral',
+      'Stab',
+      'Stab',
+      'Stab',
+      'Stab',
+      'Stab',
+      'Stab',
+      'Stab',
+      'Stab',
+      'Stab',
+      'Stab',
+      'Stab',
+    ],
+  },
+];
+
+export { marketData, riskData, economicData };
