@@ -7,7 +7,7 @@ import { round } from 'lodash';
 import type { SetState } from '@app/data/types';
 import { CustomButtonLink, CustomMultiSelect, CustomTable } from '@app/ui-core/custom';
 
-export const Route = createFileRoute('/(app)/create-portfolio/$portfolioId/multifund')({
+export const Route = createFileRoute('/(app)/create-portfolio/$portfolioId/multi-fund')({
   component: MultiFund,
 });
 

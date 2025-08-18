@@ -25,14 +25,21 @@ import { Route as appAnalyzePortfolioIdIndexRouteImport } from './routes/(app)/a
 import { Route as appCreatePortfolioPortfolioIdUniverseRouteImport } from './routes/(app)/create-portfolio/$portfolioId/universe'
 import { Route as appCreatePortfolioPortfolioIdSubmitRouteImport } from './routes/(app)/create-portfolio/$portfolioId/submit'
 import { Route as appCreatePortfolioPortfolioIdPreviewRouteImport } from './routes/(app)/create-portfolio/$portfolioId/preview'
-import { Route as appCreatePortfolioPortfolioIdMultifundRouteImport } from './routes/(app)/create-portfolio/$portfolioId/multifund'
+import { Route as appCreatePortfolioPortfolioIdMultiFundRouteImport } from './routes/(app)/create-portfolio/$portfolioId/multi-fund'
 import { Route as appCreatePortfolioPortfolioIdCorrectionsRouteImport } from './routes/(app)/create-portfolio/$portfolioId/corrections'
 import { Route as appCreatePortfolioPortfolioIdCalculationsRouteImport } from './routes/(app)/create-portfolio/$portfolioId/calculations'
 import { Route as appCreatePortfolioPortfolioIdBenchmarkRouteImport } from './routes/(app)/create-portfolio/$portfolioId/benchmark'
-import { Route as appAnalyzePortfolioIdIdeaGenerationRouteImport } from './routes/(app)/analyze/$portfolioId/idea-generation'
+import { Route as appAnalyzePortfolioIdIdeaGenerationRouteRouteImport } from './routes/(app)/analyze/$portfolioId/idea-generation/route'
+import { Route as appAnalyzePortfolioIdIdeaGenerationIndexRouteImport } from './routes/(app)/analyze/$portfolioId/idea-generation/index'
 import { Route as appCreatePortfolioPortfolioIdCreateBenchmarkPreviewRouteImport } from './routes/(app)/create-portfolio/$portfolioId/create-benchmark/preview'
 import { Route as appCreatePortfolioPortfolioIdCreateBenchmarkMetadataRouteImport } from './routes/(app)/create-portfolio/$portfolioId/create-benchmark/metadata'
 import { Route as appCreatePortfolioPortfolioIdCreateBenchmarkCorrectionsRouteImport } from './routes/(app)/create-portfolio/$portfolioId/create-benchmark/corrections'
+import { Route as appAnalyzePortfolioIdIdeaGenerationTopStocksRouteImport } from './routes/(app)/analyze/$portfolioId/idea-generation/top-stocks'
+import { Route as appAnalyzePortfolioIdIdeaGenerationScreeningRouteImport } from './routes/(app)/analyze/$portfolioId/idea-generation/screening'
+import { Route as appAnalyzePortfolioIdIdeaGenerationRegimesRouteRouteImport } from './routes/(app)/analyze/$portfolioId/idea-generation/regimes/route'
+import { Route as appAnalyzePortfolioIdIdeaGenerationRegimesIndexRouteImport } from './routes/(app)/analyze/$portfolioId/idea-generation/regimes/index'
+import { Route as appAnalyzePortfolioIdIdeaGenerationRegimesLeadingIndicatorRouteImport } from './routes/(app)/analyze/$portfolioId/idea-generation/regimes/leading-indicator'
+import { Route as appAnalyzePortfolioIdIdeaGenerationRegimesEconomicSurpriseRouteImport } from './routes/(app)/analyze/$portfolioId/idea-generation/regimes/economic-surprise'
 
 const appHelpLazyRouteImport = createFileRoute('/(app)/help')()
 
@@ -117,10 +124,10 @@ const appCreatePortfolioPortfolioIdPreviewRoute =
     path: '/$portfolioId/preview',
     getParentRoute: () => appCreatePortfolioRouteRoute,
   } as any)
-const appCreatePortfolioPortfolioIdMultifundRoute =
-  appCreatePortfolioPortfolioIdMultifundRouteImport.update({
-    id: '/$portfolioId/multifund',
-    path: '/$portfolioId/multifund',
+const appCreatePortfolioPortfolioIdMultiFundRoute =
+  appCreatePortfolioPortfolioIdMultiFundRouteImport.update({
+    id: '/$portfolioId/multi-fund',
+    path: '/$portfolioId/multi-fund',
     getParentRoute: () => appCreatePortfolioRouteRoute,
   } as any)
 const appCreatePortfolioPortfolioIdCorrectionsRoute =
@@ -141,11 +148,17 @@ const appCreatePortfolioPortfolioIdBenchmarkRoute =
     path: '/$portfolioId/benchmark',
     getParentRoute: () => appCreatePortfolioRouteRoute,
   } as any)
-const appAnalyzePortfolioIdIdeaGenerationRoute =
-  appAnalyzePortfolioIdIdeaGenerationRouteImport.update({
+const appAnalyzePortfolioIdIdeaGenerationRouteRoute =
+  appAnalyzePortfolioIdIdeaGenerationRouteRouteImport.update({
     id: '/$portfolioId/idea-generation',
     path: '/$portfolioId/idea-generation',
     getParentRoute: () => appAnalyzeRouteRoute,
+  } as any)
+const appAnalyzePortfolioIdIdeaGenerationIndexRoute =
+  appAnalyzePortfolioIdIdeaGenerationIndexRouteImport.update({
+    id: '/',
+    path: '/',
+    getParentRoute: () => appAnalyzePortfolioIdIdeaGenerationRouteRoute,
   } as any)
 const appCreatePortfolioPortfolioIdCreateBenchmarkPreviewRoute =
   appCreatePortfolioPortfolioIdCreateBenchmarkPreviewRouteImport.update({
@@ -165,6 +178,42 @@ const appCreatePortfolioPortfolioIdCreateBenchmarkCorrectionsRoute =
     path: '/$portfolioId/create-benchmark/corrections',
     getParentRoute: () => appCreatePortfolioRouteRoute,
   } as any)
+const appAnalyzePortfolioIdIdeaGenerationTopStocksRoute =
+  appAnalyzePortfolioIdIdeaGenerationTopStocksRouteImport.update({
+    id: '/top-stocks',
+    path: '/top-stocks',
+    getParentRoute: () => appAnalyzePortfolioIdIdeaGenerationRouteRoute,
+  } as any)
+const appAnalyzePortfolioIdIdeaGenerationScreeningRoute =
+  appAnalyzePortfolioIdIdeaGenerationScreeningRouteImport.update({
+    id: '/screening',
+    path: '/screening',
+    getParentRoute: () => appAnalyzePortfolioIdIdeaGenerationRouteRoute,
+  } as any)
+const appAnalyzePortfolioIdIdeaGenerationRegimesRouteRoute =
+  appAnalyzePortfolioIdIdeaGenerationRegimesRouteRouteImport.update({
+    id: '/regimes',
+    path: '/regimes',
+    getParentRoute: () => appAnalyzePortfolioIdIdeaGenerationRouteRoute,
+  } as any)
+const appAnalyzePortfolioIdIdeaGenerationRegimesIndexRoute =
+  appAnalyzePortfolioIdIdeaGenerationRegimesIndexRouteImport.update({
+    id: '/',
+    path: '/',
+    getParentRoute: () => appAnalyzePortfolioIdIdeaGenerationRegimesRouteRoute,
+  } as any)
+const appAnalyzePortfolioIdIdeaGenerationRegimesLeadingIndicatorRoute =
+  appAnalyzePortfolioIdIdeaGenerationRegimesLeadingIndicatorRouteImport.update({
+    id: '/leading-indicator',
+    path: '/leading-indicator',
+    getParentRoute: () => appAnalyzePortfolioIdIdeaGenerationRegimesRouteRoute,
+  } as any)
+const appAnalyzePortfolioIdIdeaGenerationRegimesEconomicSurpriseRoute =
+  appAnalyzePortfolioIdIdeaGenerationRegimesEconomicSurpriseRouteImport.update({
+    id: '/economic-surprise',
+    path: '/economic-surprise',
+    getParentRoute: () => appAnalyzePortfolioIdIdeaGenerationRegimesRouteRoute,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof authIndexRoute
@@ -177,18 +226,25 @@ export interface FileRoutesByFullPath {
   '/help': typeof appHelpLazyRoute
   '/analyze/stock-profile': typeof appAnalyzeStockProfileRoute
   '/create-portfolio/metadata': typeof appCreatePortfolioMetadataRoute
-  '/analyze/$portfolioId/idea-generation': typeof appAnalyzePortfolioIdIdeaGenerationRoute
+  '/analyze/$portfolioId/idea-generation': typeof appAnalyzePortfolioIdIdeaGenerationRouteRouteWithChildren
   '/create-portfolio/$portfolioId/benchmark': typeof appCreatePortfolioPortfolioIdBenchmarkRoute
   '/create-portfolio/$portfolioId/calculations': typeof appCreatePortfolioPortfolioIdCalculationsRoute
   '/create-portfolio/$portfolioId/corrections': typeof appCreatePortfolioPortfolioIdCorrectionsRoute
-  '/create-portfolio/$portfolioId/multifund': typeof appCreatePortfolioPortfolioIdMultifundRoute
+  '/create-portfolio/$portfolioId/multi-fund': typeof appCreatePortfolioPortfolioIdMultiFundRoute
   '/create-portfolio/$portfolioId/preview': typeof appCreatePortfolioPortfolioIdPreviewRoute
   '/create-portfolio/$portfolioId/submit': typeof appCreatePortfolioPortfolioIdSubmitRoute
   '/create-portfolio/$portfolioId/universe': typeof appCreatePortfolioPortfolioIdUniverseRoute
   '/analyze/$portfolioId': typeof appAnalyzePortfolioIdIndexRoute
+  '/analyze/$portfolioId/idea-generation/regimes': typeof appAnalyzePortfolioIdIdeaGenerationRegimesRouteRouteWithChildren
+  '/analyze/$portfolioId/idea-generation/screening': typeof appAnalyzePortfolioIdIdeaGenerationScreeningRoute
+  '/analyze/$portfolioId/idea-generation/top-stocks': typeof appAnalyzePortfolioIdIdeaGenerationTopStocksRoute
   '/create-portfolio/$portfolioId/create-benchmark/corrections': typeof appCreatePortfolioPortfolioIdCreateBenchmarkCorrectionsRoute
   '/create-portfolio/$portfolioId/create-benchmark/metadata': typeof appCreatePortfolioPortfolioIdCreateBenchmarkMetadataRoute
   '/create-portfolio/$portfolioId/create-benchmark/preview': typeof appCreatePortfolioPortfolioIdCreateBenchmarkPreviewRoute
+  '/analyze/$portfolioId/idea-generation/': typeof appAnalyzePortfolioIdIdeaGenerationIndexRoute
+  '/analyze/$portfolioId/idea-generation/regimes/economic-surprise': typeof appAnalyzePortfolioIdIdeaGenerationRegimesEconomicSurpriseRoute
+  '/analyze/$portfolioId/idea-generation/regimes/leading-indicator': typeof appAnalyzePortfolioIdIdeaGenerationRegimesLeadingIndicatorRoute
+  '/analyze/$portfolioId/idea-generation/regimes/': typeof appAnalyzePortfolioIdIdeaGenerationRegimesIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof authIndexRoute
@@ -201,18 +257,23 @@ export interface FileRoutesByTo {
   '/help': typeof appHelpLazyRoute
   '/analyze/stock-profile': typeof appAnalyzeStockProfileRoute
   '/create-portfolio/metadata': typeof appCreatePortfolioMetadataRoute
-  '/analyze/$portfolioId/idea-generation': typeof appAnalyzePortfolioIdIdeaGenerationRoute
   '/create-portfolio/$portfolioId/benchmark': typeof appCreatePortfolioPortfolioIdBenchmarkRoute
   '/create-portfolio/$portfolioId/calculations': typeof appCreatePortfolioPortfolioIdCalculationsRoute
   '/create-portfolio/$portfolioId/corrections': typeof appCreatePortfolioPortfolioIdCorrectionsRoute
-  '/create-portfolio/$portfolioId/multifund': typeof appCreatePortfolioPortfolioIdMultifundRoute
+  '/create-portfolio/$portfolioId/multi-fund': typeof appCreatePortfolioPortfolioIdMultiFundRoute
   '/create-portfolio/$portfolioId/preview': typeof appCreatePortfolioPortfolioIdPreviewRoute
   '/create-portfolio/$portfolioId/submit': typeof appCreatePortfolioPortfolioIdSubmitRoute
   '/create-portfolio/$portfolioId/universe': typeof appCreatePortfolioPortfolioIdUniverseRoute
   '/analyze/$portfolioId': typeof appAnalyzePortfolioIdIndexRoute
+  '/analyze/$portfolioId/idea-generation/screening': typeof appAnalyzePortfolioIdIdeaGenerationScreeningRoute
+  '/analyze/$portfolioId/idea-generation/top-stocks': typeof appAnalyzePortfolioIdIdeaGenerationTopStocksRoute
   '/create-portfolio/$portfolioId/create-benchmark/corrections': typeof appCreatePortfolioPortfolioIdCreateBenchmarkCorrectionsRoute
   '/create-portfolio/$portfolioId/create-benchmark/metadata': typeof appCreatePortfolioPortfolioIdCreateBenchmarkMetadataRoute
   '/create-portfolio/$portfolioId/create-benchmark/preview': typeof appCreatePortfolioPortfolioIdCreateBenchmarkPreviewRoute
+  '/analyze/$portfolioId/idea-generation': typeof appAnalyzePortfolioIdIdeaGenerationIndexRoute
+  '/analyze/$portfolioId/idea-generation/regimes/economic-surprise': typeof appAnalyzePortfolioIdIdeaGenerationRegimesEconomicSurpriseRoute
+  '/analyze/$portfolioId/idea-generation/regimes/leading-indicator': typeof appAnalyzePortfolioIdIdeaGenerationRegimesLeadingIndicatorRoute
+  '/analyze/$portfolioId/idea-generation/regimes': typeof appAnalyzePortfolioIdIdeaGenerationRegimesIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -227,18 +288,25 @@ export interface FileRoutesById {
   '/(auth)/': typeof authIndexRoute
   '/(app)/analyze/stock-profile': typeof appAnalyzeStockProfileRoute
   '/(app)/create-portfolio/metadata': typeof appCreatePortfolioMetadataRoute
-  '/(app)/analyze/$portfolioId/idea-generation': typeof appAnalyzePortfolioIdIdeaGenerationRoute
+  '/(app)/analyze/$portfolioId/idea-generation': typeof appAnalyzePortfolioIdIdeaGenerationRouteRouteWithChildren
   '/(app)/create-portfolio/$portfolioId/benchmark': typeof appCreatePortfolioPortfolioIdBenchmarkRoute
   '/(app)/create-portfolio/$portfolioId/calculations': typeof appCreatePortfolioPortfolioIdCalculationsRoute
   '/(app)/create-portfolio/$portfolioId/corrections': typeof appCreatePortfolioPortfolioIdCorrectionsRoute
-  '/(app)/create-portfolio/$portfolioId/multifund': typeof appCreatePortfolioPortfolioIdMultifundRoute
+  '/(app)/create-portfolio/$portfolioId/multi-fund': typeof appCreatePortfolioPortfolioIdMultiFundRoute
   '/(app)/create-portfolio/$portfolioId/preview': typeof appCreatePortfolioPortfolioIdPreviewRoute
   '/(app)/create-portfolio/$portfolioId/submit': typeof appCreatePortfolioPortfolioIdSubmitRoute
   '/(app)/create-portfolio/$portfolioId/universe': typeof appCreatePortfolioPortfolioIdUniverseRoute
   '/(app)/analyze/$portfolioId/': typeof appAnalyzePortfolioIdIndexRoute
+  '/(app)/analyze/$portfolioId/idea-generation/regimes': typeof appAnalyzePortfolioIdIdeaGenerationRegimesRouteRouteWithChildren
+  '/(app)/analyze/$portfolioId/idea-generation/screening': typeof appAnalyzePortfolioIdIdeaGenerationScreeningRoute
+  '/(app)/analyze/$portfolioId/idea-generation/top-stocks': typeof appAnalyzePortfolioIdIdeaGenerationTopStocksRoute
   '/(app)/create-portfolio/$portfolioId/create-benchmark/corrections': typeof appCreatePortfolioPortfolioIdCreateBenchmarkCorrectionsRoute
   '/(app)/create-portfolio/$portfolioId/create-benchmark/metadata': typeof appCreatePortfolioPortfolioIdCreateBenchmarkMetadataRoute
   '/(app)/create-portfolio/$portfolioId/create-benchmark/preview': typeof appCreatePortfolioPortfolioIdCreateBenchmarkPreviewRoute
+  '/(app)/analyze/$portfolioId/idea-generation/': typeof appAnalyzePortfolioIdIdeaGenerationIndexRoute
+  '/(app)/analyze/$portfolioId/idea-generation/regimes/economic-surprise': typeof appAnalyzePortfolioIdIdeaGenerationRegimesEconomicSurpriseRoute
+  '/(app)/analyze/$portfolioId/idea-generation/regimes/leading-indicator': typeof appAnalyzePortfolioIdIdeaGenerationRegimesLeadingIndicatorRoute
+  '/(app)/analyze/$portfolioId/idea-generation/regimes/': typeof appAnalyzePortfolioIdIdeaGenerationRegimesIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -257,14 +325,21 @@ export interface FileRouteTypes {
     | '/create-portfolio/$portfolioId/benchmark'
     | '/create-portfolio/$portfolioId/calculations'
     | '/create-portfolio/$portfolioId/corrections'
-    | '/create-portfolio/$portfolioId/multifund'
+    | '/create-portfolio/$portfolioId/multi-fund'
     | '/create-portfolio/$portfolioId/preview'
     | '/create-portfolio/$portfolioId/submit'
     | '/create-portfolio/$portfolioId/universe'
     | '/analyze/$portfolioId'
+    | '/analyze/$portfolioId/idea-generation/regimes'
+    | '/analyze/$portfolioId/idea-generation/screening'
+    | '/analyze/$portfolioId/idea-generation/top-stocks'
     | '/create-portfolio/$portfolioId/create-benchmark/corrections'
     | '/create-portfolio/$portfolioId/create-benchmark/metadata'
     | '/create-portfolio/$portfolioId/create-benchmark/preview'
+    | '/analyze/$portfolioId/idea-generation/'
+    | '/analyze/$portfolioId/idea-generation/regimes/economic-surprise'
+    | '/analyze/$portfolioId/idea-generation/regimes/leading-indicator'
+    | '/analyze/$portfolioId/idea-generation/regimes/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -277,18 +352,23 @@ export interface FileRouteTypes {
     | '/help'
     | '/analyze/stock-profile'
     | '/create-portfolio/metadata'
-    | '/analyze/$portfolioId/idea-generation'
     | '/create-portfolio/$portfolioId/benchmark'
     | '/create-portfolio/$portfolioId/calculations'
     | '/create-portfolio/$portfolioId/corrections'
-    | '/create-portfolio/$portfolioId/multifund'
+    | '/create-portfolio/$portfolioId/multi-fund'
     | '/create-portfolio/$portfolioId/preview'
     | '/create-portfolio/$portfolioId/submit'
     | '/create-portfolio/$portfolioId/universe'
     | '/analyze/$portfolioId'
+    | '/analyze/$portfolioId/idea-generation/screening'
+    | '/analyze/$portfolioId/idea-generation/top-stocks'
     | '/create-portfolio/$portfolioId/create-benchmark/corrections'
     | '/create-portfolio/$portfolioId/create-benchmark/metadata'
     | '/create-portfolio/$portfolioId/create-benchmark/preview'
+    | '/analyze/$portfolioId/idea-generation'
+    | '/analyze/$portfolioId/idea-generation/regimes/economic-surprise'
+    | '/analyze/$portfolioId/idea-generation/regimes/leading-indicator'
+    | '/analyze/$portfolioId/idea-generation/regimes'
   id:
     | '__root__'
     | '/(app)'
@@ -306,14 +386,21 @@ export interface FileRouteTypes {
     | '/(app)/create-portfolio/$portfolioId/benchmark'
     | '/(app)/create-portfolio/$portfolioId/calculations'
     | '/(app)/create-portfolio/$portfolioId/corrections'
-    | '/(app)/create-portfolio/$portfolioId/multifund'
+    | '/(app)/create-portfolio/$portfolioId/multi-fund'
     | '/(app)/create-portfolio/$portfolioId/preview'
     | '/(app)/create-portfolio/$portfolioId/submit'
     | '/(app)/create-portfolio/$portfolioId/universe'
     | '/(app)/analyze/$portfolioId/'
+    | '/(app)/analyze/$portfolioId/idea-generation/regimes'
+    | '/(app)/analyze/$portfolioId/idea-generation/screening'
+    | '/(app)/analyze/$portfolioId/idea-generation/top-stocks'
     | '/(app)/create-portfolio/$portfolioId/create-benchmark/corrections'
     | '/(app)/create-portfolio/$portfolioId/create-benchmark/metadata'
     | '/(app)/create-portfolio/$portfolioId/create-benchmark/preview'
+    | '/(app)/analyze/$portfolioId/idea-generation/'
+    | '/(app)/analyze/$portfolioId/idea-generation/regimes/economic-surprise'
+    | '/(app)/analyze/$portfolioId/idea-generation/regimes/leading-indicator'
+    | '/(app)/analyze/$portfolioId/idea-generation/regimes/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -429,11 +516,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof appCreatePortfolioPortfolioIdPreviewRouteImport
       parentRoute: typeof appCreatePortfolioRouteRoute
     }
-    '/(app)/create-portfolio/$portfolioId/multifund': {
-      id: '/(app)/create-portfolio/$portfolioId/multifund'
-      path: '/$portfolioId/multifund'
-      fullPath: '/create-portfolio/$portfolioId/multifund'
-      preLoaderRoute: typeof appCreatePortfolioPortfolioIdMultifundRouteImport
+    '/(app)/create-portfolio/$portfolioId/multi-fund': {
+      id: '/(app)/create-portfolio/$portfolioId/multi-fund'
+      path: '/$portfolioId/multi-fund'
+      fullPath: '/create-portfolio/$portfolioId/multi-fund'
+      preLoaderRoute: typeof appCreatePortfolioPortfolioIdMultiFundRouteImport
       parentRoute: typeof appCreatePortfolioRouteRoute
     }
     '/(app)/create-portfolio/$portfolioId/corrections': {
@@ -461,8 +548,15 @@ declare module '@tanstack/react-router' {
       id: '/(app)/analyze/$portfolioId/idea-generation'
       path: '/$portfolioId/idea-generation'
       fullPath: '/analyze/$portfolioId/idea-generation'
-      preLoaderRoute: typeof appAnalyzePortfolioIdIdeaGenerationRouteImport
+      preLoaderRoute: typeof appAnalyzePortfolioIdIdeaGenerationRouteRouteImport
       parentRoute: typeof appAnalyzeRouteRoute
+    }
+    '/(app)/analyze/$portfolioId/idea-generation/': {
+      id: '/(app)/analyze/$portfolioId/idea-generation/'
+      path: '/'
+      fullPath: '/analyze/$portfolioId/idea-generation/'
+      preLoaderRoute: typeof appAnalyzePortfolioIdIdeaGenerationIndexRouteImport
+      parentRoute: typeof appAnalyzePortfolioIdIdeaGenerationRouteRoute
     }
     '/(app)/create-portfolio/$portfolioId/create-benchmark/preview': {
       id: '/(app)/create-portfolio/$portfolioId/create-benchmark/preview'
@@ -485,19 +579,106 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof appCreatePortfolioPortfolioIdCreateBenchmarkCorrectionsRouteImport
       parentRoute: typeof appCreatePortfolioRouteRoute
     }
+    '/(app)/analyze/$portfolioId/idea-generation/top-stocks': {
+      id: '/(app)/analyze/$portfolioId/idea-generation/top-stocks'
+      path: '/top-stocks'
+      fullPath: '/analyze/$portfolioId/idea-generation/top-stocks'
+      preLoaderRoute: typeof appAnalyzePortfolioIdIdeaGenerationTopStocksRouteImport
+      parentRoute: typeof appAnalyzePortfolioIdIdeaGenerationRouteRoute
+    }
+    '/(app)/analyze/$portfolioId/idea-generation/screening': {
+      id: '/(app)/analyze/$portfolioId/idea-generation/screening'
+      path: '/screening'
+      fullPath: '/analyze/$portfolioId/idea-generation/screening'
+      preLoaderRoute: typeof appAnalyzePortfolioIdIdeaGenerationScreeningRouteImport
+      parentRoute: typeof appAnalyzePortfolioIdIdeaGenerationRouteRoute
+    }
+    '/(app)/analyze/$portfolioId/idea-generation/regimes': {
+      id: '/(app)/analyze/$portfolioId/idea-generation/regimes'
+      path: '/regimes'
+      fullPath: '/analyze/$portfolioId/idea-generation/regimes'
+      preLoaderRoute: typeof appAnalyzePortfolioIdIdeaGenerationRegimesRouteRouteImport
+      parentRoute: typeof appAnalyzePortfolioIdIdeaGenerationRouteRoute
+    }
+    '/(app)/analyze/$portfolioId/idea-generation/regimes/': {
+      id: '/(app)/analyze/$portfolioId/idea-generation/regimes/'
+      path: '/'
+      fullPath: '/analyze/$portfolioId/idea-generation/regimes/'
+      preLoaderRoute: typeof appAnalyzePortfolioIdIdeaGenerationRegimesIndexRouteImport
+      parentRoute: typeof appAnalyzePortfolioIdIdeaGenerationRegimesRouteRoute
+    }
+    '/(app)/analyze/$portfolioId/idea-generation/regimes/leading-indicator': {
+      id: '/(app)/analyze/$portfolioId/idea-generation/regimes/leading-indicator'
+      path: '/leading-indicator'
+      fullPath: '/analyze/$portfolioId/idea-generation/regimes/leading-indicator'
+      preLoaderRoute: typeof appAnalyzePortfolioIdIdeaGenerationRegimesLeadingIndicatorRouteImport
+      parentRoute: typeof appAnalyzePortfolioIdIdeaGenerationRegimesRouteRoute
+    }
+    '/(app)/analyze/$portfolioId/idea-generation/regimes/economic-surprise': {
+      id: '/(app)/analyze/$portfolioId/idea-generation/regimes/economic-surprise'
+      path: '/economic-surprise'
+      fullPath: '/analyze/$portfolioId/idea-generation/regimes/economic-surprise'
+      preLoaderRoute: typeof appAnalyzePortfolioIdIdeaGenerationRegimesEconomicSurpriseRouteImport
+      parentRoute: typeof appAnalyzePortfolioIdIdeaGenerationRegimesRouteRoute
+    }
   }
 }
 
+interface appAnalyzePortfolioIdIdeaGenerationRegimesRouteRouteChildren {
+  appAnalyzePortfolioIdIdeaGenerationRegimesEconomicSurpriseRoute: typeof appAnalyzePortfolioIdIdeaGenerationRegimesEconomicSurpriseRoute
+  appAnalyzePortfolioIdIdeaGenerationRegimesLeadingIndicatorRoute: typeof appAnalyzePortfolioIdIdeaGenerationRegimesLeadingIndicatorRoute
+  appAnalyzePortfolioIdIdeaGenerationRegimesIndexRoute: typeof appAnalyzePortfolioIdIdeaGenerationRegimesIndexRoute
+}
+
+const appAnalyzePortfolioIdIdeaGenerationRegimesRouteRouteChildren: appAnalyzePortfolioIdIdeaGenerationRegimesRouteRouteChildren =
+  {
+    appAnalyzePortfolioIdIdeaGenerationRegimesEconomicSurpriseRoute:
+      appAnalyzePortfolioIdIdeaGenerationRegimesEconomicSurpriseRoute,
+    appAnalyzePortfolioIdIdeaGenerationRegimesLeadingIndicatorRoute:
+      appAnalyzePortfolioIdIdeaGenerationRegimesLeadingIndicatorRoute,
+    appAnalyzePortfolioIdIdeaGenerationRegimesIndexRoute:
+      appAnalyzePortfolioIdIdeaGenerationRegimesIndexRoute,
+  }
+
+const appAnalyzePortfolioIdIdeaGenerationRegimesRouteRouteWithChildren =
+  appAnalyzePortfolioIdIdeaGenerationRegimesRouteRoute._addFileChildren(
+    appAnalyzePortfolioIdIdeaGenerationRegimesRouteRouteChildren,
+  )
+
+interface appAnalyzePortfolioIdIdeaGenerationRouteRouteChildren {
+  appAnalyzePortfolioIdIdeaGenerationRegimesRouteRoute: typeof appAnalyzePortfolioIdIdeaGenerationRegimesRouteRouteWithChildren
+  appAnalyzePortfolioIdIdeaGenerationScreeningRoute: typeof appAnalyzePortfolioIdIdeaGenerationScreeningRoute
+  appAnalyzePortfolioIdIdeaGenerationTopStocksRoute: typeof appAnalyzePortfolioIdIdeaGenerationTopStocksRoute
+  appAnalyzePortfolioIdIdeaGenerationIndexRoute: typeof appAnalyzePortfolioIdIdeaGenerationIndexRoute
+}
+
+const appAnalyzePortfolioIdIdeaGenerationRouteRouteChildren: appAnalyzePortfolioIdIdeaGenerationRouteRouteChildren =
+  {
+    appAnalyzePortfolioIdIdeaGenerationRegimesRouteRoute:
+      appAnalyzePortfolioIdIdeaGenerationRegimesRouteRouteWithChildren,
+    appAnalyzePortfolioIdIdeaGenerationScreeningRoute:
+      appAnalyzePortfolioIdIdeaGenerationScreeningRoute,
+    appAnalyzePortfolioIdIdeaGenerationTopStocksRoute:
+      appAnalyzePortfolioIdIdeaGenerationTopStocksRoute,
+    appAnalyzePortfolioIdIdeaGenerationIndexRoute:
+      appAnalyzePortfolioIdIdeaGenerationIndexRoute,
+  }
+
+const appAnalyzePortfolioIdIdeaGenerationRouteRouteWithChildren =
+  appAnalyzePortfolioIdIdeaGenerationRouteRoute._addFileChildren(
+    appAnalyzePortfolioIdIdeaGenerationRouteRouteChildren,
+  )
+
 interface appAnalyzeRouteRouteChildren {
   appAnalyzeStockProfileRoute: typeof appAnalyzeStockProfileRoute
-  appAnalyzePortfolioIdIdeaGenerationRoute: typeof appAnalyzePortfolioIdIdeaGenerationRoute
+  appAnalyzePortfolioIdIdeaGenerationRouteRoute: typeof appAnalyzePortfolioIdIdeaGenerationRouteRouteWithChildren
   appAnalyzePortfolioIdIndexRoute: typeof appAnalyzePortfolioIdIndexRoute
 }
 
 const appAnalyzeRouteRouteChildren: appAnalyzeRouteRouteChildren = {
   appAnalyzeStockProfileRoute: appAnalyzeStockProfileRoute,
-  appAnalyzePortfolioIdIdeaGenerationRoute:
-    appAnalyzePortfolioIdIdeaGenerationRoute,
+  appAnalyzePortfolioIdIdeaGenerationRouteRoute:
+    appAnalyzePortfolioIdIdeaGenerationRouteRouteWithChildren,
   appAnalyzePortfolioIdIndexRoute: appAnalyzePortfolioIdIndexRoute,
 }
 
@@ -510,7 +691,7 @@ interface appCreatePortfolioRouteRouteChildren {
   appCreatePortfolioPortfolioIdBenchmarkRoute: typeof appCreatePortfolioPortfolioIdBenchmarkRoute
   appCreatePortfolioPortfolioIdCalculationsRoute: typeof appCreatePortfolioPortfolioIdCalculationsRoute
   appCreatePortfolioPortfolioIdCorrectionsRoute: typeof appCreatePortfolioPortfolioIdCorrectionsRoute
-  appCreatePortfolioPortfolioIdMultifundRoute: typeof appCreatePortfolioPortfolioIdMultifundRoute
+  appCreatePortfolioPortfolioIdMultiFundRoute: typeof appCreatePortfolioPortfolioIdMultiFundRoute
   appCreatePortfolioPortfolioIdPreviewRoute: typeof appCreatePortfolioPortfolioIdPreviewRoute
   appCreatePortfolioPortfolioIdSubmitRoute: typeof appCreatePortfolioPortfolioIdSubmitRoute
   appCreatePortfolioPortfolioIdUniverseRoute: typeof appCreatePortfolioPortfolioIdUniverseRoute
@@ -528,8 +709,8 @@ const appCreatePortfolioRouteRouteChildren: appCreatePortfolioRouteRouteChildren
       appCreatePortfolioPortfolioIdCalculationsRoute,
     appCreatePortfolioPortfolioIdCorrectionsRoute:
       appCreatePortfolioPortfolioIdCorrectionsRoute,
-    appCreatePortfolioPortfolioIdMultifundRoute:
-      appCreatePortfolioPortfolioIdMultifundRoute,
+    appCreatePortfolioPortfolioIdMultiFundRoute:
+      appCreatePortfolioPortfolioIdMultiFundRoute,
     appCreatePortfolioPortfolioIdPreviewRoute:
       appCreatePortfolioPortfolioIdPreviewRoute,
     appCreatePortfolioPortfolioIdSubmitRoute:

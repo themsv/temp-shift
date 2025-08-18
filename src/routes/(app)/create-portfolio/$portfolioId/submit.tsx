@@ -30,19 +30,6 @@ export const Route = createFileRoute('/(app)/create-portfolio/$portfolioId/submi
   },
 });
 
-// const portfolioById: BasicPortfolio = {
-//   isMultifund: true,
-//   name: 'Parag Parikh',
-//   currency: 'USD',
-//   strategy: 'long',
-//   investmentStyle: 'growth',
-//   description: 'Lorem',
-//   mappedPortfolios: [],
-//   benchmarkType: '',
-//   universeType: '',
-//   id: 11111,
-// };
-
 function SubmitPortfolio() {
   const [opened, { open, close }] = useDisclosure(false);
 
@@ -110,7 +97,7 @@ function SubmitPortfolio() {
             isRequired
             onClick={() =>
               void navigate({
-                to: '/create-portfolio/$portfolioId/multifund',
+                to: '/create-portfolio/$portfolioId/multi-fund',
                 params: { portfolioId },
               })
             }

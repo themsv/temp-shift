@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { createFileRoute } from '@tanstack/react-router';
+import { createFileRoute, Outlet, useNavigate } from '@tanstack/react-router';
 import {
   Box,
   Button,
@@ -9,20 +9,17 @@ import {
   Paper,
   Popover,
   ScrollArea,
-  SegmentedControl,
   Tabs,
   Text,
   Title,
   useMantineTheme,
 } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
-import { IconBookmark, IconCaretDownFilled, IconColumns3 } from '@tabler/icons-react';
+import { IconCaretDownFilled } from '@tabler/icons-react';
 import { useIntl } from 'react-intl';
-import TopStocks from '@app/components/FlavoursTable/flavours';
-import StockScreening from '@app/components/StockScreening/stock-screening';
-import Selectable from '@app/components/SingleSelectCombobox/Select';
+
 import appLayoutConfig, { innerLayout } from '@app/consts/app-layout';
-import data from '../../../../mocks/Dropdowns.json';
+import data from '../../../../../mocks/Dropdowns.json';
 
 export const Route = createFileRoute('/(app)/analyze/$portfolioId/idea-generation')({
   component: IdeaGeneration,
@@ -34,13 +31,13 @@ const tabs = [
   { label: 'Economic Regimes', value: 'regimes' },
   { label: 'Visualize(Scatter Plot)', value: 'scatter', disabled: true },
 ];
-const options = ['All universe', 'Universe 1', 'Universe 3'];
 
 function IdeaGeneration() {
-  const [value, setValue] = useState<string>('');
+  const { portfolioId } = Route.useParams();
   const { spacing } = useMantineTheme();
   const { formatMessage } = useIntl();
-  const selectedLabel = value || 'Universe (None)';
+
+  const navigate = useNavigate();
   return (
     <Paper
       withBorder
@@ -48,87 +45,31 @@ function IdeaGeneration() {
       mt="md"
       h={`calc(100vh - ${appLayoutConfig.header.height} - ${innerLayout.buttonSetHeight} - ${spacing.xl} - ${spacing.xl})`}
     >
-      <Group align="flex-start" justify="space-between">
+      <Group align="flex-start" justify="space-between" w="100%">
         <Tabs defaultValue="top-stocks" w="96%">
           <Tabs.List>
             <Title order={5} style={{ alignSelf: 'center' }}>
               {formatMessage({ id: 'IDEA_GENERATION' })}
             </Title>
             {tabs.map((tab) => (
-              <Tabs.Tab key={tab.value} value={tab.value} disabled={tab.disabled}>
+              <Tabs.Tab
+                key={tab.value}
+                value={tab.value}
+                disabled={tab.disabled}
+                onClick={() =>
+                  void navigate({
+                    // TODO: Make this type-safe
+                    to: `/analyze/$portfolioId/idea-generation/${tab.value}`,
+                    params: { portfolioId },
+                  })
+                }
+              >
                 {tab.label}
               </Tabs.Tab>
             ))}
           </Tabs.List>
 
-          <Tabs.Panel value="top-stocks" pt="md">
-            <Group mb={20}>
-              <FlavourFactorDropdown />
-              <Selectable
-                data={options}
-                setValue={setValue}
-                selectedLabel={selectedLabel}
-                value={value}
-              />
-            </Group>
-
-            <TopStocks />
-          </Tabs.Panel>
-
-          <Tabs.Panel value="screening" pt="md">
-            <Group mb={10}>
-              <Selectable
-                data={options}
-                setValue={setValue}
-                selectedLabel={selectedLabel}
-                value={value}
-                radius={10}
-              />
-
-              <SegmentedControl
-                fullWidth
-                data={[
-                  { label: 'Binary Flav.', value: 'positive' },
-                  { label: 'Flavor Exp.', value: 'negative' },
-                ]}
-                radius="md"
-                transitionDuration={150}
-                color="dark"
-                styles={{
-                  root: {
-                    border: '1px solid #C0C0C0',
-                    padding: 2,
-                    backgroundColor: 'white',
-                  },
-                  label: {
-                    fontSize: 12,
-                    fontWeight: 400,
-                    padding: 10,
-                  },
-                  control: {
-                    '&[data-active]': {
-                      backgroundColor: '#3d3d3d',
-                      color: 'white',
-                    },
-                  },
-                }}
-              />
-              <Group style={{ marginLeft: 'auto' }} gap="sm">
-                <IconBookmark size={24} />
-                <IconColumns3 size={24} />
-              </Group>
-            </Group>
-
-            <StockScreening />
-          </Tabs.Panel>
-
-          <Tabs.Panel value="regimes" pt="md">
-            <Text>Economic Regimes explanation and logic.</Text>
-          </Tabs.Panel>
-
-          <Tabs.Panel value="scatter" pt="md">
-            <Text>Scatter plot visualization canvas or chart here.</Text>
-          </Tabs.Panel>
+          <Outlet />
         </Tabs>
         <CloseButton
           onClick={() => {
