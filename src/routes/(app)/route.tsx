@@ -1,5 +1,5 @@
 import { Suspense } from 'react';
-import { createFileRoute, Outlet } from '@tanstack/react-router';
+import { createFileRoute, Outlet, useLocation } from '@tanstack/react-router';
 import { AppShell, LoadingOverlay } from '@mantine/core';
 
 import SideNavbar from '@app/components/app-layout/side-navbar';
@@ -11,6 +11,11 @@ export const Route = createFileRoute('/(app)')({
 });
 
 function MainLayout() {
+  const location = useLocation();
+  const numericIdPattern = /^\/analyze\/\d+(\/idea-generation)?\/?$/;
+
+  const isNoRightPadding = numericIdPattern.test(location.pathname);
+
   return (
     <AppShell
       layout="alt"
@@ -37,7 +42,7 @@ function MainLayout() {
         <SideNavbar />
       </AppShell.Navbar>
 
-      <AppShell.Main>
+      <AppShell.Main pr={isNoRightPadding ? 0 : 'md'}>
         <Suspense fallback={<LoadingOverlay visible />}>
           <Outlet />
         </Suspense>

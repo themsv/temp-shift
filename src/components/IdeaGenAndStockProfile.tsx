@@ -7,7 +7,7 @@ import { innerLayout } from '@app/consts/app-layout';
 export function IdeaGenAndStockProfile() {
   const { formatMessage } = useIntl();
   return (
-    <Group gap={0} w={innerLayout.buttonSetWidth} justify="space-between">
+    <Group gap={10} w={innerLayout.buttonSetWidth} justify="center">
       {/* FIXME: Navigation to Idea Gen can happen with/without portfolioId So, fix the Link accordingly */}
       <CustomButtonLink
         to="/analyze/$portfolioId/idea-generation"

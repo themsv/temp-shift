@@ -1,24 +1,14 @@
 import { useState } from 'react';
 import { createFileRoute } from '@tanstack/react-router';
-import {
-  ActionIcon,
-  Box,
-  Group,
-  ScrollArea,
-  Stack,
-  Tabs,
-  Text,
-  useMantineTheme,
-} from '@mantine/core';
-import { IconChartBar, IconLayoutBoard, IconX } from '@tabler/icons-react';
+import { Group, ScrollArea, Stack, Tabs, useMantineTheme } from '@mantine/core';
+import { IconChartBar, IconLayoutBoard } from '@tabler/icons-react';
 
-import { ArticleCard } from '@app/components/dashboard/ArticleCard';
 import ContributorsTable from '@app/components/ContributorsTable/ContributorsTable';
 import { ContributorsControls } from '@app/components/ContributorsTable/ContributorsControls';
+import TabMenu from '@app/components/economic-exposure/TabMenu';
 import { SkyLine } from '@app/components/charts/SkyLine';
 import { HeatmapChart } from '@app/components/charts/HeatMapChart';
 import { innerLayout } from '@app/consts/app-layout';
-import insights from '../../../../mocks/insights.json';
 import styleChart from '../../../../mocks/styleChart.json';
 import factorChart from '../../../../mocks/factorChart.json';
 import industryChart from '../../../../mocks/industryChart.json';
@@ -39,10 +29,26 @@ function PortfolioDetails() {
 
   const { spacing } = useMantineTheme();
   const [checked, setChecked] = useState(true);
+  const [showBubble] = useState(false);
+  const [panelWidth, setPanelWidth] = useState(innerLayout.buttonSetWidth);
+
+  function panelWidthHandler(closed: boolean) {
+    if (closed) {
+      setPanelWidth('0');
+    } else {
+      setPanelWidth(innerLayout.buttonSetWidth);
+    }
+  }
 
   return (
-    <Group gap={0}>
-      <Stack w={`calc(100% - ${innerLayout.buttonSetWidth} - ${spacing.md})`} px="md">
+    <Group gap={0} h="80vh" justify="space-between" pos="relative">
+      <Stack
+        w={
+          panelWidth === '0' ? '98%' : `calc(100% - ${innerLayout.buttonSetWidth} - ${spacing.md})`
+        }
+        px="md"
+        gap={0}
+      >
         <Tabs defaultValue="style">
           <Tabs.List>
             {tabs.map((t) => (
@@ -82,32 +88,14 @@ function PortfolioDetails() {
           ))}
         </Tabs>
       </Stack>
-      <Stack w={innerLayout.buttonSetWidth}>
-        <Stack bg="gray.0" p="md">
-          <Group justify="space-between">
-            <Text fw={500}>Insights</Text>
-            <ActionIcon
-              onClick={() => {
-                console.log('clicked');
-              }}
-              aria-label="Go back"
-              variant="transparent"
-              size="lg"
-            >
-              <IconX color="black" size={20} />
-            </ActionIcon>
-          </Group>
-          <ScrollArea h="74vh" offsetScrollbars type="hover">
-            <Stack gap="sm">
-              {insights.map((item) => (
-                <ArticleCard key={item.id} {...item} />
-              ))}
-            </Stack>
-          </ScrollArea>
-        </Stack>
-      </Stack>
-      {/* To sync the layout with Bookmarks */}
-      <Box w={spacing.md} />
+      <div
+        style={{
+          width: panelWidth,
+          height: '80vh',
+        }}
+      >
+        <TabMenu panelWidthHandler={panelWidthHandler} />
+      </div>
     </Group>
   );
 }

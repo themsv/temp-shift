@@ -1,0 +1,53 @@
+/* table specific styles */
+.table {
+  border-collapse: collapse;
+}
+
+.topTable {
+  background-color: #f8f8f6;
+  height: 70px;
+}
+
+.td,
+.th {
+  border: 1px solid black;
+}
+
+/* styles to affect under collapse mode */
+.firstCol {
+  width: 40%;
+}
+
+.secThirdCol {
+  width: 30%;
+}
+
+/* styles to affect under expand mode */
+.expand.firstTable {
+  flex: 1 1 40%;
+}
+
+.expand.secTable {
+  flex: 2 2 56%;
+  text-align: center;
+}
+
+.expand.firstCol {
+  /* min-width: 20%; */
+  max-width: 20%;
+  text-align: left;
+  text-overflow: ellipsis;
+}
+
+.expand.secThirdCol {
+  max-width: 40%;
+}
+
+/* accordion specific styles */
+.accordionHeader > span {
+  padding: 5px 0px 8px;
+}
+
+.accordionContent > div {
+  padding: 5px 8px;
+}
