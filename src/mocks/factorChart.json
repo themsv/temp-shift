@@ -1,0 +1,69 @@
+{
+  "title": "Factors",
+  "categories": [
+    {
+      "name": "Risk & Liquidity",
+      "items": [
+        "High Beta",
+        "Low Beta",
+        "High Vol",
+        "Low Vol",
+        "Large Caps",
+        "Small Caps",
+        "High Liquidity",
+        "Low Liquidity"
+      ]
+    },
+    { "name": "Debt", "items": ["High Leverage", "Low Leverage"] },
+    { "name": "Sensitivities", "items": ["High FX Sens.", "Low FX Sens."] },
+    { "name": "Value 1.0", "items": ["High B/P", "Low B/P"] },
+    { "name": "Growth 1.0", "items": ["High EPS G.", "Low EPS G."] },
+    { "name": "Profit", "items": ["High ROE", "Low ROE"] },
+    {
+      "name": "Sentiment",
+      "items": ["High Momentum", "Low Momentum", "High Revisions", "Low Revisions"]
+    },
+    { "name": "Alpha", "items": ["High Alpha", "Low Alpha"] }
+  ],
+  "series": [
+    {
+      "name": "Active Flavour Exposure",
+      "type": "column",
+      "data": [
+        -12, 10, 8, -3, 1, -5, 7, -2, 9, 8, -2, -3, 10, -10, 6, 3, -6, 2, 5, -5, 2, -2, 1, -1
+      ]
+    },
+    {
+      "name": "Recovery",
+      "type": "scatter",
+      "data": [
+        1.6, -2.7, -0.2, -1.8, -2.4, 0.7, -0.5, 1.6, 2.2, -2.3, 2.4, -1.5, -2.4, 1.7, 2.4, -1.6,
+        -2.7, -2.3, -1.8, 2.1, -1.9, -2.7, -2.4, -1.8
+      ]
+    },
+    {
+      "name": "Expansion",
+      "type": "scatter",
+      "data": [
+        2.1, -1.9, -2.7, -2.4, -1.8, 1.4, 2.8, 2.5, -2.5, 1.6, -1.1, -1.7, 0.5, 0.6, 1.8, -1.4,
+        -2.3, -2.5, -0.7, 1.6, -2.7, -0.2, -1.8, -2.4
+      ]
+    },
+    {
+      "name": "Slowdown",
+      "type": "scatter",
+      "data": [
+        1, -2.3, 2.2, -1, -2, 0.5, 0.8, 2, 0.6, 2.3, 2, -2, 2, 1.3, -2, 2.3, 0.8, -1, -1.3, 2.5,
+        -1.6, 1.2, -2.6, 0.6
+      ]
+    },
+    {
+      "name": "Downturn",
+      "type": "scatter",
+      "data": [
+        2.5, -1.6, 1.2, -2.6, 0.6, -2.5, -1.3, 2.5, 1.7, 2.5, 1.3, -0.5, -1.4, 0.5, 2.1, -1.2, -0.3,
+        1.2, 2.1, 1, -2.3, 2.2, -1, -2
+      ]
+    }
+  ]
+}

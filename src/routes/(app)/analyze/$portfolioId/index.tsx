@@ -15,15 +15,19 @@ import { IconChartBar, IconLayoutBoard, IconX } from '@tabler/icons-react';
 import { ArticleCard } from '@app/components/dashboard/ArticleCard';
 import ContributorsTable from '@app/components/ContributorsTable/ContributorsTable';
 import { ContributorsControls } from '@app/components/ContributorsTable/ContributorsControls';
-import { BubbleChart, HeatmapChart, SkyLine } from '@app/components/charts/SkyLine';
+import { SkyLine } from '@app/components/charts/SkyLine';
+import { HeatmapChart } from '@app/components/charts/HeatMapChart';
 import { innerLayout } from '@app/consts/app-layout';
 import insights from '../../../../mocks/insights.json';
+import styleChart from '../../../../mocks/styleChart.json';
+import factorChart from '../../../../mocks/factorChart.json';
+import industryChart from '../../../../mocks/industryChart.json';
 
 const tabs = [
-  { label: 'Style Flavours', value: 'flavours' },
-  { label: 'Factors', value: 'factors' },
-  { label: 'Industrial Groups', value: 'groups' },
-  { label: 'Macro Betas', value: 'macros' },
+  { key: 'style', label: 'Style Flavours', data: styleChart },
+  { key: 'factors', label: 'Factors', data: factorChart },
+  { key: 'industry', label: 'Industry Groups', data: industryChart },
+  { key: 'macro', label: 'Macro Betas', data: styleChart },
 ];
 
 export const Route = createFileRoute('/(app)/analyze/$portfolioId/')({
@@ -35,15 +39,14 @@ function PortfolioDetails() {
 
   const { spacing } = useMantineTheme();
   const [checked, setChecked] = useState(true);
-  const [showBubble] = useState(false);
 
   return (
     <Group gap={0}>
       <Stack w={`calc(100% - ${innerLayout.buttonSetWidth} - ${spacing.md})`} px="md">
-        <Tabs defaultValue="groups">
+        <Tabs defaultValue="style">
           <Tabs.List>
             {tabs.map((t) => (
-              <Tabs.Tab value={t.value} key={t.value}>
+              <Tabs.Tab value={t.key} key={t.key}>
                 {t.label}
               </Tabs.Tab>
             ))}
@@ -52,7 +55,7 @@ function PortfolioDetails() {
           {tabs.map((t) => (
             // NOTE: The hardcoded height is a ugly workaround for now which needs to be calculated
             // dynamically from 100vh - headerHeight - elementsHeight etc  -Saivenkat
-            <Tabs.Panel value={t.value} key={t.value} p="md" component={ScrollArea} h="76vh">
+            <Tabs.Panel value={t.key} key={t.key} p="md" component={ScrollArea} h="76vh">
               <Tabs variant="pills" defaultValue="bar-chart">
                 <Tabs.List>
                   <Tabs.Tab value="bar-chart">
@@ -64,13 +67,13 @@ function PortfolioDetails() {
                 </Tabs.List>
 
                 <Tabs.Panel value="bar-chart">
-                  {showBubble ? <BubbleChart /> : <SkyLine />}
+                  <SkyLine data={t.data} />
                   <ContributorsControls checked={checked} setChecked={setChecked} />
                   <ContributorsTable />
                 </Tabs.Panel>
 
                 <Tabs.Panel value="heatmap">
-                  <HeatmapChart />
+                  <HeatmapChart data={t.data} />
                   <ContributorsControls checked={checked} setChecked={setChecked} />
                   <ContributorsTable />
                 </Tabs.Panel>

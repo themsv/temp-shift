@@ -1,245 +1,345 @@
+import { useMemo, useState, useCallback, useRef, useEffect } from 'react';
 import Chart from 'react-apexcharts';
+import { Paper, Text, Breadcrumbs } from '@mantine/core';
+import { BubbleChart } from './BubbleChart';
 
-import data from '../../mocks/graphData.json';
+interface TooltipData {
+  category: string;
+  value: number;
+}
 
-const seriesData = data.map((item) => ({
-  x: item.category,
-  y: item.activeExposure,
-}));
-const regimeSeries = ['Recovery', 'Expansion', 'Slowdown', 'Downturn'].map((regime) => ({
-  name: regime,
-  type: 'scatter',
-  yAxisIndex: 1,
-  data: data.map((d) => ({ x: d.category, y: d[regime] })),
-}));
+function buildAxis(data) {
+  const cats = data?.categories || [];
+  const isGrouped = Array.isArray(cats) && typeof cats[0] === 'object' && !!cats[0]?.items;
+  const flatCategories = isGrouped ? cats.flatMap((g) => g.items) : cats;
+  const groups = isGrouped ? cats.map((g) => ({ title: g.name, cols: g.items.length })) : undefined;
+  return { isGrouped, flatCategories, groups };
+}
 
-const prop = {
-  group: {
-    groups: [
-      { title: 'Value', cols: 8 },
-      { title: 'Growth', cols: 7 },
-      { title: 'Quality', cols: 4 },
-      { title: 'Lossmakers', cols: 4 },
-    ],
-  },
-};
-function SkyLine() {
-  const state = {
-    options: {
+function buildGroupBoundaryAnnotations(flatCategories, groups) {
+  if (!groups || !groups.length) return [];
+  const annotations = [];
+  let cursor = 0;
+  for (let i = 0; i < groups.length; i++) {
+    const cols = groups[i].cols;
+    if (i !== 0) {
+      const leftCat = flatCategories[cursor];
+      if (leftCat !== undefined) {
+        annotations.push({
+          x: leftCat,
+          borderColor: '#B8C2CC',
+          strokeDashArray: 0,
+          opacity: 1,
+          label: { show: false },
+        });
+      }
+    }
+    cursor += cols;
+  }
+  return annotations;
+}
+
+function computeYExtents(series, catCount) {
+  const vals = [];
+  (series || []).forEach((s) => {
+    if (!Array.isArray(s.data)) return;
+    for (let i = 0; i < Math.min(catCount, s.data.length); i++) {
+      const v = s.data[i];
+      if (typeof v === 'number' && Number.isFinite(v)) vals.push(v);
+    }
+  });
+
+  const hasData = vals.length > 0;
+  const rawMin = hasData ? Math.min(...vals) : -1;
+  const rawMax = hasData ? Math.max(...vals) : 1;
+  const min0 = Math.min(rawMin, 0);
+  const max0 = Math.max(rawMax, 0);
+  const span = Math.max(1e-6, max0 - min0);
+  const pad = span * 0.1;
+  return { yMin: min0 - pad, yMax: max0 + pad };
+}
+
+function SkyLine({ data }) {
+  const [tooltipData, setTooltipData] = useState<TooltipData>({
+    category: '',
+    value: 0,
+  });
+  const [tooltipPos, setTooltipPos] = useState<{ x: number; y: number } | null>(null);
+  const [chartMode, setChartMode] = useState<'skyline' | 'bubble'>('skyline');
+  const [bubbleCategory, setBubbleCategory] = useState<string | null>(null);
+  const [tooltipLocked, setTooltipLocked] = useState(false);
+  const { isGrouped, flatCategories, groups } = useMemo(() => buildAxis(data), [data]);
+  const chartRef = useRef<HTMLDivElement>(null);
+  const tooltipRef = useRef<HTMLDivElement>(null);
+  const groupBoundaryAnnotations = useMemo(
+    () => buildGroupBoundaryAnnotations(flatCategories, groups),
+    [flatCategories, groups],
+  );
+  const safeSeries = useMemo(() => {
+    return (data?.series || []).map((s, idx) => {
+      const type = idx === 0 ? 'column' : 'scatter';
+      const arr = Array.isArray(s.data) ? s.data : [];
+      const aligned =
+        flatCategories.length && arr.length !== flatCategories.length
+          ? arr.slice(0, flatCategories.length)
+          : arr;
+      return { ...s, type, data: aligned };
+    });
+  }, [data?.series, flatCategories.length]);
+
+  const { yMin, yMax } = useMemo(
+    () => computeYExtents(safeSeries, flatCategories.length),
+    [safeSeries, flatCategories.length],
+  );
+  useEffect(() => {
+    function handleClickOutside(e: MouseEvent) {
+      if (
+        tooltipLocked &&
+        chartRef.current &&
+        !chartRef.current.contains(e.target as Node) &&
+        tooltipRef.current &&
+        !tooltipRef.current.contains(e.target as Node)
+      ) {
+        setTooltipLocked(false);
+        setTooltipData(null);
+      }
+    }
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [tooltipLocked]);
+
+  const handleBarClick = useCallback((event: MouseEvent, category?: string) => {
+    if (chartRef.current) {
+      const chartRect = chartRef.current.getBoundingClientRect();
+      const offsetX = event.clientX - chartRect.left;
+      const offsetY = event.clientY - chartRect.top;
+      // Always place tooltip slightly to the right of the click position
+      setTooltipPos({
+        x: offsetX, // 15px right offset
+        y: offsetY, // vertical offset
+      });
+
+      // If category is passed, it means it's a bar click → switch to bubble chart
+      // if (category) {
+      setBubbleCategory(category);
+      setChartMode('bubble');
+      // }
+    }
+  }, []);
+  const groupConfig = useMemo(
+    () => (isGrouped ? { style: { fontSize: '13px', fontWeight: 700 }, groups } : { groups: [] }),
+    [isGrouped, groups],
+  );
+
+  const strokeWidths = useMemo(() => safeSeries.map((_, i) => (i === 0 ? 0 : 0)), [safeSeries]);
+
+  const options = useMemo(
+    () => ({
       chart: {
-        height: 1024,
-      },
-      plotOptions: {},
-      dataLabels: { enabled: false },
-      xaxis: {
-        type: 'category',
-        labels: {
-          rotate: -45,
+        type: 'line',
+        height: 520,
+        events: {
+          dataPointMouseEnter: function (event, _, { seriesIndex, dataPointIndex }) {
+            if (tooltipLocked) return;
+            const category = flatCategories[dataPointIndex];
+            const value = safeSeries[seriesIndex]?.data[dataPointIndex];
+            setTooltipData({ category, value });
+            setTooltipPos({ x: event.clientX, y: event.clientY - 200 });
+          },
+          dataPointMouseLeave: function () {
+            if (!tooltipLocked) setTooltipData(null);
+          },
+          dataPointSelection: function (event, _, { seriesIndex, dataPointIndex }) {
+            const category = flatCategories[dataPointIndex];
+            const value = safeSeries[seriesIndex]?.data[dataPointIndex];
+            setTooltipData({ category, value });
+            setTooltipPos({ x: event.clientX, y: event.clientY - 200 });
+            setTooltipLocked(true); // keep tooltip after click
+            const e = config.event as MouseEvent;
+            handleBarClick(e);
+          },
         },
-        ...prop,
+        stacked: false,
+        toolbar: { show: true },
+      },
+
+      grid: {
+        padding: { bottom: isGrouped ? 14 : 10, left: 12, right: 12 },
+        yaxis: { lines: { show: false } },
+        xaxis: { lines: { show: false } },
+      },
+      annotations: {
+        xaxis: [
+          { x: 0, borderColor: '#B8C2CC', strokeDashArray: 0, opacity: 1, label: { show: false } },
+        ],
+        yaxis: [
+          { y: 0, borderColor: '#B8C2CC', strokeDashArray: 0, opacity: 1, label: { show: false } },
+          {
+            y: 15,
+            borderColor: '#B8C2CC',
+            strokeDashArray: 0,
+            opacity: 1,
+            label: { show: false },
+          },
+        ],
+      },
+      plotOptions: { bar: { columnWidth: '80%' } },
+      dataLabels: { enabled: false },
+      stroke: { width: strokeWidths },
+      markers: {
+        size: safeSeries.map((_, i) => (i === 0 ? 0 : 6)),
+        shape: safeSeries.map((_, i) => {
+          if (i === 1) return 'diamond';
+          if (i === 2) return 'circle';
+          if (i === 3) return 'triangle';
+          if (i === 4) return 'square';
+          return 'circle';
+        }),
+        hover: { size: 7 },
+      },
+      legend: {
+        position: 'top',
+        horizontalAlign: 'center',
+        floating: false,
+        itemMargin: {
+          horizontal: 15,
+          vertical: 5,
+        },
+      },
+      colors: ['#aacef9', '#007859', '#80a66d', '#f67a87', '#a41e2f'],
+      xaxis: {
+        categories: flatCategories,
+        tickPlacement: 'between',
+        axisTicks: { show: true },
+        axisBorder: { show: true, color: '#B8C2CC', height: 2 },
+        labels: { rotate: -45, trim: false, style: { fontSize: '12px' } },
+        group: groupConfig,
       },
       yaxis: [
         {
-          seriesName: 'ActiveExposure',
+          min: -15,
+          seriesName: 'Active Exposure ',
+          max: 15,
           title: {
-            text: 'Active Exposure',
+            text: 'Active Exposure %(Blue bars)',
+            style: {
+              fontWeight: 'normal',
+              fontSize: '12px',
+            },
           },
-          axisTicks: {
-            show: true,
-          },
-          axisBorder: {
-            show: true,
+          labels: {
+            labels: { formatter: (v) => `${v}` },
           },
         },
         {
-          seriesName: 'Regime',
+          seriesName: 'Regimes Returns',
+          opposite: true,
+          min: -3,
+          max: 3,
           title: {
-            text: 'Regimes Returns',
+            text: 'Average Monthly Excess Returns % (Regimes Returns)',
+            style: {
+              fontWeight: 'normal',
+              fontSize: '12px',
+            },
+            rotate: 90,
           },
-          axisTicks: {
-            show: true,
+          labels: {
+            labels: { formatter: (v) => `${v}` },
           },
           axisBorder: {
             show: true,
           },
-          opposite: true,
         },
       ],
-      markers: {
-        size: 5,
-        shape: ['square', 'triangle', 'cross', 'plus', 'diamond'],
+      tooltip: {
+        enabled: false,
+        shared: true,
+        intersect: false,
+        y: { formatter: (v) => v.toFixed(2) },
       },
-    },
-    series: [
-      {
-        name: 'ActiveExposure',
-        data: seriesData,
-        type: 'bar',
-        color: '#80c7fd',
-      },
-      ...regimeSeries,
-    ],
-  };
-  return <Chart type="bar" options={state.options} series={state.series} width={1024}></Chart>;
-}
-
-function HeatmapChart() {
-  const categories = data.map((d) => d.category);
-
-  const series = ['Recovery', 'Expansion', 'Slowdown', 'Downturn', 'Active Exposure'].map(
-    (key) => ({
-      name: key,
-      data: data.map((d) => ({
-        x: d.category,
-        y: key === 'Active Exposure' ? d.activeExposure : d[key],
-      })),
     }),
+    [
+      isGrouped,
+      flatCategories,
+      groupBoundaryAnnotations,
+      groupConfig,
+      safeSeries,
+      strokeWidths,
+      yMin,
+      yMax,
+      tooltipLocked,
+    ],
   );
 
-  const options = {
-    chart: {
-      type: 'heatmap',
-      height: 600,
-    },
-    plotOptions: {
-      heatmap: {
-        shadeIntensity: 1,
-        useFillColorAsStroke: false,
-        radius: 0,
-        colorScale: {
-          min: -10,
-          max: 10,
-          colorStops: [
-            {
-              from: -10,
-              to: 0,
-              color: '#f00', // Red for -10
-            },
-
-            {
-              from: 0,
-              to: 10,
-              color: '#0fo', // Green for 10
-            },
-          ],
-        },
-      },
-    },
-    dataLabels: {
-      enabled: true,
-    },
-    xaxis: {
-      categories,
-      // labels: {
-      //   rotate: -45,
-      // },
-    },
-    legend: {
-      show: true,
-      position: 'bottom',
-    },
-    tooltip: {
-      y: {
-        formatter: (val: number) => val.toFixed(2),
-      },
-    },
-  };
-
-  return <Chart options={options} series={series} type="heatmap" height={420} />;
+  if (chartMode === 'bubble') {
+    return (
+      <div style={{ cursor: 'pointer' }}>
+        <Breadcrumbs>
+          <Text
+            onClick={() => {
+              setChartMode('skyline');
+            }}
+          >
+            Asx Quality Growth
+          </Text>
+          <Text>
+            {tooltipData.category} (Active Exposure - {tooltipData.value}%){' '}
+          </Text>
+        </Breadcrumbs>
+        <BubbleChart category={bubbleCategory} />
+      </div>
+    );
+  }
+  return (
+    <div style={{ position: 'relative' }} ref={chartRef}>
+      <style>{`
+        .apexcharts-legend-group-vertical {
+    flex-direction: row !important;
+}
+      `}</style>
+      <Chart
+        key={isGrouped ? 'grouped' : 'flat'}
+        options={options}
+        series={safeSeries}
+        type="line"
+        height={520}
+      />
+      {tooltipData && tooltipPos && (
+        <Paper
+          ref={tooltipRef}
+          shadow="md"
+          p="sm"
+          style={{
+            position: 'absolute',
+            left: tooltipPos.x,
+            top: tooltipPos.y,
+            background: '#fff',
+            border: '1px solid #ccc',
+            padding: '6px 8px',
+            borderRadius: '4px',
+            boxShadow: '0 2px 5px rgba(0,0,0,0.2)',
+            zIndex: 10,
+            pointerEvents: 'auto',
+          }}
+        >
+          <Text
+            weight={500}
+            style={{ cursor: 'pointer', color: '#007BFF' }}
+            onClick={() => {
+              handleBarClick(tooltipData.category);
+            }}
+          >
+            {tooltipData.category}
+          </Text>
+          <Text size="sm">{tooltipData.category}</Text>
+          <Text size="sm">Value: {tooltipData.value}</Text>
+        </Paper>
+      )}
+    </div>
+  );
 }
 
-function BubbleChart() {
-  const options = {
-    chart: {
-      type: 'bubble',
-      height: 320,
-      zoom: {
-        enabled: false,
-      },
-    },
-    xaxis: {
-      title: { text: 'Style Exposure' },
-      min: 0,
-      max: 100,
-      labels: {
-        formatter: (val) => `${val}%`,
-      },
-    },
-    yaxis: {
-      title: { text: 'Active Weight' },
-      min: -10,
-      max: 10,
-    },
-    fill: {
-      type: 'solid',
-    },
-    dataLabels: {
-      enabled: false,
-    },
-    tooltip: {
-      y: {
-        formatter: (val) => `${val.toFixed(2)}%`,
-      },
-    },
-    colors: undefined, // we'll use custom color logic below
-    markers: {
-      size: 0,
-    },
-    plotOptions: {
-      bubble: {
-        minBubbleRadius: 10,
-        maxBubbleRadius: 60,
-      },
-    },
-  };
-
-  const series = [
-    {
-      name: 'Exposure',
-      data: [
-        {
-          x: 10,
-          y: 2,
-          z: 20,
-          fillColor: 'red',
-        },
-        {
-          x: 30,
-          y: 1,
-          z: 40,
-          fillColor: 'green',
-        },
-        {
-          x: 50,
-          y: 2,
-          z: 50,
-          fillColor: 'green',
-        },
-        {
-          x: 70,
-          y: -2,
-          z: 60,
-          fillColor: 'green',
-        },
-        {
-          x: 90,
-          y: -5,
-          z: 80,
-          fillColor: 'red',
-        },
-      ],
-    },
-  ];
-
-  return <Chart options={options} series={series} type="bubble" />;
-}
-
-// Utility function to interpolate red-to-green based on value (-10 to 10)
-function getColorForValue(value) {
-  const percent = (value + 10) / 20; // normalize -10 to 10 into 0 to 1
-  const red = Math.round(255 * (1 - percent));
-  const green = Math.round(150 + 105 * percent); // green starts from 150
-  return `rgb(${red}, ${green}, 100)`;
-}
-
-export { BubbleChart, SkyLine, HeatmapChart };
+export { SkyLine };

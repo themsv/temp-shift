@@ -1,0 +1,183 @@
+{
+  "styleFlavourData": {
+    "categories": [
+      "Value",
+      "Deep Value",
+      "High Risk Value",
+      "Low Risk Yield",
+      "High Risk Growth",
+      "Short Term Growth",
+      "GARP",
+      "Expensive Growth",
+      "Sentiment Growth",
+      "Growth Traps",
+      "Secular Growth",
+      "Quality Comp.",
+      "Cheap Comp.",
+      "Growth Comp.",
+      "Quasi Comp.",
+      "NPAT Loss",
+      "NPAT & CFO Loss",
+      "Winner Loss.",
+      "Loser Loss."
+    ],
+    "series": [
+      {
+        "name": "Active Exposure",
+        "type": "column",
+        "data": [
+          2.5, -9.0, 6.2, -6.8, -5.0, 6.5, 3.5, 2.8, 3.6, 3.7, 1.0, -1.2, 3.5, 3.8, 3.9, -3.0, -2.8,
+          2.2, 0.5
+        ]
+      }
+    ]
+  },
+  "regimeOverlaySeries": [
+    {
+      "name": "Recovery",
+      "type": "scatter",
+      "data": [
+        { "x": "Value", "y": 1.5 },
+        { "x": "Deep Value", "y": 1.55 },
+        { "x": "High Risk Value", "y": 1.6 },
+        { "x": "Low Risk Yield", "y": 1.65 },
+        { "x": "High Risk Growth", "y": 1.7 },
+        { "x": "Short Term Growth", "y": 1.75 },
+        { "x": "GARP", "y": 1.8 },
+        { "x": "Expensive Growth", "y": 1.85 },
+        { "x": "Sentiment Growth", "y": 1.9 },
+        { "x": "Growth Traps", "y": 1.95 },
+        { "x": "Secular Growth", "y": 2.0 },
+        { "x": "Quality Comp.", "y": 2.05 },
+        { "x": "Cheap Comp.", "y": 2.1 },
+        { "x": "Growth Comp.", "y": 2.15 },
+        { "x": "Quasi Comp.", "y": 2.2 },
+        { "x": "NPAT Loss", "y": 2.25 },
+        { "x": "NPAT & CFO Loss", "y": 2.3 },
+        { "x": "Winner Loss.", "y": 2.35 },
+        { "x": "Loser Loss.", "y": 2.4 }
+      ],
+      "marker": { "shape": "diamond", "size": 6 }
+    },
+    {
+      "name": "Expansion",
+      "type": "scatter",
+      "data": [
+        { "x": "Value", "y": 1.2 },
+        { "x": "Deep Value", "y": 1.23 },
+        { "x": "High Risk Value", "y": 1.26 },
+        { "x": "Low Risk Yield", "y": 1.29 },
+        { "x": "High Risk Growth", "y": 1.32 },
+        { "x": "Short Term Growth", "y": 1.35 },
+        { "x": "GARP", "y": 1.38 },
+        { "x": "Expensive Growth", "y": 1.41 },
+        { "x": "Sentiment Growth", "y": 1.44 },
+        { "x": "Growth Traps", "y": 1.47 },
+        { "x": "Secular Growth", "y": 1.5 },
+        { "x": "Quality Comp.", "y": 1.53 },
+        { "x": "Cheap Comp.", "y": 1.56 },
+        { "x": "Growth Comp.", "y": 1.59 },
+        { "x": "Quasi Comp.", "y": 1.62 },
+        { "x": "NPAT Loss", "y": 1.65 },
+        { "x": "NPAT & CFO Loss", "y": 1.68 },
+        { "x": "Winner Loss.", "y": 1.71 },
+        { "x": "Loser Loss.", "y": 1.74 }
+      ],
+      "marker": { "shape": "circle", "size": 6 }
+    },
+    {
+      "name": "Slowdown",
+      "type": "scatter",
+      "data": [
+        { "x": "Value", "y": 2.0 },
+        { "x": "Deep Value", "y": 2.02 },
+        { "x": "High Risk Value", "y": 2.04 },
+        { "x": "Low Risk Yield", "y": 2.06 },
+        { "x": "High Risk Growth", "y": 2.08 },
+        { "x": "Short Term Growth", "y": 2.1 },
+        { "x": "GARP", "y": 2.12 },
+        { "x": "Expensive Growth", "y": 2.14 },
+        { "x": "Sentiment Growth", "y": 2.16 },
+        { "x": "Growth Traps", "y": 2.18 },
+        { "x": "Secular Growth", "y": 2.2 },
+        { "x": "Quality Comp.", "y": 2.22 },
+        { "x": "Cheap Comp.", "y": 2.24 },
+        { "x": "Growth Comp.", "y": 2.26 },
+        { "x": "Quasi Comp.", "y": 2.28 },
+        { "x": "NPAT Loss", "y": 2.3 },
+        { "x": "NPAT & CFO Loss", "y": 2.32 },
+        { "x": "Winner Loss.", "y": 2.34 },
+        { "x": "Loser Loss.", "y": 2.36 }
+      ],
+      "marker": { "shape": "triangle", "size": 6 }
+    },
+    {
+      "name": "Downturn",
+      "type": "scatter",
+      "data": [
+        { "x": "Value", "y": 0.8 },
+        { "x": "Deep Value", "y": 0.84 },
+        { "x": "High Risk Value", "y": 0.88 },
+        { "x": "Low Risk Yield", "y": 0.92 },
+        { "x": "High Risk Growth", "y": 0.96 },
+        { "x": "Short Term Growth", "y": 1.0 },
+        { "x": "GARP", "y": 1.04 },
+        { "x": "Expensive Growth", "y": 1.08 },
+        { "x": "Sentiment Growth", "y": 1.12 },
+        { "x": "Growth Traps", "y": 1.16 },
+        { "x": "Secular Growth", "y": 1.2 },
+        { "x": "Quality Comp.", "y": 1.24 },
+        { "x": "Cheap Comp.", "y": 1.28 },
+        { "x": "Growth Comp.", "y": 1.32 },
+        { "x": "Quasi Comp.", "y": 1.36 },
+        { "x": "NPAT Loss", "y": 1.4 },
+        { "x": "NPAT & CFO Loss", "y": 1.44 },
+        { "x": "Winner Loss.", "y": 1.48 },
+        { "x": "Loser Loss.", "y": 1.52 }
+      ],
+      "marker": { "shape": "square", "size": 6 }
+    }
+  ],
+  "factorsData": {
+    "categories": [
+      "High Beta",
+      "Low Beta",
+      "High Volatility",
+      "Low Volatility",
+      "Small Caps",
+      "High Liquidity",
+      "Low Liquidity",
+      "High FX Sensitivity",
+      "Low FX Sensitivity",
+      "High Book To Price",
+      "Low Book To Price",
+      "High TTM EPS Growth"
+    ],
+    "series": [
+      {
+        "name": "Active Exposure",
+        "data": [-10, 10, 8, -2, -5, 7, -1, -4, 3, 9, -8, 2]
+      }
+    ]
+  },
+  "industryGroupData": {
+    "categories": [
+      "Energy",
+      "Materials",
+      "Capital Goods",
+      "Consumer Services",
+      "Insurance",
+      "Software",
+      "Semiconductors",
+      "Telecom",
+      "Utilities",
+      "REITs"
+    ],
+    "series": [
+      {
+        "name": "Active Exposure",
+        "data": [-1, 4, -3, 8, 7, -2, -6, 2, 1, 0.5]
+      }
+    ]
+  }
+}
