@@ -85,7 +85,7 @@ function LeadingIndicator() {
         />
       </Group>
       <Stack bg="gray.1" gap="xs">
-        <ApexChart options={options} series={series} height={520} />
+        <ApexChart options={options} series={series} height={480} />
         <Group justify="center">
           {[
             { color: '#f9e79f', label: 'Recovery' },

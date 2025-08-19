@@ -7,17 +7,17 @@ import { CustomButtonLink, CustomHeading } from '@app/ui-core/custom';
 export const Route = createFileRoute(
   '/(app)/create-portfolio/$portfolioId/create-benchmark/metadata',
 )({
-  component: RouteComponent,
+  component: CustomBenchmark,
 });
 
-function RouteComponent() {
+function CustomBenchmark() {
   const { portfolioId } = Route.useParams();
 
   return (
     <Stack h="80vh" justify="space-between">
       <Stack>
         <CustomHeading title="Create Custom Benchmark" description="Set up a Custom Benchmark" />
-        <TextInput label="Benchmark Name" />
+        <TextInput label="Benchmark Name" value="ASX 300" />
         <Dropzone
           onDrop={(files) => {
             console.log('accepted files', files);

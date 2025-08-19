@@ -1,5 +1,5 @@
 import { createFileRoute } from '@tanstack/react-router';
-import { Group, Select, Stack, Text, Title } from '@mantine/core';
+import { Flex, Group, Select, Stack, Text, Title } from '@mantine/core';
 import ApexChart from 'react-apexcharts';
 
 export const Route = createFileRoute(
@@ -79,22 +79,41 @@ function EconomicSurprise() {
         <Text>Select currency/region of Economic Surprise</Text>
         <Select
           size="xs"
+          defaultValue="USD"
           data={[
-            { label: 'World', value: 'World' },
-            { label: 'Australia', value: 'Australia' },
-            { label: 'USA*', value: 'USA' },
+            { label: 'AUD', value: 'AUD' },
+            { label: 'G10', value: 'G10' },
+            { label: 'APAC', value: 'APAC' },
+            { label: 'JPY', value: 'JPY' },
+            { label: 'USD', value: 'USD' },
+            { label: 'EM', value: 'EM' },
+            { label: 'Europe', value: 'Europe' },
             { label: 'China', value: 'China' },
-            { label: 'Japan', value: 'Japan' },
-            { label: 'G20', value: 'G20' },
-            { label: 'Asia Major 5*', value: 'AsiaMajor5' },
-            { label: '4 Major Europe', value: '4MajorEurope' },
-            { label: 'UK', value: 'UK' },
-            { label: 'India', value: 'India' },
+            { label: 'GBP', value: 'GBP' },
           ]}
         />
       </Group>
       <Stack bg="gray.1" gap="xs">
-        <ApexChart options={options} series={series} type="line" height={500} />
+        <ApexChart options={options} series={series} height={480} />
+        <Group justify="center">
+          {[
+            { color: '#f5b7b1', label: 'Negative' },
+            { color: '#aed6f1', label: 'Neutral' },
+            { color: '#f9e79f', label: 'Positive' },
+          ].map((item) => (
+            <Flex key={item.label} align="center" gap="sm">
+              <span
+                style={{
+                  width: 12,
+                  height: 12,
+                  borderRadius: 12,
+                  backgroundColor: item.color,
+                }}
+              />
+              {item.label}
+            </Flex>
+          ))}
+        </Group>
       </Stack>
     </Stack>
   );

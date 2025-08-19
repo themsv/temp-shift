@@ -1,17 +1,23 @@
 import { useMemo, useState } from 'react';
 import { createFileRoute } from '@tanstack/react-router';
-import { Group, Stack, TextInput, Title } from '@mantine/core';
+import { Group, NumberInput, Stack, Text, TextInput, Title } from '@mantine/core';
 import { AgGridReact } from 'ag-grid-react';
-import { themeQuartz, type ColDef, type ColGroupDef } from 'ag-grid-community';
+import {
+  themeQuartz,
+  type ColDef,
+  type ColGroupDef,
+  type ICellRendererParams,
+} from 'ag-grid-community';
 
 import data from 'src/mocks/summaryData.json';
 import { CustomButtonLink, CustomHeading } from '@app/ui-core/custom';
+
 export const Route = createFileRoute(
   '/(app)/create-portfolio/$portfolioId/create-benchmark/preview',
 )({
-  component: RouteComponent,
+  component: BenchmarkPreview,
 });
-// Types
+
 type DetailRow = {
   sedol: string;
   bbTicker: string;
@@ -24,7 +30,7 @@ type SummaryRow = {
   date: string;
   count: number;
   weight: number;
-  reweight?: string;
+  reWeight?: string;
   tickerList: DetailRow[];
 };
 
@@ -37,27 +43,7 @@ const icons = {
   groupContracted: '<span class="ag-icon ag-icon-plus" style="font-size: 14px;"></span>',
 };
 
-const reWeightFunc = () => {
-  return (
-    <button
-      type="button"
-      style={{
-        textDecoration: 'underline',
-        color: '#007BFF',
-        border: '0',
-        backgroundColor: 'transparent',
-      }}
-      onClick={(e: React.MouseEvent<HTMLButtonElement>) => {
-        e.preventDefault();
-        console.log('Re-weight clicked');
-      }}
-    >
-      Re-weight
-    </button>
-  );
-};
-
-function RouteComponent() {
+function BenchmarkPreview() {
   const { portfolioId } = Route.useParams();
   // ag-grid theme typing
   const myTheme = themeQuartz.withParams({
@@ -77,14 +63,26 @@ function RouteComponent() {
       cellRenderer: 'agGroupCellRenderer',
     },
     { field: 'count', headerName: 'No. of Holdings' },
-    { field: 'weight' },
+    { field: 'weight', headerName: 'Weight' },
     {
       headerName: '',
-      field: 'reweight',
-      width: 100,
+      field: 'reWeight',
       menuTabs: [], // hides menu
       sortable: false, // disables sorting
-      cellRenderer: reWeightFunc,
+      cellRenderer: (params: ICellRendererParams) => {
+        return (
+          <Text
+            td="underline"
+            c="green.9"
+            style={{ cursor: 'pointer' }}
+            onClick={() => {
+              params.node.setExpanded(!params.node.expanded);
+            }}
+          >
+            Re-weight
+          </Text>
+        );
+      },
     },
   ]);
 
@@ -92,16 +90,27 @@ function RouteComponent() {
     return {
       detailGridOptions: {
         columnDefs: [
-          { field: 'sedol' },
-          { field: 'bbTicker' },
-          { field: 'isin' },
-          { field: 'ticker' },
-          { field: 'weight' },
+          { field: 'sedol', headerName: 'Sedol' },
+          { field: 'bbTicker', headerName: 'Bbg Ticker' },
+          { field: 'isin', headerName: 'ISIN' },
+          { field: 'ticker', headerName: 'Ticker' },
+          {
+            field: 'weight',
+            headerName: 'Weight',
+            cellRenderer: (params: ICellRendererParams) => (
+              <NumberInput
+                onChange={(val) => {
+                  params.setValue(val);
+                }}
+                hideControls
+                w={64}
+                size="xs"
+                value={params.value}
+              />
+            ),
+          },
         ],
-        defaultColDef: {
-          flex: 1,
-          suppressHeaderMenuButton: true,
-        },
+        defaultColDef: defaultColDef,
       },
       getDetailRowData: (params: {
         data: SummaryRow;

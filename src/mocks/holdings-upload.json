@@ -95,7 +95,7 @@
     {
       "uuid": "f1k7o2m0-1n2k-3l4m-8b9c-1e2f3g4h5i6j",
       "effectiveDate": "04-03-2025",
-      "sedol": "098278",
+      "sedol": "",
       "bbTicker": "CSL AU",
       "isin": "CSL AU",
       "ticker": "ABCD",
@@ -105,7 +105,7 @@
     {
       "uuid": "a2l8p3n1-2o3l-4m5n-9c0d-2f3g4h5i6j7k",
       "effectiveDate": "04-03-2025",
-      "sedol": "789273",
+      "sedol": "0884709",
       "bbTicker": "WOW AU",
       "isin": "COL-AU",
       "ticker": "ABCD",

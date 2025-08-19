@@ -70,7 +70,7 @@ function CustomTable(props: Readonly<CustomTableProps>) {
                     onClick={header.column.getToggleSortingHandler()}
                     style={{ cursor: 'pointer', backgroundColor: '#E0F1FF' }}
                   >
-                    <Text fw="500" size="sm">
+                    <Text fw="500" size="sm" ta="center">
                       {flexRender(header.column.columnDef.header, header.getContext())}
                     </Text>
                   </MTable.Th>
@@ -85,11 +85,19 @@ function CustomTable(props: Readonly<CustomTableProps>) {
             ) : (
               tableInstance.getRowModel().rows.map((row) => (
                 <MTable.Tr key={row.id}>
-                  {row.getVisibleCells().map((cell) => (
-                    <MTable.Td key={cell.id} py="2">
-                      {flexRender(cell.column.columnDef.cell, cell.getContext())}
-                    </MTable.Td>
-                  ))}
+                  {row.getVisibleCells().map((cell) => {
+                    const align = cell.column.columnDef.meta?.align;
+                    return (
+                      <MTable.Td
+                        key={cell.id}
+                        style={{
+                          textAlign: align,
+                        }}
+                      >
+                        {flexRender(cell.column.columnDef.cell, cell.getContext())}
+                      </MTable.Td>
+                    );
+                  })}
                 </MTable.Tr>
               ))
             )}

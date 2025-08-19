@@ -1,9 +1,14 @@
-import { useState } from 'react';
 import { createFileRoute } from '@tanstack/react-router';
-import { Stack, Group } from '@mantine/core';
+import {
+  Stack,
+  Group,
+  Select,
+  type ComboboxItem,
+  type ComboboxLikeRenderOptionInput,
+  Checkbox,
+} from '@mantine/core';
 import { IconPlus } from '@tabler/icons-react';
-import { CustomHeading, CustomCombobox, CustomButtonLink } from '@app/ui-core/custom';
-import BenchmarkData from './../../../../mocks/benchmark-data.json';
+import { CustomHeading, CustomButtonLink } from '@app/ui-core/custom';
 
 export const Route = createFileRoute('/(app)/create-portfolio/$portfolioId/benchmark')({
   component: Benchmark,
@@ -12,25 +17,20 @@ export const Route = createFileRoute('/(app)/create-portfolio/$portfolioId/bench
 function Benchmark() {
   const { portfolioId } = Route.useParams();
 
-  const [selectedValues, setSelectedValues] = useState<string[]>([
-    'msci-world',
-    'msci-em',
-    'msci-100',
-    'asx-growth',
-    'sp-growth',
-  ]);
-
+  const renderOption = (item: ComboboxLikeRenderOptionInput<ComboboxItem>) => (
+    <Checkbox label={item.option.label} checked={item.checked} size="sm" />
+  );
   return (
     <Stack h="80vh" justify="space-between">
       <Stack>
         <CustomHeading title="Select Base Benchmarks" description="" />
-        <CustomCombobox
-          data={BenchmarkData}
-          selectedValues={selectedValues}
-          setSelectedValues={setSelectedValues}
+        <Select
           placeholder="Search or Select Benchmarks"
           label="Benchmarks"
+          data={data}
           required
+          searchable
+          renderOption={renderOption}
         />
         <CustomButtonLink
           to={'/create-portfolio/$portfolioId/create-benchmark/metadata'}
@@ -56,3 +56,26 @@ function Benchmark() {
     </Stack>
   );
 }
+
+const data = [
+  {
+    group: 'MSCI',
+    items: [
+      { label: 'MSCI Worlds', value: 'msci-world' },
+      { label: 'MSCI Emerging Markets (EM)', value: 'msci-em' },
+      { label: 'MSCI 100', value: 'msci-100' },
+      { label: 'MSCI Lorem Ipsum', value: 'msci-lorem' },
+    ],
+  },
+  {
+    group: 'ASX',
+    items: [{ label: 'S&P/ASX 300', value: 'asx-300', disabled: true }],
+  },
+  {
+    group: 'Custom',
+    items: [
+      { label: 'ASX Growth', value: 'asx-growth' },
+      { label: 'S&P Growth', value: 'sp-growth' },
+    ],
+  },
+];

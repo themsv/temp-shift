@@ -61,7 +61,7 @@ function PortfolioAnalyzePanel({ panelWidthHandler }: Readonly<PortfolioAnalyzeP
                 clipPath: 'polygon(0 0, 100% 10%, 100% 100%, 100% 90%, 0 100%)',
               }}
             >
-              <span>{tabItem}</span>
+              {tabItem}
             </Tabs.Tab>
           );
         })}

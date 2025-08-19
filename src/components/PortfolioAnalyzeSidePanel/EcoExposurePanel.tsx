@@ -19,8 +19,8 @@ type AccordionProps = {
 
 function AccordionWrapper({ label, children }: Readonly<AccordionProps>) {
   return (
-    <Accordion variant="separated" multiple defaultValue={[label]}>
-      <Accordion.Item value={label}>
+    <Accordion variant="separated" multiple defaultValue={[label]} my="xs">
+      <Accordion.Item value={label} bg="#fff">
         <Accordion.Control p="0px 8px" className={styles.accordionHeader}>
           {label}
         </Accordion.Control>

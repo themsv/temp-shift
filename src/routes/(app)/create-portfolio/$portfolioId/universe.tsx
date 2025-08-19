@@ -39,13 +39,17 @@ function Universe() {
           description={`By default all securities in the benchmark selected for analysis are considered as Investable Universe. \nPlease select a custom universe if you would like to change the default`}
         />
         <Select
+          defaultValue={'msci'}
           data={[
-            { group: '', items: ['Default (MSCI World)'] },
+            { group: '', items: [{ label: 'Default (MSCI World)', value: 'msci' }] },
             {
               group: 'Custom',
               items: [
-                'ASX Top 200 Excluding IT',
-                'MSCI All World Excluding Consumer Discretionary',
+                { label: 'ASX Top 200 Excluding IT', value: 'asx' },
+                {
+                  label: 'MSCI All World Excluding Consumer Discretionary',
+                  value: 'msciExConsumer',
+                },
               ],
             },
           ]}
@@ -82,7 +86,7 @@ function Universe() {
         </CustomButtonLink>
       </Group>
 
-      <Drawer opened={opened} onClose={close} position="right" withCloseButton={false}>
+      <Drawer opened={opened} onClose={close} position="right" withCloseButton={false} size="lg">
         <Stack justify="space-between" h="90vh">
           <Stack gap="lg">
             <CustomHeading title="Add Custom Universe" description="Set up your universe" />

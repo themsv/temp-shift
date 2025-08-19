@@ -1,6 +1,6 @@
 import { createFileRoute } from '@tanstack/react-router';
 import { Group, Stack, Tabs, TextInput } from '@mantine/core';
-import { IconCircleCheck, IconCircleX } from '@tabler/icons-react';
+import { IconCircleCheck, IconCircleMinus } from '@tabler/icons-react';
 import { CustomButtonLink, CustomHeading } from '@app/ui-core/custom';
 import { InvalidHoldings, ValidHoldings } from '@app/components/portfolio/HoldingsTable';
 
@@ -10,18 +10,6 @@ export const Route = createFileRoute(
   component: Corrections,
 });
 
-const CORRECTION_TABS = [
-  {
-    label: 'Errors',
-    value: 'invalid',
-    icon: <IconCircleX color="red" />,
-  },
-  {
-    label: 'Mapped',
-    value: 'valid',
-    icon: <IconCircleCheck color="green" />,
-  },
-];
 function Corrections() {
   const { portfolioId } = Route.useParams();
 
@@ -32,11 +20,20 @@ function Corrections() {
         <TextInput label="Benchmark Name" value="ASX 300" />
         <Tabs defaultValue="invalid">
           <Tabs.List>
-            {CORRECTION_TABS.map((tab) => (
-              <Tabs.Tab key={tab.value} value={tab.value} leftSection={tab.icon}>
-                {tab.label}
-              </Tabs.Tab>
-            ))}
+            <Tabs.Tab
+              value="invalid"
+              leftSection={<IconCircleMinus color="var(--mantine-color-red-9)" />}
+              color="var(--mantine-color-red-9)"
+            >
+              Errors
+            </Tabs.Tab>
+            <Tabs.Tab
+              value="valid"
+              color="var(--mantine-color-green-9)"
+              leftSection={<IconCircleCheck color="var(--mantine-color-green-9)" />}
+            >
+              Mapped
+            </Tabs.Tab>
           </Tabs.List>
           <Tabs.Panel value="invalid" w="100%">
             <InvalidHoldings />

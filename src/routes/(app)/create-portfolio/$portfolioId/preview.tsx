@@ -1,13 +1,17 @@
 import { useMemo, useState } from 'react';
 import { createFileRoute } from '@tanstack/react-router';
 import { AgGridReact } from 'ag-grid-react';
-import { themeQuartz, type ColDef, type ColGroupDef } from 'ag-grid-community';
+import {
+  themeQuartz,
+  type ColDef,
+  type ColGroupDef,
+  type ICellRendererParams,
+} from 'ag-grid-community';
+import { Group, NumberInput, Stack, Text, Title } from '@mantine/core';
 
 import data from 'src/mocks/summaryData.json';
-import { Group, Stack, Title } from '@mantine/core';
 import { CustomButtonLink } from '@app/ui-core/custom';
 
-// Types
 type DetailRow = {
   sedol: string;
   bbTicker: string;
@@ -20,7 +24,7 @@ type SummaryRow = {
   date: string;
   count: number;
   weight: number;
-  reweight?: string;
+  reWeight: string;
   tickerList: DetailRow[];
 };
 
@@ -38,26 +42,6 @@ const icons = {
   groupContracted: '<span class="ag-icon ag-icon-plus" style="font-size: 14px;"></span>',
 };
 
-const reWeightFunc = () => {
-  return (
-    <button
-      type="button"
-      style={{
-        textDecoration: 'underline',
-        color: '#007BFF',
-        border: '0',
-        backgroundColor: 'transparent',
-      }}
-      onClick={(e: React.MouseEvent<HTMLButtonElement>) => {
-        e.preventDefault();
-        console.log('Re-weight clicked');
-      }}
-    >
-      Re-weight
-    </button>
-  );
-};
-
 function PortfolioPreview() {
   const { portfolioId } = Route.useParams();
 
@@ -72,21 +56,32 @@ function PortfolioPreview() {
     borderColor: '#E0F1FF',
   });
 
-  // ag-grid ColumnDefs
   const [columnDefs] = useState<(ColDef<SummaryRow> | ColGroupDef<SummaryRow>)[]>([
     {
       field: 'date',
       cellRenderer: 'agGroupCellRenderer',
     },
     { field: 'count', headerName: 'No. of Holdings' },
-    { field: 'weight' },
+    { field: 'weight', headerName: 'Weight' },
     {
       headerName: '',
-      field: 'reweight',
-      width: 100,
+      field: 'reWeight',
       menuTabs: [], // hides menu
       sortable: false, // disables sorting
-      cellRenderer: reWeightFunc,
+      cellRenderer: (params: ICellRendererParams) => {
+        return (
+          <Text
+            td="underline"
+            c="green.9"
+            style={{ cursor: 'pointer' }}
+            onClick={() => {
+              params.node.setExpanded(!params.node.expanded);
+            }}
+          >
+            Re-weight
+          </Text>
+        );
+      },
     },
   ]);
 
@@ -94,16 +89,28 @@ function PortfolioPreview() {
     return {
       detailGridOptions: {
         columnDefs: [
-          { field: 'sedol' },
-          { field: 'bbTicker' },
-          { field: 'isin' },
-          { field: 'ticker' },
-          { field: 'weight' },
+          { field: 'sedol', headerName: 'Sedol' },
+          { field: 'bbTicker', headerName: 'Bbg Ticker' },
+          { field: 'isin', headerName: 'ISIN' },
+          { field: 'ticker', headerName: 'Ticker' },
+          {
+            field: 'weight',
+            headerName: 'Weight',
+            cellRenderer: (params: ICellRendererParams) => (
+              <NumberInput
+                onChange={(val) => {
+                  params.setValue(val);
+                }}
+                hideControls
+                w={64}
+                size="xs"
+                value={params.value}
+              />
+            ),
+          },
         ],
-        defaultColDef: {
-          flex: 1,
-          suppressHeaderMenuButton: true,
-        },
+        defaultColDef: defaultColDef,
+        suppressCellFocus: true,
       },
       getDetailRowData: (params: {
         data: SummaryRow;
@@ -127,6 +134,7 @@ function PortfolioPreview() {
         detailCellRendererParams={detailCellRendererParams}
         icons={icons}
         domLayout="autoHeight"
+        suppressCellFocus={true}
       />
 
       <Group style={{ alignSelf: 'flex-end' }}>
