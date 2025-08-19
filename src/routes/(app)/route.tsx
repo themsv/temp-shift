@@ -42,7 +42,7 @@ function MainLayout() {
         <SideNavbar />
       </AppShell.Navbar>
 
-      <AppShell.Main pr={isNoRightPadding ? 0 : 'md'}>
+      <AppShell.Main pr={isNoRightPadding ? 10 : 'md'}>
         <Suspense fallback={<LoadingOverlay visible />}>
           <Outlet />
         </Suspense>

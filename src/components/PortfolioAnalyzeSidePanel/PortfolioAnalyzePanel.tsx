@@ -48,13 +48,13 @@ function PortfolioAnalyzePanel({ panelWidthHandler }: Readonly<PortfolioAnalyzeP
           return (
             <Tabs.Tab
               value={tabItem}
-              fw={400}
-              fz="15.69px"
+              fw={350}
+              fz="15px"
               lts="0%"
               lh="150%"
               p="8px 5px"
-              w="30px"
-              h="120px"
+              w="25px"
+              h="110px"
               ta="center"
               bdrs="0px 25px 25px 0px"
               key={tabItem}
