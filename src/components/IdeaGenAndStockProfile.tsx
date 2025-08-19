@@ -17,6 +17,7 @@ export function IdeaGenAndStockProfile() {
       </CustomButtonLink>
       <CustomButtonLink
         to="/analyze/stock-profile"
+        state={{ fromButton: true }}
         variant="outline"
         leftSection={<IconQueryStats size="20" color="var(--mantine-color-skyblue-5)" />}
       >

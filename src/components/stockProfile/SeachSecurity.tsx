@@ -1,38 +1,17 @@
+import { useLocation, useNavigate } from '@tanstack/react-router';
 import { Center, Select, Stack, Text, ActionIcon, Group, Box } from '@mantine/core';
-import { IconSearch, IconX } from '@tabler/icons-react';
+import { IconChevronLeft, IconChevronRight, IconSearch, IconX } from '@tabler/icons-react';
+import { useAnalyze } from '../../context/useAnalyze';
 
-interface SelectValue {
-  value: string;
-  label: string;
-}
-
-interface SearchSecurityProps {
-  readonly changeFlex: boolean;
-  readonly openDetailView: boolean;
-  readonly value: SelectValue | null;
-  readonly setValue: (v: SelectValue | null) => void;
-  readonly setChangeFlex: (b: boolean) => void;
-}
-
-export default function SearchSecurity({
-  changeFlex,
-  openDetailView,
-  value,
-  setValue,
-  setChangeFlex,
-}: SearchSecurityProps) {
-  let width: string;
-  if (changeFlex && !openDetailView) {
-    width = '75%';
-  } else if (openDetailView) {
-    width = '40%';
-  } else {
-    width = '100%';
-  }
+export default function SearchSecurity() {
+  const { isExpanded, setIsExpanded, changeFlex, setChangeFlex, setData, data } = useAnalyze();
+  const navigate = useNavigate();
+  const location = useLocation();
+  const fromButton = location.state.fromButton === true;
   return (
     <Box
       style={{
-        width: width,
+        flex: 1,
         transition: 'width 0.3s ease',
         padding: '0.5%',
         border: '1px solid #dcdcdc',
@@ -40,10 +19,38 @@ export default function SearchSecurity({
       }}
     >
       <Group justify="space-between">
-        <Text fw={500}> Stock Profile </Text>
+        {fromButton ? (
+          <Text fw={500}> Stock Profile </Text>
+        ) : (
+          <Group gap={0}>
+            {changeFlex === true ? null : isExpanded === false ? (
+              <IconChevronLeft
+                style={{ cursor: 'pointer' }}
+                onClick={() => {
+                  void navigate({ to: '/analyze/stock-profile' });
+                  setIsExpanded(true);
+                }}
+              />
+            ) : (
+              <IconChevronRight
+                style={{ cursor: 'pointer' }}
+                onClick={() => {
+                  {
+                    setIsExpanded(false);
+                    void navigate({ to: '/analyze/115' });
+                  }
+                }}
+              />
+            )}
+            <Text fw={500}> Stock Profile </Text>
+          </Group>
+        )}
         <ActionIcon
           onClick={() => {
             window.history.back();
+            setData(null);
+            setChangeFlex(false);
+            setIsExpanded(false);
           }}
           aria-label="Go back"
           variant="transparent"
@@ -52,25 +59,29 @@ export default function SearchSecurity({
           <IconX color="black" size={20} />
         </ActionIcon>
       </Group>
-      <Center h={500}>
-        <Stack align="center" justify="center">
+      <Center h={isExpanded === true ? 500 : 570}>
+        <Stack align="center">
           <Text> Add security for comparison </Text>
           <Select
             searchable
-            rightSection={<IconSearch />}
+            rightSection={<IconSearch style={{ color: 'var(--mantine-color-skyblue-5)' }} />}
             placeholder="Search"
             clearable
             size="xs"
             style={{
-              width: 'clamp(180px, 30vw, 400px)',
+              width:
+                isExpanded === true || fromButton
+                  ? 'clamp(180px, 40vw  , 450px)'
+                  : 'clamp(180px, 15vw  , 450px)',
+              border: '1px solid var(--mantine-color-skyblue-5)',
             }}
             data={[
               { value: 'IAG AU', label: 'Insurance Australian Group Limited' },
               { value: 'McQ', label: 'Macquarie Investment Bank' },
             ]}
-            value={value ? value.value : null}
+            value={data ? data.value : null}
             onChange={(_value, option) => {
-              setValue(option);
+              setData(option);
               setChangeFlex(true);
             }}
           />

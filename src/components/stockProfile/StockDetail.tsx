@@ -1,13 +1,13 @@
 import { Accordion, Flex, Text, Box, Tabs, Table } from '@mantine/core';
 import { IconTriangleFilled } from '@tabler/icons-react';
-import { data, tableGroups } from '../stockProfile/StockProfileData';
+import { data, data2, tableGroups } from '../stockProfile/StockProfileData';
 
 interface StockDetailProps {
   readonly setOpenDetailView: (b: boolean) => void;
 }
 
 export default function StockDetail({ setOpenDetailView }: StockDetailProps) {
-  const items = data.map((item) => (
+  const exposure_items = data.map((item) => (
     <Box key={item.value} style={{ overflowX: 'auto', maxWidth: '100%', marginTop: '0' }}>
       <Accordion.Item key={item.value} value={item.value}>
         <Accordion.Control>{item.value}</Accordion.Control>
@@ -119,6 +119,109 @@ export default function StockDetail({ setOpenDetailView }: StockDetailProps) {
     </Box>
   ));
 
+  const exposure_input_items = data2.map((item) => (
+    <Box key={item.value} style={{ overflowX: 'auto', maxWidth: '100%', marginTop: '0' }}>
+      <Accordion.Item key={item.value} value={item.value}>
+        <Accordion.Control>{item.value}</Accordion.Control>
+        <Accordion.Panel style={{ backgroundColor: 'white' }}>
+          <Table
+            withColumnBorders
+            withTableBorder
+            verticalSpacing={1}
+            horizontalSpacing={1}
+            styles={{
+              th: {
+                textAlign: 'center',
+                padding: 0,
+              },
+            }}
+          >
+            <colgroup>
+              <col /> {/* 1st column: default width (auto or flexible) */}
+              <col style={{ width: '44%' }} /> {/* 2nd column */}
+              <col style={{ width: '25%' }} /> {/* 3rd column */}
+              <col style={{ width: '25%' }} /> {/* 4th column */}
+            </colgroup>
+            <Table.Thead>
+              <Table.Tr>
+                <Table.Th>
+                  <Text size="xs" fw={500}></Text>
+                </Table.Th>
+                <Table.Th>
+                  <Text size="xs" fw={500}></Text>
+                </Table.Th>
+                <Table.Th>
+                  <Text size="xs" fw={500}>
+                    Raw
+                  </Text>
+                </Table.Th>
+                <Table.Th>
+                  <Text size="xs" fw={500}>
+                    Pct Rank
+                  </Text>
+                </Table.Th>
+              </Table.Tr>
+            </Table.Thead>
+            <Table.Tbody>
+              {tableGroups.map((group) =>
+                group.rows.map((row, idx) => {
+                  const getBackgroundColor = (val: string) => {
+                    const numericValue = parseFloat(val);
+                    if (numericValue >= 40 && numericValue <= 89)
+                      return '#e5faf6'; // light green
+                    else if (numericValue >= 90 && numericValue <= 100)
+                      return '#22cfa7'; // green
+                    else if (numericValue >= 0 && numericValue <= 20)
+                      return '#ffd0db'; // light red/pink
+                    else if (numericValue < 0) return '#df2d41'; // dark red
+                    return ''; // default transparent or no color
+                  };
+
+                  const bgColor1 = getBackgroundColor(row.value1);
+                  const bgColor2 = getBackgroundColor(row.value2);
+                  const bgColor3 = getBackgroundColor(row.value3);
+
+                  return (
+                    <Table.Tr key={row.factor}>
+                      {idx === 0 && (
+                        <Table.Td rowSpan={group.rows.length}>
+                          <Text
+                            style={{
+                              writingMode: 'vertical-rl',
+                              transform: 'rotate(180deg)',
+                              whiteSpace: 'nowrap',
+                              textAlign: 'center',
+                              fontWeight: 600,
+                              display: 'block',
+                              lineHeight: 1,
+                              padding: '0 4px',
+                            }}
+                            size="xs"
+                          >
+                            {group.group}
+                          </Text>
+                        </Table.Td>
+                      )}
+                      <Table.Td>
+                        <Text size="xs">{row.factor}</Text>
+                      </Table.Td>
+                      <Table.Td style={{ backgroundColor: bgColor1, textAlign: 'center' }}>
+                        <Text size="xs">{row.value1}</Text>
+                      </Table.Td>
+                      <Table.Td style={{ backgroundColor: bgColor2, textAlign: 'center' }}>
+                        <Text size="xs">{row.value2}</Text>
+                      </Table.Td>
+                    </Table.Tr>
+                  );
+                }),
+              )}
+            </Table.Tbody>
+          </Table>
+        </Accordion.Panel>
+      </Accordion.Item>
+    </Box>
+  ));
+
   return (
     <Flex
       style={{
@@ -168,9 +271,28 @@ export default function StockDetail({ setOpenDetailView }: StockDetailProps) {
                   padding: 0,
                 },
               }}
-              defaultValue="Factor"
+              defaultValue="Style Flavour Exposures"
             >
-              {items}
+              {exposure_items}
+            </Accordion>
+          </Tabs.Panel>
+          <Tabs.Panel value="exposure_input" pt="xs">
+            <Accordion
+              styles={{
+                label: {
+                  padding: 2,
+                },
+                control: {
+                  fontSize: 14,
+                  padding: 0,
+                },
+                content: {
+                  padding: 0,
+                },
+              }}
+              defaultValue="Factors"
+            >
+              {exposure_input_items}
             </Accordion>
           </Tabs.Panel>
         </Tabs>

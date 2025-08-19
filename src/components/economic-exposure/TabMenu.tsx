@@ -1,7 +1,10 @@
 import { useState, type CSSProperties, type SetStateAction } from 'react';
 import { Tabs } from '@mantine/core';
+import { useAnalyze } from 'src/context/useAnalyze';
 import TableLayout from './TableLayout';
 import Insights from './InsightsPanel';
+import SearchSecurity from '../stockProfile/SeachSecurity';
+import StockOverviewPanel from '../stockProfile/StockOverviewPanel';
 
 const tabsList: string[] = ['Insights', 'Eco Exp.', 'Stock Profile'];
 
@@ -10,9 +13,9 @@ type TabMenuProps = {
 };
 
 function TabMenu({ panelWidthHandler }: Readonly<TabMenuProps>) {
-  const [activeTab, setActiveTab] = useState<string | null>('Insights');
   const [isVisible, setIsVisible] = useState(true);
   const [isExpand, setIsExpand] = useState(false);
+  const { data, setData, activeTab, setActiveTab } = useAnalyze();
 
   function closeHandler() {
     setIsVisible(false);
@@ -76,7 +79,11 @@ function TabMenu({ panelWidthHandler }: Readonly<TabMenuProps>) {
         {/* Hello */}
       </Tabs.Panel>
       <Tabs.Panel value="Stock Profile" bg="#ffffff" p="8px">
-        Stock profile
+        {data ? (
+          <StockOverviewPanel value={data} />
+        ) : (
+          <SearchSecurity value={data} setValue={setData} setChangeFlex={() => {}} />
+        )}
       </Tabs.Panel>
     </Tabs>
   );
