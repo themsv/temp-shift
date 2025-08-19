@@ -5,14 +5,14 @@ function BubbleChart() {
     {
       name: 'Bubbles',
       data: [
-        { x: 10, y: 2, z: 20, fillColor: '#1ABC9C' },
-        { x: 20, y: -2, z: 25, fillColor: '#F5B7B1' },
-        { x: 40, y: 1, z: 40, fillColor: '#76D7C4' },
-        { x: 50, y: -5, z: 20, fillColor: '#E74C3C' },
-        { x: 60, y: 2, z: 50, fillColor: '#17A589' },
-        { x: 70, y: -4, z: 55, fillColor: '#EC7063' },
-        { x: 85, y: -3, z: 70, fillColor: '#922B21' },
-        { x: 90, y: 2, z: 90, fillColor: '#138D75' },
+        { x: 10, y: 2, z: 120, fillColor: '#1ABC9C' },
+        { x: 20, y: -2, z: 225, fillColor: '#F5B7B1' },
+        { x: 40, y: 1, z: 140, fillColor: '#76D7C4' },
+        { x: 50, y: -5, z: 150, fillColor: '#E74C3C' },
+        { x: 60, y: 2, z: 160, fillColor: '#17A589' },
+        { x: 70, y: -4, z: 155, fillColor: '#EC7063' },
+        { x: 85, y: -3, z: 250, fillColor: '#922B21' },
+        { x: 90, y: 2, z: 290, fillColor: '#138D75' },
       ],
     },
   ];

@@ -7,24 +7,72 @@ interface TooltipData {
   category: string;
   value: number;
 }
+interface CategoryGroup {
+  name: string;
+  items: string[];
+}
 
-function buildAxis(data) {
+interface ChartData {
+  categories: string[] | CategoryGroup[];
+}
+interface Group {
+  title: string;
+  cols: number;
+}
+type SeriesData = {
+  name: string;
+  data: (number | null | undefined)[];
+  type?: 'column' | 'scatter';
+  color?: string;
+};
+
+type DataPoint = {
+  category: string;
+  value: number;
+  series: number;
+};
+
+interface SkyLineProps {
+  data: DataPoint[];
+}
+interface AxisResult {
+  isGrouped: boolean;
+  flatCategories: string[];
+  groups: string[][];
+}
+
+function buildAxis(data: ChartData | undefined) {
   const cats = data?.categories || [];
   const isGrouped = Array.isArray(cats) && typeof cats[0] === 'object' && !!cats[0]?.items;
-  const flatCategories = isGrouped ? cats.flatMap((g) => g.items) : cats;
-  const groups = isGrouped ? cats.map((g) => ({ title: g.name, cols: g.items.length })) : undefined;
+  const flatCategories = isGrouped
+    ? (cats as CategoryGroup[]).flatMap((g) => g.items)
+    : (cats as string[]);
+  const groups = isGrouped
+    ? (cats as CategoryGroup[]).map((g) => ({
+        title: g.name,
+        cols: g.items.length,
+      }))
+    : undefined;
   return { isGrouped, flatCategories, groups };
 }
 
-function buildGroupBoundaryAnnotations(flatCategories, groups) {
+function buildGroupBoundaryAnnotations(flatCategories: string[], groups: Group[] | undefined) {
   if (!groups || !groups.length) return [];
-  const annotations = [];
+
+  const annotations: {
+    x: string;
+    borderColor: string;
+    strokeDashArray: number;
+    opacity: number;
+    label: { show: boolean };
+  }[] = [];
+
   let cursor = 0;
   for (let i = 0; i < groups.length; i++) {
     const cols = groups[i].cols;
     if (i !== 0) {
-      const leftCat = flatCategories[cursor];
-      if (leftCat !== undefined) {
+      const leftCat = flatCategories[cursor] as string | undefined;
+      if (leftCat) {
         annotations.push({
           x: leftCat,
           borderColor: '#B8C2CC',
@@ -39,13 +87,16 @@ function buildGroupBoundaryAnnotations(flatCategories, groups) {
   return annotations;
 }
 
-function computeYExtents(series, catCount) {
-  const vals = [];
-  (series || []).forEach((s) => {
+function computeYExtents(series: SeriesData[], catCount: number): { yMin: number; yMax: number } {
+  const vals: number[] = [];
+
+  series.forEach((s) => {
     if (!Array.isArray(s.data)) return;
     for (let i = 0; i < Math.min(catCount, s.data.length); i++) {
       const v = s.data[i];
-      if (typeof v === 'number' && Number.isFinite(v)) vals.push(v);
+      if (typeof v === 'number' && Number.isFinite(v)) {
+        vals.push(v);
+      }
     }
   });
 
@@ -59,7 +110,7 @@ function computeYExtents(series, catCount) {
   return { yMin: min0 - pad, yMax: max0 + pad };
 }
 
-function SkyLine({ data }) {
+function SkyLine({ data }: SkyLineProps) {
   const [tooltipData, setTooltipData] = useState<TooltipData>({
     category: '',
     value: 0,
@@ -75,15 +126,20 @@ function SkyLine({ data }) {
     () => buildGroupBoundaryAnnotations(flatCategories, groups),
     [flatCategories, groups],
   );
-  const safeSeries = useMemo(() => {
-    return (data?.series || []).map((s, idx) => {
-      const type = idx === 0 ? 'column' : 'scatter';
-      const arr = Array.isArray(s.data) ? s.data : [];
+  const safeSeries = useMemo<SeriesData[]>(() => {
+    const series: SeriesData[] = (data?.series ?? []) as SeriesData[];
+    return series.map((s, idx) => {
+      const type: 'column' | 'scatter' = idx === 0 ? 'column' : 'scatter';
+      const arr: number[] = Array.isArray(s.data) ? s.data : [];
       const aligned =
         flatCategories.length && arr.length !== flatCategories.length
           ? arr.slice(0, flatCategories.length)
           : arr;
-      return { ...s, type, data: aligned };
+      return {
+        ...s,
+        type,
+        data: aligned,
+      };
     });
   }, [data?.series, flatCategories.length]);
 
@@ -146,16 +202,17 @@ function SkyLine({ data }) {
             const category = flatCategories[dataPointIndex];
             const value = safeSeries[seriesIndex]?.data[dataPointIndex];
             setTooltipData({ category, value });
-            setTooltipPos({ x: event.clientX, y: event.clientY - 200 });
+            setTooltipPos({ x: event.clientX - 80, y: event.clientY - 250 });
           },
           dataPointMouseLeave: function () {
             if (!tooltipLocked) setTooltipData(null);
+            setTooltipLocked(false);
           },
           dataPointSelection: function (event, _, { seriesIndex, dataPointIndex }) {
             const category = flatCategories[dataPointIndex];
             const value = safeSeries[seriesIndex]?.data[dataPointIndex];
             setTooltipData({ category, value });
-            setTooltipPos({ x: event.clientX, y: event.clientY - 200 });
+            setTooltipPos({ x: event.clientX - 80, y: event.clientY - 250 });
             setTooltipLocked(true); // keep tooltip after click
             const e = config.event as MouseEvent;
             handleBarClick(e);
@@ -172,7 +229,13 @@ function SkyLine({ data }) {
       },
       annotations: {
         xaxis: [
-          { x: 0, borderColor: '#B8C2CC', strokeDashArray: 0, opacity: 1, label: { show: false } },
+          {
+            x: 0,
+            borderColor: '#B8C2CC',
+            strokeDashArray: 0,
+            opacity: 1,
+            label: { show: false },
+          },
         ],
         yaxis: [
           { y: 0, borderColor: '#B8C2CC', strokeDashArray: 0, opacity: 1, label: { show: false } },
@@ -186,6 +249,18 @@ function SkyLine({ data }) {
         ],
       },
       plotOptions: { bar: { columnWidth: '80%' } },
+      states: {
+        hover: {
+          filter: {
+            type: 'none',
+          },
+        },
+        active: {
+          filter: {
+            type: 'none',
+          },
+        },
+      },
       dataLabels: { enabled: false },
       stroke: { width: strokeWidths },
       markers: {
@@ -213,7 +288,7 @@ function SkyLine({ data }) {
         categories: flatCategories,
         tickPlacement: 'between',
         axisTicks: { show: true },
-        axisBorder: { show: true, color: '#B8C2CC', height: 2 },
+        axisBorder: { show: true, /*color: '#B8C2CC',*/ height: 2 },
         labels: { rotate: -45, trim: false, style: { fontSize: '12px' } },
         group: groupConfig,
       },
