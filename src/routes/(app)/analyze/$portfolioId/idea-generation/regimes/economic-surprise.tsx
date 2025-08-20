@@ -56,7 +56,7 @@ function EconomicSurprise() {
       markers: {
         fillColors: ['#f4d35e', '#90caf9', '#e57373', '#000'],
       },
-      customLegendItems: ['Negative', 'Neutral', 'Positive', 'Economic Surprise'],
+      customLegendItems: ['Negative', 'Neutral', 'Positive', 'REF'],
     },
     annotations: {
       xaxis: regimes.map((r) => ({
@@ -94,22 +94,35 @@ function EconomicSurprise() {
         />
       </Group>
       <Stack bg="gray.1" gap="xs">
-        <ApexChart options={options} series={series} height={480} />
+        <ApexChart options={options} series={series} height={400} />
         <Group justify="center">
           {[
             { color: '#f5b7b1', label: 'Negative' },
             { color: '#aed6f1', label: 'Neutral' },
             { color: '#f9e79f', label: 'Positive' },
+            { color: 'black', label: 'REF', isLine: true },
           ].map((item) => (
             <Flex key={item.label} align="center" gap="sm">
-              <span
-                style={{
-                  width: 12,
-                  height: 12,
-                  borderRadius: 12,
-                  backgroundColor: item.color,
-                }}
-              />
+              {item.isLine ? (
+                <span
+                  style={{
+                    width: 20,
+                    height: 3,
+                    backgroundColor: item.color,
+                    display: 'inline-block',
+                  }}
+                />
+              ) : (
+                <span
+                  style={{
+                    width: 12,
+                    height: 12,
+                    borderRadius: 12,
+                    backgroundColor: item.color,
+                    display: 'inline-block',
+                  }}
+                />
+              )}
               {item.label}
             </Flex>
           ))}

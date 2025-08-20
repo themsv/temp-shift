@@ -60,8 +60,8 @@ const ContributorsTable = () => {
           cellClass: styles.leftAlignCell,
           headerClass: () =>
             !expandedGroups.stockDetails
-              ? `${styles.leftAlignHeader} group-boundary`
-              : styles.leftAlignHeaderExpanded,
+              ? `${styles.leftAlignHeading} group-boundary`
+              : styles.leftAlignHeaderExpanding,
           cellClassRules: {
             'group-boundary': () => !expandedGroups.stockDetails,
           },
@@ -159,21 +159,23 @@ const ContributorsTable = () => {
   };
 
   return (
-    <div className="ag-theme-alpine" style={{ width: 'auto' }}>
-      <AgGridReact
-        onColumnGroupOpened={onColumnGroupOpened}
-        rowData={data}
-        columnDefs={columnDefs}
-        domLayout="autoHeight"
-        defaultColDef={{
-          suppressHeaderMenuButton: true,
-          sortable: false,
-          resizable: true,
-          cellClass: 'custom-cell',
-          width: 122,
-          suppressSizeToFit: true,
-        }}
-      />
+    <div className={styles.contributorsGrid}>
+      <div className={`ag-theme-alpine`} style={{ width: 'auto' }}>
+        <AgGridReact
+          onColumnGroupOpened={onColumnGroupOpened}
+          rowData={data}
+          columnDefs={columnDefs}
+          domLayout="autoHeight"
+          defaultColDef={{
+            suppressHeaderMenuButton: true,
+            sortable: false,
+            resizable: true,
+            cellClass: 'custom-cell',
+            width: 122,
+            suppressSizeToFit: true,
+          }}
+        />
+      </div>
     </div>
   );
 };

@@ -85,23 +85,36 @@ function LeadingIndicator() {
         />
       </Group>
       <Stack bg="gray.1" gap="xs">
-        <ApexChart options={options} series={series} height={480} />
+        <ApexChart options={options} series={series} height={420} />
         <Group justify="center">
           {[
             { color: '#f9e79f', label: 'Recovery' },
             { color: '#aed6f1', label: 'Expansion' },
             { color: '#d5dbdb', label: 'Slowdown' },
             { color: '#f5b7b1', label: 'Downturn' },
+            { color: 'black', label: `OECD LI - ${region}`, isLine: true },
           ].map((item) => (
             <Flex key={item.label} align="center" gap="sm">
-              <span
-                style={{
-                  width: 12,
-                  height: 12,
-                  borderRadius: 12,
-                  backgroundColor: item.color,
-                }}
-              />
+              {item.isLine ? (
+                <span
+                  style={{
+                    width: 20,
+                    height: 3,
+                    backgroundColor: item.color,
+                    display: 'inline-block',
+                  }}
+                />
+              ) : (
+                <span
+                  style={{
+                    width: 12,
+                    height: 12,
+                    borderRadius: 12,
+                    backgroundColor: item.color,
+                    display: 'inline-block',
+                  }}
+                />
+              )}
               {item.label}
             </Flex>
           ))}

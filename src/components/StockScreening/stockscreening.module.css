@@ -8,10 +8,10 @@
 :global(.ag-header-group-cell.headers) {
   writing-mode: vertical-rl;
   transform: rotate(180deg);
-  height: 110px;
   justify-content: space-between;
   background-color: #e3f2f9 !important;
   color: black;
+  height: 110px;
   padding: 9px;
   border-bottom: 1px solid #aacef9;
 }

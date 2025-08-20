@@ -19,6 +19,7 @@ import { IconCaretDownFilled } from '@tabler/icons-react';
 import { useIntl } from 'react-intl';
 
 import appLayoutConfig, { innerLayout } from '@app/consts/app-layout';
+import TabMenu from '@app/components/economic-exposure/TabMenu';
 import data from '../../../../../mocks/Dropdowns.json';
 
 export const Route = createFileRoute('/(app)/analyze/$portfolioId/idea-generation')({
@@ -35,7 +36,17 @@ const tabs = [
 function IdeaGeneration() {
   const { portfolioId } = Route.useParams();
   const { spacing } = useMantineTheme();
+
   const { formatMessage } = useIntl();
+  const [panelWidth, setPanelWidth] = useState('0');
+
+  function panelWidthHandler(closed: boolean) {
+    if (closed) {
+      setPanelWidth('0');
+    } else {
+      setPanelWidth(innerLayout.buttonSetWidth);
+    }
+  }
 
   const navigate = useNavigate();
   return (
@@ -44,13 +55,15 @@ function IdeaGeneration() {
       p="md"
       mt="md"
       h={`calc(100vh - ${appLayoutConfig.header.height} - ${innerLayout.buttonSetHeight} - ${spacing.xl} - ${spacing.xl})`}
+      style={{ overflow: 'auto' }}
     >
-      <Group align="flex-start" justify="space-between" w="100%">
+      <Group align="flex-start" justify="space-between" wrap="nowrap" w="100%">
         <Tabs defaultValue="top-stocks" w="96%">
           <Tabs.List>
             <Title order={5} style={{ alignSelf: 'center' }}>
               {formatMessage({ id: 'IDEA_GENERATION' })}
             </Title>
+
             {tabs.map((tab) => (
               <Tabs.Tab
                 key={tab.value}
@@ -76,6 +89,17 @@ function IdeaGeneration() {
             window.history.back();
           }}
         />
+        <Box
+          w={panelWidth}
+          h="80vh"
+          style={{
+            position: 'absolute',
+            bottom: 35,
+            right: 0,
+          }}
+        >
+          <TabMenu panelWidthHandler={panelWidthHandler} tabs={['Stock Profile']} activeTabs={''} />
+        </Box>
       </Group>
     </Paper>
   );

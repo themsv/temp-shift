@@ -10,12 +10,15 @@ const tabsList: string[] = ['Insights', 'Eco Exp.', 'Stock Profile'];
 
 type TabMenuProps = {
   panelWidthHandler: (closed: boolean) => void;
+  tabs: string[];
+  activeTabs: string;
 };
 
-function TabMenu({ panelWidthHandler }: Readonly<TabMenuProps>) {
+function TabMenu({ panelWidthHandler, tabs, activeTabs }: Readonly<TabMenuProps>) {
+  const [activeTab, setActiveTab] = useState<string | null>(activeTabs);
   const [isVisible, setIsVisible] = useState(true);
   const [isExpand, setIsExpand] = useState(false);
-  const { data, setData, activeTab, setActiveTab } = useAnalyze();
+  const { data, setData } = useAnalyze();
 
   function closeHandler() {
     setIsVisible(false);
@@ -45,7 +48,7 @@ function TabMenu({ panelWidthHandler }: Readonly<TabMenuProps>) {
       h="80vh"
     >
       <Tabs.List>
-        {tabsList.map((tabItem) => {
+        {tabs?.map((tabItem) => {
           return (
             <Tabs.Tab
               value={tabItem}

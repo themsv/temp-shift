@@ -105,7 +105,7 @@ export default function StockScreening() {
             columnGroupShow: 'open',
             width: 145,
             headerClass: () => (expandedGroups.marketDetails ? ` group-boundary` : ''),
-            cellClass: expandedGroups.marketDetails ? 'group-boundary' : undefined,
+            cellClass: expandedGroups.marketDetails ? 'group-boundary' : 'centered-content',
           },
         ],
       },
@@ -313,6 +313,174 @@ export default function StockScreening() {
         ],
       },
       {
+        headerName: 'Flavour Components',
+        headerClass: 'centered-header',
+        marryChildren: true,
+        children: [
+          {
+            headerName: 'NTM Consensus EPS Growth',
+            headerClass: () => `headers group-boundary`,
+            children: [
+              {
+                field: 'ntmEpsGrowthRaw',
+                headerName: 'Raw',
+                headerClass: 'sideHeaders group-boundary',
+                cellClass: 'centered-content',
+                width: 40,
+              },
+              {
+                field: 'ntmEpsGrowthPct',
+                headerName: '%',
+                headerClass: 'sideHeaders group-boundary',
+                cellClass: (params: CellClassParams) => getRankStyleClass(params.value),
+                width: 40,
+              },
+            ],
+          },
+          {
+            headerName: 'LT Consensus EPS Growth',
+            headerClass: () => `headers group-boundary`,
+            children: [
+              {
+                field: 'ltEpsGrowthRaw',
+                headerName: 'Raw',
+                headerClass: 'sideHeaders group-boundary',
+                cellClass: 'centered-content',
+                width: 40,
+              },
+              {
+                field: 'ltEpsGrowthPct',
+                headerName: '%',
+                headerClass: 'sideHeaders group-boundary',
+                cellClass: (params: CellClassParams) => getRankStyleClass(params.value),
+                width: 40,
+              },
+            ],
+          },
+          {
+            headerName: '“Low Risk” Model',
+            headerClass: () => `headers group-boundary`,
+            children: [
+              {
+                field: 'lowRiskRaw',
+                headerName: 'Raw',
+                headerClass: 'sideHeaders group-boundary',
+                cellClass: 'centered-content',
+                width: 40,
+              },
+              {
+                field: 'lowRiskPct',
+                headerName: '%',
+                headerClass: 'sideHeaders group-boundary',
+                cellClass: (params: CellClassParams) => getRankStyleClass(params.value),
+                width: 40,
+              },
+            ],
+          },
+          {
+            headerName: 'Composite Stability',
+            headerClass: () => `headers group-boundary`,
+            children: [
+              {
+                field: 'stabilityRaw',
+                headerName: 'Raw',
+                headerClass: 'sideHeaders group-boundary',
+                cellClass: 'centered-content',
+                width: 40,
+              },
+              {
+                field: 'stabilityPct',
+                headerName: '%',
+                headerClass: 'sideHeaders group-boundary',
+                cellClass: (params: CellClassParams) => getRankStyleClass(params.value),
+                width: 40,
+              },
+            ],
+          },
+          {
+            headerName: '12Mth Momentum',
+            headerClass: () => `headers group-boundary`,
+            children: [
+              {
+                field: 'momentumRaw',
+                headerName: 'Raw',
+                headerClass: 'sideHeaders group-boundary',
+                cellClass: 'centered-content',
+                width: 40,
+              },
+              {
+                field: 'momentumPct',
+                headerName: '%',
+                headerClass: 'sideHeaders group-boundary',
+                cellClass: (params: CellClassParams) => getRankStyleClass(params.value),
+                width: 40,
+              },
+            ],
+          },
+          {
+            headerName: '3M Earnings Revisions',
+            headerClass: () => `headers group-boundary`,
+            children: [
+              {
+                field: 'earningsRevRaw',
+                headerName: 'Raw',
+                headerClass: 'sideHeaders group-boundary',
+                cellClass: 'centered-content',
+                width: 40,
+              },
+              {
+                field: 'earningsRevPct',
+                headerName: '%',
+                headerClass: 'sideHeaders group-boundary',
+                cellClass: 'centered-content',
+                width: 40,
+              },
+            ],
+          },
+          {
+            headerName: 'Composite Value Model',
+            headerClass: () => `headers group-boundary`,
+            children: [
+              {
+                field: 'valueModelRaw',
+                headerName: 'Raw',
+                headerClass: 'sideHeaders group-boundary',
+                cellClass: 'centered-content',
+                width: 40,
+              },
+              {
+                field: 'valueModelPct',
+                headerName: '%',
+                headerClass: 'sideHeaders group-boundary',
+                cellClass: (params: CellClassParams) => getRankStyleClass(params.value),
+                width: 40,
+              },
+            ],
+          },
+          {
+            headerName: 'TTM Return on Equity',
+            headerClass: () => `headers group-boundary`,
+            children: [
+              {
+                field: 'roeRaw',
+                headerName: 'Raw',
+                headerClass: 'sideHeaders group-boundary',
+                cellClass: 'centered-content',
+                width: 40,
+              },
+              {
+                field: 'roePct',
+                headerName: '%',
+                headerClass: 'sideHeaders group-boundary',
+                cellClass: (params: CellClassParams) => getRankStyleClass(params.value),
+                width: 40,
+              },
+            ],
+          },
+        ],
+      },
+
+      {
         headerName: 'Components of Composite Value Model',
         marryChildren: true,
 
@@ -325,6 +493,7 @@ export default function StockScreening() {
                 field: 'earningYieldRaw',
                 headerName: 'Raw',
                 headerClass: 'sideHeaders group-boundary',
+                cellClass: 'centered-content',
                 width: 45,
               },
               {
@@ -343,6 +512,7 @@ export default function StockScreening() {
               {
                 field: 'dividendYieldRaw',
                 headerName: 'Raw',
+                cellClass: 'centered-content',
                 headerClass: 'sideHeaders group-boundary',
                 width: 45,
               },
@@ -362,6 +532,7 @@ export default function StockScreening() {
               {
                 field: 'cycAdjEarningsRaw',
                 headerName: 'Raw',
+                cellClass: 'centered-content',
                 headerClass: 'sideHeaders group-boundary',
                 width: 45,
               },
@@ -389,6 +560,7 @@ export default function StockScreening() {
                 field: 'macqAlphaRaw',
                 headerName: 'Raw',
                 headerClass: 'sideHeaders group-boundary',
+                cellClass: 'centered-content',
                 width: 45,
               },
               {
@@ -411,6 +583,7 @@ export default function StockScreening() {
           {
             headerName: 'Market Macro',
             headerClass: () => 'subHeader',
+            cellClass: 'centered-content',
             marryChildren: true,
             children: [
               {

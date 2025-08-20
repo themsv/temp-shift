@@ -6,7 +6,6 @@ export function AnalyzeProvider({ children }) {
   const [isExpanded, setIsExpanded] = useState(false);
   const [data, setData] = useState(null);
   const [changeFlex, setChangeFlex] = useState(false);
-  const [activeTab, setActiveTab] = useState<string | null>('Insights');
   const [fromNavbar, setFromNavbar] = useState(false);
 
   return (
@@ -18,8 +17,6 @@ export function AnalyzeProvider({ children }) {
         setData,
         changeFlex,
         setChangeFlex,
-        activeTab,
-        setActiveTab,
         fromNavbar,
         setFromNavbar,
       }}
