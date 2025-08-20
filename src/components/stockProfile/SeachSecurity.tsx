@@ -59,7 +59,7 @@ export default function SearchSecurity() {
           <IconX color="black" size={20} />
         </ActionIcon>
       </Group>
-      <Center h={isExpanded === true ? 500 : 570}>
+      <Center h={500}>
         <Stack align="center">
           <Text> Add security for comparison </Text>
           <Select

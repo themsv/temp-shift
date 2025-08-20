@@ -1,5 +1,5 @@
 import { useState, type CSSProperties, type SetStateAction } from 'react';
-import { Tabs } from '@mantine/core';
+import { Box, Tabs } from '@mantine/core';
 import { useAnalyze } from 'src/context/useAnalyze';
 import EcoExposure from './EcoExposurePanel';
 import Insights from './InsightsPanel';
@@ -14,7 +14,7 @@ type PortfolioAnalyzePanelProps = {
 
 function PortfolioAnalyzePanel({ panelWidthHandler }: Readonly<PortfolioAnalyzePanelProps>) {
   const [isPanelExpand, setIsPanelExpand] = useState(false);
-  const { data, setData, activeTab, setActiveTab } = useAnalyze();
+  const { data, setData, activeTab, setActiveTab, setChangeFlex } = useAnalyze();
 
   function closePanelHandler() {
     setActiveTab(null);
@@ -24,6 +24,7 @@ function PortfolioAnalyzePanel({ panelWidthHandler }: Readonly<PortfolioAnalyzeP
   function changePanelHandler(e: SetStateAction<string | null>) {
     setActiveTab(e);
     setData(null);
+    setChangeFlex(false);
     setIsPanelExpand(false);
     panelWidthHandler(false);
   }
@@ -86,7 +87,14 @@ function PortfolioAnalyzePanel({ panelWidthHandler }: Readonly<PortfolioAnalyzeP
         {data ? (
           <StockOverviewPanel value={data} closePanelHandler={closePanelHandler} />
         ) : (
-          <SearchSecurity value={data} setValue={setData} />
+          <Box
+            style={{
+              display: 'flex',
+              height: '100%',
+            }}
+          >
+            <SearchSecurity value={data} setValue={setData} />
+          </Box>
         )}
       </Tabs.Panel>
     </Tabs>
