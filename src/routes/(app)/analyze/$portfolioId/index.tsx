@@ -30,6 +30,7 @@ function PortfolioDetails() {
   const { spacing } = useMantineTheme();
   const [checked, setChecked] = useState(true);
   const [panelWidth, setPanelWidth] = useState(innerLayout.buttonSetWidth);
+  const tabList: string[] = ['Insights', 'Eco Exp.', 'Stock Profile'];
 
   function panelWidthHandler(closed: boolean) {
     if (closed) {
@@ -93,7 +94,11 @@ function PortfolioDetails() {
           height: '80vh',
         }}
       >
-        <PortfolioAnalyzePanel panelWidthHandler={panelWidthHandler} />
+        <PortfolioAnalyzePanel
+          panelWidthHandler={panelWidthHandler}
+          tabList={tabList}
+          screen={'analyze'}
+        />
       </div>
     </Group>
   );

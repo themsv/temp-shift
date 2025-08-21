@@ -7,6 +7,7 @@ export function AnalyzeProvider({ children }) {
   const [data, setData] = useState(null);
   const [changeFlex, setChangeFlex] = useState(false);
   const [fromNavbar, setFromNavbar] = useState(false);
+  const [ideaGenTab, setIdeaGenTab] = useState('top-stocks');
 
   return (
     <AnalyzeContext
@@ -19,6 +20,8 @@ export function AnalyzeProvider({ children }) {
         setChangeFlex,
         fromNavbar,
         setFromNavbar,
+        ideaGenTab,
+        setIdeaGenTab,
       }}
     >
       {children}

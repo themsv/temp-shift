@@ -3,7 +3,7 @@ import { Center, Select, Stack, Text, ActionIcon, Group, Box } from '@mantine/co
 import { IconChevronLeft, IconChevronRight, IconSearch, IconX } from '@tabler/icons-react';
 import { useAnalyze } from '../../context/useAnalyze';
 
-export default function SearchSecurity() {
+export default function SearchSecurity({ closePanelHandler }) {
   const { isExpanded, setIsExpanded, changeFlex, setChangeFlex, setData, data } = useAnalyze();
   const navigate = useNavigate();
   const location = useLocation();
@@ -45,19 +45,32 @@ export default function SearchSecurity() {
             <Text fw={500}> Stock Profile </Text>
           </Group>
         )}
-        <ActionIcon
-          onClick={() => {
-            window.history.back();
-            setData(null);
-            setChangeFlex(false);
-            setIsExpanded(false);
-          }}
-          aria-label="Go back"
-          variant="transparent"
-          size="lg"
-        >
-          <IconX color="black" size={20} />
-        </ActionIcon>
+        {!fromButton && !isExpanded ? (
+          <ActionIcon
+            onClick={() => {
+              closePanelHandler();
+            }}
+            aria-label="Go back"
+            variant="transparent"
+            size="lg"
+          >
+            <IconX color="black" size={20} />
+          </ActionIcon>
+        ) : (
+          <ActionIcon
+            onClick={() => {
+              window.history.back();
+              setData(null);
+              setChangeFlex(false);
+              setIsExpanded(false);
+            }}
+            aria-label="Go back"
+            variant="transparent"
+            size="lg"
+          >
+            <IconX color="black" size={20} />
+          </ActionIcon>
+        )}
       </Group>
       <Center h={500}>
         <Stack align="center">

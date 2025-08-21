@@ -6,18 +6,22 @@ import Insights from './InsightsPanel';
 import SearchSecurity from '../stockProfile/SeachSecurity';
 import StockOverviewPanel from '../stockProfile/StockOverviewPanel';
 
-const tabsList: string[] = ['Insights', 'Eco Exp.', 'Stock Profile'];
+const tabList: string[] = ['Insights', 'Eco Exp.', 'Stock Profile'];
 
 type PortfolioAnalyzePanelProps = {
   panelWidthHandler: (closed: boolean) => void;
 };
 
-function PortfolioAnalyzePanel({ panelWidthHandler }: Readonly<PortfolioAnalyzePanelProps>) {
+function PortfolioAnalyzePanel({
+  panelWidthHandler,
+  tabList,
+  screen,
+}: Readonly<PortfolioAnalyzePanelProps>) {
   const [isPanelExpand, setIsPanelExpand] = useState(false);
   const { data, setData, activeTab, setActiveTab, setChangeFlex } = useAnalyze();
 
   function closePanelHandler() {
-    setActiveTab(null);
+    setActiveTab('');
     panelWidthHandler(true);
   }
 
@@ -35,7 +39,7 @@ function PortfolioAnalyzePanel({ panelWidthHandler }: Readonly<PortfolioAnalyzeP
 
   return (
     <Tabs
-      defaultValue="Insights"
+      defaultValue={screen === 'analyze' ? 'Insights' : ''}
       orientation="vertical"
       placement="right"
       value={activeTab}
@@ -45,7 +49,7 @@ function PortfolioAnalyzePanel({ panelWidthHandler }: Readonly<PortfolioAnalyzeP
       color="black"
     >
       <Tabs.List>
-        {tabsList.map((tabItem) => {
+        {tabList.map((tabItem) => {
           return (
             <Tabs.Tab
               value={tabItem}
@@ -89,11 +93,13 @@ function PortfolioAnalyzePanel({ panelWidthHandler }: Readonly<PortfolioAnalyzeP
         ) : (
           <Box
             style={{
+              flex: 1,
               display: 'flex',
+              flexDirection: 'column',
               height: '100%',
             }}
           >
-            <SearchSecurity value={data} setValue={setData} />
+            <SearchSecurity value={data} setValue={setData} closePanelHandler={closePanelHandler} />
           </Box>
         )}
       </Tabs.Panel>

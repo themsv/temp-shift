@@ -39,7 +39,6 @@ function TabMenu({ panelWidthHandler, tabs, activeTabs }: Readonly<TabMenuProps>
 
   return (
     <Tabs
-      defaultValue="Insights"
       orientation="vertical"
       placement="right"
       value={activeTab}

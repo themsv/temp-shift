@@ -18,8 +18,9 @@ import { useDisclosure } from '@mantine/hooks';
 import { IconCaretDownFilled } from '@tabler/icons-react';
 import { useIntl } from 'react-intl';
 
+import { useAnalyze } from 'src/context/useAnalyze';
 import appLayoutConfig, { innerLayout } from '@app/consts/app-layout';
-import TabMenu from '@app/components/economic-exposure/TabMenu';
+import PortfolioAnalyzePanel from '@app/components/PortfolioAnalyzeSidePanel/PortfolioAnalyzePanel';
 import data from '../../../../../mocks/Dropdowns.json';
 
 export const Route = createFileRoute('/(app)/analyze/$portfolioId/idea-generation')({
@@ -39,6 +40,7 @@ function IdeaGeneration() {
 
   const { formatMessage } = useIntl();
   const [panelWidth, setPanelWidth] = useState('0');
+  const { ideaGenTab, setIdeaGenTab } = useAnalyze();
 
   function panelWidthHandler(closed: boolean) {
     if (closed) {
@@ -51,14 +53,13 @@ function IdeaGeneration() {
   const navigate = useNavigate();
   return (
     <Paper
-      withBorder
       p="md"
-      mt="md"
+      mt="xs"
       h={`calc(100vh - ${appLayoutConfig.header.height} - ${innerLayout.buttonSetHeight} - ${spacing.xl} - ${spacing.xl})`}
       style={{ overflow: 'auto' }}
     >
       <Group align="flex-start" justify="space-between" wrap="nowrap" w="100%">
-        <Tabs defaultValue="top-stocks" w="96%">
+        <Tabs w="96%" defaultValue={ideaGenTab} mb="md">
           <Tabs.List>
             <Title order={5} style={{ alignSelf: 'center' }}>
               {formatMessage({ id: 'IDEA_GENERATION' })}
@@ -69,13 +70,14 @@ function IdeaGeneration() {
                 key={tab.value}
                 value={tab.value}
                 disabled={tab.disabled}
-                onClick={() =>
-                  void navigate({
-                    // TODO: Make this type-safe
-                    to: `/analyze/$portfolioId/idea-generation/${tab.value}`,
-                    params: { portfolioId },
-                  })
-                }
+                onClick={() => {
+                  (setIdeaGenTab(tab.value),
+                    void navigate({
+                      // TODO: Make this type-safe
+                      to: `/analyze/$portfolioId/idea-generation/${tab.value}`,
+                      params: { portfolioId },
+                    }));
+                }}
               >
                 {tab.label}
               </Tabs.Tab>
@@ -90,15 +92,20 @@ function IdeaGeneration() {
           }}
         />
         <Box
-          w={panelWidth}
+          w={355}
           h="80vh"
           style={{
+            justifyContent: 'flex-end',
             position: 'absolute',
-            bottom: 35,
             right: 0,
+            zIndex: 1,
           }}
         >
-          <TabMenu panelWidthHandler={panelWidthHandler} tabs={['Stock Profile']} activeTabs={''} />
+          <PortfolioAnalyzePanel
+            panelWidthHandler={panelWidthHandler}
+            tabList={['Stock Profile']}
+            screen="idea-generation"
+          />
         </Box>
       </Group>
     </Paper>
@@ -181,9 +188,6 @@ export default function FlavourFactorDropdown() {
                 py={4}
                 style={{
                   backgroundColor: '#eaf3fc',
-                  position: 'sticky',
-                  top: 0,
-                  zIndex: 1,
                   borderBottom: '1px solid #ccc',
                 }}
               >
@@ -203,9 +207,6 @@ export default function FlavourFactorDropdown() {
                 py={4}
                 style={{
                   backgroundColor: '#eaf3fc',
-                  position: 'sticky',
-                  top: 0,
-                  zIndex: 1,
                   borderBottom: '1px solid #ccc',
                 }}
               >
